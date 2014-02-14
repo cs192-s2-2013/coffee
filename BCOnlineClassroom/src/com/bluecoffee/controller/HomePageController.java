@@ -5,6 +5,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import java.util.Locale;
+import org.springframework.ui.Model;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -14,63 +17,31 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.bluecoffee.domain.MatFile;
 import com.bluecoffee.services.MatFileService;
+import com.bluecoffee.domain.MatSubject;
+import com.bluecoffee.services.MatSubjectService;
 
 @Controller
 public class HomePageController {
 
 	@Autowired
 	MatFileService matFileService;
-
-	@RequestMapping("/register")
-	public String registerUser(@ModelAttribute MatFile matFile) {
-
-		return "register";
-	}
-
-	@RequestMapping("/insert")
-	public String inserData(@ModelAttribute MatFile matFile) {
-		if (matFile != null)
-			matFileService.insertData(matFile);
-		return "redirect:/getList";
-	}
-
-	@RequestMapping("/getList")
-	public ModelAndView getUserLIst() {
-		List<MatFile> matFileList = matFileService.getMatFileList();
-		return new ModelAndView("matFileList", "matFileList", matFileList);
-	}
-
-	@RequestMapping("/edit")
-	public ModelAndView editMatFile(@RequestParam String id,
-			@ModelAttribute MatFile matFile) {
-
-		matFile = matFileService.getMatFile(id);
-
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("matFile", matFile);
-
-		return new ModelAndView("edit", "map", map);
-
-	}
-
-	@RequestMapping("/update")
-	public String updateUser(@ModelAttribute MatFile matFile) {
-		matFileService.updateData(matFile);
-		return "redirect:/getList";
-
-	}
-
-	@RequestMapping("/delete")
-	public String deleteUser(@RequestParam String id) {
-		System.out.println("id = " + id);
-		matFileService.deleteData(id);
-		return "redirect:/getList";
+	
+	@Autowired
+	MatSubjectService matSubjectService;
+	
+	@RequestMapping("/home")
+	public String homepage(Model model) {
+		return "home";
 	}
 	
-/*	@RequestMapping("/subject")
-	public ModelAndView getSubjectList() {
-		List<MatSubject> matSubjectList = matSubjectService.getMatSubjectList();
-		return new ModelAndView("matSubjectList", "matSubjectList", matSubjectList);
-	}*/
+	@RequestMapping("/chat")
+	public String chat(Model model) {
+		return "chat";
+	}
+
+	@RequestMapping("/forum")
+	public String forum(Model model) {
+		return "forum";
+	}
 	
 }

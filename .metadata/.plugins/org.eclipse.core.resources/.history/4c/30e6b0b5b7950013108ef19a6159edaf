@@ -1,0 +1,5 @@
+package com.bluecoffee.controller;
+
+public class MaterialsController {
+
+}

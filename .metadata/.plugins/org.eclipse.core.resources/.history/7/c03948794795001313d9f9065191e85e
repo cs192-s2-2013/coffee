@@ -1,0 +1,5 @@
+package com.bluecoffee.services;
+
+public interface MatSubjectService {
+
+}

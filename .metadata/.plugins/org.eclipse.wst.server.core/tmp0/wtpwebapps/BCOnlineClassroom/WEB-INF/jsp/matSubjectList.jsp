@@ -31,8 +31,7 @@ td {
 </head>
 <body>
 	<center>
-		<br /> <br /> <br /> <b>User
-			List | Being Java Guys </b><br /> <br />
+		<br /> <br /> <br /> <b>Subjects List </b><br /> <br />
 			
 		
 
@@ -43,7 +42,7 @@ td {
 			</tr>
 			<c:forEach var="matSubject" items="${matSubjectList}">
 				<tr>
-					<td><a href="subfolder?id=${matSubject.matSubjectID}">${matSubject.subjectName}</a></td>
+					<td>${matSubject.subjectName}</td>
 					<td>${matSubject.subjectDesc}</td>
 				</tr>
 			</c:forEach>

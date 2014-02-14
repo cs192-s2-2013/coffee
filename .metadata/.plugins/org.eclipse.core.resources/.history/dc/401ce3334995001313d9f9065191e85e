@@ -1,0 +1,5 @@
+package com.bluecoffee.jdbc;
+
+public class MatSubjectRowMapper {
+
+}

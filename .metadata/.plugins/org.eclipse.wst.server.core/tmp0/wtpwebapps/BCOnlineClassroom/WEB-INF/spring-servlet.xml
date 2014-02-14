@@ -23,6 +23,8 @@
 	<!-- declare beans -->
 	<bean id="matFileDao" class="com.bluecoffee.dao.MatFileDaoImpl" />
 	<bean id="matFileService" class="com.bluecoffee.services.MatFileServiceImpl" />
+	<bean id="matSubjectDao" class="com.bluecoffee.dao.MatSubjectDaoImpl" />
+	<bean id="matSubjectService" class="com.bluecoffee.services.MatSubjectServiceImpl" />
 
 	<!-- declare datasource bean -->
 	<bean id="dataSource"
