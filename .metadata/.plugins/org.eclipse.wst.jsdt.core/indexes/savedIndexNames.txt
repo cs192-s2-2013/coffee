@@ -1,0 +1,7 @@
+INDEX VERSION 1.3+C:\Users\lara312\Documents\GitHub\coffee\.metadata\.plugins\org.eclipse.wst.jsdt.core\indexes
+724487703.index
+363576530.index
+2171514603.index
+3713692459.index
+1172678805.index
+2943276963.index
