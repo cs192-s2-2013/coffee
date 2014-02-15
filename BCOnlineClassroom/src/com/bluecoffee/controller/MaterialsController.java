@@ -13,8 +13,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.bluecoffee.domain.MatFile;
-import com.bluecoffee.services.MatFileService;
+import com.bluecoffee.domain.MatFolder;
 import com.bluecoffee.domain.MatSubject;
+import com.bluecoffee.services.MatFileService;
+import com.bluecoffee.services.MatFolderService;
 import com.bluecoffee.services.MatSubjectService;
 
 @Controller
@@ -22,9 +24,10 @@ public class MaterialsController {
 
 	@Autowired
 	MatFileService matFileService;
-	
 	@Autowired
 	MatSubjectService matSubjectService;
+	@Autowired
+	MatFolderService matFolderService;
 	
 	@RequestMapping("/materials")
 	public ModelAndView getSubjectList() {
@@ -32,6 +35,21 @@ public class MaterialsController {
 		return new ModelAndView("matSubjectList", "matSubjectList", matSubjectList);
 	}
 	
+	@RequestMapping("/subfolder")
+	public ModelAndView getFolderList(@RequestParam String id, 
+			@ModelAttribute MatFolder matFolder){
+		
+		List<MatFolder> matFolderList = matFolderService.getMatFolderList();
+
+		return new ModelAndView("subfolder", "matFolderList", matFolderList);
+/*
+		matFile = matFileService.getMatFile(id);
+
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("matFile", matFile);		
+		
+		return new ModelAndView("subfolder", "map", map);*/
+	}
 	
 	@RequestMapping("/register")
 	public String registerUser(@ModelAttribute MatFile matFile) {

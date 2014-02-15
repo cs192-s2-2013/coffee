@@ -8,9 +8,7 @@ import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 
-import com.bluecoffee.domain.MatFile;
 import com.bluecoffee.domain.MatSubject;
-import com.bluecoffee.jdbc.MatFileRowMapper;
 import com.bluecoffee.jdbc.MatSubjectRowMapper;
 
 public class MatSubjectDaoImpl implements MatSubjectDao {

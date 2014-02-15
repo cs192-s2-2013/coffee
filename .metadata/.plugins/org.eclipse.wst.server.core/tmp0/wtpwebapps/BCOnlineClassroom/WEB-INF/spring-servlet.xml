@@ -25,7 +25,9 @@
 	<bean id="matFileService" class="com.bluecoffee.services.MatFileServiceImpl" />
 	<bean id="matSubjectDao" class="com.bluecoffee.dao.MatSubjectDaoImpl" />
 	<bean id="matSubjectService" class="com.bluecoffee.services.MatSubjectServiceImpl" />
-
+	<bean id="matFolderDao" class="com.bluecoffee.dao.MatFolderDaoImpl" />
+	<bean id="matFolderService" class="com.bluecoffee.services.MatFolderServiceImpl" />
+	
 	<!-- declare datasource bean -->
 	<bean id="dataSource"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
