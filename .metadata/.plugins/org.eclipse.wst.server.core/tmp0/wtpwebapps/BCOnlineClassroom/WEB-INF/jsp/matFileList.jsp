@@ -5,7 +5,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <html>
 <head>
-<title>Being Java Guys | Spring DI Hello World</title>
+<title>Blue Coffee | Online Classroom </title>
 <style>
 body {
 	font-size: 20px;
@@ -31,18 +31,17 @@ td {
 </head>
 <body>
 	<center>
-		<br /> <br /> <br /> <b>User
-			List | Being Java Guys </b><br /> <br />
+		<br /> <br /> <br /> <b>Files </b><br /> <br />
 			
 		
 
 		<table border="1">
 			<tr>
-				<td class="heading">User Id</td>
-				<td class="heading">First Name</td>
-				<td class="heading">Last Name</td>
-				<td class="heading">Gender</td>
-				<td class="heading">City</td>
+				<td class="heading">FileID</td>
+				<td class="heading">File Name</td>
+				<td class="heading">File Type</td>
+				<td class="heading">File Size</td>
+				<td class="heading">Upload Date</td>
 				<td class="heading">Edit</td>
 				<td class="heading">Delete</td>
 			</tr>

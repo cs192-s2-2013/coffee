@@ -39,6 +39,10 @@ public class MatFileServiceImpl implements MatFileService {
 		
 	}
 
+	@Override
+	public List<MatFile> getMatFileListBySubjectName(String subjectName) {
+		return matfiledao.getMatFileListBySubjectName(subjectName);
+	}
 
 	
 }

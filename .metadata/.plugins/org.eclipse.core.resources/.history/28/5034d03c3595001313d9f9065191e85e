@@ -1,5 +1,0 @@
-package com.bluecoffee.dao;
-
-public interface MatSubjectDao {
-
-}

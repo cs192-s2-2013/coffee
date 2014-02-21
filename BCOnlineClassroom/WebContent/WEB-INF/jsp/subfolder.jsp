@@ -5,7 +5,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <html>
 <head>
-<title>Being Java Guys | Spring DI Hello World</title>
+<title>Blue Coffee | Online Classroom</title>
 <style>
 body {
 	font-size: 20px;
@@ -31,19 +31,13 @@ td {
 </head>
 <body>
 	<center>
-		<br /> <br /> <br /> <b>User
-			List | Being Java Guys </b><br /> <br />
+		<br /> <br /> <br /> <b>Subfolder </b><br /> <br />
 			
 		
 
 		<table border="1">
-			<tr>
-				<td class="heading">FolderID</td>
-				<td class="heading">Folder Name</td>
-			</tr>
 			<c:forEach var="matFolder" items="${matFolderList}">
 				<tr>
-					<td>${matFolder.matFolderID}</td>
 					<td>${matFolder.folderName}</td>
 				</tr>
 			</c:forEach>

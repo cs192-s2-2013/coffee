@@ -2,7 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <html>
 <head>
-<title>Being Java Guys | Spring DI Hello World</title>
+<title>Blue Coffee | Online Classroom</title>
 <style>
 body {
 	font-size: 20px;
@@ -29,25 +29,25 @@ td {
 </head>
 <body>
 	<center>
-		<br /> <br /> <br /> <b>Being Java Guys | Registration Form </b> <br />
+		<br /> <br /> <br /> <b>Uploading File </b> <br />
 		<br />
 		<div>
 			<form:form method="post" action="/insert" modelAttribute="matFile">
 				<table>
 					<tr>
-						<td>First Name :</td>
+						<td>Filename :</td>
 						<td><form:input path="fileName" /></td>
 					</tr>
 					<tr>
-						<td>Last Name :</td>
+						<td>File Type :</td>
 						<td><form:input path="fileType" /></td>
 					</tr>
 					<tr>
-						<td>Gender :</td>
+						<td>File Size :</td>
 						<td><form:input path="fileSize" /></td>
 					</tr>
 					<tr>
-						<td>City :</td>
+						<td>Upload Date :</td>
 						<td><form:input path="uploadDate" /></td>
 					</tr>
 					<tr>
@@ -56,7 +56,7 @@ td {
 					</tr>
 					<tr>
 						
-						<td colspan="2"><a href="getList">Click Here to See User List</a></td>
+						<td colspan="2"><a href="getList">Click Here to See File List</a></td>
 					</tr>
 				</table>
 			</form:form>

@@ -20,6 +20,8 @@ public class MatFileExtractor implements ResultSetExtractor<MatFile> {
 		matFile.setFileType(resultSet.getString(3));
 		matFile.setFileSize(resultSet.getString(4));
 		matFile.setUploadDate(resultSet.getString(5));
+		matFile.setMatSubjectID(resultSet.getInt(6));
+		matFile.setMatFolderID(resultSet.getInt(7));
 		
 		return matFile;
 	}

@@ -1,0 +1,8 @@
+127.0.0.1 - - [19/Feb/2014:02:09:54 +0800] "GET / HTTP/1.1" 404 951
+0:0:0:0:0:0:0:1 - - [19/Feb/2014:02:09:56 +0800] "GET /SpringJDBCTemplate/WEB-INF/jsp/matFileList.jsp HTTP/1.1" 404 949
+0:0:0:0:0:0:0:1 - - [19/Feb/2014:02:10:11 +0800] "GET /SpringJDBCTemplate/WEB-INF/jsp/matFileList.jsp HTTP/1.1" 404 949
+0:0:0:0:0:0:0:1 - - [19/Feb/2014:02:11:21 +0800] "GET /SpringJDBCTemplate/ HTTP/1.1" 302 -
+0:0:0:0:0:0:0:1 - - [19/Feb/2014:02:11:22 +0800] "GET /SpringJDBCTemplate/home HTTP/1.1" 200 2311
+0:0:0:0:0:0:0:1 - - [19/Feb/2014:02:11:40 +0800] "GET /SpringJDBCTemplate/materials HTTP/1.1" 200 4924
+0:0:0:0:0:0:0:1 - - [19/Feb/2014:02:11:47 +0800] "GET /SpringJDBCTemplate/subfolder?id=CS%2011 HTTP/1.1" 200 992
+0:0:0:0:0:0:0:1 - - [19/Feb/2014:02:18:40 +0800] "GET /SpringJDBCTemplate/subfolder?id=CS%2011 HTTP/1.1" 200 936

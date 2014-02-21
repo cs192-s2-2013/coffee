@@ -69,5 +69,15 @@ public class MatFileDaoImpl implements MatFileDao {
 		matFileList = jdbcTemplate.query(sql, new MatFileRowMapper());
 		return matFileList.get(0);
 	}
+	
+	public List<MatFile> getMatFileListBySubjectName(String subjectName) {
+		List matFileList = new ArrayList();
+
+		String sql = "select * from matfile natural join matsubject where subjectName='"+subjectName+"'";
+
+		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+		matFileList = jdbcTemplate.query(sql, new MatFileRowMapper());
+		return matFileList;
+	}
 
 }

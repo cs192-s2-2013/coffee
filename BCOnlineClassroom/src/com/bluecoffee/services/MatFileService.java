@@ -15,4 +15,6 @@ public interface MatFileService {
 	public MatFile getMatFile(String id);
 
 	public void updateData(MatFile matFile);
+	
+	public List<MatFile> getMatFileListBySubjectName(String subjectName);
 }

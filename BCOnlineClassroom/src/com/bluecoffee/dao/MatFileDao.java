@@ -16,4 +16,6 @@ public interface MatFileDao {
 
 	public MatFile getMatFile(String id);
 
+	public List<MatFile> getMatFileListBySubjectName(String subjectName);
+	
 }

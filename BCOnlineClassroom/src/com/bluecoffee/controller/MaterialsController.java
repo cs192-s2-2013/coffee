@@ -38,11 +38,17 @@ public class MaterialsController {
 	@RequestMapping("/subfolder")
 	public ModelAndView getFolderList(@RequestParam String id, 
 			@ModelAttribute MatFolder matFolder){
-		
+		/*
 		List<MatFolder> matFolderList = matFolderService.getMatFolderList();
 
 		return new ModelAndView("subfolder", "matFolderList", matFolderList);
-/*
+		*/
+		
+		//List<MatFolder> matFolderList = matFolderService.getMatFolderList();
+		List<MatFile> matFileList = matFileService.getMatFileListBySubjectName(id);
+		
+		return new ModelAndView("matFileList", "matFileList", matFileList);
+		/*
 		matFile = matFileService.getMatFile(id);
 
 		Map<String, Object> map = new HashMap<String, Object>();
