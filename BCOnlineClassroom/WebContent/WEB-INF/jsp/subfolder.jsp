@@ -33,15 +33,63 @@ td {
 	<center>
 		<br /> <br /> <br /> <b>Subfolder </b><br /> <br />
 			
-		
-
-		<table border="1">
-			<c:forEach var="matFolder" items="${matFolderList}">
+			Slides
+			
+			<table border="1">
+			<tr>
+				<td class="heading">File Name</td>
+				<td class="heading">File Type</td>
+				<td class="heading">File Size</td>
+				<td class="heading">Upload Date</td>
+			</tr>
+			<c:forEach var="matFile" items="${map.Slides}">
 				<tr>
-					<td>${matFolder.folderName}</td>
+					<td>${matFile.fileName}</td>
+					<td>${matFile.fileType}</td>
+					<td>${matFile.fileSize}</td>
+					<td>${matFile.uploadDate}</td>
 				</tr>
 			</c:forEach>
 		</table>
+			
+		Samplex
+			
+		<table border="1">
+			<tr>
+				<td class="heading">File Name</td>
+				<td class="heading">File Type</td>
+				<td class="heading">File Size</td>
+				<td class="heading">Upload Date</td>
+			</tr>
+			<c:forEach var="matFile" items="${map.Samplex}">
+				<tr>
+					<td>${matFile.fileName}</td>
+					<td>${matFile.fileType}</td>
+					<td>${matFile.fileSize}</td>
+					<td>${matFile.uploadDate}</td>
+				</tr>
+			</c:forEach>
+		</table>
+
+		Miscellaneous
+			
+		<table border="1">
+			<tr>
+				<td class="heading">File Name</td>
+				<td class="heading">File Type</td>
+				<td class="heading">File Size</td>
+				<td class="heading">Upload Date</td>
+			</tr>
+			<c:forEach var="matFile" items="${map.Miscellaneous}">
+				<tr>
+					<td>${matFile.fileName}</td>
+					<td>${matFile.fileType}</td>
+					<td>${matFile.fileSize}</td>
+					<td>${matFile.uploadDate}</td>
+				</tr>
+			</c:forEach>
+		</table>
+			
 
 	</center>
 </body>

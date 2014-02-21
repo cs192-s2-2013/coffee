@@ -40,14 +40,20 @@ public class MaterialsController {
 			@ModelAttribute MatFolder matFolder){
 		/*
 		List<MatFolder> matFolderList = matFolderService.getMatFolderList();
-
+	
 		return new ModelAndView("subfolder", "matFolderList", matFolderList);
 		*/
 		
-		//List<MatFolder> matFolderList = matFolderService.getMatFolderList();
+		List<MatFolder> matFolderList = matFolderService.getMatFolderList();
 		List<MatFile> matFileList = matFileService.getMatFileListBySubjectName(id);
 		
-		return new ModelAndView("matFileList", "matFileList", matFileList);
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		for(MatFolder folder : matFolderList){
+			map.put(folder.getFolderName(), matFileService.getMatFileListBySubjectFolder(id, folder.getMatFolderID()));
+		}
+				
+		return new ModelAndView("subfolder", "map", map);
 		/*
 		matFile = matFileService.getMatFile(id);
 

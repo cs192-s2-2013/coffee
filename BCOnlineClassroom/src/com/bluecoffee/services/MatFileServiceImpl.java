@@ -43,6 +43,10 @@ public class MatFileServiceImpl implements MatFileService {
 	public List<MatFile> getMatFileListBySubjectName(String subjectName) {
 		return matfiledao.getMatFileListBySubjectName(subjectName);
 	}
-
+	
+	@Override
+	public List<MatFile> getMatFileListBySubjectFolder(String subjectName, int matFolderID) {
+		return matfiledao.getMatFileListBySubjectFolder(subjectName, matFolderID);
+	}
 	
 }
