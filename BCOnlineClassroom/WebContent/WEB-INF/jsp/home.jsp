@@ -12,6 +12,7 @@
 <a href= "forum" style="text-decoration:none; margin-right:10px;"><font color="white"; size="4px";>Forums</font></a>
 <a href= "chat" style="text-decoration:none; margin-right:10px;"><font color="white"; size ="4px">Chat</font></a>
 <a href= "materials" style="text-decoration:none; margin-right:10px;"><font color="white"; size ="4px">Materials</font></a>
+<a href= "upload" style="text-decoration:none; margin-right:10px;"><font color="white"; size ="4px">Upload a File</font></a>
 </div>
 </div>
 

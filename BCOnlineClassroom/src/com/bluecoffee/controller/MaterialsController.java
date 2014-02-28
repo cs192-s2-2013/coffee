@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.ui.Model;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -108,5 +110,12 @@ public class MaterialsController {
 		matFileService.deleteData(id);
 		return "redirect:/getList";
 	}
+
+	/*WALA DAPAT TOOOOO LALALALALDJSFKJJAHSIFKVEDUIR*/
+	@RequestMapping("/download")
+	public String gotodownloadthigy(Model model){
+		return "download";
+	}
+	
 	
 }

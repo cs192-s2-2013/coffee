@@ -19,14 +19,14 @@ public class MatFileDaoImpl implements MatFileDao {
 	public void insertData(MatFile matFile) {
 
 		String sql = "INSERT INTO matfile "
-				+ "(fileName, fileType, fileSize, uploadDate) VALUES (?, ?, ?, ?)";
+				+ "(fileName, fileType, fileSize, uploadDate, path) VALUES (?, ?, ?, ?, ?)";
 
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
 
 		jdbcTemplate.update(
 				sql,
 				new Object[] { matFile.getFileName(), matFile.getFileType(),
-						matFile.getFileSize(), matFile.getUploadDate() });
+						matFile.getFileSize(), matFile.getUploadDate(), matFile.getPath() });
 
 	}
 
@@ -51,13 +51,13 @@ public class MatFileDaoImpl implements MatFileDao {
 	@Override
 	public void updateData(MatFile matFile) {
 
-		String sql = "UPDATE matfile set fileName = ?,fileType = ?, fileSize = ?, uploadDate = ? where matFileID = ?";
+		String sql = "UPDATE matfile set fileName = ?,fileType = ?, fileSize = ?, uploadDate = ?, path = ? where matFileID = ?";
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
 
 		jdbcTemplate.update(
 				sql,
 				new Object[] { matFile.getFileName(), matFile.getFileType(),
-						matFile.getFileSize(), matFile.getUploadDate(), matFile.getMatFileID() });
+						matFile.getFileSize(), matFile.getUploadDate(), matFile.getPath(), matFile.getMatFileID() });
 
 	}
 
@@ -73,7 +73,7 @@ public class MatFileDaoImpl implements MatFileDao {
 	public List<MatFile> getMatFileListBySubjectName(String subjectName) {
 		List matFileList = new ArrayList();
 
-		String sql = "select matFileID, fileName, fileType, fileSize, uploadDate, matSubjectID, matFolderID"
+		String sql = "select matFileID, fileName, fileType, fileSize, uploadDate, path, matSubjectID, matFolderID"
 				+ " from matfile natural join matsubject where subjectName='"+subjectName+"'";
 
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
@@ -84,7 +84,7 @@ public class MatFileDaoImpl implements MatFileDao {
 	public List<MatFile> getMatFileListBySubjectFolder(String subjectName, int matFolderID) {
 		List matFileList = new ArrayList();
 
-		String sql = "select matFileID, fileName, fileType, fileSize, uploadDate, matSubjectID, matFolderID"
+		String sql = "select matFileID, fileName, fileType, fileSize, uploadDate, path, matSubjectID, matFolderID"
 				+ " from matfile natural join matsubject where subjectName='"+subjectName+"' and matFolderID="+matFolderID;
 
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);

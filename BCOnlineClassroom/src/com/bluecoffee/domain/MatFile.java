@@ -7,6 +7,7 @@ public class MatFile {
 	private String fileType;
 	private String fileSize;
 	private String uploadDate;
+	private String path;
 	private int matSubjectID;
 	private int matFolderID;
 
@@ -15,6 +16,7 @@ public class MatFile {
 	public String getFileType(){ return fileType; }
 	public String getFileSize(){ return fileSize; }
 	public String getUploadDate(){ return uploadDate; }
+	public String getPath(){ return path; }
 	public int getMatSubjectID(){ return matSubjectID; }
 	public int getMatFolderID(){ return matFolderID; }
 	
@@ -23,6 +25,7 @@ public class MatFile {
 	public void setFileType(String fileType){ this.fileType = fileType; }
 	public void setFileSize(String fileSize){ this.fileSize = fileSize; }
 	public void setUploadDate(String uploadDate){ this.uploadDate = uploadDate; }
+	public void setPath(String path){ this.path = path; }
 	public void setMatSubjectID(int matSubjectID){ this.matSubjectID =  matSubjectID; }
 	public void setMatFolderID(int matFolderID){ this.matFolderID =  matFolderID; }
 	

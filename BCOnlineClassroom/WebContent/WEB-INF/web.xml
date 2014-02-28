@@ -17,4 +17,13 @@
 		<servlet-name>spring</servlet-name>
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
+	
+	<context-param> 
+    	<description>Location to store uploaded file</description> 
+    	<param-name>file-upload</param-name> 
+    	<param-value>
+        	 C:\Users\lara312\Documents\GitHub\coffee\BCOnlineClassroom\WebContent\downloads
+     	</param-value> 
+	</context-param>
+	
 </web-app>

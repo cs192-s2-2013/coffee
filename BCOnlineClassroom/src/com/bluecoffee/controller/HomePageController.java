@@ -44,4 +44,14 @@ public class HomePageController {
 		return "forum";
 	}
 	
+	@RequestMapping("/upload")
+	public String upload(Model model) {
+		return "upload";
+	}
+	
+	@RequestMapping("/fileUploaded")
+	public String uploadfile(Model model) {
+		return "fileUploaded";
+	}
+	
 }
