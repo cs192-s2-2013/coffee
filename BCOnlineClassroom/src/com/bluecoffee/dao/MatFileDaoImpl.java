@@ -26,7 +26,7 @@ public class MatFileDaoImpl implements MatFileDao {
 		jdbcTemplate.update(
 				sql,
 				new Object[] { matFile.getFileName(), matFile.getFileType(),
-						matFile.getFileSize(), matFile.getUploadDate(), matFile.getPath() });
+						matFile.getFileSize(), matFile.getUploadDate(), matFile.getPath()});
 
 	}
 

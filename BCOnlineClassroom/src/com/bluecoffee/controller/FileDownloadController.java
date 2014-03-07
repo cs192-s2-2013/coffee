@@ -12,9 +12,9 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
-@RequestMapping("/download.do")
 public class FileDownloadController {
 	
 	/**
@@ -25,22 +25,26 @@ public class FileDownloadController {
 	/**
 	 * Path of the file to be downloaded, relative to application's directory
 	 */
-	private String filePath = "/downloads/SpringProject.zip";
+	//private String filePath = "/downloads/SpringProject.zip";
+	private String filePath = "\\";
 	
 	/**
 	 * Method for handling file download request from client
 	 */
-	@RequestMapping(method = RequestMethod.GET)
-	public void doDownload(HttpServletRequest request,
+	@RequestMapping(value = "/download.do", params = "filename", method = RequestMethod.GET)
+	public void doDownload(@RequestParam String filename, HttpServletRequest request,
 			HttpServletResponse response) throws IOException {
-
+		
+		filePath = filePath + filename;
+		
 		// get absolute path of the application
 		ServletContext context = request.getServletContext();
-		String appPath = context.getRealPath("");
-		System.out.println("appPath = " + appPath);
+		//String appPath = context.getRealPath("");
+		String fileRepository = context.getInitParameter("file-upload");
+		System.out.println("fileRepository = " + fileRepository);
 
 		// construct the complete absolute path of the file
-		String fullPath = appPath + filePath;		
+		String fullPath = fileRepository + filePath;		
 		File downloadFile = new File(fullPath);
 		FileInputStream inputStream = new FileInputStream(downloadFile);
 		
@@ -75,6 +79,8 @@ public class FileDownloadController {
 
 		inputStream.close();
 		outStream.close();
+		
+		filePath = "\\";
 
 	}
 }

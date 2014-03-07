@@ -1,0 +1,5 @@
+package com.bluecoffee.domain;
+
+public class UploadFile {
+
+}

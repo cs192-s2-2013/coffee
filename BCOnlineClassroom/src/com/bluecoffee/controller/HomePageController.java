@@ -4,10 +4,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import java.util.Locale;
-import org.springframework.ui.Model;
 
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.ui.Model;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -15,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.bluecoffee.domain.MatFile;
+import com.bluecoffee.domain.*;
 import com.bluecoffee.services.MatFileService;
 import com.bluecoffee.domain.MatSubject;
 import com.bluecoffee.services.MatSubjectService;
@@ -45,12 +47,17 @@ public class HomePageController {
 	}
 	
 	@RequestMapping("/upload")
-	public String upload(Model model) {
+	public String upload(@ModelAttribute MatFile matFile) {
 		return "upload";
 	}
 	
 	@RequestMapping("/fileUploaded")
-	public String uploadfile(Model model) {
+	public String uploadfile(@ModelAttribute MatFile matFile, HttpServletRequest request/*, ServletContext context*/) {
+		//UploadFile uf = new UploadFile(request, context);
+		//String filename = uf.upload();
+		/*if (matFile != null)
+			matFileService.insertData(matFile);
+		*/
 		return "fileUploaded";
 	}
 	
