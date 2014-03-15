@@ -17,7 +17,7 @@
 </div>
 <div style="margin-top:20px; margin-left:30px; float:left;">
 Select a file to upload: <br />
-<form action="fileUploaded" method="post"
+<form action="fileUploaded?id=${id}&sf=${sf}" method="post"
                         enctype="multipart/form-data">
 <input type="file" name="file" size="50" />
 <br />

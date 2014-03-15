@@ -8,4 +8,6 @@ public interface MatFolderService {
 	
 	public List<MatFolder> getMatFolderList();
 	
+	public int getMatFolderIDbyName(String name);
+	
 }

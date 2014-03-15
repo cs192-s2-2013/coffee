@@ -19,14 +19,15 @@ public class MatFileDaoImpl implements MatFileDao {
 	public void insertData(MatFile matFile) {
 
 		String sql = "INSERT INTO matfile "
-				+ "(fileName, fileType, fileSize, uploadDate, path) VALUES (?, ?, ?, ?, ?)";
+				+ "(fileName, fileType, fileSize, uploadDate, path, matSubjectID, matFolderID) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
 
 		jdbcTemplate.update(
 				sql,
 				new Object[] { matFile.getFileName(), matFile.getFileType(),
-						matFile.getFileSize(), matFile.getUploadDate(), matFile.getPath()});
+						matFile.getFileSize(), matFile.getUploadDate(), matFile.getPath(),
+						matFile.getMatSubjectID(), matFile.getMatFolderID()});
 
 	}
 

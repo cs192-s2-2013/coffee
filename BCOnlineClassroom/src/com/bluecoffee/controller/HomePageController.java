@@ -27,7 +27,6 @@ public class HomePageController {
 
 	@Autowired
 	MatFileService matFileService;
-	
 	@Autowired
 	MatSubjectService matSubjectService;
 	
@@ -44,21 +43,6 @@ public class HomePageController {
 	@RequestMapping("/forum")
 	public String forum(Model model) {
 		return "forum";
-	}
-	
-	@RequestMapping("/upload")
-	public String upload(@ModelAttribute MatFile matFile) {
-		return "upload";
-	}
-	
-	@RequestMapping("/fileUploaded")
-	public String uploadfile(@ModelAttribute MatFile matFile, HttpServletRequest request/*, ServletContext context*/) {
-		//UploadFile uf = new UploadFile(request, context);
-		//String filename = uf.upload();
-		/*if (matFile != null)
-			matFileService.insertData(matFile);
-		*/
-		return "fileUploaded";
 	}
 	
 }

@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import com.bluecoffee.domain.MatSubject;
+import com.bluecoffee.jdbc.MatFileRowMapper;
 import com.bluecoffee.jdbc.MatSubjectRowMapper;
 
 public class MatSubjectDaoImpl implements MatSubjectDao {
@@ -39,6 +40,20 @@ public class MatSubjectDaoImpl implements MatSubjectDao {
 		matSubjectList = jdbcTemplate.query(sql, new MatSubjectRowMapper());
 		return matSubjectList;
 	}
+	
+	@Override
+	public int getMatSubjectIDbyName(String name){
+		MatSubject matSubject = new MatSubject();
+
+		String sql = "select * from matsubject where subjectName='"+name+"'";
+		
+		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+		matSubject = jdbcTemplate.query(sql, new MatSubjectRowMapper()).get(0);
+		
+		return matSubject.getMatSubjectID();
+	}
+	
+	
 	
 /*	@Override
 	public void deleteData(String id) {

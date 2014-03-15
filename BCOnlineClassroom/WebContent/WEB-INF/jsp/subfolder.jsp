@@ -45,14 +45,14 @@ td {
 			</tr>
 			<c:forEach var="matFile" items="${map.Slides}">
 				<tr>
-					<td>${matFile.fileName}</a></td>
+					<td>${matFile.fileName}</td>
 					<td>${matFile.fileType}</td>
 					<td>${matFile.fileSize}</td>
 					<td>${matFile.uploadDate}</td>
 					<td><a href="download.do?filename=${matFile.fileName}">download</a></td>
 				</tr>
 			</c:forEach>
-			<tr><td colspan="7"><a href="upload">Upload</a></td></tr>
+			<tr><td colspan="7"><a href="upload?id=${id}&sf=Slides">Upload</a></td></tr>
 		</table>
 			
 		Samplex
@@ -74,7 +74,7 @@ td {
 					<td><a href="download.do?filename=${matFile.fileName}">download</a></td>
 				</tr>
 			</c:forEach>
-			<tr><td colspan="7"><a href="upload">Upload</a></td></tr>
+			<tr><td colspan="7"><a href="upload?id=${id}&sf=Samplex">Upload</a></td></tr>
 		</table>
 
 		Miscellaneous
@@ -96,7 +96,7 @@ td {
 					<td><a href="download.do?filename=${matFile.fileName}">download</a></td>
 				</tr>
 			</c:forEach>
-			<tr><td colspan="7"><a href="upload">Upload</a></td></tr>
+			<tr><td colspan="7"><a href="upload?id=${id}&sf=Miscellaneous">Upload</a></td></tr>
 		</table>
 			
 

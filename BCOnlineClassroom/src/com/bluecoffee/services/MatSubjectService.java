@@ -9,6 +9,8 @@ public interface MatSubjectService {
 //	public void insertData(MatFile matFile);
 
 	public List<MatSubject> getMatSubjectList();
+	
+	public int getMatSubjectIDbyName(String name);
 
 //	public void deleteData(String id);
 

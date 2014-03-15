@@ -16,4 +16,9 @@ public class MatFolderServiceImpl implements MatFolderService {
 	public List<MatFolder> getMatFolderList() {
 		return matfolderdao.getMatFolderList();
 	}
+	
+	@Override
+	public int getMatFolderIDbyName(String name){
+		return matfolderdao.getMatFolderIDbyName(name);
+	}
 }

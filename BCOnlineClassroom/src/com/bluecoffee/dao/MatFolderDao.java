@@ -8,4 +8,6 @@ public interface MatFolderDao {
 
 	public List<MatFolder> getMatFolderList();
 	
+	public int getMatFolderIDbyName(String name);
+	
 }
