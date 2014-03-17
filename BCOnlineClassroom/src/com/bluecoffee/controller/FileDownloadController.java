@@ -14,6 +14,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import com.bluecoffee.services.MatFileService;
+
 @Controller
 public class FileDownloadController {
 	
@@ -21,7 +24,10 @@ public class FileDownloadController {
 	 * Size of a byte buffer to read/write file
 	 */
 	private static final int BUFFER_SIZE = 4096;
-			
+	
+	@Autowired
+	MatFileService matfileservice;
+	
 	/**
 	 * Path of the file to be downloaded, relative to application's directory
 	 */
@@ -31,11 +37,14 @@ public class FileDownloadController {
 	/**
 	 * Method for handling file download request from client
 	 */
-	@RequestMapping(value = "/download.do", params = "filename", method = RequestMethod.GET)
-	public void doDownload(@RequestParam String filename, HttpServletRequest request,
+	@RequestMapping(value = "/download.do", params = "fid", method = RequestMethod.GET)
+	public void doDownload(@RequestParam int fid, HttpServletRequest request,
 			HttpServletResponse response) throws IOException {
 		
-		filePath = filePath + filename;
+		
+		
+		filePath = matfileservice.getFilePathByID(fid) + matfileservice.getFileNameByID(fid);
+		//filePath = filePath + filename;
 		
 		// get absolute path of the application
 		ServletContext context = request.getServletContext();
@@ -44,12 +53,13 @@ public class FileDownloadController {
 		System.out.println("fileRepository = " + fileRepository);
 
 		// construct the complete absolute path of the file
-		String fullPath = fileRepository + filePath;		
-		File downloadFile = new File(fullPath);
+		//String fullPath = fileRepository + filePath;		
+		//replaced fullPath with filePath
+		File downloadFile = new File(filePath);
 		FileInputStream inputStream = new FileInputStream(downloadFile);
 		
 		// get MIME type of the file
-		String mimeType = context.getMimeType(fullPath);
+		String mimeType = context.getMimeType(filePath);
 		if (mimeType == null) {
 			// set to binary type if MIME mapping not found
 			mimeType = "application/octet-stream";
@@ -80,7 +90,5 @@ public class FileDownloadController {
 		inputStream.close();
 		outStream.close();
 		
-		filePath = "\\";
-
 	}
 }

@@ -52,9 +52,15 @@ public class MaterialsController {
 	}
 	
 	@RequestMapping("/subfolder")
-	public ModelAndView getFolderList(@RequestParam String id, 
+	public ModelAndView getFolderList(@RequestParam String id, @RequestParam int us, 
 			@ModelAttribute MatFolder matFolder, Model model){
-
+		
+		String message = "";
+		
+		if(us==0){ message = ""; }
+		else if(us==1){ message = "File uploaded successfully"; }
+		else if(us==-1){ message = "There was an error while uploading the file"; }
+		
 		List<MatFolder> matFolderList = matFolderService.getMatFolderList();
 		List<MatFile> matFileList = matFileService.getMatFileListBySubjectName(id);
 		
@@ -65,6 +71,7 @@ public class MaterialsController {
 		}
 				
 		model.addAttribute("id", id);
+		model.addAttribute("message", message);
 		
 		return new ModelAndView("subfolder", "map", map);
 		/*
@@ -95,7 +102,7 @@ public class MaterialsController {
 		List<MatFile> matFileList = matFileService.getMatFileList();
 		return new ModelAndView("matFileList", "matFileList", matFileList);
 	}*/
-
+/*
 	@RequestMapping("/edit")
 	public ModelAndView editMatFile(@RequestParam String id,
 			@ModelAttribute MatFile matFile) {
@@ -121,11 +128,11 @@ public class MaterialsController {
 		System.out.println("id = " + id);
 		matFileService.deleteData(id);
 		return "redirect:/getList";
-	}
+	}*/
 
-	@RequestMapping(value="/download", params="filename")
-	public String gotodownloadthigy(@RequestParam String filename, Model model){
-		model.addAttribute("filename", filename);
+	@RequestMapping(value="/download", params="fid")
+	public String gotodownloadthigy(@RequestParam int fid, Model model){
+		model.addAttribute("fid", fid);
 		return "download";
 	}
 	
@@ -140,11 +147,14 @@ public class MaterialsController {
 	@RequestMapping("/fileUploaded")
 	public String uploadfile(@RequestParam String id, @RequestParam String sf, @ModelAttribute MatFile matFile, HttpServletRequest request) {
 
+		int uploadsuccessful=0;
+		
 		File file;
 		int maxFileSize = 5000 * 1024;
 		int maxMemSize = 5000 * 1024;
 		ServletContext context = request.getServletContext();
 		String filePath = context.getInitParameter("file-upload");
+		filePath = filePath + "\\" + id + "\\" + sf + "\\";
 
 		// Verify the content type
 		String contentType = request.getContentType();
@@ -204,11 +214,15 @@ public class MaterialsController {
 				}
 			}
 			
+			uploadsuccessful = 1;
 		}catch(Exception ex) {
 			System.out.println(ex);
 		}
-	}
+		}
+		else{
+			uploadsuccessful = -1;
+		}
 		
-		return "fileUploaded";
+		return "redirect:/subfolder?id="+id+"&us="+uploadsuccessful;
 	}
 }

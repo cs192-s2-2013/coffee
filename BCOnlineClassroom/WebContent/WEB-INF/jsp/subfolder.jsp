@@ -30,6 +30,9 @@ td {
 </style>
 </head>
 <body>
+
+${message }
+
 	<center>
 		<br /> <br /> <br /> <b>Subfolder </b><br /> <br />
 			
@@ -49,7 +52,7 @@ td {
 					<td>${matFile.fileType}</td>
 					<td>${matFile.fileSize}</td>
 					<td>${matFile.uploadDate}</td>
-					<td><a href="download.do?filename=${matFile.fileName}">download</a></td>
+					<td><a href="download.do?fid=${matFile.matFileID}">download</a></td>
 				</tr>
 			</c:forEach>
 			<tr><td colspan="7"><a href="upload?id=${id}&sf=Slides">Upload</a></td></tr>
@@ -71,7 +74,7 @@ td {
 					<td>${matFile.fileType}</td>
 					<td>${matFile.fileSize}</td>
 					<td>${matFile.uploadDate}</td>
-					<td><a href="download.do?filename=${matFile.fileName}">download</a></td>
+					<td><a href="download.do?fid=${matFile.matFileID}">download</a></td>
 				</tr>
 			</c:forEach>
 			<tr><td colspan="7"><a href="upload?id=${id}&sf=Samplex">Upload</a></td></tr>
@@ -93,7 +96,7 @@ td {
 					<td>${matFile.fileType}</td>
 					<td>${matFile.fileSize}</td>
 					<td>${matFile.uploadDate}</td>
-					<td><a href="download.do?filename=${matFile.fileName}">download</a></td>
+					<td><a href="download.do?fid=${matFile.matFileID}">download</a></td>
 				</tr>
 			</c:forEach>
 			<tr><td colspan="7"><a href="upload?id=${id}&sf=Miscellaneous">Upload</a></td></tr>

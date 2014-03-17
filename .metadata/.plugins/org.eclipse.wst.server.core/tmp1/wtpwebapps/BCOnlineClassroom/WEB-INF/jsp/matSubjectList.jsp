@@ -42,7 +42,7 @@ td {
 			</tr>
 			<c:forEach var="matSubject" items="${matSubjectList}">
 				<tr>
-					<td><a href="subfolder?id=${matSubject.subjectName}">${matSubject.subjectName}</a></td>
+					<td><a href="subfolder?id=${matSubject.subjectName}&us=0">${matSubject.subjectName}</a></td>
 					<td>${matSubject.subjectDesc}</td>
 				</tr>
 			</c:forEach>

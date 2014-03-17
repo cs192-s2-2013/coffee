@@ -23,13 +23,13 @@ public class MatFileServiceImpl implements MatFileService {
 	}
 
 	@Override
-	public void deleteData(String id) {
+	public void deleteData(int id) {
 		matfiledao.deleteData(id);
 		
 	}
 
 	@Override
-	public MatFile getMatFile(String id) {
+	public MatFile getMatFile(int id) {
 		return matfiledao.getMatFile(id);
 	}
 
@@ -48,5 +48,16 @@ public class MatFileServiceImpl implements MatFileService {
 	public List<MatFile> getMatFileListBySubjectFolder(String subjectName, int matFolderID) {
 		return matfiledao.getMatFileListBySubjectFolder(subjectName, matFolderID);
 	}
+	
+	@Override
+	public String getFileNameByID(int id){
+		return getMatFile(id).getFileName();
+	}
+	
+	@Override
+	public String getFilePathByID(int id){
+		return getMatFile(id).getPath();
+	}
+	
 	
 }

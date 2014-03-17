@@ -42,7 +42,7 @@ public class MatFileDaoImpl implements MatFileDao {
 	}
 
 	@Override
-	public void deleteData(String id) {
+	public void deleteData(int id) {
 		String sql = "delete from matfile where matFileID=" + id;
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
 		jdbcTemplate.update(sql);
@@ -63,7 +63,7 @@ public class MatFileDaoImpl implements MatFileDao {
 	}
 
 	@Override
-	public MatFile getMatFile(String id) {
+	public MatFile getMatFile(int id) {
 		List<MatFile> matFileList = new ArrayList<MatFile>();
 		String sql = "select * from matfile where matFileID= " + id;
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
@@ -92,5 +92,7 @@ public class MatFileDaoImpl implements MatFileDao {
 		matFileList = jdbcTemplate.query(sql, new MatFileRowMapper());
 		return matFileList;
 	}
+
+	
 	
 }
