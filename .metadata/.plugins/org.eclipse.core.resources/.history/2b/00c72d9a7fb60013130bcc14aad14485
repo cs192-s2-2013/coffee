@@ -1,0 +1,14 @@
+package com.bluecoffee.dao;
+
+import java.util.List;
+
+import com.bluecoffee.domain.FPost;
+
+public interface FPostDao {
+
+	public void insertData(FPost fpost);
+	public FPost getFPostByID(int fPostID);
+	public FPost getFPostByFPost(FPost fpost);
+	public List<FPost> getFPostList();
+
+}

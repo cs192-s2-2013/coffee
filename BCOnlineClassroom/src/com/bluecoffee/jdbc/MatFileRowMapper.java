@@ -14,5 +14,4 @@ public class MatFileRowMapper implements RowMapper<MatFile> {
 		MatFileExtractor matFileExtractor = new MatFileExtractor();
 		return matFileExtractor.extractData(resultSet);
 	}
-
 }

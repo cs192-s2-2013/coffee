@@ -21,6 +21,7 @@ import com.bluecoffee.domain.*;
 import com.bluecoffee.services.MatFileService;
 import com.bluecoffee.domain.MatSubject;
 import com.bluecoffee.services.MatSubjectService;
+import com.bluecoffee.services.UserService;
 
 @Controller
 public class HomePageController {
@@ -29,6 +30,17 @@ public class HomePageController {
 	MatFileService matFileService;
 	@Autowired
 	MatSubjectService matSubjectService;
+	@Autowired UserService userService;
+	
+	@Autowired private User user;
+	
+	@RequestMapping(value="/login", params = "un")
+	public String login(@RequestParam String un){
+		
+		user = userService.getUserByUsername(un);
+		
+		return "home";
+	}
 	
 	@RequestMapping("/home")
 	public String homepage(Model model) {
@@ -40,9 +52,9 @@ public class HomePageController {
 		return "chat";
 	}
 
-	@RequestMapping("/forum")
+/*	@RequestMapping("/forum")
 	public String forum(Model model) {
 		return "forum";
 	}
-	
+*/	
 }

@@ -1,0 +1,72 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<html>
+<head>
+<title>Blue Coffee | Online Classroom</title>
+<style>
+body {
+	font-size: 20px;
+	color: teal;
+	font-family: Calibri;
+}
+
+td {
+	font-size: 15px;
+	color: black;
+	width: 100px;
+	height: 22px;
+	text-align: center;
+}
+.heading {
+	font-size: 18px;
+	color: white;
+	font: bold;
+	background-color: orange;
+	border: thick;
+}
+</style>
+</head>
+<body>
+	<center>
+		<br /> <br /> <br /> <b>Subjects List </b><br /> <br />
+			
+		Post:  ${fPost.content}
+
+		<table border="1">
+			<tr>
+				<td class="heading">Comment</td>
+				<td class="heading">Comment by</td>
+			</tr>
+			<c:forEach var="fComment" items="${fCommentList}">
+				<tr>
+					<td>${fComment.content}</a></td>
+					<td>${fComment.commenter}</td>
+				</tr>
+			</c:forEach>
+		</table>
+
+
+		<div>
+			<form:form method="post" action="/comment" modelAttribute="fComment">
+				${fComment.fPostID = pid }
+				<table>
+					<tr>
+						<td>Comment :</td>
+						<td><form:input path="content" /></td>
+					</tr>
+					<tr>
+						<td>&nbsp;</td>
+						<td><input type="submit" value="Comment" /></td>
+					</tr>
+				</table>
+			</form:form>
+		</div>
+
+
+
+	</center>
+</body>
+</html>

@@ -13,8 +13,11 @@
 		<item value="false" key="isRegEx"/>
 		<item value="false" key="incremental"/>
 		<item value="false" key="wholeword"/>
-		<item value="file-upload" key="selection"/>
+		<item value="matFile" key="selection"/>
 		<list key="findhistory">
+			<item value="f"/>
+			<item value="MatFile"/>
+			<item value="MatFileService"/>
 			<item value="file-upload"/>
 			<item value="get"/>
 			<item value="img"/>

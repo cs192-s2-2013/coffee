@@ -1,38 +1,213 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page session="false" %>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <html>
 <head>
-	<title>Home</title>
+	<title>Blue Coffee</title>
+	
+	
+	<link type="text/css" rel="stylesheet" href="css/bootstrap.css"/>
+	<link href="http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+	<link type="text/css" rel="stylesheet" href="css/style.css">
+	<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0-rc1/css/bootstrap.min.css" rel="stylesheet">
+	
+	<style>
+          body { background: #FFFFFF; }
+          .container { background: ; }
+    </style>
+	
 </head>
+
 <body>
-<div id="titlebox" style="background-color:#465e67; height:18%; margin-top:none;">
-<div id="title" style="margin-top:30px; margin-left:50px; float:left;"><font size="6px" color="white">Online Classroom</font></div>
 
-<div id="menu" style="margin-top:50px; margin-right:40px; float:right; ">
-<a href= "forum" style="text-decoration:none; margin-right:10px;"><font color="white"; size="4px";>Forums</font></a>
-<a href= "chat" style="text-decoration:none; margin-right:10px;"><font color="white"; size ="4px">Chat</font></a>
-<a href= "materials" style="text-decoration:none; margin-right:10px;"><font color="white"; size ="4px">Materials</font></a>
-<a href= "upload" style="text-decoration:none; margin-right:10px;"><font color="white"; size ="4px">Upload a File</font></a>
-</div>
-</div>
+	<font color="#336699">
 
-<div id="logos"; style="margin-top:20px; margin-left:30px; border: 1px solid #465e67; width:200px; float:left;">
-<img src="https://fbcdn-photos-h-a.akamaihd.net/hphotos-ak-prn1/v/t34/1077951_10201100917159620_1672902962_a.jpg?oh=415fbf9c74f234211abe2dc5a5648a07&oe=52EEBD34&__gda__=1391376688_4c8d6f92084aa352fff6dbbb52aedc0e" alt="UP Department of Computer Science" style="margin-top:10px; margin-left:10px; margin-bottom:10px;" height="176" width="180"/>
-<img src="https://fbcdn-sphotos-h-a.akamaihd.net/hphotos-ak-prn2/v/t34/1616577_10201100916919614_1458609028_n.jpg?oh=d3cf73cafbbd4c58b0f120666de150e9&oe=52EE731A&__gda__=1391380748_4d935486c313ca46ee09dbcf384c5de9" alt="UP Department of Computer Science" style="margin-top:10px; margin-left:10px; margin-bottom:10px;" height="176" width="180"/>
-</div>
+	<!-- fixed navigation bar with drop down menu
+	***************************************************-->
+<div id="wrapper">	
+	<div class="navbar navbar-inverse navbar-fixed-top">
+		<div class="container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a href="#" class="navbar-brand">Online Classroom</a> 
+			</div>
+			
+			<div class="navbar-collapse collapse">
+				<ul class="nav navbar-nav">
+					<li class="active"><a href="index.html">Home</a></li>
+					<li class="divider-vertical"></li>
+					<li><a href="resource.html">Resources</a></li>
+					<li class="divider-vertical"></li>
+					<li><a href="feature.html">Forum</a></li>
+					<li class="divider-vertical"></li>
+					<li><a href="chat.html">Chat</a></li>
+					<li class="divider-vertical"></li>
+					<li><a href="about.html">About</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	
+	<!-- Carousel
+	***********************************-->
+	
+	<div id="myCarousel" class="carousel slide">
+		<ol class="carousel-indicators">
+			<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+			<li data-target="#myCarousel" data-slide-to="1" class="active"></li>
+			<li data-target="#myCarousel" data-slide-to="2" class="active"></li>
+		</ol>
+		
+		<div class="carousel-inner">
+		
+			<div class="item active">
+				<img src="image/scene1.jpg"/>
+				<div class="container">
+					<div class="carousel-caption">
+						<font color="#336699">
+						<h1>Resources</h1>
+						<p>Get files, samplex, codes, etc</p></font>
+						<p><a class="btn btn-large btn-danger" action="materials">Check Resources</a></p>
+					</div>
+				</div>
+			</div>
+			
+			<div class="item">
+				<img src="image/scene2.jpg"/>
+				<div class="container">
+					<div class="carousel-caption">
+						<font color="#336699">
+						<h1>Forum</h1>
+						<p>Blah blah</p></font>
+						<p><a class="btn btn-large btn-danger" action="forum">Check Forum</a></p>
+					</div>
+				</div>
+			</div>
+			
+			<div class="item">
+				<img src="image/scene3.jpg"/>
+				<div class="container">
+					<div class="carousel-caption">
+						<font color="#336699">
+						<h1>Chat</h1>
+						<p>Chat with the whole comsci community. wew</p></font>
+						<p><a class="btn btn-large btn-danger" href="chat.html">Chat now!</a></p>
+					</div>
+				</div>
+			</div>
+			
+		</div>
+		
+		<a class="left carousel-control" href="#myCarousel" data-slide="prev">
+			<span class="glyphicon glyphicon-chevron-left"></span>
+		</a>
+		
+		<a class="right carousel-control" href="#myCarousel" data-slide="next">
+			<span class="glyphicon glyphicon-chevron-right"></span>
+		</a>
+		
+	</div>	
+	<!-- Grid
+	****************************************-->
+	
+	<div class="container">
+		<div class="row">
+			
+			<div class="col-md-12">
+				<h2>Online Classroom</h2>
+				<p>App that lets you collaborate with your professor and classmates online! Come on and have your class online!</p>
+			</div>
+		
+		</div>
+		
+		<div class="row">
+		
+			<div class="col-md-4">
+				<a href="materials"><h2>Resources</h2></a>
+				<p>Some text will go here. Some text will go here. Some text will go here. Some text will go here.</p>
+			</div>
+			
+			<div class="col-md-4">
+				<a href="forum"><h2>Forum</h2></a>
+				<p>Some text will go here. Some text will go here. Some text will go here. Some text will go here.</p>
+			</div>
+			
+			<div class="col-md-4">
+				<a href="#"><h2>Chat</h2></a>
+				<p>Some text will go here. Some text will go here. Some text will go here. Some text will go here.</p>
+			</div>
+			
+		</div>
+		
+	</div>
+	
+	<!-- Font Awesome Icons
+	***************************************************-->
+	
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="well">
+					
+						<a href="#"><i class="largeicon icon-android"></i></a>
+						<a href="#"><i class="largeicon icon-twitter"></i></a>
+						<a href="#"><i class="largeicon icon-linkedin"></i></a>
+						<a href="#"><i class="largeicon icon-youtube"></i></a>
+						<a href="#"><i class="largeicon icon-skype"></i></a>
+						<a href="#"><i class="largeicon icon-google-plus"></i></a>
+						<a href="#"><i class="largeicon icon-apple"></i></a>
+					
+					</div>
+				</div>
+			</div>
+		</div>
 
-<div id="textbox"; style="margin-top:20px; margin-right:30px;width:75%; float:right;">
-<div id="text"; style = "margin-top:10px; margin-left:10px; margin-right:10px;">
+	<div class="push"></div>
+	
+	<!-- Footer and Modal
+	**************************************************-->
+	<div id="footer">
+	<hr/>	
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
 
-</br></br><h1><b><font color=#465e67 size="7px"><center>LEARNING RESOURCES<font color=#999999>,</font> COLLABORATION<font color=#999999> &</font> CONFERENCE</center></b></h1>
-
-<P> <font size="4px"><p align="justify">This online classroom, is an exclusive platform for collaboration with your Department of Computer Science fellows. 
-Access a plethora of review materials and learning resources.
-Gain feedback from the entire UP DCS network.
-Hold a conference or study session with anyone in the department.
-<i>Share your expertise.</i></font></p>
-</font>
+				<p>Copyright &copy; Blue Coffee.
+				<!--<a href="#">Terms and Conditions</a> -->
+				
+					<a data-toggle="modal" href="#myModal">Terms and Conditions</a>
+				</p>
+				
+				<!--Modal -->
+				<div class="modal fade" id="myModal" tabinex="-1" role="dialog" aria-hidden="true">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header">
+							<h2>Terms and Conditions</h2>
+							</div>
+							<div class="modal-body">
+								<p>The text will go here...</p>
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	</div>
 </div>
-</font>
-</div>
+	</font>
+	
+	<script src="js/jquery.js"></script>
+	<script src="js/bootstrap.js"></script>
 </body>
+</html>

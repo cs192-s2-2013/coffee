@@ -12,6 +12,8 @@ public class MatFile {
 	private String path;
 	private int matSubjectID;
 	private int matFolderID;
+	private int userID;
+	private String uploader; //not part of database
 
 	public int getMatFileID(){ return matFileID; }
 	public String getFileName(){ return fileName; }
@@ -21,6 +23,8 @@ public class MatFile {
 	public String getPath(){ return path; }
 	public int getMatSubjectID(){ return matSubjectID; }
 	public int getMatFolderID(){ return matFolderID; }
+	public int getUserID(){ return userID; }
+	public String getUploader(){ return uploader; }
 	
 	public void setMatFileID(int matFileID){ this.matFileID = matFileID; }
 	public void setFileName(String fileName){ this.fileName = fileName; }
@@ -30,5 +34,6 @@ public class MatFile {
 	public void setPath(String path){ this.path = path; }
 	public void setMatSubjectID(int matSubjectID){ this.matSubjectID =  matSubjectID; }
 	public void setMatFolderID(int matFolderID){ this.matFolderID =  matFolderID; }
-	
+	public void setUserID(int userID){ this.userID = userID; }
+	public void setUploader(String uploader){ this.uploader = uploader; }
 }

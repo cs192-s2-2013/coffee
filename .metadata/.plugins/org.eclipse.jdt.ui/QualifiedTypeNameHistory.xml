@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
 <fullyQualifiedTypeName name="com.bluecoffee.domain.MatSubject"/>
+<fullyQualifiedTypeName name="com.bluecoffee.services.UserService"/>
+<fullyQualifiedTypeName name="com.bluecoffee.domain.FPost"/>
+<fullyQualifiedTypeName name="com.bluecoffee.dao.MatFileDao"/>
 </qualifiedTypeNameHistroy>

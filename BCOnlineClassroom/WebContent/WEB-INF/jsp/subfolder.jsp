@@ -44,6 +44,7 @@ ${message }
 				<td class="heading">File Type</td>
 				<td class="heading">File Size</td>
 				<td class="heading">Upload Date</td>
+				<td class="heading">Uploaded by</td>
 				<td class="heading"></td>
 			</tr>
 			<c:forEach var="matFile" items="${map.Slides}">
@@ -52,6 +53,7 @@ ${message }
 					<td>${matFile.fileType}</td>
 					<td>${matFile.fileSize}</td>
 					<td>${matFile.uploadDate}</td>
+					<td>${matFile.uploader}</td>
 					<td><a href="download.do?fid=${matFile.matFileID}">download</a></td>
 				</tr>
 			</c:forEach>
@@ -66,6 +68,7 @@ ${message }
 				<td class="heading">File Type</td>
 				<td class="heading">File Size</td>
 				<td class="heading">Upload Date</td>
+				<td class="heading">Uploaded by</td>
 				<td class="heading"></td>
 			</tr>
 			<c:forEach var="matFile" items="${map.Samplex}">
@@ -74,6 +77,7 @@ ${message }
 					<td>${matFile.fileType}</td>
 					<td>${matFile.fileSize}</td>
 					<td>${matFile.uploadDate}</td>
+					<td>${matFile.uploader}</td>
 					<td><a href="download.do?fid=${matFile.matFileID}">download</a></td>
 				</tr>
 			</c:forEach>
@@ -88,6 +92,7 @@ ${message }
 				<td class="heading">File Type</td>
 				<td class="heading">File Size</td>
 				<td class="heading">Upload Date</td>
+				<td class="heading">Uploaded by</td>
 				<td class="heading"></td>
 			</tr>
 			<c:forEach var="matFile" items="${map.Miscellaneous}">
@@ -96,6 +101,7 @@ ${message }
 					<td>${matFile.fileType}</td>
 					<td>${matFile.fileSize}</td>
 					<td>${matFile.uploadDate}</td>
+					<td>${matFile.uploader}</td>
 					<td><a href="download.do?fid=${matFile.matFileID}">download</a></td>
 				</tr>
 			</c:forEach>

@@ -1,0 +1,18 @@
+package com.bluecoffee.services;
+
+import java.util.List;
+
+import com.bluecoffee.domain.FTag;
+
+
+public interface FTagService {
+	
+	public void insertData(FTag ftag);
+	
+	public List<FTag> getFTagList();
+	
+	public int getTagID(String tag);
+
+}
+
+

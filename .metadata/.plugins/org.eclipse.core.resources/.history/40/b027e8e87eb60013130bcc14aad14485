@@ -1,0 +1,12 @@
+package com.bluecoffee.services;
+
+import java.util.List;
+
+import com.bluecoffee.domain.FPost;
+
+public interface FPostService {
+
+	public int insertData(FPost fpost);
+	public FPost getFPostByID(int fPostID);
+	public List<FPost> getFPostList();
+}

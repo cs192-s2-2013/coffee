@@ -1,0 +1,25 @@
+package com.bluecoffee.services;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.bluecoffee.dao.FPostDao;
+import com.bluecoffee.dao.MatFileDao;
+import com.bluecoffee.domain.FPost;
+
+public class FPostServiceImpl implements FPostService{
+	
+	@Autowired
+	FPostDao fPostDao;
+	
+	@Override
+	public void insertData(FPost fpost){
+		fPostDao.insertData(fpost);
+	}
+	
+	@Override
+	public List<FPost> getFPostList() {
+		return fPostDao.getFPostList();
+	}
+}
