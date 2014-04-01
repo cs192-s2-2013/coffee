@@ -55,7 +55,7 @@ public class ForumController {
 	@Autowired private User user;
 	
 	@RequestMapping("/forum")
-	public String showPosts(Model model){
+	public String showPosts(@RequestParam(value = "r", required=false, defaultValue="0") int r, Model model){
 		
 		List<FPost> fPostList = fPostService.getFPostList();
 		for(FPost fPost : fPostList){
@@ -63,6 +63,7 @@ public class ForumController {
 			fPost.setPoster(user.getFirstName()+" "+user.getLastName()+" ("+user.getUsername()+")");
 		}
 		model.addAttribute("fPostList", fPostList);
+		model.addAttribute("r", r);
 		
 		return "forum";
 	}
@@ -79,14 +80,14 @@ public class ForumController {
 		if (fPost.getTitle().length() >0 && fPost.getContent().length() >0){
 			
 			fPost.setPostDate(new Date());
-			//TODO fPost.setUserID();  should be based on uploader(session attribute)
-			fPost.setUserID(1);//for now, default
+			fPost.setUserID(user.getUserID());
+			//fPost.setUserID(1);//for now, default
 			fPost.setCommentCount(0);
 			fPostService.insertData(fPost);
 			int fPostID = fPostService.getIDByFPost(fPost);
 			
 			/**tags**/
-			String[] tags = fPost.getTag().split(",");
+			String[] tags = fPost.getTag().split(" ");
 			for(String tag : tags){
 				tag = tag.trim();
 				int tagid = fTagService.getFTagID(tag);
@@ -134,7 +135,8 @@ public class ForumController {
 		if (fComment.getContent().length()>0){
 			fComment.setCommentDate(new Date());
 			fComment.setFPostID(pid);
-			fComment.setUserID(1); //TODO:  user id from session attribute
+			//fComment.setUserID(1); 
+			fComment.setUserID(user.getUserID());  //TODO:  user id from session attribute
 			fCommentService.insertData(fComment);	
 			
 			fPostService.incCommentCount(pid);

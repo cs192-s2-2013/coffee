@@ -38,7 +38,7 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<a href="#" class="navbar-brand">Blue Coffee</a> 
+				<a href="home" class="navbar-brand">Blue Coffee</a> 
 			</div>
 			
 			<div class="navbar-collapse collapse">
@@ -63,10 +63,24 @@
 	**************************************************-->
 	<div class = "jumbotron">
 		<!--JSP code to get subject-->
-		<h2>Resources</h2>
+		<a href="#"><h2>Resources</h2></a>
 		<h5>Upload or download all the resources you need.</h5>
 	</div>
 	
+	
+	<!-- Search Bar
+	************************************************* -->
+	<form:form method="post" action="/materials"> <!-- modelAttribute="fPost" -->
+		<div class="row">
+			<div class="col-sm-3"></div>
+			<div class="col-sm-5">
+				<input type="text" name="searchString" class="form-control" placeholder="Find files">
+			</div>
+			<div class="col-sm-2">
+				<button type="submit" class="btn btn-primary">Search</button>
+			</div>
+		</div>
+	</form:form>
 	
 	
 	<!--Subject Grid
@@ -80,7 +94,14 @@
 			<%if(i==0) {%>
 				<div class="row">
 			<%} %>
-			<div class="col-sm-3"><center><a href="subfolder?id=${matSubject.subjectName}&us=0"><img src="C:\Users\lara312\Documents\GitHub\coffee\BCOnlineClassroom\WebContent\WEB-INF\jsp\image\blue-folder-icon.png"/></a></br>${matSubject.subjectName}</br></br></center></div>
+			<div class="col-sm-3">
+				<center>
+				<a href="subfolder?id=${matSubject.subjectName}&us=0"><img src="<spring:url value='/resources/images/blue-folder-icon.png'/>"/></a>
+				</br>
+				${matSubject.subjectName}
+				</br></br>
+				</center>
+			</div>
 			<%i++;	
 			if(i==4) {
 				i=0;%>

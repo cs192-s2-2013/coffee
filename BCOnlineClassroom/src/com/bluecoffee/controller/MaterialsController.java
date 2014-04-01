@@ -218,7 +218,7 @@ public class MaterialsController {
 					mf.setMatFolderID(matFolderService.getMatFolderIDbyName(sf));
 					
 					mf.setUserID(user.getUserID());
-					//mf.setUserID(1); //should not be hardcoded
+					//mf.setUserID(1); //TODO should not be hardcoded
 					
 					matFileService.insertData(mf);
 					

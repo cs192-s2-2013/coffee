@@ -38,7 +38,7 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<a href="#" class="navbar-brand">Blue Coffee</a> 
+				<a href="home" class="navbar-brand">Blue Coffee</a> 
 			</div>
 			
 			<div class="navbar-collapse collapse">
@@ -62,51 +62,61 @@
 	**************************************************-->
 	<div class="jumbotron">
 		<!--JSP code to get subject-->
-		<h2>Forum</h2>
+		<a href="#"><h2>Forum</h2></a>
 		<h5>Ask away or share your knowledge.</h5>
 	</div>
 	
 	
-	<!-- Input question
-	**************************************************-->
-	<div class="container">
-	<form:form method="post" action="/insertpost" modelAttribute="fPost">
-		<div class="row">
-			<div class="col-sm-1"></div>
-			<div class="col-sm-5"><h3>Ask a question</h3></div>
-		</div>
-		<div class="row">
-			<div class="col-sm-1"></div>
-			<div class="col-sm-10">
-				<input type="text" name="title" class="form-control" placeholder="Type your question here">
+	<c:choose>
+	<c:when test="${r=='1'}">
+		<!-- Input question
+		**************************************************-->
+		<div class="container">
+		<form:form method="post" action="/insertpost" modelAttribute="fPost">
+			<div class="row">
+				<div class="col-sm-2"></div>
+					<div class="col-sm-8"><center><h3>Ask a question</h3></center></div>
 			</div>
-		</div>
-		</br>
-		<div class="row">
-			<div class="col-sm-1"></div>
-			<div class="col-sm-10">
-				<textarea class="form-control" name="content" rows="3" placeholder="Details about the problem"></textarea>
+			<div class="row">
+				<div class="col-sm-2"></div>
+				<div class="col-sm-8">
+					<input type="text" name="title" class="form-control" placeholder="Type your question here">
+				</div>
 			</div>
-		</div>
-		</br>
-		<div class="row">
-			<div class="col-sm-1"></div>
-			<div class="col-sm-10">
-				<textarea class="form-control" name="tag" placeholder="Tags"></textarea>
+			</br>
+			<div class="row">
+				<div class="col-sm-2"></div>
+				<div class="col-sm-8">
+					<textarea class="form-control" name="content" rows="3" placeholder="Details about the problem"></textarea>
+				</div>
 			</div>
-		</div>
-		</br>
-		<div class="row">
-			<div class="col-sm-8"></div>
-			<div class="col-sm-3">
-				<!--<button type="button" class="btn btn-info">Add details</button>-->
-				<button type="submit" class="btn btn-primary">Submit query</button>
+			</br>
+			<div class="row">
+				<div class="col-sm-2"></div>
+				<div class="col-sm-8">
+					<textarea class="form-control" name="tag" placeholder="Tags: tags-are-separated-by-spaces this-is-another-tag"></textarea>
+				</div>
 			</div>
+			</br>
+			<div class="row">
+				<div class="col-sm-8"></div>
+				<div class="col-sm-3">
+					<!--<button type="button" class="btn btn-info">Add details</button>-->
+					<a href="forum?r=1"></a><button type="cancel" class="btn btn-primary">Cancel</button></a>
+					<button type="submit" class="btn btn-primary">Submit</button>
+				</div>
+			</div>
+		</form:form>
 		</div>
-	</form:form>
-	</div>
-	</br></br></br>
-	
+		</br></br></br>
+	</c:when>
+	<c:otherwise>
+		<div class="row">
+			<div class="col-sm-2"></div>
+				<div class="col-sm-8"><a href="forum?r=1"><p align="right"><button type="ask" class="btn btn-primary">Ask a question</p></button></a></div>
+		</div>
+	</c:otherwise>
+	</c:choose>
 	
 	<!-- List of questions
 	**************************************************-->
@@ -117,7 +127,8 @@
 				<div class="col-sm-1"></div>
 				<div class="col-sm-8 table-bordered">
 					<h4><a href="forumPost?pid=${forumItem.getFPostID()}">${forumItem.title}</a></h4>
-					${forumItem.content}
+					Tags:
+					<!-- Insert tags here later -->
 					</br>
 					<h6>Posted by ${forumItem.poster} on ${forumItem.postDate}</h6>
 				</div>

@@ -38,7 +38,7 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<a href="#" class="navbar-brand">Blue Coffee</a> 
+				<a href="home" class="navbar-brand">Blue Coffee</a> 
 			</div>
 			
 			<div class="navbar-collapse collapse">
@@ -90,7 +90,7 @@
 	**************************************************-->
 	<div class = "jumbotron">
 		<!--JSP code to get subject-->
-		<h2>Forum</h2>
+		<a href="forum"><h2>Forum</h2></a>
 		<h5>Ask away or share your knowledge.</h5>
 	</div>
 	
@@ -106,8 +106,7 @@
 			<div class="col-sm-10">
 				${fPost.content}
 				</br></br>
-				Tags: <c:forEach var="fTag" items="${fTagList}"> ${fTag.tag }	</c:forEach>
-				</br></br>
+				<h6><b>Tags: </b><c:forEach var="fTag" items="${fTagList}"> ${fTag.tag }</c:forEach></h6>
 				<small><b>Posted by ${fPost.poster} on ${fPost.postDate}</small></b>
 			</div>
 		</div>

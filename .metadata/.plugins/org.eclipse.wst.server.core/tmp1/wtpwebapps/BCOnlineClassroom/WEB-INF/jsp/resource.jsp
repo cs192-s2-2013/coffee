@@ -37,7 +37,7 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<a href="#" class="navbar-brand">Blue Coffee</a> 
+				<a href="home" class="navbar-brand">Blue Coffee</a> 
 			</div>
 			
 			<div class="navbar-collapse collapse">
@@ -88,7 +88,7 @@
 	**************************************************-->
 	<div class = "jumbotron">
 		<!--JSP code to get subject-->
-		<h2>Resources</h2>
+		<a href="materials"><h2>Resources</h2></a>
 		<h5>Upload or download all the resources you need.</h5>
 	</div>
 	<center>
@@ -117,7 +117,6 @@
 					</span>
 					
 					<span class="fileinput-filename"></span>
-					<a href="#" class="close fileinput-exists" data-dismiss="fileinput" style="float: none">&times;</a>
 					<button type="submit" class="btn btn-info" id="mytooltip" data-toggle="tooltip" title="Upload Files" data-placement="right">
 						Upload
 					</button>
@@ -189,7 +188,6 @@
 					</span>
 					
 					<span class="fileinput-filename"></span>
-					<a href="#" class="close fileinput-exists" data-dismiss="fileinput" style="float: none">&times;</a>
 					<button type="submit" class="btn btn-info" id="mytooltip" data-toggle="tooltip" title="Upload Files" data-placement="right">
 						Upload
 					</button>
@@ -259,7 +257,6 @@
 					</span>
 					
 					<span class="fileinput-filename"></span>
-					<a href="#" class="close fileinput-exists" data-dismiss="fileinput" style="float: none">&times;</a>
 					<button type="submit" class="btn btn-info" id="mytooltip" data-toggle="tooltip" title="Upload Files" data-placement="right">
 						Upload
 					</button>
@@ -311,9 +308,7 @@
 </div>	
 	
 	<div class="push"></div>
-	
-	
-	<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" href="#uploadSuccess">Upload Success</button>
+
 	
 	
 	<!-- Upload Success Modal
