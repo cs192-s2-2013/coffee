@@ -23,7 +23,10 @@ import com.bluecoffee.domain.MatSubject;
 import com.bluecoffee.services.MatSubjectService;
 import com.bluecoffee.services.UserService;
 
+import org.springframework.web.bind.annotation.SessionAttributes;
+
 @Controller
+@SessionAttributes("user")
 public class HomePageController {
 
 	@Autowired
@@ -32,13 +35,12 @@ public class HomePageController {
 	MatSubjectService matSubjectService;
 	@Autowired UserService userService;
 	
-	@Autowired private User user;
+	//@Autowired private User user;
 	
 	@RequestMapping(value="/login", params = "un")
-	public String login(@RequestParam String un){
-		
-		user = userService.getUserByUsername(un);
-		
+	public String login(@RequestParam String un, Model model){
+		User user = userService.getUserByUsername(un);
+		model.addAttribute("user", user);	
 		return "home";
 	}
 	

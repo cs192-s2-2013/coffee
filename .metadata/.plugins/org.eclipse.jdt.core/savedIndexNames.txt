@@ -76,7 +76,6 @@ INDEX VERSION 1.126+C:\Users\lara312\Documents\GitHub\coffee\.metadata\.plugins\
 3697579709.index
 30765161.index
 2953919159.index
-2361643349.index
 4282597549.index
 974424613.index
 2691344168.index

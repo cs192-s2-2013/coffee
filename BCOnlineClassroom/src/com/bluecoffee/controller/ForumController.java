@@ -15,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.bluecoffee.domain.FPost;
@@ -44,6 +45,7 @@ import org.apache.commons.io.output.*;
 import javax.servlet.jsp.PageContext;
 
 @Controller
+@SessionAttributes("user")
 public class ForumController {
 	
 	@Autowired FPostService fPostService;
@@ -62,6 +64,7 @@ public class ForumController {
 			User user = userService.getUserByUserID(fPost.getUserID());
 			fPost.setPoster(user.getFirstName()+" "+user.getLastName()+" ("+user.getUsername()+")");
 		}
+		Collections.reverse(fPostList);
 		model.addAttribute("fPostList", fPostList);
 		model.addAttribute("r", r);
 		
@@ -76,7 +79,7 @@ public class ForumController {
 	}
 	
 	@RequestMapping("/insertpost")	//redirected from submitpost.jsp
-	public String inserPost(@ModelAttribute FPost fPost) {
+	public String inserPost(@ModelAttribute FPost fPost, @ModelAttribute("user") User user) {
 		if (fPost.getTitle().length() >0 && fPost.getContent().length() >0){
 			
 			fPost.setPostDate(new Date());
@@ -131,12 +134,11 @@ public class ForumController {
 	}
 	
 	@RequestMapping("/comment")
-	public String comment(@RequestParam int pid, @ModelAttribute FComment fComment){
+	public String comment(@RequestParam int pid, @ModelAttribute FComment fComment, @ModelAttribute("user") User user){
 		if (fComment.getContent().length()>0){
 			fComment.setCommentDate(new Date());
 			fComment.setFPostID(pid);
-			//fComment.setUserID(1); 
-			fComment.setUserID(user.getUserID());  //TODO:  user id from session attribute
+			fComment.setUserID(user.getUserID());
 			fCommentService.insertData(fComment);	
 			
 			fPostService.incCommentCount(pid);
