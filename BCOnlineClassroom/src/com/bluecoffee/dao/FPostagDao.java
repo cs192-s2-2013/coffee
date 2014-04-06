@@ -8,7 +8,7 @@ public interface FPostagDao {
 
 	public void insertData(int fPostID, int fTagID);
 	public List<FPostag> getFPostagListByPostID(int fPostagID);
-
+	public List<FPostag> getFPostagListByTagID(int fTagID);
 //	public List<FPostag> getFTagList();
 	
 //	public int getFTagID(String tag);

@@ -151,21 +151,21 @@
 	<div class="container">
 		<div class="row pull-center">
 			<b>
-			<div class="col-sm-4 table-bordered">Filename</div>
-			<div class="col-sm-2 table-bordered">File Size</div>
+			<div class="col-sm-5 table-bordered">Filename</div>
+			<div class="col-sm-1 table-bordered">File Size</div>
 			<div class="col-sm-2 table-bordered">Upload Date</div>
-			<div class="col-sm-2 table-bordered">Uploaded by</div>
-			<div class="col-sm-2 table-bordered">Download</div>
+			<div class="col-sm-3 table-bordered">Uploaded by</div>
+			<div class="col-sm-1 table-bordered">Download</div>
 			</b>
 		</div>
 		<!-- JSP generated code for all items in folder -->
 		<c:forEach var="matFile" items="${map.Slides}">
 			<div class="row pull-center">
-				<div class="col-sm-4 table-bordered">${matFile.fileName}</div>
-				<div class="col-sm-2 table-bordered">${matFile.fileSize}</div>
+				<div class="col-sm-5 table-bordered">${matFile.fileName}</div>
+				<div class="col-sm-1 table-bordered">${matFile.fileSize}</div>
 				<div class="col-sm-2 table-bordered">${matFile.uploadDate}</div>
-				<div class="col-sm-2 table-bordered">${matFile.uploader}</div>
-				<div class="col-sm-2 table-bordered"><a href="download.do?fid=${matFile.matFileID}">Download</a></div>
+				<div class="col-sm-3 table-bordered">${matFile.uploader}</div>
+				<div class="col-sm-1 table-bordered"><a href="download.do?fid=${matFile.matFileID}">Download</a></div>
 			</div>
 		</c:forEach>
 	</div>
@@ -220,21 +220,21 @@
 	<div class="container">
 		<div class="row pull-center">
 			<b>
-			<div class="col-sm-4 table-bordered">Filename</div>
-			<div class="col-sm-2 table-bordered">File Size</div>
+			<div class="col-sm-5 table-bordered">Filename</div>
+			<div class="col-sm-1 table-bordered">File Size</div>
 			<div class="col-sm-2 table-bordered">Upload Date</div>
-			<div class="col-sm-2 table-bordered">Uploaded by</div>
-			<div class="col-sm-2 table-bordered">Download</div>
+			<div class="col-sm-3 table-bordered">Uploaded by</div>
+			<div class="col-sm-1 table-bordered">Download</div>
 			</b>
 		</div>
 		<!-- JSP generated code for all items in folder -->
 		<c:forEach var="matFile" items="${map.Samplex}">
 			<div class="row pull-center">
-				<div class="col-sm-4 table-bordered">${matFile.fileName}</div>
-				<div class="col-sm-2 table-bordered">${matFile.fileSize}</div>
+				<div class="col-sm-5 table-bordered">${matFile.fileName}</div>
+				<div class="col-sm-1 table-bordered">${matFile.fileSize}</div>
 				<div class="col-sm-2 table-bordered">${matFile.uploadDate}</div>
-				<div class="col-sm-2 table-bordered">${matFile.uploader}</div>
-				<div class="col-sm-2 table-bordered"><a href="download.do?fid=${matFile.matFileID}">Download</a></div>
+				<div class="col-sm-3 table-bordered">${matFile.uploader}</div>
+				<div class="col-sm-1 table-bordered"><a href="download.do?fid=${matFile.matFileID}">Download</a></div>
 			</div>
 		</c:forEach>
 	</div>
@@ -287,21 +287,21 @@
 	<div class="container">
 		<div class="row pull-center">
 			<b>
-			<div class="col-sm-4 table-bordered">Filename</div>
-			<div class="col-sm-2 table-bordered">File Size</div>
+			<div class="col-sm-5 table-bordered">Filename</div>
+			<div class="col-sm-1 table-bordered">File Size</div>
 			<div class="col-sm-2 table-bordered">Upload Date</div>
-			<div class="col-sm-2 table-bordered">Uploaded by</div>
-			<div class="col-sm-2 table-bordered">Download</div>
+			<div class="col-sm-3 table-bordered">Uploaded by</div>
+			<div class="col-sm-1 table-bordered">Download</div>
 			</b>
 		</div>
 		<!-- JSP generated code for all items in folder -->
 		<c:forEach var="matFile" items="${map.Miscellaneous}">
 			<div class="row pull-center">
-				<div class="col-sm-4 table-bordered">${matFile.fileName}</div>
-				<div class="col-sm-2 table-bordered">${matFile.fileSize}</div>
+				<div class="col-sm-5 table-bordered">${matFile.fileName}</div>
+				<div class="col-sm-1 table-bordered">${matFile.fileSize}</div>
 				<div class="col-sm-2 table-bordered">${matFile.uploadDate}</div>
-				<div class="col-sm-2 table-bordered">${matFile.uploader}</div>
-				<div class="col-sm-2 table-bordered"><a href="download.do?fid=${matFile.matFileID}">Download</a></div>
+				<div class="col-sm-3 table-bordered">${matFile.uploader}</div>
+				<div class="col-sm-1 table-bordered"><a href="download.do?fid=${matFile.matFileID}">Download</a></div>
 			</div>
 		</c:forEach>
 	</div>

@@ -45,5 +45,16 @@ public class FPostagDaoImpl implements FPostagDao {
 		
 		return fPostagList;
 	}
+	
+	@Override
+	public List<FPostag> getFPostagListByTagID(int fTagID){
+		List<FPostag> fPostagList = new ArrayList();
+		
+		String sql = "select * from fpostag where fTagID="+fTagID;
+		
+		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+		fPostagList = jdbcTemplate.query(sql, new FPostagRowMapper());
+		return fPostagList;
+	}
 }
  

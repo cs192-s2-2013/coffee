@@ -1,0 +1,5 @@
+package com.uportal.dao;
+
+public class ChatOnlineDao {
+
+}

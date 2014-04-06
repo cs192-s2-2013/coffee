@@ -9,6 +9,8 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.web.bind.annotation.CookieValue;
+import org.jasypt.util.text.BasicTextEncryptor;
 import org.springframework.ui.Model;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -70,21 +72,13 @@ public class ForumController {
 		
 		return "forum";
 	}
-
-	@RequestMapping("/submitpost")
-	public String submitPost(Model model){
-		FPost fPost = new FPost();
-		model.addAttribute("fPost", fPost);
-		return "submitpost";
-	}
 	
-	@RequestMapping("/insertpost")	//redirected from submitpost.jsp
+	@RequestMapping("/submitpost")	//redirected from submitpost.jsp
 	public String inserPost(@ModelAttribute FPost fPost, @ModelAttribute("user") User user) {
 		if (fPost.getTitle().length() >0 && fPost.getContent().length() >0){
 			
 			fPost.setPostDate(new Date());
 			fPost.setUserID(user.getUserID());
-			//fPost.setUserID(1);//for now, default
 			fPost.setCommentCount(0);
 			fPostService.insertData(fPost);
 			int fPostID = fPostService.getIDByFPost(fPost);
@@ -97,27 +91,54 @@ public class ForumController {
 				fPostagService.insertData(fPostID, tagid);
 				
 			}
+			
+			return "redirect:/viewpost?pid=" + fPostID;
 		}
+		
 		return "redirect:/forum";
-		//return "redirect:/viewpost?pid=" + fPostService.getIDByFPost(fPost);
 	}
 	
-	@RequestMapping(value = "/forumPost", params = "pid")
+	//TODO redirect to a new page, not forum.jsp but similar
+	@RequestMapping("/searchpost")
+	public String searchpost(Model model, HttpServletRequest request){
+		
+		String s = request.getParameter("s");
+		
+		int fTagID = fTagService.getFTagID(s);
+		List<FPostag> fPostagList = fPostagService.getFPostagListByTagID(fTagID);
+		List<FPost> fPostList = new ArrayList();
+		for(FPostag fPostag : fPostagList){
+			fPostList.add( fPostService.getFPostByID(fPostag.getFPostID()) );	
+		}
+		
+		for(FPost fPost : fPostList){
+			User user = userService.getUserByUserID(fPost.getUserID());
+			fPost.setPoster(user.getFirstName()+" "+user.getLastName()+" ("+user.getUsername()+")");
+		}
+		Collections.reverse(fPostList);
+		model.addAttribute("fPostList", fPostList);
+		
+		return "forum";
+	}
+	
+	@RequestMapping(value = "/viewpost", params = "pid")
 	public String viewpost(@RequestParam int pid, Model model){
 		
+		/** fPost := specific post **/
 		FPost fPost = fPostService.getFPostByID(pid);
 		User user = userService.getUserByUserID(fPost.getUserID());
 		fPost.setPoster(user.getFirstName()+" "+user.getLastName()+" ("+user.getUsername()+")");
+		model.addAttribute("fPost", fPost);
 		
+		/** fCommentList := list of comments **/
 		List<FComment> fCommentList = fCommentService.getFCommentListByFPostID(pid);
 		for(FComment fComment : fCommentList){
 			user = userService.getUserByUserID(fComment.getUserID());
 			fComment.setCommenter(user.getFirstName()+" "+user.getLastName()+" ("+user.getUsername()+")");
 		}
-		
-		model.addAttribute("fPost", fPost);
 		model.addAttribute("fCommentList", fCommentList);
 		
+		/** fTagList := list  of tags **/
 		List<FPostag> fPostagList = fPostagService.getFPostagListByPostID(pid);
 		List<FTag> fTagList = new ArrayList();
 		for(FPostag fPostag : fPostagList){
@@ -126,11 +147,11 @@ public class ForumController {
 		model.addAttribute("fTagList", fTagList);
 		
 		/**FComment for posting new comment**/
-		FComment fComment = new FComment();
-		model.addAttribute("fComment", fComment);
+		//FComment fComment = new FComment();
+		//model.addAttribute("fComment", fComment);
 		model.addAttribute("pid",pid);
 		
-		return "forumPost";
+		return "viewpost";
 	}
 	
 	@RequestMapping("/comment")
@@ -143,6 +164,6 @@ public class ForumController {
 			
 			fPostService.incCommentCount(pid);
 		}
-		return "redirect:/forumPost?pid="+pid;
+		return "redirect:/viewpost?pid="+pid;
 	}
 }

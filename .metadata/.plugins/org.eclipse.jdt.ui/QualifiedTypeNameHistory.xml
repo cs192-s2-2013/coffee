@@ -4,4 +4,5 @@
 <fullyQualifiedTypeName name="com.bluecoffee.services.UserService"/>
 <fullyQualifiedTypeName name="com.bluecoffee.domain.FPost"/>
 <fullyQualifiedTypeName name="com.bluecoffee.dao.MatFileDao"/>
+<fullyQualifiedTypeName name="com.uportal.services.ChatOnlineService"/>
 </qualifiedTypeNameHistroy>

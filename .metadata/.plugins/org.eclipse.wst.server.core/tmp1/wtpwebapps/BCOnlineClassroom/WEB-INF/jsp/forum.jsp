@@ -66,13 +66,27 @@
 		<h5>Ask away or share your knowledge.</h5>
 	</div>
 	
+	<!-- Search Bar
+	************************************************* -->
+	<form:form method="post" action="/searchpost">
+		<div class="row">
+			<div class="col-sm-3"></div>
+			<div class="col-sm-5">
+				<input type="text" name="s" class="form-control" placeholder="Search for posts">
+			</div>
+			<div class="col-sm-2">
+				<button type="submit" class="btn btn-primary">Search</button>
+			</div>
+		</div>
+	</form:form>
+	
 	
 	<c:choose>
 	<c:when test="${r=='1'}">
 		<!-- Input question
 		**************************************************-->
 		<div class="container">
-		<form:form method="post" action="/insertpost" modelAttribute="fPost">
+		<form:form method="post" action="/submitpost" modelAttribute="fPost">
 			<div class="row">
 				<div class="col-sm-2"></div>
 					<div class="col-sm-8"><center><h3>Ask a question</h3></center></div>
@@ -126,7 +140,7 @@
 			<div class="row">
 				<div class="col-sm-1"></div>
 				<div class="col-sm-8 table-bordered">
-					<h4><a href="forumPost?pid=${forumItem.getFPostID()}">${forumItem.title}</a></h4>
+					<h4><a href="viewpost?pid=${forumItem.getFPostID()}">${forumItem.title}</a></h4>
 					Tags:
 					<!-- Insert tags here later -->
 					</br>

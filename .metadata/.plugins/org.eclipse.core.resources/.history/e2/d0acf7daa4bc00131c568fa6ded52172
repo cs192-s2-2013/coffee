@@ -1,0 +1,20 @@
+package com.uportal.services;
+
+import java.util.List;
+
+public class ChatOnlineServiceImpl implements ChatOnlineService {
+	
+	@Autowired
+	ChatOnlineDao chatonlinedao;
+	
+	@Override
+	public void insertUser(int userID){
+		chatonlinedao.insertUser(userID);
+	}
+	
+	@Override
+	public void deleteUser(int userID){
+		chatonlinedao.deleteUser(userID);
+	}
+
+}

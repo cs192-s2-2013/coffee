@@ -70,11 +70,11 @@
 	
 	<!-- Search Bar
 	************************************************* -->
-	<form:form method="post" action="/materials"> <!-- modelAttribute="fPost" -->
+	<form:form method="post" action="/searchfile">
 		<div class="row">
 			<div class="col-sm-3"></div>
 			<div class="col-sm-5">
-				<input type="text" name="searchString" class="form-control" placeholder="Find files">
+				<input type="text" name="s" class="form-control" placeholder="Find files">
 			</div>
 			<div class="col-sm-2">
 				<button type="submit" class="btn btn-primary">Search</button>

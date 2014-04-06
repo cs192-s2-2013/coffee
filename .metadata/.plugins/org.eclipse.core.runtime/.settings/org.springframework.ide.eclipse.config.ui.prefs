@@ -1,3 +1,5 @@
 //com.springsource.config.ui.prefs.activePageIndex\:/BCOnlineClassroom/WebContent/WEB-INF/spring-servlet.xml=<?xml version\="1.0" encoding\="UTF-8"?>\r\n<activePage index\="0"/>
 //com.springsource.config.ui.prefs.activePageIndex\:/FileDownloadSpringMVC/WebContent/WEB-INF/spring-mvc.xml=<?xml version\="1.0" encoding\="UTF-8"?>\r\n<activePage index\="0"/>
+//com.springsource.config.ui.prefs.activePageIndex\:/uPortalSpringJDBC/WebContent/WEB-INF/spring-security.xml=<?xml version\="1.0" encoding\="UTF-8"?>\r\n<activePage index\="0"/>
+//com.springsource.config.ui.prefs.activePageIndex\:/uPortalSpringJDBC/WebContent/WEB-INF/spring-servlet.xml=<?xml version\="1.0" encoding\="UTF-8"?>\r\n<activePage index\="0"/>
 eclipse.preferences.version=1

@@ -19,7 +19,7 @@ public class UserDaoImpl implements UserDao {
 	@Override
 	public User getUserByUserID(int id){
 		List<User> userList = new ArrayList<User>();	
-		String sql = "select * from user where userID=" + id;
+		String sql = "select userid, username, lastname, firstname, email from users where userid=" + id;
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
 		userList = jdbcTemplate.query(sql, new UserRowMapper());
 		return userList.get(0);
@@ -28,7 +28,7 @@ public class UserDaoImpl implements UserDao {
 	@Override
 	public User getUserByUsername(String username){
 		List<User> userList = new ArrayList<User>();	
-		String sql = "select * from user where username='" + username + "'";
+		String sql = "select userid, username, lastname, firstname, email from users where username='" + username + "'";
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
 		userList = jdbcTemplate.query(sql, new UserRowMapper());
 		return userList.get(0);

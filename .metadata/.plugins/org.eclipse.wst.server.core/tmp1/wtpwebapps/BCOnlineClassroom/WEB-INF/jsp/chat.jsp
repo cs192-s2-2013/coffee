@@ -1,5 +1,8 @@
-<!doctype html>
-
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <html>
 <head>
 	<title>Blue Coffee</title>
@@ -8,6 +11,7 @@
 	<link type="text/css" rel="stylesheet" href="css/bootstrap.css"/>
 	<link href="http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
 	<link type="text/css" rel="stylesheet" href="css/style.css">
+	<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0-rc1/css/bootstrap.min.css" rel="stylesheet">
 	
 	<style>
           body { background: #FFFFFF; }
@@ -23,63 +27,56 @@
 	<!-- tried this one on the first tut <button class="btn btn-success">Test</button> -->
 
 	<!-- fixed navigaiton bar with dropdown menu
-	***************************************************-->
-	<div class="container">
+	***************************************************-->	
+<div id="wrapper">
 	<div class="navbar navbar-inverse navbar-fixed-top">
-	<div class="navbar-inner">
-		
+		<div class="container">
 			<div class="navbar-header">
 				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<a href="#" class="navbar-brand">Blue Coffee</a> 
+				<a href="home" class="navbar-brand">Blue Coffee</a> 
 			</div>
 			
 			<div class="navbar-collapse collapse">
 				<ul class="nav navbar-nav nav-pills">
 					<li><a href="index.html">Home</a></li>
 					<li class="divider-vertical"></li>
-					<li><a href="resource.html">Resources</a></li>
+					<li  class="active"><a href="resource.html">Resources</a></li>
 					<li class="divider-vertical"></li>
 					<li><a href="feature.html">Forum</a></li>
 					<li class="divider-vertical"></li>
-					<li  class="active"><a href="chat.html">Chat</a></li>
+					<li><a href="chat.html">Chat</a></li>
 					<li class="divider-vertical"></li>
 					<li><a href="about.html">About</a></li>
 				</ul>
 			</div>
 		</div>
 	</div>
-	</div>
-
-	<!-- Tooltips and Popovers
+		
+	
+	<!-- Subject Title
 	**************************************************-->
-	
-	<div class="container">
-		<div class="row">
-			<div class="col-md-12">
-			</br><?br></br>
-				<h2>Something something</h2> <hr/>
-				
-				<a class="btn btn-primary" id="mytooltip" href="#" data-toggle="tooltip" title="Hello :)" data-placement="right">
-					A button
-				</a>
-				
-			</div>
-		</div>
+	<div class = "jumbotron">
+		<!--JSP code to get subject-->
+		<a href="materials"><h2>Chat</h2></a>
+		<h5>Duh. Chat.</h5>
 	</div>
+	<center>
+		<h1>${id}</h1>
+	</center>
 	
+		
 	
 	<!-- Footer and Modal
 	**************************************************-->
-		
+	<div id="footer">
+	<hr/>
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12">
-				
-				<hr/>
 				<p>Copyright &copy; Blue Coffee.
 				<!--<a href="#">Terms and Conditions</a> -->
 				
@@ -101,18 +98,18 @@
 							</div>
 						</div>
 					</div>
-				</div>
-			
-	</font>
-	<!-- Comment --->
-					
+				</div>		
 			</div>
 		</div>
 	</div>
+	</div>
+</div>
+	</font>
 	
 	<script src="js/jquery.js"></script>
 	<script src="js/bootstrap.js"></script>
 	<script src="js/contentHover.js"></script>
+	<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0-rc1/js/bootstrap.min.js"></script>
 	
 	<script type="text/javascript">
 		$('document').ready(function(){
@@ -122,11 +119,6 @@
 		});
 	
 	</script>
+
 </body>
 </html>
-
-<!--
-
-16 -  tutorial 1 : creating website from scratch
-17 - tutorial 2 : responsive navigation bar
--->

@@ -139,7 +139,7 @@
 			</div>
 			
 			<div class="col-md-4">
-				<a href="#"><h2>Chat</h2></a>
+				<a href="chat"><h2>Chat</h2></a>
 				<p>Some text will go here. Some text will go here. Some text will go here. Some text will go here.</p>
 			</div>
 			

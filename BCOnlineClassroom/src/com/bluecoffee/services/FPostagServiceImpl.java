@@ -20,7 +20,12 @@ public class FPostagServiceImpl implements FPostagService {
 	}
 	
 	@Override
-	public List<FPostag> getFPostagListByPostID(int fPostagID){
-		return fpostagdao.getFPostagListByPostID(fPostagID);
+	public List<FPostag> getFPostagListByPostID(int fPostID){
+		return fpostagdao.getFPostagListByPostID(fPostID);
+	}
+	
+	@Override
+	public List<FPostag> getFPostagListByTagID(int fTagID){
+		return fpostagdao.getFPostagListByTagID(fTagID);
 	}
 }

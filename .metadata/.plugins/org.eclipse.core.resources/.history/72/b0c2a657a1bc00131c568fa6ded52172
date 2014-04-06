@@ -1,0 +1,9 @@
+package com.uportal.services;
+
+import java.util.List;
+
+public class ChatOnlineService {
+
+	public void insertUser();
+	public void deleteUser();
+}

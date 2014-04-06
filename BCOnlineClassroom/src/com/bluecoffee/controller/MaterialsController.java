@@ -1,12 +1,15 @@
 package com.bluecoffee.controller;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.web.bind.annotation.CookieValue;
+import org.jasypt.util.text.BasicTextEncryptor;
 import org.springframework.ui.Model;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,6 +19,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.bluecoffee.domain.FPost;
+import com.bluecoffee.domain.FPostag;
 import com.bluecoffee.domain.MatFile;
 import com.bluecoffee.domain.MatFolder;
 import com.bluecoffee.domain.MatSubject;
@@ -94,52 +99,21 @@ public class MaterialsController {
 		return new ModelAndView("subfolder", "map", map);*/
 	}
 	
-	/*
-	@RequestMapping("/register")
-	public String registerUser(@ModelAttribute MatFile matFile) {
-
-		return "register";
-	}
-
-	@RequestMapping("/insert")
-	public String inserData(@ModelAttribute MatFile matFile) {
-		if (matFile != null)
-			matFileService.insertData(matFile);
-		return "redirect:/getList";
-	}
-
-	@RequestMapping("/getList")
-	public ModelAndView getUserLIst() {
-		List<MatFile> matFileList = matFileService.getMatFileList();
-		return new ModelAndView("matFileList", "matFileList", matFileList);
-	}*/
-/*
-	@RequestMapping("/edit")
-	public ModelAndView editMatFile(@RequestParam String id,
-			@ModelAttribute MatFile matFile) {
-
-		matFile = matFileService.getMatFile(id);
-
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("matFile", matFile);
+	@RequestMapping("/searchfile")
+	public String searchfille(/*@ModelAttribute String s,*/ Model model, HttpServletRequest request){
 		
-		return new ModelAndView("edit", "map", map);
-
+		String s = request.getParameter("s");
+		
+		List<MatFile> matFileList = matFileService.getMatFileListByFilename(s);
+		for(MatFile matFile : matFileList){
+			User user = userService.getUserByUserID(matFile.getUserID());
+			matFile.setUploader(user.getFirstName()+" "+user.getLastName()+" ("+user.getUsername()+")");
+		}
+		model.addAttribute("matFileList", matFileList);	
+		
+		return "searchresult"; //TODO new page for search result!!
 	}
-
-	@RequestMapping("/update")
-	public String updateUser(@ModelAttribute MatFile matFile) {
-		matFileService.updateData(matFile);
-		return "redirect:/getList";
-
-	}
-
-	@RequestMapping("/delete")
-	public String deleteUser(@RequestParam String id) {
-		System.out.println("id = " + id);
-		matFileService.deleteData(id);
-		return "redirect:/getList";
-	}*/
+	
 
 	@RequestMapping(value="/download", params="fid")
 	public String gotodownloadthigy(@RequestParam int fid, Model model){

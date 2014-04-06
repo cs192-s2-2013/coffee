@@ -95,7 +95,7 @@ public class MatFileDaoImpl implements MatFileDao {
 	
 	public List<MatFile> getMatFileListByFilename(String filename){
 		List<MatFile> matFileList = new ArrayList<MatFile>();
-		String sql = "SELECT * FROM matfile WHERE filename='" +filename+ "'";
+		String sql = "SELECT * FROM matfile WHERE filename LIKE '" +filename+ "%'";
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
 		matFileList = jdbcTemplate.query(sql, new MatFileRowMapper());
 		return matFileList;
