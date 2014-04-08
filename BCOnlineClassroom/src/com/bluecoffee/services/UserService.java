@@ -7,7 +7,7 @@ import com.bluecoffee.domain.User;
 public interface UserService {
 	
 	public User getUserByUserID(int id);
-	
 	public User getUserByUsername(String username);
-
+	public List<User> getChatOnline();
+	public List<User> getChatUser();
 }

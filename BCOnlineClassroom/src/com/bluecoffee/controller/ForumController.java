@@ -56,7 +56,7 @@ public class ForumController {
 	@Autowired FPostagService fPostagService;
 	@Autowired UserService userService;
 	
-	@Autowired private User user;
+	//@Autowired private User user;
 	
 	@RequestMapping("/forum")
 	public String showPosts(@RequestParam(value = "r", required=false, defaultValue="0") int r, Model model){

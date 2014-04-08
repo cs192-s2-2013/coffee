@@ -19,7 +19,17 @@ public class UserServiceImpl implements UserService{
 	
 	@Override
 	public User getUserByUsername(String username){
-		
 		return userdao.getUserByUsername(username);
 	}
+	
+	@Override
+	public List<User> getChatOnline(){
+		return userdao.getChatOnline();
+	}
+	
+	@Override
+	public List<User> getChatUser(){
+		return userdao.getChatUser();
+	}
+
 }

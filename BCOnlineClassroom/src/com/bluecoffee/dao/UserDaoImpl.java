@@ -34,4 +34,20 @@ public class UserDaoImpl implements UserDao {
 		return userList.get(0);
 	}
 	
+	public List<User> getChatOnline(){
+		List<User> chatOnlineList = new ArrayList<User>();
+		String sql = "SELECT userid, username, lastname, firstname, email FROM users NATURAL JOIN chatonline"; 
+		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+		chatOnlineList = jdbcTemplate.query(sql, new UserRowMapper());
+		return chatOnlineList;
+	}
+	
+	public List<User> getChatUser() {
+		List<User> chatUserList = new ArrayList<User>();
+		String sql = "SELECT userid, username, lastname, firstname, email FROM users";
+		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+		chatUserList = jdbcTemplate.query(sql, new UserRowMapper());
+		return chatUserList;   
+	}
+	
 }

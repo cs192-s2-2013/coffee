@@ -1,4 +1,5 @@
 package com.bluecoffee.controller;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -20,7 +21,11 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.bluecoffee.domain.User;
+import com.bluecoffee.domain.ChatConvo;
+import com.bluecoffee.domain.ChatMessage;
 import com.bluecoffee.services.UserService;
+import com.bluecoffee.services.ChatConvoService;
+import com.bluecoffee.services.ChatMessageService;
 
 import java.io.*;
 import java.util.*;
@@ -38,8 +43,46 @@ import javax.servlet.jsp.PageContext;
 @Controller
 @SessionAttributes("user")
 public class ChatController {
-
 	
+	@Autowired ChatConvoService chatConvoService;
+	@Autowired ChatMessageService chatMessageService;
+	@Autowired UserService userService;
+
+	@RequestMapping("/chat")
+	public String showConvoList(@ModelAttribute("user") User user, Model model){
+		
+		List<ChatConvo> chatConvoList = chatConvoService.getConvoListByUserID(user.getUserID());
+		model.addAttribute("chatConvoList", chatConvoList);
+
+		/*** Online users section ***/
+		List<User> onlineUserList = userService.getChatOnline();
+		List<User> allUserList = userService.getChatUser();
+		model.addAttribute("onlineUserList", onlineUserList);
+		model.addAttribute("allUserList", allUserList);
+		/****************************/
+		
+		return "chathome";
+	}
+	
+	@RequestMapping("/conversation")
+	public String showConversation(@ModelAttribute("user") User user, Model model, /*param?*/ int chatConvoID){
+
+		List<ChatMessage> chatMessageList = chatMessageService.getMessageListByConvoID();
+		
+		
+		model.addAttribute("messageList", messageList);
+		
+		
+		/*** Online users section ***/
+		List<User> onlineUserList = userService.getChatOnline();
+		List<User> allUserList = userService.getChatUser();
+		
+		model.addAttribute("onlineUserList", onlineUserList);
+		model.addAttribute("allUserList", allUserList);
+		/****************************/
+		
+		return "conversation";
+	}
 	
 	
 }
