@@ -5,20 +5,13 @@ import java.sql.SQLException;
 
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.ResultSetExtractor;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import com.bluecoffee.domain.MatFile;
-import com.bluecoffee.domain.User;
-import com.bluecoffee.services.UserService;
 
 public class MatFileExtractor implements ResultSetExtractor<MatFile> {
-
-	@Autowired
-	UserService userService;
 	
 	public MatFile extractData(ResultSet resultSet) throws SQLException,
 			DataAccessException {
-		
 		
 		MatFile matFile = new MatFile();
 		

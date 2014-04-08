@@ -9,9 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import com.bluecoffee.domain.FComment;
-import com.bluecoffee.domain.FPost;
 import com.bluecoffee.jdbc.FCommentRowMapper;
-import com.bluecoffee.jdbc.FPostRowMapper;
 
 public class FCommentDaoImpl implements FCommentDao {
 

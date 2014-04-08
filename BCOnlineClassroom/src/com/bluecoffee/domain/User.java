@@ -1,12 +1,5 @@
 package com.bluecoffee.domain;
-import org.springframework.stereotype.Component;
-import org.springframework.context.annotation.Scope;
-import org.springframework.context.annotation.ScopedProxyMode;
 
-//@Component
-//@Scope("session")
-/*@Component
-@Scope(value="session", proxyMode=ScopedProxyMode.TARGET_CLASS)*/
 public class User {
 
 	private int userID;
