@@ -13,40 +13,47 @@ import com.bluecoffee.jdbc.UserRowMapper;
 
 public class UserDaoImpl implements UserDao {
 
-	@Autowired
-	DataSource dataSource;
+	@Autowired DataSource dataSource;
 
 	@Override
 	public User getUserByUserID(int id){
 		List<User> userList = new ArrayList<User>();	
-		String sql = "select userid, username, lastname, firstname, email from users where userid=" + id;
+		
+		String sql = "SELECT userid, username, lastname, firstname, email FROM users WHERE userid=" + id;
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
 		userList = jdbcTemplate.query(sql, new UserRowMapper());
+		
 		return userList.get(0);
 	}
 	
 	@Override
 	public User getUserByUsername(String username){
 		List<User> userList = new ArrayList<User>();	
-		String sql = "select userid, username, lastname, firstname, email from users where username='" + username + "'";
+		
+		String sql = "SELECT userid, username, lastname, firstname, email FROM users WHERE username='" + username + "'";
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
 		userList = jdbcTemplate.query(sql, new UserRowMapper());
+		
 		return userList.get(0);
 	}
 	
 	public List<User> getChatOnline(){
 		List<User> chatOnlineList = new ArrayList<User>();
+		
 		String sql = "SELECT userid, username, lastname, firstname, email FROM users NATURAL JOIN chatonline"; 
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
 		chatOnlineList = jdbcTemplate.query(sql, new UserRowMapper());
+		
 		return chatOnlineList;
 	}
 	
 	public List<User> getChatUser() {
 		List<User> chatUserList = new ArrayList<User>();
+		
 		String sql = "SELECT userid, username, lastname, firstname, email FROM users";
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
 		chatUserList = jdbcTemplate.query(sql, new UserRowMapper());
+		
 		return chatUserList;   
 	}
 	

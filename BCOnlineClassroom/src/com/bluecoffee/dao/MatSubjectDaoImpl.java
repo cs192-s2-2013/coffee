@@ -14,30 +14,15 @@ import com.bluecoffee.jdbc.MatSubjectRowMapper;
 
 public class MatSubjectDaoImpl implements MatSubjectDao {
 
-	@Autowired
-	DataSource dataSource;
-
-	/*public void insertData(MatFile matFile) {
-
-		String sql = "INSERT INTO matfile "
-				+ "(fileName, fileType, fileSize, uploadDate) VALUES (?, ?, ?, ?)";
-
-		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
-
-		jdbcTemplate.update(
-				sql,
-				new Object[] { matFile.getFileName(), matFile.getFileType(),
-						matFile.getFileSize(), matFile.getUploadDate() });
-
-	}*/
+	@Autowired DataSource dataSource;
 
 	public List<MatSubject> getMatSubjectList() {
-		List matSubjectList = new ArrayList();
+		List<MatSubject> matSubjectList = new ArrayList<MatSubject>();
 
-		String sql = "select * from matsubject ";
-
+		String sql = "SELECT * FROM matsubject ";
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
 		matSubjectList = jdbcTemplate.query(sql, new MatSubjectRowMapper());
+		
 		return matSubjectList;
 	}
 	
@@ -45,8 +30,7 @@ public class MatSubjectDaoImpl implements MatSubjectDao {
 	public int getMatSubjectIDbyName(String name){
 		MatSubject matSubject = new MatSubject();
 
-		String sql = "select * from matsubject where subjectName='"+name+"'";
-		
+		String sql = "SELECT * FROM matsubject WHERE subjectName='"+name+"'";
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
 		matSubject = jdbcTemplate.query(sql, new MatSubjectRowMapper()).get(0);
 		

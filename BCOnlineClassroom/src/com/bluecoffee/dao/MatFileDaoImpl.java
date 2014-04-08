@@ -13,16 +13,13 @@ import com.bluecoffee.jdbc.MatFileRowMapper;
 
 public class MatFileDaoImpl implements MatFileDao {
 
-	@Autowired
-	DataSource dataSource;
+	@Autowired DataSource dataSource;
 
 	public void insertData(MatFile matFile) {
 
 		String sql = "INSERT INTO matfile "
 				+ "(fileName, fileType, fileSize, uploadDate, path, matSubjectID, matFolderID, userID) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
-
 		jdbcTemplate.update(
 				sql,
 				new Object[] { matFile.getFileName(), matFile.getFileType(),
@@ -32,72 +29,74 @@ public class MatFileDaoImpl implements MatFileDao {
 	}
 
 	public List<MatFile> getMatFileList() {
-		List matFileList = new ArrayList();
+		List<MatFile> matFileList = new ArrayList<MatFile>();
 
-		String sql = "select * from matfile";
-
+		String sql = "SELECT * FROM matfile";
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
 		matFileList = jdbcTemplate.query(sql, new MatFileRowMapper());
+		
 		return matFileList;
 	}
 
 	@Override
 	public void deleteData(int id) {
-		String sql = "delete from matfile where matFileID=" + id;
+		String sql = "DELETE FROM matfile WHERE matFileID=" + id;
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
 		jdbcTemplate.update(sql);
-
 	}
 
 	@Override
 	public void updateData(MatFile matFile) {
 
-		String sql = "UPDATE matfile set fileName = ?,fileType = ?, fileSize = ?, uploadDate = ?, path = ? where matFileID = ?";
+		String sql = "UPDATE matfile SET fileName = ?,fileType = ?, fileSize = ?, uploadDate = ?, path = ? where matFileID = ?";
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
-
 		jdbcTemplate.update(
 				sql,
 				new Object[] { matFile.getFileName(), matFile.getFileType(),
 						matFile.getFileSize(), matFile.getUploadDate(), matFile.getPath(), matFile.getMatFileID() });
-
+	
 	}
 
 	@Override
 	public MatFile getMatFile(int id) {
 		List<MatFile> matFileList = new ArrayList<MatFile>();
-		String sql = "select * from matfile where matFileID= " + id;
+		
+		String sql = "SELECT * FROM matfile WHERE matFileID= " + id;
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
 		matFileList = jdbcTemplate.query(sql, new MatFileRowMapper());
+		
 		return matFileList.get(0);
 	}
 	
 	public List<MatFile> getMatFileListBySubjectName(String subjectName) {
-		List matFileList = new ArrayList();
+		List<MatFile> matFileList = new ArrayList<MatFile>();
 
-		String sql = "select matFileID, fileName, fileType, fileSize, uploadDate, path, matSubjectID, matFolderID, userID"
-				+ " from matfile natural join matsubject where subjectName='"+subjectName+"'";
-
+		String sql = "SELECT matFileID, fileName, fileType, fileSize, uploadDate, path, matSubjectID, matFolderID, userID"
+				+ " FROM matfile NATURAL JOIN matsubject WHERE subjectName='"+subjectName+"'";
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
 		matFileList = jdbcTemplate.query(sql, new MatFileRowMapper());
+		
 		return matFileList;
 	}
 
 	public List<MatFile> getMatFileListBySubjectFolder(String subjectName, int matFolderID) {
-		List matFileList = new ArrayList();
+		List<MatFile> matFileList = new ArrayList<MatFile>();
 
-		String sql = "select matFileID, fileName, fileType, fileSize, uploadDate, path, matSubjectID, matFolderID, userID"
-				+ " from matfile natural join matsubject where subjectName='"+subjectName+"' and matFolderID="+matFolderID;
-
+		String sql = "SELECT matFileID, fileName, fileType, fileSize, uploadDate, path, matSubjectID, matFolderID, userID"
+				+ " FROM matfile NATURAL JOIN matsubject WHERE subjectName='"+subjectName+"' AND matFolderID="+matFolderID;
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
 		matFileList = jdbcTemplate.query(sql, new MatFileRowMapper());
+		
 		return matFileList;
 	}
 	
 	public List<MatFile> getMatFileListByFilename(String filename){
 		List<MatFile> matFileList = new ArrayList<MatFile>();
+		
 		String sql = "SELECT * FROM matfile WHERE filename LIKE '" +filename+ "%'";
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
 		matFileList = jdbcTemplate.query(sql, new MatFileRowMapper());
+		
 		return matFileList;
 	}
 }

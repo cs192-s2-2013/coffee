@@ -15,38 +15,33 @@ import com.bluecoffee.jdbc.FPostRowMapper;
 
 public class FCommentDaoImpl implements FCommentDao {
 
-	@Autowired
-	DataSource dataSource;
+	@Autowired DataSource dataSource;
 
 	public void insertData(FComment fcomment){
-		String sql = "INSERT INTO fcomment "
-				+ "(content, commentDate, fPostID, userID) VALUES (?, ?, ?, ?)";
-
+		String sql = "INSERT INTO fcomment (content, commentDate, fPostID, userID) VALUES (?, ?, ?, ?)";
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
-
 		jdbcTemplate.update(
 				sql,
 				new Object[] { fcomment.getContent(), fcomment.getCommentDate(), fcomment.getFPostID(), fcomment.getUserID()});
-		
 	}
 
 	public List<FComment> getFCommentList(){
-		List fCommentList = new ArrayList();
+		List<FComment> fCommentList = new ArrayList<FComment>();
 
-		String sql = "select * from fcomment";
-
+		String sql = "SELECT * FROM fcomment";
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
 		fCommentList = jdbcTemplate.query(sql, new FCommentRowMapper());
+		
 		return fCommentList;		
 	}
 	
 	public List<FComment> getFCommentListByFPostID(int fPostID){
-		List<FComment> fCommentList = new ArrayList();
+		List<FComment> fCommentList = new ArrayList<FComment>();
 
-		String sql = "select * from fcomment where fPostID = " + fPostID;
-
+		String sql = "SELECT * FROM fcomment WHERE fPostID = " + fPostID;
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
 		fCommentList = jdbcTemplate.query(sql, new FCommentRowMapper());
-		return fCommentList;		
+		
+		return fCommentList;
 	}
 }

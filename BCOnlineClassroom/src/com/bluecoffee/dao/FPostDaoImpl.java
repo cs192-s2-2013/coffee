@@ -13,16 +13,13 @@ import com.bluecoffee.jdbc.FPostRowMapper;
 
 public class FPostDaoImpl implements FPostDao {
 
-	@Autowired
-	DataSource dataSource;
+	@Autowired DataSource dataSource;
 
 	@Override
 	public void insertData(FPost fpost){
-		String sql = "INSERT INTO fpost "
-				+ "(title, content, commentCount, postDate, userID) VALUES (?, ?, ?, ?, ?)";
-
+		
+		String sql = "INSERT INTO fpost (title, content, commentCount, postDate, userID) VALUES (?, ?, ?, ?, ?)";
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
-
 		jdbcTemplate.update(
 				sql,
 				new Object[] { fpost.getTitle(), fpost.getContent(), fpost.getCommentCount(), fpost.getPostDate(), fpost.getUserID()});
@@ -30,46 +27,44 @@ public class FPostDaoImpl implements FPostDao {
 	
 	@Override
 	public FPost getFPostByID(int fPostID){
-		List<FPost> fPostList = new ArrayList();
+		List<FPost> fPostList = new ArrayList<FPost>();
 
-		String sql = "select * from fpost where fPostID=" + fPostID;
-
+		String sql = "SELECT * FROM fpost WHERE fPostID=" + fPostID;
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
 		fPostList = jdbcTemplate.query(sql, new FPostRowMapper());
+		
 		return fPostList.get(0);
 	}
 
 	@Override
 	public int getIDByFPost(FPost fPost){
-		List<FPost> fPostList = new ArrayList();
+		List<FPost> fPostList = new ArrayList<FPost>();
 
-		String sql = "select * from fpost where title='"+fPost.getTitle()+ "' and content='" +fPost.getContent()+ "'";
-
+		String sql = "SELECT * FROM fpost WHERE title='"+fPost.getTitle()+ "' AND content='" +fPost.getContent()+ "'";
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
 		fPostList = jdbcTemplate.query(sql, new FPostRowMapper());
+		
 		return fPostList.get(0).getFPostID();
 	}
 	
 	@Override
 	public List<FPost> getFPostList(){
-		List<FPost> fPostList = new ArrayList();
+		List<FPost> fPostList = new ArrayList<FPost>();
 
-		String sql = "select * from fpost";
-
+		String sql = "SELECT * FROM fpost";
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
 		fPostList = jdbcTemplate.query(sql, new FPostRowMapper());
+		
 		return fPostList;		
 	}
 	
 	@Override
 	public void updateCommentCount(int fPostID, int newCount){
+		
 		String sql = "UPDATE fpost SET commentCount=" +newCount
 				+" WHERE fPostID="+fPostID;
-
-			JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
-			jdbcTemplate.update(sql);	
-		
-		
+		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+		jdbcTemplate.update(sql);	
 	}
 
 }

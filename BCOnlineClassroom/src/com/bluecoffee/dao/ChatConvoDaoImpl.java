@@ -18,7 +18,7 @@ public class ChatConvoDaoImpl implements ChatConvoDao {
 	@Override
 	public List<ChatConvo> getConvoListByUserID(int userID){
 				
-		List<ChatConvo> chatConvoList = new ArrayList();
+		List<ChatConvo> chatConvoList = new ArrayList<ChatConvo>();
 		String sql = "SELECT chatConvoID, title FROM chatconvo NATURAL JOIN chatmember WHERE userID = "+userID;
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
 		chatConvoList = jdbcTemplate.query(sql, new ChatConvoRowMapper());
