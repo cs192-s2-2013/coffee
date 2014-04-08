@@ -73,11 +73,11 @@ public class HomePageController {
 	}
 	
 	
-	@RequestMapping("/chat")
+/*	@RequestMapping("/chat")
 	public String chat(Model model) {
 		return "chat";
 	}
-
+*/
 /*	@RequestMapping("/forum")
 	public String forum(Model model) {
 		return "forum";

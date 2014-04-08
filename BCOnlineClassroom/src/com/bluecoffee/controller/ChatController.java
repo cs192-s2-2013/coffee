@@ -67,10 +67,10 @@ public class ChatController {
 	@RequestMapping("/conversation")
 	public String showConversation(@ModelAttribute("user") User user, Model model, /*param?*/ int chatConvoID){
 
-		List<ChatMessage> chatMessageList = chatMessageService.getMessageListByConvoID();
+		List<ChatMessage> chatMessageList = chatMessageService.getMessageListByConvoID(chatConvoID);
+		//should I include user string?
 		
-		
-		model.addAttribute("messageList", messageList);
+		model.addAttribute("chatMessageList", chatMessageList);
 		
 		
 		/*** Online users section ***/

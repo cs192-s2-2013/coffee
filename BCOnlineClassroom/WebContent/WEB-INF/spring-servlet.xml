@@ -38,13 +38,17 @@
 	
 	<bean id="fPostDao" class="com.bluecoffee.dao.FPostDaoImpl" />
 	<bean id="fPostService" class="com.bluecoffee.services.FPostServiceImpl" />
-	
 	<bean id="fCommentDao" class="com.bluecoffee.dao.FCommentDaoImpl" />
 	<bean id="fCommentService" class="com.bluecoffee.services.FCommentServiceImpl" />
 	<bean id="fTagDao" class="com.bluecoffee.dao.FTagDaoImpl" />
 	<bean id="fTagService" class="com.bluecoffee.services.FTagServiceImpl" />
 	<bean id="fPostagDao" class="com.bluecoffee.dao.FPostagDaoImpl" />
 	<bean id="fPostagService" class="com.bluecoffee.services.FPostagServiceImpl" />
+
+	<bean id="chatConvoDao" class="com.bluecoffee.dao.ChatConvoDaoImpl" />
+	<bean id="chatConvoService" class="com.bluecoffee.services.ChatConvoServiceImpl" />	
+	<bean id="chatMessageDao" class="com.bluecoffee.dao.ChatMessageDaoImpl" />
+	<bean id="chatMessageService" class="com.bluecoffee.services.ChatMessageServiceImpl" />
 	
 	<bean id="user" class="com.bluecoffee.domain.User" />
 	
