@@ -40,12 +40,12 @@ public class HomePageController {
 	
 	//@Autowired private User user;
 	
-	/*@RequestMapping(value="/login", params = "un")
+	@RequestMapping(value="/login", params = "un")
 	public String login(@RequestParam String un, Model model){
 		User user = userService.getUserByUsername(un);
 		model.addAttribute("user", user);	
 		return "home";
-	}*/
+	}
 
 	@RequestMapping("/home")
 	public String homepage(Model model, @CookieValue(value="cs192session", defaultValue="none") String fooCookie) {

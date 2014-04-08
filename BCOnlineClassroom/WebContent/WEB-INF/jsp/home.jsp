@@ -154,7 +154,6 @@
 			<div class="row">
 				<div class="col-md-12">
 					<div class="well">
-					
 						<a href="#"><i class="largeicon icon-android"></i></a>
 						<a href="#"><i class="largeicon icon-twitter"></i></a>
 						<a href="#"><i class="largeicon icon-linkedin"></i></a>

@@ -23,9 +23,6 @@
     	<param-name>file-upload</param-name> 
     	<param-value>
         	 C:\Users\lara312\Documents\GitHub\coffee\BCOnlineClassroom\WebContent\downloads
-     	</param-value> 
-	</context-param>
-	
-	
-	
+     	</param-value>
+  </context-param>
 </web-app>

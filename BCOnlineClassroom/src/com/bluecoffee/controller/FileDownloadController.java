@@ -44,7 +44,6 @@ public class FileDownloadController {
 			HttpServletResponse response) throws IOException {
 		
 		
-		
 		filePath = matfileservice.getFilePathByID(fid) + matfileservice.getFileNameByID(fid);
 		//filePath = filePath + filename;
 		
@@ -91,6 +90,7 @@ public class FileDownloadController {
 
 		inputStream.close();
 		outStream.close();
-		
 	}
+	
+	
 }

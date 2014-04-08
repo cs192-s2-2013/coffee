@@ -96,7 +96,7 @@
 			<%} %>
 			<div class="col-sm-3">
 				<center>
-				<a href="subfolder?id=${matSubject.subjectName}&us=0"><img src="<spring:url value='/resources/images/blue-folder-icon.png'/>"/></a>
+				<a href="subfolder?id=${matSubject.subjectName}&us=0"><i class="largeicon icon-star"></i></a>
 				</br>
 				${matSubject.subjectName}
 				</br></br>
