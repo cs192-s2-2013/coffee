@@ -61,14 +61,8 @@ public class MaterialsController {
 	}
 	
 	@RequestMapping("/subfolder")
-	public ModelAndView getFolderList(@RequestParam String id, @RequestParam int us, 
+	public ModelAndView getFolderList(@RequestParam String id, @RequestParam(value = "us", required=false, defaultValue="0") int us, 
 			@ModelAttribute MatFolder matFolder, Model model){
-		
-		String message = "";
-		
-		if(us==0){ message = ""; }
-		else if(us==1){ message = "File uploaded successfully"; }
-		else if(us==-1){ message = "There was an error while uploading the file"; }
 		
 		List<MatFolder> matFolderList = matFolderService.getMatFolderList();
 		//List<MatFile> matFileList = matFileService.getMatFileListBySubjectName(id);
@@ -87,7 +81,7 @@ public class MaterialsController {
 		}
 		
 		model.addAttribute("id", id);
-		model.addAttribute("message", message);
+		model.addAttribute("success", us);
 		
 		return new ModelAndView("resource", "map", map);
 		/*

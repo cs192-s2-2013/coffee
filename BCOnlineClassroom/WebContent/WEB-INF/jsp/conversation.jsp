@@ -14,8 +14,13 @@
 	<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0-rc1/css/bootstrap.min.css" rel="stylesheet">
 	
 	<style>
-          body { background: #FFFFFF; }
-          .container { background: ; }
+          	body { background: #FFFFFF; }
+          	.container { background: ; }
+			#box {
+				overflow: auto;
+				background: transparent;
+				border: 1px solid rgb(192,192,192);
+			}
     </style>
 	
 </head>
@@ -55,28 +60,73 @@
 			</div>
 		</div>
 	</div>
-		
+
 	
-	<!-- Subject Title
+	<!-- Title
 	**************************************************-->
-	<div class = "jumbotron">
+	<div class="jumbotron">
 		<!--JSP code to get subject-->
-		<a href="materials"><h2>Chat</h2></a>
-		<h5>Duh. Chat.</h5>
+		<a href="chat"><h2>Chat</h2></a>
+		<h5>Blablabla</h5>
 	</div>
-	<center>
-		<h1>${id}</h1>
-	</center>
 	
+	<!-- Buttons
+	**************************************************-->
+	<div class="row">
+		<div class="col-sm-2"></div>
+			<div class="col-sm-1" style="margin-lfet:40px; margin-bottom:10px"><a href="#"><button type="" class="btn btn-primary">Add members</button></a></div>
+			<div class="col-sm-1" style="margin-right:40px; margin-bottom:10px"><a href="leave?c=${c}"><button type="" class="btn btn-primary">Leave conversation</button></a></div>
+	</div>
+	
+	<!-- List of messages
+	**************************************************-->	
+	<div style="float:left; margin-left:200px">
+	<font size=5px>Conversation</font>
+	<div id="box" style="width:700px; height:300px;">
+		<div style="margin:10px">
+			<c:forEach var="message" items="${chatMessageList}">
+			<b>${message.getSender()}:</b> ${message.getMessage()} </br>
+			</c:forEach>
+		</div>
+	</div>
+	</div>
 		
+	<!-- List of members
+	**************************************************-->
+	<div style="float:right; margin-right:200px">
+	<font size=5px>"Members"</font>
+	<div id="box" style="width:250px; height:300px;">
+		<div style="margin:10px">
+			<c:forEach var="user" items="${membersList}"><a href="addmember?c=${c}&u=${user.getUserID()}">${user.getFirstName()} ${user.getLastName()}</a> </br>
+			</c:forEach>
+		</div>
+	</div>
+	</div>
 	
+	<!-- Input message
+	**************************************************-->
+	<form:form method="post" action="/sendmessage?c=${c}" modelAttribute="chatMessage">
+		<div class="row">
+			<div class="col-sm-2"></div>
+			<div class="col-sm-7">
+				<input type="text" name="message" class="form-control" placeholder="Type your message here" style="margin-top:10px"> 
+			</div>
+			<div class="col-sm-1">
+				<button type="submit" class="btn btn-primary" style="margin-top:10px">Send</button>
+			</div>
+		</div>
+	</form:form>
+		</br></br>
+			
+		
 	<!-- Footer and Modal
 	**************************************************-->
-	<div id="footer">
-	<hr/>
+		
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12">
+				
+				<hr/>
 				<p>Copyright &copy; Blue Coffee.
 				<!--<a href="#">Terms and Conditions</a> -->
 				
@@ -98,27 +148,57 @@
 							</div>
 						</div>
 					</div>
-				</div>		
+				</div>
+			
+	</font>
+	<!-- Comment --->
+					
 			</div>
 		</div>
 	</div>
-	</div>
-</div>
-	</font>
 	
 	<script src="js/jquery.js"></script>
 	<script src="js/bootstrap.js"></script>
 	<script src="js/contentHover.js"></script>
-	<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0-rc1/js/bootstrap.min.js"></script>
 	
 	<script type="text/javascript">
 		$('document').ready(function(){
 		
 			$('#mytooltip').tooltip();
 			
+			$('#myPopOver').popover();
+			
+			$('#d1').contenthover({
+				overlay_background:'#000',
+				overlay_opacity:0.8
+			});
+			
+			$('#d2').contenthover({
+				effect:'slide',
+				slide_speed:300,
+				overlay_background:'#000',
+				overlay_opacity:0.8
+			});
+			
+			$('#d3').contenthover({
+				overlay_width:270,
+				overlay_height:180,
+				effect:'slide',
+				slide_direction:'right',
+				overlay_x_position:'right',
+				overlay_y_position:'center',
+				overlay_background:'#000',
+				overlay_opacity:0.8
+			});
+			
 		});
 	
 	</script>
-
 </body>
 </html>
+
+<!--
+
+16 -  tutorial 1 : creating website from scratch
+17 - tutorial 2 : responsive navigation bar
+-->

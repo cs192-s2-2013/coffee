@@ -44,7 +44,7 @@
 				<ul class="nav navbar-nav nav-pills">
 					<li><a href="index.html">Home</a></li>
 					<li class="divider-vertical"></li>
-					<li  class="active"><a href="resource.html">Resources</a></li>
+					<li  class="active"><a href="resource.html">Materials</a></li>
 					<li class="divider-vertical"></li>
 					<li><a href="feature.html">Forum</a></li>
 					<li class="divider-vertical"></li>
@@ -61,7 +61,7 @@
 	**************************************************-->
 	<div class = "jumbotron">
 		<!--JSP code to get subject-->
-		<a href="materials"><h2>Resources</h2></a>
+		<a href="materials"><h2>Materials</h2></a>
 		<h5>Upload or download all the resources you need.</h5>
 	</div>
 	<center>

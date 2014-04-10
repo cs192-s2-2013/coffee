@@ -16,6 +16,6 @@ public class LogoutController {
 	@RequestMapping("/logout")
 	public String logout(HttpSession session) {
 		session.invalidate();
-		return "redirect:/home";
+		return "redirect:http://localhost:8080/uPortalSpringJDBC/logout";
 	}
 }

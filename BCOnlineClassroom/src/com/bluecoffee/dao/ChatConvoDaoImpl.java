@@ -27,4 +27,48 @@ public class ChatConvoDaoImpl implements ChatConvoDao {
 		
 	}
 	
+	@Override
+	public void insertData(String title){
+		String sql = "INSERT INTO chatconvo (title) VALUES (?)";
+		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+		jdbcTemplate.update(
+				sql,
+				new Object[] { title });		
+	}
+	
+	public void insertMember(int chatConvoID, int userID){
+		String sql = "INSERT INTO chatmember (chatConvoID, userID) VALUES (?, ?)";
+		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+		jdbcTemplate.update(
+				sql,
+				new Object[] { chatConvoID, userID });
+	}
+	
+	public void deleteMember(int chatConvoID, int userID){
+		String sql = "DELETE FROM chatmember WHERE chatConvoID="+chatConvoID + " AND userID="+userID;
+		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+		jdbcTemplate.update(sql);
+	}
+	
+	public List<ChatConvo> getConvoByChatMember(int chatConvoID, int userID){
+		List<ChatConvo> chatConvoList = null;/*new ArrayList<ChatConvo>();*/
+		
+		String sql = "SELECT chatConvoID, title FROM chatmember NATURAL JOIN chatconvo WHERE chatConvoID="+chatConvoID+" AND userID="+userID;
+		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+		chatConvoList = jdbcTemplate.query(sql, new ChatConvoRowMapper());
+		
+		return chatConvoList;
+	}
+	
+	public int getChatConvoID(String title){
+		title = title.replace("'", "''");
+		
+		List<ChatConvo> chatConvoList = new ArrayList<ChatConvo>();
+		String sql = "SELECT chatConvoID, title FROM chatconvo WHERE title = '"+title+"'";
+		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+		chatConvoList = jdbcTemplate.query(sql, new ChatConvoRowMapper());
+		
+		return chatConvoList.get(0).getChatConvoID();
+		
+	}
 }

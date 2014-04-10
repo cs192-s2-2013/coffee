@@ -7,20 +7,32 @@
 <head>
 	<title>Blue Coffee</title>
 	
-	
+	  
 	<link type="text/css" rel="stylesheet" href="css/bootstrap.css"/>
 	<link href="http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
-	<link type="text/css" rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" type="text/css" href=<c:url value="/WEB-INF/jsp/css/style.css"/>>
 	<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0-rc1/css/bootstrap.min.css" rel="stylesheet">
+
+	<!--  
+
+	<link type="text/css" rel="stylesheet" href="css/style.css">
+	-->
 	
 	<style>
           body { background: #FFFFFF; }
           .container { background: ; }
+          .modal-dialog {
+          	width:400px; 
+          	margin-top: 180px;
+          }
+		  .modal-body { height: 60px; }
     </style>
 	
 </head>
 
 <body>
+		
+	
 
 	<font color="#336699">
 	
@@ -44,7 +56,7 @@
 				<ul class="nav navbar-nav nav-pills">
 					<li><a href="index.html">Home</a></li>
 					<li class="divider-vertical"></li>
-					<li  class="active"><a href="resource.html">Resources</a></li>
+					<li  class="active"><a href="resource.html">Materials</a></li>
 					<li class="divider-vertical"></li>
 					<li><a href="feature.html">Forum</a></li>
 					<li class="divider-vertical"></li>
@@ -88,12 +100,61 @@
 	**************************************************-->
 	<div class = "jumbotron">
 		<!--JSP code to get subject-->
-		<a href="materials"><h2>Resources</h2></a>
+		<a href="materials"><h2>Materials</h2></a>
 		<h5>Upload or download all the resources you need.</h5>
 	</div>
 	<center>
 		<h1>${id}</h1>
 	</center>
+
+	<c:if test="${success == '1'}">
+		<div id="message" class="modal show" tabindex="-1" role="dialog" aria-hidden="true">
+		  <div class="modal-dialog">
+		  <div class="modal-content">
+		      <div class="modal-body">
+		          <h3 class="text-center">Upload Successful!</h3>
+		      </div>
+		      <div class="modal-footer">
+		          <div class="col-md-12">
+		          <button class="btn btn-primary" data-dismiss="modal" aria-hidden="true"><a href="subfolder?id=${id}"><font color="white">Close</font></a></button>
+				  </div>	
+		      </div>
+		  </div>
+		  </div>
+		</div>
+	</c:if>
+	<c:if test="${success == '-1'}">
+		<div id="message" class="modal show" tabindex="-1" role="dialog" aria-hidden="true">
+		  <div class="modal-dialog">
+		  <div class="modal-content">
+		      <div class="modal-body">
+		          <h3 class="text-center">Upload Failed!</h3>
+		      </div>
+		      <div class="modal-footer">
+		          <div class="col-md-12">
+		          <button class="btn btn-primary" data-dismiss="modal" aria-hidden="true"><a href="subfolder?id=${id}"><font color="white">Close</font></a></button>
+				  </div>	
+		      </div>
+		  </div>
+		  </div>
+		</div>
+	</c:if>		
+	
+	<!-- 
+	<div class="modal hide" id="myModal">
+	  <div class="modal-header">
+	    <button type="button" class="close" data-dismiss="modal">×</button>
+	    <h3>Modal header</h3>
+	  </div>
+	  <div class="modal-body">
+	      <textarea id="textareaID"></textarea>
+	  </div>
+	  <div class="modal-footer">
+	    <a href="#" class="btn" data-dismiss="modal">Close</a>
+	    <a href="#" class="btn btn-primary">Save changes</a>
+	  </div>
+	</div>
+	-->
 	
 	
 		<!-- Slides
@@ -102,7 +163,7 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-md-7">
-				<h2>Slides <a href="download.do?fid=${matFile.matFileID}"><i class="largeicon icon-download"></i></a></h2>
+				<h2>Slides <a href="download.do?fid=${matFile.matFileID}"><i class="largeicon icon-download-alt"></i></a></h2>
 			</div>
 			<div class="col-md-5">
 			
@@ -160,7 +221,7 @@
 		<!-- JSP generated code for all items in folder -->
 		<c:forEach var="matFile" items="${map.Slides}">
 			<div class="row pull-center">				
-				<div class="col-sm-5 table-bordered"><a href="download.do?fid=${matFile.matFileID}"><i class="largeicon icon-download"></i></a> ${matFile.fileName}</div>
+				<div class="col-sm-5 table-bordered"><a href="download.do?fid=${matFile.matFileID}"><i class="largeicon icon-download-alt"></i></a> ${matFile.fileName}</div>
 				<!-- <div class="col-sm-1 table-bordered">${matFile.fileSize}</div> -->
 				<div class="col-sm-2 table-bordered">${matFile.uploadDate}</div>
 				<div class="col-sm-3 table-bordered">${matFile.uploader}</div>
@@ -174,7 +235,7 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-md-7">
-				<h2>Samplex <a href="download.do?fid=${matFile.matFileID}"><i class="largeicon icon-download"></i></a></h2>
+				<h2>Samplex <a href="download.do?fid=${matFile.matFileID}"><i class="largeicon icon-download-alt"></i></a></h2>
 			</div>
 			<div class="col-md-5">
 			
@@ -227,7 +288,7 @@
 		<!-- JSP generated code for all items in folder -->
 		<c:forEach var="matFile" items="${map.Samplex}">
 			<div class="row pull-center">
-				<div class="col-sm-5 table-bordered"><a href="download.do?fid=${matFile.matFileID}"><i class="largeicon icon-download"></i></a> ${matFile.fileName}</div>
+				<div class="col-sm-5 table-bordered"><a href="download.do?fid=${matFile.matFileID}"><i class="largeicon icon-download-alt""></i></a> ${matFile.fileName}</div>
 				<div class="col-sm-2 table-bordered">${matFile.uploadDate}</div>
 				<div class="col-sm-3 table-bordered">${matFile.uploader}</div>
 			</div>
@@ -239,7 +300,7 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-md-7">
-				<h2>Miscellaneous <a href="download.do?fid=${matFile.matFileID}"><i class="largeicon icon-download"></i></a></h2>
+				<h2>Miscellaneous <a href="download.do?fid=${matFile.matFileID}"><i class="largeicon icon-download-alt""></i></a></h2>
 			</div>
 			<div class="col-md-5">
 			
@@ -290,7 +351,7 @@
 		<!-- JSP generated code for all items in folder -->
 		<c:forEach var="matFile" items="${map.Miscellaneous}">
 			<div class="row pull-center">
-				<div class="col-sm-5 table-bordered"><a href="download.do?fid=${matFile.matFileID}"><i class="largeicon icon-download"></i></a> ${matFile.fileName}</div>
+				<div class="col-sm-5 table-bordered"><a href="download.do?fid=${matFile.matFileID}"><i class="largeicon icon-download-alt""></i></a> ${matFile.fileName}</div>
 				<div class="col-sm-2 table-bordered">${matFile.uploadDate}</div>
 				<div class="col-sm-3 table-bordered">${matFile.uploader}</div>
 			</div>

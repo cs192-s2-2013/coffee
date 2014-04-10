@@ -42,7 +42,7 @@
 				<ul class="nav navbar-nav">
 					<li class="active"><a href="index.html">Home</a></li>
 					<li class="divider-vertical"></li>
-					<li><a href="resource.html">Resources</a></li>
+					<li><a href="resource.html">Materials</a></li>
 					<li class="divider-vertical"></li>
 					<li><a href="feature.html">Forum</a></li>
 					<li class="divider-vertical"></li>
@@ -71,9 +71,9 @@
 				<div class="container">
 					<div class="carousel-caption">
 						<font color="#336699">
-						<h1>Resources</h1>
+						<h1>Materials</h1>
 						<p>Get files, samplex, codes, etc</p></font>
-						<p><a class="btn btn-large btn-danger" action="materials">Check Resources</a></p>
+						<p><a class="btn btn-large btn-danger" action="materials">Check Materials</a></p>
 					</div>
 				</div>
 			</div>
@@ -129,7 +129,7 @@
 		<div class="row">
 		
 			<div class="col-md-4">
-				<a href="materials"><h2>Resources</h2></a>
+				<a href="materials"><h2>Materials</h2></a>
 				<p>Some text will go here. Some text will go here. Some text will go here. Some text will go here.</p>
 			</div>
 			

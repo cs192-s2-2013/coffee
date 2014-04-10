@@ -62,6 +62,7 @@ dfn {
 h1 {
   margin: .67em 0;
   font-size: 2em;
+  color: white;
 }
 mark {
   color: #000;
@@ -5855,4 +5856,44 @@ left:0;
 
 .push {
 height: 8em;
+}
+
+.modalWindow {
+    position: fixed;
+    font-family: arial;
+    font-size:80%;
+    background: rgba(236, 240, 241,.85);
+    z-index: 99999;
+    opacity:1;
+    -webkit-transition: opacity 400ms ease-in;
+    -moz-transition: opacity 400ms ease-in;
+    transition: opacity 400ms ease-in;
+    pointer-events: auto;
+    text-align: center;
+    height: 80px;
+    width: 200px;
+    margin-top: 10%;
+    margin-left: 40%;
+    border-radius: 10px;
+}
+
+.modalWindow:target {
+    opacity:0;
+    pointer-events: none;
+}
+
+#message{
+	color: black;
+	padding-top: 50px;
+	padding-left: 50px;
+	padding-right: 50px;
+}
+
+.box {
+	width: 100px;
+	height: 50px;
+	margin: 0 auto;
+	overflow: auto;
+	background: transparent;
+	border: 1px solid #0f0;
 }

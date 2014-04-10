@@ -13,9 +13,12 @@
 	<link type="text/css" rel="stylesheet" href="css/style.css">
 	<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0-rc1/css/bootstrap.min.css" rel="stylesheet">
 	
-	<style>
+	<style type="text/css">
           body { background: #FFFFFF; }
           .container { background: ; }
+          textarea { resize: none; }
+          k { font-size: 44.5px; }
+          
     </style>
 	
 </head>
@@ -70,15 +73,15 @@
 	************************************************* -->
 	<form:form method="post" action="/searchpost">
 		<div class="row">
-			<div class="col-sm-3"></div>
-			<div class="col-sm-5">
+			<div class="col-sm-6"></div>
+			<div class="col-sm-3" style="margin-left:60px">
 				<input type="text" name="s" class="form-control" placeholder="Search for posts">
 			</div>
-			<div class="col-sm-2">
-				<button type="submit" class="btn btn-primary">Search</button>
+			<div class="col-sm-1">
+				<button type="submit" class="btn btn-primary"><i class="largeicon icon-search"></i></button>
 			</div>
 		</div>
-	</form:form>
+	</form:form>	
 	
 	
 	<c:choose>
@@ -127,33 +130,28 @@
 	<c:otherwise>
 		<div class="row">
 			<div class="col-sm-2"></div>
-				<div class="col-sm-8"><a href="forum?r=1"><p align="right"><button type="ask" class="btn btn-primary">Ask a question</p></button></a></div>
+				<div class="col-sm-1" style="margin-bottom:20px"><a href="forum?r=1"><button type="ask" class="btn btn-primary">Ask a question</button></a></div>
 		</div>
 	</c:otherwise>
 	</c:choose>
 	
 	<!-- List of questions
 	**************************************************-->
-	
 	<c:forEach var="forumItem" items="${fPostList}">
 		<div class="container">
 			<div class="row">
 				<div class="col-sm-1"></div>
 				<div class="col-sm-8 table-bordered">
 					<h4><a href="viewpost?pid=${forumItem.getFPostID()}">${forumItem.title}</a></h4>
-					Tags:
-					<!-- Insert tags here later -->
-					</br>
 					<h6>Posted by ${forumItem.poster} on ${forumItem.postDate}</h6>
 				</div>
 				<div class="col-sm-2 table-bordered"><center>
-					<h1>${forumItem.commentCount}</h1>
+					<k> ${forumItem.commentCount} </k>
 					replies
 				</center></div>
 			</div>
 		</div>
 	</c:forEach>
-	
 	
 	<!-- Footer and Jumbotron
 	**************************************************

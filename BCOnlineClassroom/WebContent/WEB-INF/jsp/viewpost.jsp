@@ -45,7 +45,7 @@
 				<ul class="nav navbar-nav nav-pills">
 					<li><a href="index.html">Home</a></li>
 					<li class="divider-vertical"></li>
-					<li  class="active"><a href="resource.html">Resources</a></li>
+					<li  class="active"><a href="resource.html">Materials</a></li>
 					<li class="divider-vertical"></li>
 					<li><a href="feature.html">Forum</a></li>
 					<li class="divider-vertical"></li>

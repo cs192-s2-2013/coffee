@@ -24,4 +24,12 @@ public class ChatMessageDaoImpl implements ChatMessageDao {
 		
 		return chatMessageList;
 	}
+	
+	public void insertMessage(ChatMessage chatMessage){
+		String sql = "INSERT INTO chatmessage (message, messageDate, userID, chatConvoID) VALUES (?, ?, ?, ?)";
+		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+		jdbcTemplate.update(
+				sql,
+				new Object[] { chatMessage.getMessage(), chatMessage.getMessageDate(), chatMessage.getUserID(), chatMessage.getChatConvoID()});
+	}
 }

@@ -58,6 +58,7 @@ public class ForumController {
 	
 	//@Autowired private User user;
 	
+	/*** Shows all posts in the forum ***/
 	@RequestMapping("/forum")
 	public String showPosts(@RequestParam(value = "r", required=false, defaultValue="0") int r, Model model){
 		
@@ -73,6 +74,7 @@ public class ForumController {
 		return "forum";
 	}
 	
+	/*** for creating a new post. redirects to viewpost ***/
 	@RequestMapping("/submitpost")	//redirected from submitpost.jsp
 	public String inserPost(@ModelAttribute FPost fPost, @ModelAttribute("user") User user) {
 		if (fPost.getTitle().length() >0 && fPost.getContent().length() >0){
@@ -99,6 +101,7 @@ public class ForumController {
 	}
 	
 	//TODO redirect to a new page, not forum.jsp but similar
+	/*** shows result of search ***/
 	@RequestMapping("/searchpost")
 	public String searchpost(Model model, HttpServletRequest request){
 		
@@ -106,7 +109,7 @@ public class ForumController {
 		
 		int fTagID = fTagService.getFTagID(s);
 		List<FPostag> fPostagList = fPostagService.getFPostagListByTagID(fTagID);
-		List<FPost> fPostList = new ArrayList();
+		List<FPost> fPostList = new ArrayList<FPost>();
 		for(FPostag fPostag : fPostagList){
 			fPostList.add( fPostService.getFPostByID(fPostag.getFPostID()) );	
 		}
@@ -121,6 +124,7 @@ public class ForumController {
 		return "forum";
 	}
 	
+	/*** shows one post and its comments ***/
 	@RequestMapping(value = "/viewpost", params = "pid")
 	public String viewpost(@RequestParam int pid, Model model){
 		
@@ -140,7 +144,7 @@ public class ForumController {
 		
 		/** fTagList := list  of tags **/
 		List<FPostag> fPostagList = fPostagService.getFPostagListByPostID(pid);
-		List<FTag> fTagList = new ArrayList();
+		List<FTag> fTagList = new ArrayList<FTag>();
 		for(FPostag fPostag : fPostagList){
 			fTagList.add( fTagService.getFTag(fPostag.getFTagID()) );	
 		}
@@ -154,6 +158,7 @@ public class ForumController {
 		return "viewpost";
 	}
 	
+	/*** for posting a comment. Redirects to viewpost ***/
 	@RequestMapping("/comment")
 	public String comment(@RequestParam int pid, @ModelAttribute FComment fComment, @ModelAttribute("user") User user){
 		if (fComment.getContent().length()>0){

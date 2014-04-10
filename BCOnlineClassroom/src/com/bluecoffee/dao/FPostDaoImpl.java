@@ -39,8 +39,11 @@ public class FPostDaoImpl implements FPostDao {
 	@Override
 	public int getIDByFPost(FPost fPost){
 		List<FPost> fPostList = new ArrayList<FPost>();
-
-		String sql = "SELECT * FROM fpost WHERE title='"+fPost.getTitle()+ "' AND content='" +fPost.getContent()+ "'";
+		
+		String title = fPost.getTitle().replace("'", "''");
+		String content = fPost.getContent().replace("'", "''");
+		
+		String sql = "SELECT * FROM fpost WHERE title='"+title+ "' AND content='" +content+ "'";
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
 		fPostList = jdbcTemplate.query(sql, new FPostRowMapper());
 		
