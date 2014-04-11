@@ -11,15 +11,19 @@ public class ChatConvoServiceImpl implements ChatConvoService {
 
 	@Autowired ChatConvoDao chatConvoDao;
 	
-	@Override
-	public List<ChatConvo> getConvoListByUserID(int userID){
-		return chatConvoDao.getConvoListByUserID(userID);
+	public String getTitleByID(int chatConvoID){
+		return chatConvoDao.getTitleByID(chatConvoID);
 	}
 
 	@Override
 	public int insertData(String title){
 		chatConvoDao.insertData(title);
 		return chatConvoDao.getChatConvoID(title);
+	}
+	
+	@Override
+	public List<ChatConvo> getConvoListByUserID(int userID){
+		return chatConvoDao.getConvoListByUserID(userID);
 	}
 	
 	public void insertMember(int chatConvoID, int userID){

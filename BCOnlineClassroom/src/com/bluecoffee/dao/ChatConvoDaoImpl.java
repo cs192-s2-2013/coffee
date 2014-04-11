@@ -27,6 +27,15 @@ public class ChatConvoDaoImpl implements ChatConvoDao {
 		
 	}
 	
+	public String getTitleByID(int chatConvoID){
+        List<ChatConvo> chatConvoList = new ArrayList<ChatConvo>();
+        String sql = "SELECT chatConvoID, title FROM chatconvo WHERE chatConvoID = "+chatConvoID;
+        JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+        chatConvoList = jdbcTemplate.query(sql, new ChatConvoRowMapper());
+
+        return chatConvoList.get(0).getTitle();
+	}
+	
 	@Override
 	public void insertData(String title){
 		String sql = "INSERT INTO chatconvo (title) VALUES (?)";

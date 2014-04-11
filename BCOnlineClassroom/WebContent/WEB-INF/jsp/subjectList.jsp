@@ -16,6 +16,7 @@
 	<style>
           body { background: #FFFFFF; }
           .container { background: ; }
+          i { font-size: 35px; }
     </style>
 	
 </head>

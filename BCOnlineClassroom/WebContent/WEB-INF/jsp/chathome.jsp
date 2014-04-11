@@ -118,7 +118,8 @@
 		  <div class="modal-dialog">
 		  <div class="modal-content">
 		      <div class="modal-header">
-		          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+		          <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><a href="chat">x</a></button>
+				  
 		        <h3>Enter conversation title:</h3>
 		      </div>
 		      <div class="modal-body">
@@ -158,7 +159,7 @@
 	<!--  Search user
 	************************************************* -->
 	<div style="margin-left:350px; margin-top:100px">
-	<form:form method="post" action="">
+	<form:form method="post" action="/searchuser">
 		<div class="row">
 			<div class="col-sm-3" >
 				<input type="text" name="s" class="form-control" placeholder="Search for users">

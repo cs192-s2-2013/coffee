@@ -57,6 +57,20 @@ public class UserDaoImpl implements UserDao {
 		return chatUserList;   
 	}
 	
+	public List<User> getUserListByUsername(String username){
+
+	        username = username.replace("'", "''");
+
+	        List<User> userList = new ArrayList<User>();
+
+	        String sql = "SELECT userid, username, lastname, firstname, email FROM users WHERE username LIKE '%" +username+ "%'";
+	        JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+	        userList = jdbcTemplate.query(sql, new UserRowMapper());
+
+	        return userList;
+
+	}
+	
 	public List<User> getChatMembers(int chatConvoID){
 		List<User> chatMembersList = new ArrayList<User>();
 		

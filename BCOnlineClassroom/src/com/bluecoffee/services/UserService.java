@@ -10,5 +10,6 @@ public interface UserService {
 	public User getUserByUsername(String username);
 	public List<User> getChatOnline();
 	public List<User> getChatUser();
+	public List<User> getUserListByUsername(String username);
 	public List<User> getChatMembers(int chatConvoID);
 }

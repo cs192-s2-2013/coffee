@@ -32,6 +32,10 @@ public class UserServiceImpl implements UserService{
 		return userdao.getChatUser();
 	}
 	
+	public List<User> getUserListByUsername(String username){
+        return userdao.getUserListByUsername(username);
+	}
+	
 	public List<User> getChatMembers(int chatConvoID){
 		return userdao.getChatMembers(chatConvoID);
 	}

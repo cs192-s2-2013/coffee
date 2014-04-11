@@ -52,14 +52,17 @@ public class ChatController {
 	/*** CHATHOME.jsp FUNCTIONS ***/
 	
 	@RequestMapping("/chat") /** shows all conversations **/
-	public String showConvoList(@ModelAttribute("user") User user, Model model, @RequestParam(value = "q", required=false, defaultValue="0") int q, @RequestParam(value = "v", required=false, defaultValue="-1") int v){
+	public String showConvoList(@ModelAttribute("user") User user, Model model, 
+			@RequestParam(value = "q", required=false, defaultValue="0") int q, 
+			@RequestParam(value = "s", required=false, defaultValue="") String s,
+			@RequestParam(value = "v", required=false, defaultValue="-1") int v){
 		
 		List<ChatConvo> chatConvoList = chatConvoService.getConvoListByUserID(user.getUserID());
 		model.addAttribute("chatConvoList", chatConvoList);
 
 		/*** Online users section ***/
 		// q = [1: show online users | 0: show all users] //
-		List<User> userList = getUserList(q);
+		List<User> userList = getUserList(q, s);
 		model.addAttribute("userList", userList);
 		model.addAttribute("q", q);
 		/****************************/
@@ -71,6 +74,8 @@ public class ChatController {
 			model.addAttribute("nc", 1);
 		}
 		/***************************/
+
+
 		
 		return "chathome";
 	}
@@ -93,12 +98,26 @@ public class ChatController {
 		return "redirect:/conversation?c="+c;
 	}
 	
+	@RequestMapping ("/searchuser") //SUPER NOT YET FUNCTIONAL
+	public String searchUser(HttpServletRequest request){ //if search from chathome page
+		String s = request.getParameter("s");
+		return "redirect:/chat?q=2&s="+s;
+	}
+	public String searchUser(HttpServletRequest request, @RequestParam int c){ //else if search from conversation page
+		String s = request.getParameter("s");
+		return "redirect:/conversation?q=2&c="+c+"&s="+s;
+	}
+	
 	/**********************************************/
 	
 	/*** CONVERSATION.jsp FUNCTIONS ***/
 	
 	@RequestMapping("/conversation") //shows messages in a conversation
-	public String showConversation(@ModelAttribute("user") User user, Model model, @RequestParam int c, @RequestParam(value = "u", required=false, defaultValue="0") int u){
+	public String showConversation(@ModelAttribute("user") User user, Model model, 
+			@RequestParam int c, 
+			@RequestParam(value = "q", required=false, defaultValue="0") int q,
+			@RequestParam(value = "s", required=false, defaultValue="") String s,
+			@RequestParam(value = "lc", required=false, defaultValue="0") int lc){
 
 		int chatConvoID = c;
 		model.addAttribute("c", chatConvoID);
@@ -119,9 +138,18 @@ public class ChatController {
 		/***************************************/
 		
 		/*** Online users section ***/
-		List<User> userList = getUserList(u);		
+		List<User> userList = getUserList(q, s);		
 		model.addAttribute("userList", userList);
+		model.addAttribute("q", q);
 		/****************************/
+		
+		/*** Convo name ***/
+		model.addAttribute("convoTitle", chatConvoService.getTitleByID(c));
+		/****************************/
+		
+		/*** lc ***/
+		model.addAttribute("lc",lc);
+		/********************/
 		
 		return "conversation";
 	}
@@ -161,11 +189,13 @@ public class ChatController {
 	
 	/*** OTHER FUNCTIONS ***/
 	
-	public List<User> getUserList(int q){
+	public List<User> getUserList(int q, String s){
 		List<User> userList = null;
 		
 		//if show online users only
 		if(q==1){ userList = userService.getChatOnline(); }
+		//else if search result
+		else if(q==2){ userList = userService.getUserListByUsername(s); }
 		//else if all users
 		else{ userList = userService.getChatUser(); }
 		

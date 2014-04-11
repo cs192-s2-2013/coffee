@@ -21,6 +21,36 @@
 				background: transparent;
 				border: 1px solid rgb(192,192,192);
 			}
+			.modal-dialog {
+	          	width:450px; 
+	          	height: 60px;
+	          	margin-top: 180px;
+          	}
+		  	.modal-body {
+		  		height: 60px;
+		  		margin-top:-10px; 
+		  	}
+		  	.modal-footer {
+		  		height: 60px;
+		  	}
+		  	.modal-footer button {
+		  		margin-top: -10px;
+		  	}
+		  	.chatbox {
+		  		padding-right: 15px;
+		  		padding-left: 15px;
+		  		height: 400px;
+		  	}
+		  	
+		  	.mygrid-wrapper-div {
+		  		border: solid 2px;
+		  		overflow: auto;
+		  		padding-top: 10px;
+		  		width: 100%;
+		  	}
+			
+			i { font-size: 10px; }
+		  	
     </style>
 	
 </head>
@@ -65,59 +95,109 @@
 	<!-- Title
 	**************************************************-->
 	<div class="jumbotron">
-		<!--JSP code to get subject-->
 		<a href="chat"><h2>Chat</h2></a>
-		<h5>Blablabla</h5>
+		<h5>Insightful discussion with your peers</h5>
 	</div>
 	
-	<!-- Buttons
+	
+	
+	<center>
+	<div style="height: 75%; width: 70%;">
+
+	<!-- List of members
 	**************************************************-->
-	<div class="row">
-		<div class="col-sm-2"></div>
-			<div class="col-sm-1" style="margin-lfet:40px; margin-bottom:10px"><a href="#"><button type="" class="btn btn-primary">Add members</button></a></div>
-			<div class="col-sm-1" style="margin-right:40px; margin-bottom:10px"><a href="leave?c=${c}"><button type="" class="btn btn-primary">Leave conversation</button></a></div>
-	</div>
+			<div class="col-sm-3" style="margin-left:2px;">
+				<h4>Members</h4>
+				<div class="row mygrid-wrapper-div" style="height:120px;">
+					<div class="row">
+						<c:forEach var="member" items="${membersList}">${member.getFirstName()} ${member.getLastName()}</br>
+						</c:forEach>
+					</div>
+				</div>
+				
+				<!--  Add Members 
+				***************************************** -->
+				<div class="row mygrid-wrapper-div text-left" style="height:294px; padding-left:8px;">
+					<form:form method="post" action="/searchuser?c=${c}">
+						<div class="row">
+							<div class="col-sm-9" >
+								<input type="text" name="s" class="form-control input-small" placeholder="Search users">
+							</div>
+							<div class="col-sm-1" style="padding-left:0px;">
+								<button type="submit" class="btn btn-primary"><i class="icon-search"></i></button>
+							</div>
+						</div>
+					</form:form>
+					<c:forEach var="user" items="${userList}">
+						<a href="addmember?c=${c}&u=${user.getUserID()}"><i class="icon-plus"></i></a>
+						${user.getFirstName()} ${user.getLastName()}
+						</br>
+					</c:forEach>
+				</div>
+			</div>
 	
 	<!-- List of messages
 	**************************************************-->	
-	<div style="float:left; margin-left:200px">
-	<font size=5px>Conversation</font>
-	<div id="box" style="width:700px; height:300px;">
-		<div style="margin:10px">
-			<c:forEach var="message" items="${chatMessageList}">
-			<b>${message.getSender()}:</b> ${message.getMessage()} </br>
-			</c:forEach>
-		</div>
-	</div>
-	</div>
+			<div class="col-sm-9 row" style="margin-left:2px;">
+				<h4>${convoTitle }</h4>
+				<div class="mygrid-wrapper-div" id="messagebox">
+				<div class="chatbox text-left">
+					<c:forEach var="message" items="${chatMessageList}">
+					<b>${message.getSender()}:</b> ${message.getMessage()} </br>
+					</c:forEach>
+				</div>
+				</div>
+				
+				<script>	
+					var d = document.getElementById('messagebox');
+
+					if(d.scrollHeight > d.clientHeight) {
+  					d.scrollTop = d.scrollHeight - d.clientHeight;
+					}
+				</script>
+					
+			</div>
 		
-	<!-- List of members
-	**************************************************-->
-	<div style="float:right; margin-right:200px">
-	<font size=5px>"Members"</font>
-	<div id="box" style="width:250px; height:300px;">
-		<div style="margin:10px">
-			<c:forEach var="user" items="${membersList}"><a href="addmember?c=${c}&u=${user.getUserID()}">${user.getFirstName()} ${user.getLastName()}</a> </br>
-			</c:forEach>
-		</div>
-	</div>
-	</div>
 	
 	<!-- Input message
-	**************************************************-->
+	**************************************************-->	
+	<div class="row" >
+			
+			<!-- Leave conversation
+			************************************** -->
+			<div class="col-sm-3" style="margin-top:10px; margin-bottom:10px; margin-left:15px;"><a href="conversation?c=${c}&lc=1"><button type="" class="btn btn-primary">Leave conversation</button></a></div>
+			
 	<form:form method="post" action="/sendmessage?c=${c}" modelAttribute="chatMessage">
-		<div class="row">
-			<div class="col-sm-2"></div>
 			<div class="col-sm-7">
-				<input type="text" name="message" class="form-control" placeholder="Type your message here" style="margin-top:10px"> 
+				<input type="text" name="message" class="form-control" placeholder="Type your message here" style="margin-top:10px; margin-bottom:10px;"> 
 			</div>
 			<div class="col-sm-1">
-				<button type="submit" class="btn btn-primary" style="margin-top:10px">Send</button>
+				<button type="submit" class="btn btn-primary" style="margin-top:10px; margin-bottom:10px;">Send</button>
 			</div>
-		</div>
 	</form:form>
-		</br></br>
-			
+	
+	<c:if test="${lc=='1'}">
+		<div id="message" class="modal show" tabindex="-1" role="dialog" aria-hidden="true">
+		 	<div class="modal-dialog">
+		  		<div class="modal-content">
+					<div class="modal-body">
+         				<h4 class="text-center">Are you sure you want to leave conversation?</h4>
+		     		</div>
+		      		<div class="modal-footer">
+		          		<div class="col-md-12">
+		         			<button class="btn btn-primary" data-dismiss="modal" aria-hidden="true"><a href="leave?c=${c}"><font color="white">Yes</font></a></button>
+		          			<button class="btn btn-primary" data-dismiss="modal" aria-hidden="true"><a href="conversation?c=${c}"><font color="white">Close</font></a></button>
+				 		</div>	
+		      		</div>
+		  		</div>
+		 	</div>
+		</div>
+	</c:if>
+	</div>
+	
+	</div>
+	</center>
+	
 		
 	<!-- Footer and Modal
 	**************************************************-->
