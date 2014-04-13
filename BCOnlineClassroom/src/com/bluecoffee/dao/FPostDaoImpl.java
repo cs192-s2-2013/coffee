@@ -26,6 +26,13 @@ public class FPostDaoImpl implements FPostDao {
 	}
 	
 	@Override
+	public void deleteData(int fPostID){
+		String sql = "DELETE FROM fpost WHERE fPostID="+fPostID;
+		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+		jdbcTemplate.update(sql);
+	}
+	
+	@Override
 	public FPost getFPostByID(int fPostID){
 		List<FPost> fPostList = new ArrayList<FPost>();
 
@@ -41,7 +48,9 @@ public class FPostDaoImpl implements FPostDao {
 		List<FPost> fPostList = new ArrayList<FPost>();
 		
 		String title = fPost.getTitle().replace("'", "''");
+		title = title.replace("\\", "\\\\");
 		String content = fPost.getContent().replace("'", "''");
+		content = fPost.getContent().replace("\\", "\\\\");
 		
 		String sql = "SELECT * FROM fpost WHERE title='"+title+ "' AND content='" +content+ "'";
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);

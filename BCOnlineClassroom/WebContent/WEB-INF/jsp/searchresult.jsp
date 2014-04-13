@@ -16,46 +16,32 @@
 	<style>
           body { background: #FFFFFF; }
           .container { background: ; }
+          .jumbotron { margin-top: -50px; }
     </style>
 	
 </head>
 
 <body>
 
-	<font color="#336699">
-	
-	<!-- tried this one on the first tut <button class="btn btn-success">Test</button> -->
-
-	<!-- fixed navigaiton bar with dropdown menu
-	***************************************************-->	
-<div id="wrapper">
-	<div class="navbar navbar-inverse navbar-fixed-top">
-		<div class="container">
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-				</button>
-				<a href="home" class="navbar-brand">Blue Coffee</a> 
-			</div>
-			
-			<div class="navbar-collapse collapse">
-				<ul class="nav navbar-nav nav-pills">
-					<li><a href="index.html">Home</a></li>
-					<li class="divider-vertical"></li>
-					<li  class="active"><a href="resource.html">Materials</a></li>
-					<li class="divider-vertical"></li>
-					<li><a href="feature.html">Forum</a></li>
-					<li class="divider-vertical"></li>
-					<li><a href="chat.html">Chat</a></li>
-					<li class="divider-vertical"></li>
-					<li><a href="about.html">About</a></li>
-				</ul>
-			</div>
-		</div>
-	</div>
-	
+	<!--  Navigation Bar
+	***************************** -->
+	<nav class="navbar navbar-inverse" role="navigation">
+	   <div class="navbar-header">
+	      <a class="navbar-brand" href="home">Online Classroom</a>
+	   </div>
+	   <div>
+	      <ul class="nav navbar-nav">
+	         <li><a href="materials">Materials</a></li>
+	         <li><a href="forum">Forum</a></li>
+	         <li><a href="chat">Chat</a></li>
+	      </ul>
+		<ul class="nav navbar-nav pull-right">
+              <li><a>${sessionScope.user.getUsername()}<c:if test="${sessionScope.user.getAdmin()}"> (admin)</c:if></a></li>
+              <li><a href="logout">Logout</a></li>
+          </ul>
+	     
+	   </div>
+	</nav>	
 	
 		<!-- Subject Title
 	**************************************************-->
@@ -69,43 +55,81 @@
 	</center>
 	
 	
-		<!-- Search title
+	<!-- Search Bar
+	************************************************* -->
+	<form:form method="post" action="/searchfile">
+		<div class="row">
+			<div class="col-sm-7"></div>
+			<div class="col-sm-3">
+				<input type="text" name="s" class="form-control" placeholder="Find files">
+			</div>
+			<div class="col-sm-1">
+				<button type="submit" class="btn btn-primary"><i class="icon-search" style="font-size:15px;"></i></button>
+			</div>
+		</div>
+	</form:form>
+	
+	
+	<c:choose>
+	<c:when test="${empty matFileList}">
+	
+		<!-- Empty search
 	**************************************************-->
-	<div class = "container">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-7">
-					<h2>Search results</h2>
-				</div>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-5" style="padding-left:35px;">
+				<h2>No results found</h2>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-8" style="padding-left:50px">
+			<h4>You can try:</h4>
+			Entering one word at a time or phrases separated by dashes (-). White spaces will return no results.</br>
+			Using a different but similar search key.</br>
+			Asking a question. Maybe your concern hasn't been brought up on the forum yet. 
 			</div>
 		</div>
 	</div>
 	
+	</c:when>
+	
+	<c:otherwise>
+	
+		<!-- Search title
+	**************************************************-->
+	<div class="container">
+		<div class="row">
+			<div class="col-md-5" style="padding-left:35px;">
+				<h2>Search results</h2>
+			</div>
+		</div>
+	</div>
 	
 	<!-- Table
 	**************************************************-->
-	
 	<div class="container">
 		<div class="row pull-center">
 			<b>
-			<div class="col-sm-5 table-bordered">Filename</div>
-			<div class="col-sm-1 table-bordered">File Size</div>
+			<div class="col-sm-1"></div>
+			<div class="col-sm-5 table-bordered">File</div>
 			<div class="col-sm-2 table-bordered">Upload Date</div>
 			<div class="col-sm-3 table-bordered">Uploaded by</div>
-			<div class="col-sm-1 table-bordered">Download</div>
 			</b>
 		</div>
 		<!-- JSP generated code for all items in folder -->
 		<c:forEach var="matFile" items="${matFileList}">
 			<div class="row pull-center">
-				<div class="col-sm-5 table-bordered">${matFile.fileName}</div>
-				<div class="col-sm-1 table-bordered">${matFile.fileSize}</div>
+				<div class="col-sm-1"></div>				
+				<div class="col-sm-5 table-bordered"><a href="download.do?fid=${matFile.matFileID}"><i class="largeicon icon-download-alt"></i></a> ${matFile.fileName}</div>
 				<div class="col-sm-2 table-bordered">${matFile.uploadDate}</div>
 				<div class="col-sm-3 table-bordered">${matFile.uploader}</div>
-				<div class="col-sm-1 table-bordered"><a href="download.do?fid=${matFile.matFileID}">Download</a></div>
+				<!-- <div class="col-sm-1 table-bordered"><a href="download.do?fid=${matFile.matFileID}">Download</a></div>	-->
 			</div>
 		</c:forEach>
 	</div>
+	
+	</c:otherwise>
+	</c:choose>
 	
 	
 	<!-- Footer and Modal

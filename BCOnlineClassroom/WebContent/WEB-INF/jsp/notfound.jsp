@@ -16,46 +16,31 @@
 	<style>
           body { background: #FFFFFF; }
           .container { background: ; }
+          .jumbotron { margin-top: -50px; }
     </style>
 	
 </head>
 
 <body>
 
-	<font color="#336699">
-	
-	<!-- tried this one on the first tut <button class="btn btn-success">Test</button> -->
-
-	<!-- fixed navigaiton bar with dropdown menu
-	***************************************************-->	
-<div id="wrapper">
-	<div class="navbar navbar-inverse navbar-fixed-top">
-		<div class="container">
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-				</button>
-				<a href="home" class="navbar-brand">Blue Coffee</a> 
-			</div>
-			
-			<div class="navbar-collapse collapse">
-				<ul class="nav navbar-nav nav-pills">
-					<li><a href="index.html">Home</a></li>
-					<li class="divider-vertical"></li>
-					<li  class="active"><a href="resource.html">Resources</a></li>
-					<li class="divider-vertical"></li>
-					<li><a href="feature.html">Forum</a></li>
-					<li class="divider-vertical"></li>
-					<li><a href="chat.html">Chat</a></li>
-					<li class="divider-vertical"></li>
-					<li><a href="about.html">About</a></li>
-				</ul>
-			</div>
-		</div>
-	</div>
-	
+	<!--  Navigation Bar
+	***************************** -->
+	<nav class="navbar navbar-inverse" role="navigation">
+	   <div class="navbar-header">
+	      <a class="navbar-brand" href="#">Online Classroom</a>
+	   </div>
+	   <div>
+	      <ul class="nav navbar-nav">
+	         <li><a href="#">Materials</a></li>
+	         <li><a href="#">Forum</a></li>
+	         <li><a href="#">Chat</a></li>
+	      </ul>
+	      <ul class="nav navbar-nav pull-right">
+	         <li><a href="#">Logout</a></li>
+	      </ul>
+	     
+	   </div>
+	</nav>	
 	
 	<!-- Subject Title
 	**************************************************-->

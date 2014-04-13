@@ -26,47 +26,37 @@
           	margin-top: 180px;
           }
 		  .modal-body { height: 60px; }
+		  .jumbotron { margin-top: -50px; }
     </style>
-	
+	<script>
+	    $(document).ready(function(){
+	        $("[rel=tooltip]").tooltip({ placement: 'right'});
+	    });
+    </script>
 </head>
 
 <body>
 		
-	
+	<!--  Navigation Bar
+	***************************** -->
+	<nav class="navbar navbar-inverse" role="navigation">
+	   <div class="navbar-header">
+	      <a class="navbar-brand" href="home">Online Classroom</a>
+	   </div>
+	   <div>
+	      <ul class="nav navbar-nav">
+	         <li><a href="materials">Materials</a></li>
+	         <li><a href="forum">Forum</a></li>
+	         <li><a href="chat">Chat</a></li>
+	      </ul>
+		<ul class="nav navbar-nav pull-right">
+              <li><a>${sessionScope.user.getUsername()}<c:if test="${sessionScope.user.getAdmin()}"> (admin)</c:if></a></li>
+              <li><a href="logout">Logout</a></li>
+          </ul>
+	     
+	   </div>
+	</nav>
 
-	<font color="#336699">
-	
-	<!-- tried this one on the first tut <button class="btn btn-success">Test</button> -->
-
-	<!-- fixed navigaiton bar with dropdown menu
-	***************************************************-->	
-<div id="wrapper">
-	<div class="navbar navbar-inverse navbar-fixed-top">
-		<div class="container">
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-				</button>
-				<a href="home" class="navbar-brand">Blue Coffee</a> 
-			</div>
-			
-			<div class="navbar-collapse collapse">
-				<ul class="nav navbar-nav nav-pills">
-					<li><a href="index.html">Home</a></li>
-					<li class="divider-vertical"></li>
-					<li  class="active"><a href="resource.html">Materials</a></li>
-					<li class="divider-vertical"></li>
-					<li><a href="feature.html">Forum</a></li>
-					<li class="divider-vertical"></li>
-					<li><a href="chat.html">Chat</a></li>
-					<li class="divider-vertical"></li>
-					<li><a href="about.html">About</a></li>
-				</ul>
-			</div>
-		</div>
-	</div>
 	
 	
 		<!-- Upload
@@ -156,16 +146,17 @@
 	</div>
 	-->
 	
-	
+	</br></br>
 		<!-- Slides
 	**************************************************-->
 <div class = "container">
 	<div class="container">
 		<div class="row">
-			<div class="col-md-7">
-				<h2>Slides <a href="download.do?fid=${matFile.matFileID}"><i class="largeicon icon-download-alt"></i></a></h2>
+			<div class="col-sm-1"></div>
+			<div class="col-sm-7">
+				<h2>Slides <a href="batchdownload?sn=${id}&fn=Slides"><i class="largeicon icon-download-alt" rel="tooltip" title="Download slides folder"></i></a></h2>
 			</div>
-			<div class="col-md-5">
+			<div class="col-md-4">
 			
 				<div class="fileinput fileinput-new" data-provides="fileinput">
 					
@@ -212,6 +203,7 @@
 	<div class="container">
 		<div class="row pull-center">
 			<b>
+			<div class="col-sm-1"></div>
 			<div class="col-sm-5 table-bordered">File</div>
 			<!-- <div class="col-sm-1 table-bordered">File Size</div> -->
 			<div class="col-sm-2 table-bordered">Upload Date</div>
@@ -220,8 +212,9 @@
 		</div>
 		<!-- JSP generated code for all items in folder -->
 		<c:forEach var="matFile" items="${map.Slides}">
-			<div class="row pull-center">				
-				<div class="col-sm-5 table-bordered"><a href="download.do?fid=${matFile.matFileID}"><i class="largeicon icon-download-alt"></i></a> ${matFile.fileName}</div>
+			<div class="row pull-center">
+				<div class="col-sm-1"></div>				
+				<div class="col-sm-5 table-bordered"><a href="download.do?fid=${matFile.matFileID}"><i class="largeicon icon-download-alt" rel="tooltip" title="Download ${matFile.fileName}"></i></a> ${matFile.fileName}</div>
 				<!-- <div class="col-sm-1 table-bordered">${matFile.fileSize}</div> -->
 				<div class="col-sm-2 table-bordered">${matFile.uploadDate}</div>
 				<div class="col-sm-3 table-bordered">${matFile.uploader}</div>
@@ -230,14 +223,17 @@
 		</c:forEach>
 	</div>
 	
+	</br></br></br>
+	
 	<!-- Samplex
 	**************************************************-->
 	<div class="container">
 		<div class="row">
-			<div class="col-md-7">
-				<h2>Samplex <a href="download.do?fid=${matFile.matFileID}"><i class="largeicon icon-download-alt"></i></a></h2>
+			<div class="col-sm-1"></div>
+			<div class="col-sm-7">
+				<h2>Samplex <a href="batchdownload?sn=${id}&fn=Samplex"><i class="largeicon icon-download-alt" rel="tooltip" title="Download samplex folder"></i></a></h2>
 			</div>
-			<div class="col-md-5">
+			<div class="col-md-4">
 			
 				 
 				<form method="post" action="fileUploaded?id=${id}&sf=Samplex" enctype="multipart/form-data">
@@ -280,6 +276,7 @@
 	<div class="container">
 		<div class="row pull-center">
 			<b>
+			<div class="col-sm-1"></div>
 			<div class="col-sm-5 table-bordered">File</div>
 			<div class="col-sm-2 table-bordered">Upload Date</div>
 			<div class="col-sm-3 table-bordered">Uploaded by</div>
@@ -288,21 +285,26 @@
 		<!-- JSP generated code for all items in folder -->
 		<c:forEach var="matFile" items="${map.Samplex}">
 			<div class="row pull-center">
-				<div class="col-sm-5 table-bordered"><a href="download.do?fid=${matFile.matFileID}"><i class="largeicon icon-download-alt""></i></a> ${matFile.fileName}</div>
+				<div class="col-sm-1"></div>
+				<div class="col-sm-5 table-bordered"><a href="download.do?fid=${matFile.matFileID}"><i class="largeicon icon-download-alt" rel="tooltip" title="Download ${matFile.fileName}"></i></a> ${matFile.fileName}</div>
 				<div class="col-sm-2 table-bordered">${matFile.uploadDate}</div>
 				<div class="col-sm-3 table-bordered">${matFile.uploader}</div>
 			</div>
 		</c:forEach>
 	</div>
 	
+	
+	</br></br></br>
+	
 	<!-- Miscellaneous
 	**************************************************-->
 	<div class="container">
 		<div class="row">
-			<div class="col-md-7">
-				<h2>Miscellaneous <a href="download.do?fid=${matFile.matFileID}"><i class="largeicon icon-download-alt""></i></a></h2>
+			<div class="col-sm-1"></div>
+			<div class="col-sm-7">
+				<h2>Miscellaneous <a href="batchdownload?sn=${id}&fn=Miscellaneous"><i class="largeicon icon-download-alt" rel="tooltip" title="Download miscellaneous folder"></i></a></h2>
 			</div>
-			<div class="col-md-5">
+			<div class="col-md-4">
 			
 				
 				<form method="post" action="fileUploaded?id=${id}&sf=Miscellaneous" enctype="multipart/form-data">
@@ -343,6 +345,7 @@
 	<div class="container">
 		<div class="row pull-center">
 			<b>
+			<div class="col-sm-1"></div>
 			<div class="col-sm-5 table-bordered">File</div>
 			<div class="col-sm-2 table-bordered">Upload Date</div>
 			<div class="col-sm-3 table-bordered">Uploaded by</div>
@@ -351,12 +354,15 @@
 		<!-- JSP generated code for all items in folder -->
 		<c:forEach var="matFile" items="${map.Miscellaneous}">
 			<div class="row pull-center">
-				<div class="col-sm-5 table-bordered"><a href="download.do?fid=${matFile.matFileID}"><i class="largeicon icon-download-alt""></i></a> ${matFile.fileName}</div>
+				<div class="col-sm-1"></div>
+				<div class="col-sm-5 table-bordered"><a href="download.do?fid=${matFile.matFileID}"><i class="largeicon icon-download-alt" rel="tooltip" title="Download ${matFile.fileName}"></i></a> ${matFile.fileName}</div>
 				<div class="col-sm-2 table-bordered">${matFile.uploadDate}</div>
 				<div class="col-sm-3 table-bordered">${matFile.uploader}</div>
 			</div>
 		</c:forEach>
 	</div>
+
+	</br></br>
 </div>	
 	
 	<div class="push"></div>

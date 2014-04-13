@@ -21,95 +21,116 @@
 				background: transparent;
 				border: 1px solid rgb(192,192,192);
 			}
-			.modal-dialog{ width: 500px; }
-			.modal-header{ height: 70px; }
-			.modal-body{ height: 70px; }
-			.modal-footer{ height: 70px; }
+			.modal-dialog{
+				width: 400px; 
+          		margin-top: 180px;
+			}
+			.modal-header{ height: 65px; }
+			.modal-body{ height: 65px; }
+			.modal-footer{ height: 65px; }
+			.jumbotron { margin-top: -50px; }
+			.mygrid-wrapper-div {
+		  		border: solid 2px;
+		  		overflow: auto;
+		  		padding-top: 10px;
+		  	}
     </style>
+    <script>
+	    $(document).ready(function(){
+	        $("[rel=tooltip]").tooltip({ placement: 'right'});
+	    });
+    </script>
 	
 </head>
 
 <body>
 
-	<font color="#336699">
-	
-	<!-- tried this one on the first tut <button class="btn btn-success">Test</button> -->
-
-	<!-- fixed navigaiton bar with dropdown menu
-	***************************************************-->	
-<div id="wrapper">
-	<div class="navbar navbar-inverse navbar-fixed-top">
-		<div class="container">
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-				</button>
-				<a href="home" class="navbar-brand">Blue Coffee</a> 
-			</div>
-			
-			<div class="navbar-collapse collapse">
-				<ul class="nav navbar-nav nav-pills">
-					<li><a href="index.html">Home</a></li>
-					<li class="divider-vertical"></li>
-					<li  class="active"><a href="resource.html">Resources</a></li>
-					<li class="divider-vertical"></li>
-					<li><a href="feature.html">Forum</a></li>
-					<li class="divider-vertical"></li>
-					<li><a href="chat.html">Chat</a></li>
-					<li class="divider-vertical"></li>
-					<li><a href="about.html">About</a></li>
-				</ul>
-			</div>
-		</div>
-	</div>
+	<!--  Navigation Bar
+	***************************** -->
+	<nav class="navbar navbar-inverse" role="navigation">
+	   <div class="navbar-header">
+	      <a class="navbar-brand" href="home">Online Classroom</a>
+	   </div>
+	   <div>
+	      <ul class="nav navbar-nav">
+	         <li><a href="materials">Materials</a></li>
+	         <li><a href="forum">Forum</a></li>
+	         <li><a href="#">Chat</a></li>
+	      </ul>
+			<ul class="nav navbar-nav pull-right">
+              <li><a>${sessionScope.user.getUsername()}<c:if test="${sessionScope.user.getAdmin()}"> (admin)</c:if></a></li>
+              <li><a href="logout">Logout</a></li>
+          </ul>
+	     
+	   </div>
+	</nav>
 	
 	<!-- Title
 	**************************************************-->
 	<div class="jumbotron">
-		<!--JSP code to get subject-->
-		<a href="#"><h2>Chat</h2></a>
-		<h5>Blablabla</h5>
+		<a href="chat"><h2>Chat</h2></a>
+		<h5>Insightful discussion with your peers.</h5>
 	</div>
 	
 	
-	<!-- List of conversations
+	
+	
+	<center>
+	<div style="height: 80%; width: 50%;">
+	<div class="row">
+	
+	
+	<div class="col-sm-6 text-left">
+	<!-- List of users
 	**************************************************-->
-	<div style="float:right; margin-right:300px">
-	<font size=5px>List of Conversations</font>
-	<div id="box" style="width:350px; height:350px;">
-		<div style="margin:10px">
-		<c:forEach var="convo" items="${chatConvoList}">
-			<h5><a href="conversation?c=${convo.getChatConvoID()}">${convo.getTitle()}</a></h5>
+	<c:choose>
+	<c:when test="${q=='1'}">
+		<div class="col-sm-7">
+			<font size=5px>Online</font>
+		</div>
+		<div class="col-sm-5" style="padding-top:10px;">
+			<a href="chat"><font size=2px>view all users</font></a>
+		</div>
+	</c:when>
+	<c:when test="${q=='2'}">
+		<div class="col-sm-7">
+			<font size=5px>Search result</font>
+		</div>
+		<div class="col-sm-5" style="padding-top:10px;">
+			<a href="chat"><font size=2px>view all users</font></a>
+		</div>
+	</c:when>
+	<c:otherwise>
+		<div class="col-sm-7">
+			<font size=5px>All Users</font>
+		</div>
+		<div class="col-sm-5" style="padding-top:10px;">
+			<a href="chat?q=1"><font size=2px>view online</font></a>
+		</div>
+	</c:otherwise>
+	</c:choose>
+	<div class="mygrid-wrapper-div" style="width:100%; height:300px">
+		<div style="padding-left:10px; margin:5px">
+		
+		<!--  Search user
+		************************************************* -->
+		<form:form method="post" action="/searchuser">
+			<div class="row">
+				<div class="col-sm-2"></div>
+				<div class="col-xs-2">
+					<input type="text" class="input-small" name="s" class="form-control" placeholder="Search for users">
+					<button type="submit" class="btn btn-primary"><i class="icon-search"></i></button>
+				</div>
+			</div>
+		</form:form>
+		</br>
+		<c:forEach var="u" items="${userList}">
+			<a href="gettitle?v=${u.getUserID()}"><i class="icon-envelope" rel="tooltip" title="Start conversation with ${u.getFirstName()} ${u.getLastName()}"></i></a> ${u.getFirstName()} ${u.getLastName()}				
+			</br>			
 		</c:forEach>
 		</div>
 	</div>
-	</div>
 	
-	<!-- List of users
-	**************************************************-->
-	<div style="float:left; margin-left:350px">
-		<c:choose>
-		<c:when test="${q=='1'}"> <a href="chat"><font size=5px>Online</font></a></c:when>
-		<c:otherwise><a href="chat?q=1"><font size=5px>All Users</font></a> </c:otherwise>
-		</c:choose>
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-		<c:choose>
-			<c:when test="${q=='1'}"> <a href="chat"><font size=2px>view all users</font></a> </c:when>
-			<c:otherwise> <a href="chat?q=1"><font size=2px>view online</font></a> </c:otherwise>
-		</c:choose>
-		<div id="box" style="width:300px; height:330px">
-			<div style="margin:10px">
-			<c:forEach var="u" items="${userList}">
-				<i class="icon-envelope "></i> <a href="gettitle?v=${u.getUserID()}">${u.getFirstName()} ${u.getLastName()}</a>				
-				</br>			
-			</c:forEach>
-			</div>
-		</div>
 	</div>
 	
 	<c:if test="${nc == '1'}">
@@ -123,7 +144,7 @@
 		        <h3>Enter conversation title:</h3>
 		      </div>
 		      <div class="modal-body">
-		              <input type="text" name="title" class="form-control input-lg" placeholder="Title">
+		              <input type="text" name="title" required class="form-control input-lg" placeholder="Title">
 		      </div>
 		      <div class="modal-footer">
 		          <button type="submit" class="btn btn-primary" data-dismiss="modal" aria-hidden="true">Submit</button>	
@@ -135,42 +156,28 @@
 	</c:if>
 	
 	
-	
-	<!-- List of online users
-	**************************************************
-	<div style="float:left; margin-left:350px">
-		<font size=5px>Online Users</font>
-		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-		<a href=""><font size=2px>view all users</font></a>
-		<div id="box" style="width:300px; height:250px">
-			<div style="margin:10px">
-			<c:forEach var="u" items="${chatOnlineList}">
-				<i class="icon-envelope "></i> <a href="newconvo?v=${u.getUserID()}">${u.getFirstName()} ${u.getLastName()}</a> 
-				</br>			
-			</c:forEach>
-			</div>
+	<div class="col-sm-6 text-left">
+	<!-- List of conversations
+	**************************************************-->
+	<div class="col-sm-12">
+	<font size=5px>My Conversations</font>
+	</div>
+	<div class="mygrid-wrapper-div" style="width:100%; height:300px;">
+		<div style="margin:10px">
+		<c:forEach var="convo" items="${chatConvoList}">
+			<h5><a href="conversation?c=${convo.getChatConvoID()}">'${convo.getTitle()}'</a></h5>
+		</c:forEach>
 		</div>
 	</div>
-	-->
 	
-	
-	
-	<!--  Search user
-	************************************************* -->
-	<div style="margin-left:350px; margin-top:100px">
-	<form:form method="post" action="/searchuser">
-		<div class="row">
-			<div class="col-sm-3" >
-				<input type="text" name="s" class="form-control" placeholder="Search for users">
-			</div>
-			<div class="col-sm-1">
-				<button type="submit" class="btn btn-primary"><i class="largeicon icon-search"></i></button>
-			</div>
-		</div>
-	</form:form>
 	</div>
-		
+	
+	</div>
+	</div>
+	</center>
+	
+	</br></br>
+	
 	<!-- Footer and Modal
 	**************************************************-->
 		

@@ -69,6 +69,9 @@ public class MatFileDaoImpl implements MatFileDao {
 	}
 	
 	public List<MatFile> getMatFileListBySubjectName(String subjectName) {
+		subjectName = subjectName.replace("'","''");
+		subjectName = subjectName.replace("\\", "\\\\");
+		
 		List<MatFile> matFileList = new ArrayList<MatFile>();
 
 		String sql = "SELECT matFileID, fileName, fileType, fileSize, uploadDate, path, matSubjectID, matFolderID, userID"
@@ -80,6 +83,10 @@ public class MatFileDaoImpl implements MatFileDao {
 	}
 
 	public List<MatFile> getMatFileListBySubjectFolder(String subjectName, int matFolderID) {
+		
+		subjectName = subjectName.replace("'","''");
+		subjectName = subjectName.replace("\\", "\\\\");
+		
 		List<MatFile> matFileList = new ArrayList<MatFile>();
 
 		String sql = "SELECT matFileID, fileName, fileType, fileSize, uploadDate, path, matSubjectID, matFolderID, userID"
@@ -91,9 +98,12 @@ public class MatFileDaoImpl implements MatFileDao {
 	}
 	
 	public List<MatFile> getMatFileListByFilename(String filename){
+		filename = filename.replace("'","''");
+		filename = filename.replace("\\", "\\\\");
+		
 		List<MatFile> matFileList = new ArrayList<MatFile>();
 		
-		String sql = "SELECT * FROM matfile WHERE filename LIKE '" +filename+ "%'";
+		String sql = "SELECT * FROM matfile WHERE filename LIKE '%" +filename+ "%'";
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
 		matFileList = jdbcTemplate.query(sql, new MatFileRowMapper());
 		

@@ -19,6 +19,11 @@ public class FCommentServiceImpl implements FCommentService {
 	}
 	
 	@Override
+	public void deleteData(int fCommentID){
+		fcommentdao.deleteData(fCommentID);
+	}
+	
+	@Override
 	public List<FComment> getFCommentList() {
 		return fcommentdao.getFCommentList();
 	}

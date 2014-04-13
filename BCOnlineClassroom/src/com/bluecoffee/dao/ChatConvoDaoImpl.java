@@ -71,6 +71,7 @@ public class ChatConvoDaoImpl implements ChatConvoDao {
 	
 	public int getChatConvoID(String title){
 		title = title.replace("'", "''");
+		title = title.replace("\\", "\\\\");
 		
 		List<ChatConvo> chatConvoList = new ArrayList<ChatConvo>();
 		String sql = "SELECT chatConvoID, title FROM chatconvo WHERE title = '"+title+"'";

@@ -55,9 +55,13 @@ public class MaterialsController {
 	//@Autowired private User user;
 	
 	@RequestMapping("/materials")
-	public ModelAndView getSubjectList() {
+	public String getSubjectList(@CookieValue(value="cs192session", defaultValue="none") String fooCookie, Model model) {
+		
+		if(CookieHandler.decryptCookie(fooCookie)==null){ return "notfound"; }
+		
 		List<MatSubject> matSubjectList = matSubjectService.getMatSubjectList();
-		return new ModelAndView("subjectList", "matSubjectList", matSubjectList);
+		model.addAttribute("matSubjectList", matSubjectList);
+		return "subjectList";//new ModelAndView("subjectList", "matSubjectList", matSubjectList);
 	}
 	
 	@RequestMapping("/subfolder")

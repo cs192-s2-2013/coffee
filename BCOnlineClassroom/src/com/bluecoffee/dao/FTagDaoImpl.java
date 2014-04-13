@@ -38,6 +38,9 @@ public class FTagDaoImpl implements FTagDao {
 	@Override
 	public int getFTagID(String tag){
 		
+		tag = tag.replace("'", "''");
+		tag = tag.replace("\\", "\\\\");
+		
 		List<FTag> fTagList = new ArrayList<FTag>();
 		
 		String sql = "SELECT * FROM ftag WHERE tag='"+tag+"'";

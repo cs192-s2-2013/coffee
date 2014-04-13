@@ -7,8 +7,10 @@ import com.bluecoffee.domain.FPost;
 public interface FPostService {
 
 	public void insertData(FPost fpost);
+	public void deleteData(int fPostID);
 	public FPost getFPostByID(int fPostID);
 	public int getIDByFPost(FPost fpost);
 	public List<FPost> getFPostList();
 	public void incCommentCount(int fPostID);
+	public void decCommentCount(int fPostID);
 }

@@ -60,7 +60,10 @@ public class ForumController {
 	
 	/*** Shows all posts in the forum ***/
 	@RequestMapping("/forum")
-	public String showPosts(@RequestParam(value = "r", required=false, defaultValue="0") int r, Model model){
+	public String showPosts(@CookieValue(value="cs192session", defaultValue="none") String fooCookie,
+			@RequestParam(value = "r", required=false, defaultValue="0") int r, Model model){
+		
+		if(CookieHandler.decryptCookie(fooCookie)==null){ return "notfound"; }
 		
 		List<FPost> fPostList = fPostService.getFPostList();
 		for(FPost fPost : fPostList){
@@ -99,8 +102,8 @@ public class ForumController {
 		
 		return "redirect:/forum";
 	}
-	
-	//TODO redirect to a new page, not forum.jsp but similar
+
+
 	/*** shows result of search ***/
 	@RequestMapping("/searchpost")
 	public String searchpost(Model model, HttpServletRequest request){
@@ -121,7 +124,10 @@ public class ForumController {
 		Collections.reverse(fPostList);
 		model.addAttribute("fPostList", fPostList);
 		
-		return "forum";
+		if(fPostList.isEmpty()){ model.addAttribute("noresultfound", "true"); }
+		else{ model.addAttribute("noresultfound", "false"); }
+		
+		return "forumSearchResult";
 	}
 	
 	/*** shows one post and its comments ***/
@@ -168,6 +174,25 @@ public class ForumController {
 			fCommentService.insertData(fComment);	
 			
 			fPostService.incCommentCount(pid);
+		}
+		return "redirect:/viewpost?pid="+pid;
+	}
+	
+	/*** for deleting post ***/
+	@RequestMapping("/deletepost")
+	public String deletePost(@ModelAttribute("user") User user, @RequestParam int pid){
+		if(user.getAdmin()){
+			fPostService.deleteData(pid);
+		}
+		return "redirect:/forum";
+	}
+	
+	/*** for deleting comment ***/
+	@RequestMapping("/deletecomment")
+	public String deleteComment(@ModelAttribute("user") User user, @RequestParam int pid, @RequestParam int cid){
+		if(user.getAdmin()){
+			fCommentService.deleteData(cid);
+			fPostService.decCommentCount(pid);
 		}
 		return "redirect:/viewpost?pid="+pid;
 	}

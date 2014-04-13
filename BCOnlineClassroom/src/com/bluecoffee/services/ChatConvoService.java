@@ -10,5 +10,6 @@ public interface ChatConvoService {
 	public int insertData(String title);
 	public List<ChatConvo> getConvoListByUserID(int userID);
 	public void insertMember(int chatConvoID, int userID);
+	public boolean isMemberInConvo(int chatConvoID, int userID);
 	public void deleteMember(int chatConvoID, int userID);
 }

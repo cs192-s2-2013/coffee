@@ -16,6 +16,7 @@
 	<style type="text/css">
           body { background: #FFFFFF; }
           .container { background: ; }
+		  .jumbotron { margin-top: -50px; }
           textarea { resize: none; }
           k { font-size: 44.5px; }
           
@@ -25,41 +26,25 @@
 
 <body>
 
-	<font color="#336699">
-	
-	<!-- tried this one on the first tut <button class="btn btn-success">Test</button> -->
-
-	<!-- fixed navigaiton bar with dropdown menu
-	***************************************************-->
-	<div class="container">
-	<div class="navbar navbar-inverse navbar-fixed-top">
-	<div class="navbar-inner">
-		
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-				</button>
-				<a href="home" class="navbar-brand">Blue Coffee</a> 
-			</div>
-			
-			<div class="navbar-collapse collapse">
-				<ul class="nav navbar-nav nav-pills">
-					<li><a href="index.html">Home</a></li>
-					<li class="divider-vertical"></li>
-					<li><a href="resource.html">Resources</a></li>
-					<li class="divider-vertical"></li>
-					<li  class="active"><a href="feature.html">Forum</a></li>
-					<li class="divider-vertical"></li>
-					<li><a href="chat.html">Chat</a></li>
-					<li class="divider-vertical"></li>
-					<li><a href="about.html">About</a></li>
-				</ul>
-			</div>
-		</div>
-	</div>
-	</div>
+	<!--  Navigation Bar
+	***************************** -->
+	<nav class="navbar navbar-inverse" role="navigation">
+	   <div class="navbar-header">
+	      <a class="navbar-brand" href="home">Online Classroom</a>
+	   </div>
+	   <div>
+	      <ul class="nav navbar-nav">
+	         <li><a href="materials">Materials</a></li>
+	         <li><a href="#">Forum</a></li>
+	         <li><a href="chat">Chat</a></li>
+	      </ul>
+		<ul class="nav navbar-nav pull-right">
+              <li><a>${sessionScope.user.getUsername()}<c:if test="${sessionScope.user.getAdmin()}"> (admin)</c:if></a></li>
+              <li><a href="logout">Logout</a></li>
+          </ul>
+	     
+	   </div>
+	</nav>
 	
 	<!-- Title
 	**************************************************-->
@@ -73,12 +58,12 @@
 	************************************************* -->
 	<form:form method="post" action="/searchpost">
 		<div class="row">
-			<div class="col-sm-6"></div>
-			<div class="col-sm-3" style="margin-left:60px">
-				<input type="text" name="s" class="form-control" placeholder="Search for posts">
+			<div class="col-sm-7"></div>
+			<div class="col-sm-3">
+				<input type="text" name="s" class="form-control" placeholder="Find posts">
 			</div>
 			<div class="col-sm-1">
-				<button type="submit" class="btn btn-primary"><i class="largeicon icon-search"></i></button>
+				<button type="submit" class="btn btn-primary"><i class="icon-search" style="font-size:15px;"></i></button>
 			</div>
 		</div>
 	</form:form>	
@@ -143,212 +128,23 @@
 				<div class="col-sm-1"></div>
 				<div class="col-sm-8 table-bordered">
 					<h4><a href="viewpost?pid=${forumItem.getFPostID()}">${forumItem.title}</a></h4>
-					<h6>Posted by ${forumItem.poster} on ${forumItem.postDate}</h6>
+					<h5>Posted by ${forumItem.poster} on ${forumItem.postDate}
+					<c:if test="${sessionScope.user.getAdmin()=='true'}"> <a href="deletepost?pid=${forumItem.getFPostID()}"><i class="largeicon icon-trash" rel="tooltip" title="Delete post"></i></a> </c:if>
+					</h5>
 				</div>
 				<div class="col-sm-2 table-bordered"><center>
 					<k> ${forumItem.commentCount} </k>
-					replies
+					<c:choose>
+					<c:when test="${forumItem.commentCount ==1}">
+					reply </c:when>
+					<c:otherwise>
+					replies </c:otherwise>
+					</c:choose>
 				</center></div>
 			</div>
 		</div>
 	</c:forEach>
 	
-	<!-- Footer and Jumbotron
-	**************************************************
-	
-	
-	<div class="container">
-		<div class="row">
-			<div class="col-md-12">
-				
-				<div class="jumbotron">
-					<h1>We are awesome</h1>
-					<p>
-						<a href="#" class="btn btn-success">Learn more</a>
-					</p>
-				</div>
-				
-			</div>
-		</div>
-	-->
-	<!-- Accordion
-	**************************************************
-	
-	<div class="container">
-		<div class="row">
-			<div class="col-md-12">
-				<h2>Accordion</h2> <hr/>
-				
-				<div class="panel-group" id="accordion">
-				
-					<div class="panel panel-primary">
-						<div class="panel-heading">
-							<h4 class="panel-title">
-								<a data-toggle="collapse" data-parent="Accordion" href="#section1">
-									Something
-								</a>
-							</h4>
-						</div>
-						
-						<div class="panel-collapse collapse in" id="section1">
-							<div class="panel-body">
-								This will contain some text...
-							</div>
-						</div>
-					</div>
-					
-					<div class="panel panel-success">
-						<div class="panel-heading">
-							<h4 class="panel-title">
-								<a data-toggle="collapse" data-parent="Accordion" href="#section2">
-									Something
-								</a>
-							</h4>
-						</div>
-						
-						<div class="panel-collapse collapse" id="section2">
-							<div class="panel-body">
-								This will contain some text... haha
-							</div>
-						</div>
-					</div>
-					
-					<div class="panel panel-danger">
-						<div class="panel-heading">
-							<h4 class="panel-title">
-								<a data-toggle="collapse" data-parent="Accordion" href="#section3">
-									Something
-								</a>
-							</h4>
-						</div>
-						
-						<div class="panel-collapse collapse" id="section3">
-							<div class="panel-body">
-								This will contain some text... hahaha
-							</div>
-						</div>
-					</div>
-					
-				</div>
-				
-			</div>
-		</div>
-	</div>
-	-->
-	<!-- Tab
-	**************************************************
-	
-	<div class="container">
-		<div class="row">
-			<div class="col-md-12">
-				<h2> Tab </h2> <hr/>
-				
-				<!-- Tabs Navigation
-				<ul class="nav nav-tabs">
-					<li class="active"> <a href="#tab1" data-toggle="tab"> Section 1 </a></li>
-					<li> <a href="#tab2" data-toggle="tab"> Section 2 </a></li>
-					<li> <a href="#tab3" data-toggle="tab"> Section 3 </a></li>
-				</ul>
-				
-				<!-- Tab Section 
-				<div class="tab-content">
-					<div class="tab-pane active" id="tab1">
-						This is our first tab...This is our first tab...
-						This is our first tab...This is our first tab...
-						This is our first tab...This is our first tab...
-						This is our first tab...This is our first tab...
-						This is our first tab...This is our first tab...
-					</div>
-					<div class="tab-pane" id="tab2">
-						This is our second tab...This is our second tab...
-						This is our second tab...This is our second tab...
-						This is our second tab...This is our second tab...
-						This is our second tab...This is our second tab...
-						This is our second tab...This is our second tab...
-					</div>
-					<div class="tab-pane" id="tab3">
-						This is our third tab...This is our third tab...
-					</div>
-				</div>
-				
-			</div>
-		</div>
-	</div>
-	-->
-	
-	<!-- Tooltips and Popovers
-	**************************************************
-	
-	<div class="container">
-		<div class="row">
-			<div class="col-md-12">
-				<h2>Tooltips</h2> <hr/>
-				
-				<a class="btn btn-primary" id="mytooltip" href="#" data-toggle="tooltip" title="My Tooltip text" data-placement="right">
-					Tooltip
-				</a>
-				
-			</div>
-		</div>
-		
-		<div class="row">
-			<div class="col-md-12">
-				<h2>Popovers</h2> <hr/>
-				<button id="myPopOver" class="btn btn-danger" data-toggle="popover" title="My Title" data-content="This will be the body text">
-					Popover
-				</button>
-
-			</div>
-		</div>
-	</div>
-	-->
-	
-	<!-- Content Hover
-	**************************************************
-	
-	<hr/>
-	
-	<div class="container">
-		<div class="row">
-			<div class="col-md-3">
-			
-				<img id="d1" src="image/coffee.jpg"/>
-				
-				<div class="contenthover">
-					<h3>Lorem ipsum dolor</h3>
-					<p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. </p>
-					<p><a href="#" class="mybutton">Lorem ipsum</a></p>
-				</div>
-				
-			</div>
-			
-			<div class="col-md-3 col-md-offset-1">
-			
-				<img id="d2" src="image/coffee.jpg"/>
-				
-				<div class="contenthover">
-					<h3>Lorem ipsum dolor</h3>
-					<p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. </p>
-					<p><a href="#" class="mybutton">Lorem ipsum</a></p>
-				</div>
-				
-			</div>
-			
-			<div class="col-md-3 col-md-offset-1">
-			
-				<img id="d3" src="image/coffee.jpg"/>
-				
-				<div class="contenthover">
-					<h3>Lorem ipsum dolor</h3>
-					<p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. </p>
-					<p><a href="#" class="mybutton">Lorem ipsum</a></p>
-				</div>
-				
-			</div>
-			
-		</div>
-	</div>
-	-->
 	
 	<!-- Footer and Modal
 	**************************************************-->

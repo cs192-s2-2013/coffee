@@ -33,6 +33,13 @@ public class ChatConvoServiceImpl implements ChatConvoService {
 		}
 	}
 	
+	public boolean isMemberInConvo(int chatConvoID, int userID){
+		if(chatConvoDao.getConvoByChatMember(chatConvoID, userID).isEmpty()){
+			return false;
+		}
+		return true;
+	}
+	
 	public void deleteMember(int chatConvoID, int userID){
 		chatConvoDao.deleteMember(chatConvoID, userID);
 	}

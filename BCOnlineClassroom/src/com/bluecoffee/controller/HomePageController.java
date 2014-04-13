@@ -24,7 +24,6 @@ import com.bluecoffee.services.MatSubjectService;
 import com.bluecoffee.services.UserService;
 
 import org.springframework.web.bind.annotation.SessionAttributes;
-
 import org.springframework.web.bind.annotation.CookieValue;
 import org.jasypt.util.text.BasicTextEncryptor;
 
@@ -49,26 +48,15 @@ public class HomePageController {
 
 	@RequestMapping("/home")
 	public String homepage(Model model, @CookieValue(value="cs192session", defaultValue="none") String fooCookie) {
-
-		try{
-			BasicTextEncryptor textEncryptor = new BasicTextEncryptor();
-			textEncryptor.setPassword("nLX9EDbHpxjUnd9NAcf9x2emSexySiSher");
-			String decrypted = textEncryptor.decrypt(fooCookie);
-			
-			String[] userdet = decrypted.split("-");
-			
-			if(userdet[1].equals("void"))
-					return "notfound";
-			//model.addAttribute("user", userdet[1]);
-			
-			User user = userService.getUserByUserID(Integer.parseInt(userdet[0]));
-			model.addAttribute("user", user);
-		}
-		catch (Exception e){
-			model.addAttribute("user", "none");
-			return "notfound";
-		}
+	
+		String[] userdet = CookieHandler.decryptCookie(fooCookie);
+		if(userdet==null){ return "notfound"; }
 		
+		User user = userService.getUserByUserID(Integer.parseInt(userdet[0]));
+		if(userdet[2].contains("ADMIN_CLASS")){ user.setAdmin(true); }
+		else{ user.setAdmin(false); }
+		
+		model.addAttribute("user", user);
 		return "home";
 	}
 	

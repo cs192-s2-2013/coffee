@@ -14,8 +14,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class LogoutController {
 	//@RequestMapping(method=RequestMethod.POST)
 	@RequestMapping("/logout")
-	public String logout(HttpSession session) {
+	public String logout(HttpSession session,
+			@CookieValue(value="cs192session", defaultValue="none") String fooCookie) {
+		
+		if(CookieHandler.decryptCookie(fooCookie)==null){ return "notfound"; }
+		
 		session.invalidate();
-		return "redirect:http://localhost:8080/uPortalSpringJDBC/logout";
+		return "redirect:http://localhost:8080/uPortalSpringJDBC/j_spring_security_logout";
 	}
 }

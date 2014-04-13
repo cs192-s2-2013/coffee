@@ -16,161 +16,85 @@
 	<style>
           body { background: #FFFFFF; }
           .container { background: ; }
+          #yes {
+          	text-align: right;
+          	margin: auto;
+          	left: 0;
+          	background: white;
+          	position: relative;
+          }
+		  .jumbotron {
+		  	margin-top: 100px; 
+		  	margin-bottom: 50px;
+		  }
+		  p {
+		  	color: gray;
+		  }
     </style>
 	
 </head>
 
 <body>
 
-	<font color="#336699">
+	<!--  Navigation Bar
+	***************************** -->
+<div class="container">
+        <div class="row clearfix">
+                <div class="col-md-12 column">
+                        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+                  <a class="navbar-brand" href="#">Online Classroom</a>
+               <div>
+                  <ul class="nav navbar-nav navbar-left">
+                     <li><a href="materials">Materials</a></li>
+                     <li><a href="forum">Forum</a></li>
+                     <li><a href="chat">Chat</a></li>   
+                  </ul>
+                  <ul class="nav navbar-nav pull-right">
+                  	  <li><a>${sessionScope.user.getUsername()}<c:if test="${sessionScope.user.getAdmin()}"> (admin)</c:if></a></li>
+                    <li><a href="logout">Logout</a></li>
+                 </ul>
+               </div>
+            </nav>        
+                    <div class="jumbotron">
+                                <h1> The Online Classroom </h1>
+                                <p> An exclusive platform for collaboration with your Department of Computer Science fellows. 
+Access a plethora of review materials and learning resources.
+Gain feedback from the entire UP DCS network.
+Hold a conference or study session with anyone in the department. </p>
+                                <!-- <p> <a class="btn btn-primary btn-md" href="#">Learn more</a> </p> -->
+                        </div>
+                </div>
+        </div>
+        
+        <div class="row">
+        		<h2 style="margin-left: 20px"> Features: </h2></br></br>
+        		<center>
+                <div class="col-sm-4 column">
+                        <h2><i class="largeicon icon-folder-open"></i> Materials </h2>
+                        <p> Upload or download all the resources you need. </p>
+                        <p> <a class="btn btn-primary" href="materials">Go to Materials »</a> </p>
+                </div>
+                <div class="col-sm-4 column">
+                        <h2><i class="largeicon icon-pencil"></i> Forum </h2>
+                        <p> Ask away or share your knowledge. </p>
+                        <p> <a class="btn btn-primary" href="forum">Go to Forum »</a> </p>
+                </div>
+                <div class="col-sm-4 column">
+                        <h2><i class="largeicon icon-comment"></i> Chat </h2>
+                        <p> Insightful discussion with your peers. </p>
+                        <p> <a class="btn btn-primary" href="chat">Go to Chat »</a> </p>
+                </div>
+        
+        </center>
+        </div>
+</div>
 
-	<!-- fixed navigation bar with drop down menu
-	***************************************************-->
-<div id="wrapper">	
-	<div class="navbar navbar-inverse navbar-fixed-top">
-		<div class="container">
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-				</button>
-				<a href="#" class="navbar-brand">Online Classroom</a> 
-			</div>
-			
-			<div class="navbar-collapse collapse">
-				<ul class="nav navbar-nav">
-					<li class="active"><a href="index.html">Home</a></li>
-					<li class="divider-vertical"></li>
-					<li><a href="resource.html">Materials</a></li>
-					<li class="divider-vertical"></li>
-					<li><a href="feature.html">Forum</a></li>
-					<li class="divider-vertical"></li>
-					<li><a href="chat.html">Chat</a></li>
-					<li class="divider-vertical"></li>
-					<li><a href="about.html">About</a></li>
-				</ul>
-			</div>
-		</div>
-	</div>
 	
-	<!-- Carousel
-	***********************************-->
 	
-	<div id="myCarousel" class="carousel slide">
-		<ol class="carousel-indicators">
-			<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-			<li data-target="#myCarousel" data-slide-to="1" class="active"></li>
-			<li data-target="#myCarousel" data-slide-to="2" class="active"></li>
-		</ol>
-		
-		<div class="carousel-inner">
-		
-			<div class="item active">
-				<img src="image/scene1.jpg"/>
-				<div class="container">
-					<div class="carousel-caption">
-						<font color="#336699">
-						<h1>Materials</h1>
-						<p>Get files, samplex, codes, etc</p></font>
-						<p><a class="btn btn-large btn-danger" action="materials">Check Materials</a></p>
-					</div>
-				</div>
-			</div>
-			
-			<div class="item">
-				<img src="image/scene2.jpg"/>
-				<div class="container">
-					<div class="carousel-caption">
-						<font color="#336699">
-						<h1>Forum</h1>
-						<p>Blah blah</p></font>
-						<p><a class="btn btn-large btn-danger" action="forum">Check Forum</a></p>
-					</div>
-				</div>
-			</div>
-			
-			<div class="item">
-				<img src="image/scene3.jpg"/>
-				<div class="container">
-					<div class="carousel-caption">
-						<font color="#336699">
-						<h1>Chat</h1>
-						<p>Chat with the whole comsci community. wew</p></font>
-						<p><a class="btn btn-large btn-danger" href="chat.html">Chat now!</a></p>
-					</div>
-				</div>
-			</div>
-			
-		</div>
-		
-		<a class="left carousel-control" href="#myCarousel" data-slide="prev">
-			<span class="glyphicon glyphicon-chevron-left"></span>
-		</a>
-		
-		<a class="right carousel-control" href="#myCarousel" data-slide="next">
-			<span class="glyphicon glyphicon-chevron-right"></span>
-		</a>
-		
-	</div>	
-	<!-- Grid
-	****************************************-->
-	
-	<div class="container">
-		<div class="row">
-			
-			<div class="col-md-12">
-				<h2>Online Classroom</h2>
-				<p>App that lets you collaborate with your professor and classmates online! Come on and have your class online!</p>
-			</div>
-		
-		</div>
-		
-		<div class="row">
-		
-			<div class="col-md-4">
-				<a href="materials"><h2>Materials</h2></a>
-				<p>Some text will go here. Some text will go here. Some text will go here. Some text will go here.</p>
-			</div>
-			
-			<div class="col-md-4">
-				<a href="forum"><h2>Forum</h2></a>
-				<p>Some text will go here. Some text will go here. Some text will go here. Some text will go here.</p>
-			</div>
-			
-			<div class="col-md-4">
-				<a href="chat"><h2>Chat</h2></a>
-				<p>Some text will go here. Some text will go here. Some text will go here. Some text will go here.</p>
-			</div>
-			
-		</div>
-		
-	</div>
-	
-	<!-- Font Awesome Icons
-	***************************************************-->
-	
-		<div class="container">
-			<div class="row">
-				<div class="col-md-12">
-					<div class="well">
-						<a href="#"><i class="largeicon icon-android"></i></a>
-						<a href="#"><i class="largeicon icon-twitter"></i></a>
-						<a href="#"><i class="largeicon icon-linkedin"></i></a>
-						<a href="#"><i class="largeicon icon-youtube"></i></a>
-						<a href="#"><i class="largeicon icon-skype"></i></a>
-						<a href="#"><i class="largeicon icon-google-plus"></i></a>
-						<a href="#"><i class="largeicon icon-apple"></i></a>
-					
-					</div>
-				</div>
-			</div>
-		</div>
-
-	<div class="push"></div>
 	
 	<!-- Footer and Modal
 	**************************************************-->
+	</br></br></br></br></br></br>
 	<div id="footer">
 	<hr/>	
 	<div class="container">

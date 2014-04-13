@@ -52,10 +52,16 @@ public class ChatController {
 	/*** CHATHOME.jsp FUNCTIONS ***/
 	
 	@RequestMapping("/chat") /** shows all conversations **/
-	public String showConvoList(@ModelAttribute("user") User user, Model model, 
+	public String showConvoList(
+			@CookieValue(value="cs192session", defaultValue="none") String fooCookie,
+			/*@ModelAttribute("user") User user,*/ Model model, HttpSession session,
 			@RequestParam(value = "q", required=false, defaultValue="0") int q, 
 			@RequestParam(value = "s", required=false, defaultValue="") String s,
 			@RequestParam(value = "v", required=false, defaultValue="-1") int v){
+		
+		if(CookieHandler.decryptCookie(fooCookie)==null){ return "notfound"; }
+		
+		User user = (User) session.getAttribute("user");
 		
 		List<ChatConvo> chatConvoList = chatConvoService.getConvoListByUserID(user.getUserID());
 		model.addAttribute("chatConvoList", chatConvoList);
@@ -75,8 +81,6 @@ public class ChatController {
 		}
 		/***************************/
 
-
-		
 		return "chathome";
 	}
 	
@@ -98,15 +102,16 @@ public class ChatController {
 		return "redirect:/conversation?c="+c;
 	}
 	
-	@RequestMapping ("/searchuser") //SUPER NOT YET FUNCTIONAL
-	public String searchUser(HttpServletRequest request){ //if search from chathome page
+	@RequestMapping ("/searchuser")
+	public String searchUser(HttpServletRequest request, @RequestParam(value = "c", required=false, defaultValue="-1") int c){ //else if search from conversation page
 		String s = request.getParameter("s");
-		return "redirect:/chat?q=2&s="+s;
+
+		//if search from chathome.jsp
+		if(c==-1){ return "redirect:/chat?q=2&s="+s; }
+		//else if search from conversation.jsp
+		else{ return "redirect:/conversation?q=2&c="+c+"&s="+s; }
 	}
-	public String searchUser(HttpServletRequest request, @RequestParam int c){ //else if search from conversation page
-		String s = request.getParameter("s");
-		return "redirect:/conversation?q=2&c="+c+"&s="+s;
-	}
+
 	
 	/**********************************************/
 	
@@ -117,7 +122,9 @@ public class ChatController {
 			@RequestParam int c, 
 			@RequestParam(value = "q", required=false, defaultValue="0") int q,
 			@RequestParam(value = "s", required=false, defaultValue="") String s,
-			@RequestParam(value = "lc", required=false, defaultValue="0") int lc){
+			@RequestParam(value = "lc", required=false, defaultValue="0") int lc,
+			@RequestParam(value = "au", required=false, defaultValue="0") int au,
+			@RequestParam(value = "u", required=false, defaultValue="0") int u){
 
 		int chatConvoID = c;
 		model.addAttribute("c", chatConvoID);
@@ -151,6 +158,14 @@ public class ChatController {
 		model.addAttribute("lc",lc);
 		/********************/
 		
+		/*** au ***/
+		model.addAttribute("au", au);
+		/************************/
+		
+		/*** User to be added u ***/
+		model.addAttribute("u", u);
+		/****************************/
+		
 		return "conversation";
 	}
 	
@@ -166,6 +181,18 @@ public class ChatController {
 		chatMessageService.insertMessage(chatMessage);
 		
 		return "redirect:/conversation?c="+chatConvoID;
+	}
+	
+	@RequestMapping("/areyousure")
+	public String showareyousuremodal(@RequestParam int c, @RequestParam int u){
+		int chatConvoID = c;
+		int userID = u;
+		int au;
+		
+		if(chatConvoService.isMemberInConvo(chatConvoID, userID)){ au = 2; }
+		else{ au = 1; }
+		
+		return "redirect:conversation?c="+chatConvoID+"&au="+au+"&u="+u;
 	}
 	
 	@RequestMapping("/addmember")

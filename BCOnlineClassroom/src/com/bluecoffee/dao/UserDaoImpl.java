@@ -28,6 +28,9 @@ public class UserDaoImpl implements UserDao {
 	
 	@Override
 	public User getUserByUsername(String username){
+		username = username.replace("'","''");
+		username = username.replace("\\", "\\\\");
+		
 		List<User> userList = new ArrayList<User>();	
 		
 		String sql = "SELECT userid, username, lastname, firstname, email FROM users WHERE username='" + username + "'";
@@ -60,6 +63,7 @@ public class UserDaoImpl implements UserDao {
 	public List<User> getUserListByUsername(String username){
 
 	        username = username.replace("'", "''");
+	        username = username.replace("\\", "\\\\");
 
 	        List<User> userList = new ArrayList<User>();
 

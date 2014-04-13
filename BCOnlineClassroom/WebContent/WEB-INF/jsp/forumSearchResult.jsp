@@ -13,11 +13,12 @@
 	<link type="text/css" rel="stylesheet" href="css/style.css">
 	<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0-rc1/css/bootstrap.min.css" rel="stylesheet">
 	
-	<style>
+	<style type="text/css">
           body { background: #FFFFFF; }
           .container { background: ; }
-          .jumbotron { margin-top: -50px; }
-          i { font-size: 50px; }
+		  .jumbotron { margin-top: -50px; }
+          textarea { resize: none; }
+          k { font-size: 44.5px; }
           
     </style>
 	
@@ -37,70 +38,81 @@
 	         <li><a href="forum">Forum</a></li>
 	         <li><a href="chat">Chat</a></li>
 	      </ul>
-		<ul class="nav navbar-nav pull-right">
+          <ul class="nav navbar-nav pull-right">
               <li><a>${sessionScope.user.getUsername()}<c:if test="${sessionScope.user.getAdmin()}"> (admin)</c:if></a></li>
               <li><a href="logout">Logout</a></li>
           </ul>
 	     
 	   </div>
-	</nav>	
-	
-	<!-- Resources
+	</nav>
+		
+	<!-- Title
 	**************************************************-->
-	<div class = "jumbotron">
+	<div class="jumbotron">
 		<!--JSP code to get subject-->
-		<a href="#"><h2>Materials</h2></a>
-		<h5>Upload or download all the resources you need.</h5>
+		<a href="forum"><h2>Forum</h2></a>
+		<h5>Ask away or share your knowledge.</h5>
 	</div>
-	
 	
 	<!-- Search Bar
 	************************************************* -->
-	<form:form method="post" action="/searchfile">
+	<form:form method="post" action="/searchpost">
 		<div class="row">
-			<div class="col-sm-7"></div>
-			<div class="col-sm-3">
-				<input type="text" name="s" class="form-control" placeholder="Find files">
+			<div class="col-sm-6"></div>
+			<div class="col-sm-3" style="margin-left:60px">
+				<input type="text" name="s" class="form-control" placeholder="Search for posts">
 			</div>
 			<div class="col-sm-1">
-				<button type="submit" class="btn btn-primary"><i class="icon-search" style="font-size:15px;"></i></button>
+				<button type="submit" class="btn btn-primary"><i class="largeicon icon-search"></i></button>
 			</div>
 		</div>
-	</form:form>
-	
-	</br></br>
-	
-	<!--Subject Grid
-	*************************************************-->
+	</form:form>	
+
+
+	<c:choose>
+	<c:when test="${noresultfound=='true'}">
 	<div class="container">
 		<div class="row">
-			</br>
+			<div class="col-sm-1"></div>
+			<div class="col-sm-4"><h3>No results found</h3></div>
 		</div>
-		<%int i=0; %>
-		<c:forEach var="matSubject" items="${matSubjectList}">
-			<%if(i==0) {%>
-				<div class="row">
-				<div class="col-sm-1"></div>
-			<%} %>
-			<div class="col-sm-2">
-				<center>
-				<a href="subfolder?id=${matSubject.subjectName}"><i class="icon-folder-open" rel"tooltip" title="${matSubject.subjectName}"></i></a>
-				</br>
-				${matSubject.subjectName}
-				</br></br>
-				</center>
+		<div class="row">
+			<div class="col-sm-1"></div>
+			<div class="col-sm-8" style="padding-left:50px">
+				<h4>You can try:</h4>
+				Entering one word at a time or phrases separated by dashes (-). White spaces will return no results.</br>
+				Using a different but similar search key.</br>
+				Asking a question. Maybe your concern hasn't been brought up on the forum yet. 
 			</div>
-			<%i++;	
-			if(i==5) {
-				i=0;%>
-				</div>
-			<%} %>
-		</c:forEach>
+		</div>
 	</div>
-	<!-- ${matSubject.subjectDesc} -->
-
-	
-	
+	</c:when>
+	<c:otherwise>
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-1"></div>
+			<div class="col-sm-4"><h3>Search result</h3></div>
+		</div>
+	</div>
+	<!-- List of questions
+	**************************************************-->
+	<c:forEach var="forumItem" items="${fPostList}">
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-1"></div>
+				<div class="col-sm-8 table-bordered">
+					<h4><a href="viewpost?pid=${forumItem.getFPostID()}">${forumItem.title}</a></h4>
+					<h6>Posted by ${forumItem.poster} on ${forumItem.postDate}</h6>
+				</div>
+				<div class="col-sm-2 table-bordered"><center>
+					<k> ${forumItem.commentCount} </k>
+					replies
+				</center></div>
+			</div>
+		</div>
+	</c:forEach>
+	</c:otherwise>
+	</c:choose>
 	<!-- Footer and Jumbotron
 	**************************************************
 	

@@ -10,12 +10,16 @@ import com.bluecoffee.domain.FPost;
 
 public class FPostServiceImpl implements FPostService{
 	
-	@Autowired
-	FPostDao fpostdao;
+	@Autowired FPostDao fpostdao;
 	
 	@Override
 	public void insertData(FPost fpost){
 		fpostdao.insertData(fpost);
+	}
+	
+	@Override
+	public void deleteData(int fPostID){
+		fpostdao.deleteData(fPostID);
 	}
 	
 	@Override
@@ -37,5 +41,10 @@ public class FPostServiceImpl implements FPostService{
 	public void incCommentCount(int fPostID){
 		FPost fPost = fpostdao.getFPostByID(fPostID);
 		fpostdao.updateCommentCount(fPostID, fPost.getCommentCount()+1);
+	}
+	
+	public void decCommentCount(int fPostID){
+		FPost fPost = fpostdao.getFPostByID(fPostID);
+		fpostdao.updateCommentCount(fPostID, fPost.getCommentCount()-1);
 	}
 }

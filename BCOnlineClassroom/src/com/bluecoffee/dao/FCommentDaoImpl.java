@@ -22,6 +22,12 @@ public class FCommentDaoImpl implements FCommentDao {
 				sql,
 				new Object[] { fcomment.getContent(), fcomment.getCommentDate(), fcomment.getFPostID(), fcomment.getUserID()});
 	}
+	
+	public void deleteData(int fCommentID){
+		String sql = "DELETE FROM fcomment WHERE fCommentID="+fCommentID;
+		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+		jdbcTemplate.update(sql);
+	}
 
 	public List<FComment> getFCommentList(){
 		List<FComment> fCommentList = new ArrayList<FComment>();

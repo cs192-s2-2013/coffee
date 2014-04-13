@@ -16,48 +16,33 @@
 	<style>
           body { background: #FFFFFF; }
           .container { background: ; }
+          .jumbotron { margin-top: -50px; }
+          textarea { resize: none; }
     </style>
 	
 </head>
 
 <body>
 
-	<font color="#336699">
-	
-	<!-- tried this one on the first tut <button class="btn btn-success">Test</button> -->
-
-	<!-- fixed navigaiton bar with dropdown menu
-	***************************************************-->	
-	<div class="container">
-	<div class="navbar navbar-inverse navbar-fixed-top">
-		<div class="navbar-inner">
-		
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-				</button>
-				<a href="home" class="navbar-brand">Blue Coffee</a> 
-			</div>
-			
-			<div class="navbar-collapse collapse">
-				<ul class="nav navbar-nav nav-pills">
-					<li><a href="index.html">Home</a></li>
-					<li class="divider-vertical"></li>
-					<li  class="active"><a href="resource.html">Materials</a></li>
-					<li class="divider-vertical"></li>
-					<li><a href="feature.html">Forum</a></li>
-					<li class="divider-vertical"></li>
-					<li><a href="chat.html">Chat</a></li>
-					<li class="divider-vertical"></li>
-					<li><a href="about.html">About</a></li>
-				</ul>
-			</div>
-		</div>
-	</div>
-	</div>
-	
+	<!--  Navigation Bar
+	***************************** -->
+	<nav class="navbar navbar-inverse" role="navigation">
+	   <div class="navbar-header">
+	      <a class="navbar-brand" href="home">Online Classroom</a>
+	   </div>
+	   <div>
+	      <ul class="nav navbar-nav">
+	         <li><a href="materials">Materials</a></li>
+	         <li><a href="forum">Forum</a></li>
+	         <li><a href="chat">Chat</a></li>
+	      </ul>
+		<ul class="nav navbar-nav pull-right">
+              <li><a>${sessionScope.user.getUsername()}<c:if test="${sessionScope.user.getAdmin()}"> (admin)</c:if></a></li>
+              <li><a href="logout">Logout</a></li>
+          </ul>
+	     
+	   </div>
+	</nav>	
 	
 		<!-- Upload
 	**************************************************
@@ -99,14 +84,15 @@
 	**************************************************-->
 	<div class="container">
 		<div class="row">
-			<center><h2>${fPost.title}</h2></center>
+			<center><h2>${fPost.title}</h2></center><hr width="80%">
 		</div>
 		<div class="row">
 			<div class="col-sm-1"></div>
 			<div class="col-sm-10">
 				${fPost.content}
 				</br></br>
-				<h6><b>Tags: </b><c:forEach var="fTag" items="${fTagList}"> ${fTag.tag }</c:forEach></h6>
+				<hr>
+				<h6><i class="largeicon icon-tag"></i> <b>Tags: </b><c:forEach var="fTag" items="${fTagList}"> ${fTag.tag }</c:forEach></h6>
 				<small><b>Posted by ${fPost.poster} on ${fPost.postDate}</small></b>
 			</div>
 		</div>
@@ -131,8 +117,9 @@
 					${fComment.content}
 					</small>
 				</br></br>
-				<p class="text-right"><small>Posted on ${fComment.commentDate}</small></p>
-				</div>
+				<p class="text-right"><small>Posted on ${fComment.commentDate}</small>
+				<c:if test="${sessionScope.user.getAdmin()=='true'}"> <a href="deletecomment?pid=${fPost.getFPostID() }&cid=${fComment.getFCommentID()}"><i class="largeicon icon-trash" rel="tooltip" title="Delete comment"></i></a> </c:if>
+				</p></div>
 			</div>
 		</c:forEach>
 	</div>
@@ -155,7 +142,7 @@
 		<div class="row">
 			<div class="col-sm-9"></div>
 			<div class="col-sm-2">
-				<button type="submit" class="btn btn-success">Reply</button>
+				<button type="submit" class="btn btn-primary">Reply</button>
 			</div>
 		</div>
 	</form:form>
