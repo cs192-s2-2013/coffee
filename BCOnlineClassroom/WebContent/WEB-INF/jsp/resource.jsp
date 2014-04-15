@@ -150,11 +150,12 @@
 		<!-- Slides
 	**************************************************-->
 <div class = "container">
+	<c:forEach var="category" items="${map}">
 	<div class="container">
 		<div class="row">
 			<div class="col-sm-1"></div>
 			<div class="col-sm-7">
-				<h2>Slides <a href="batchdownload?sn=${id}&fn=Slides"><i class="largeicon icon-download-alt" rel="tooltip" title="Download slides folder"></i></a></h2>
+				<h2>${category.key} <a href="batchdownload?sn=${id}&fn=Slides"><i class="largeicon icon-download-alt" rel="tooltip" title="Download slides folder"></i></a></h2>
 			</div>
 			<div class="col-md-4">
 			
@@ -173,22 +174,6 @@
 						Upload
 					</button>
 					</form>
-					
-					<!--
-					<div class="container">
-						<div class="row">
-							<div class="col-md-12">
-					
-								Select a file to upload:
-								<form action="fileUploaded?id=${id}&sf=Slides" method="post"
-					                        enctype="multipart/form-data">
-									<input type="file" name="file" size="50" />	
-									<input type="submit" value="Upload File" />
-								</form>
-							</div>
-						</div>
-					</div>
-					-->
 					<br/>
 					
 				</div>
@@ -211,157 +196,23 @@
 			</b>
 		</div>
 		<!-- JSP generated code for all items in folder -->
-		<c:forEach var="matFile" items="${map.Slides}">
-			<div class="row pull-center">
-				<div class="col-sm-1"></div>				
-				<div class="col-sm-5 table-bordered"><a href="download.do?fid=${matFile.matFileID}"><i class="largeicon icon-download-alt" rel="tooltip" title="Download ${matFile.fileName}"></i></a> ${matFile.fileName}</div>
-				<!-- <div class="col-sm-1 table-bordered">${matFile.fileSize}</div> -->
-				<div class="col-sm-2 table-bordered">${matFile.uploadDate}</div>
-				<div class="col-sm-3 table-bordered">${matFile.uploader}</div>
-				<!-- <div class="col-sm-1 table-bordered"><a href="download.do?fid=${matFile.matFileID}">Download</a></div>	-->
-			</div>
+			<c:forEach var="matFile" items="${category.value}">
+				<div class="row pull-center">
+					<div class="col-sm-1"></div>				
+					<div class="col-sm-5 table-bordered">
+						<a href="download.do?fid=${matFile.matFileID}"><i class="largeicon icon-download-alt" rel="tooltip" title="Download ${matFile.fileName}"></i></a> 
+						<c:if test="${sessionScope.user.getAdmin()=='true'}"> <a href="deletematerial?mid=${matFile.matFileID}&id=${id}"><i class="largeicon icon-trash" rel="tooltip" title="Delete material"></i></a> </c:if>
+						${matFile.fileName}
+					</div>
+					<!-- <div class="col-sm-1 table-bordered">${matFile.fileSize}</div> -->
+					<div class="col-sm-2 table-bordered">${matFile.uploadDate}</div>
+					<div class="col-sm-3 table-bordered">${matFile.uploader}</div>
+					<!-- <div class="col-sm-1 table-bordered"><a href="download.do?fid=${matFile.matFileID}">Download</a></div>	-->
+				</div>
+			</c:forEach>
 		</c:forEach>
 	</div>
 	
-	</br></br></br>
-	
-	<!-- Samplex
-	**************************************************-->
-	<div class="container">
-		<div class="row">
-			<div class="col-sm-1"></div>
-			<div class="col-sm-7">
-				<h2>Samplex <a href="batchdownload?sn=${id}&fn=Samplex"><i class="largeicon icon-download-alt" rel="tooltip" title="Download samplex folder"></i></a></h2>
-			</div>
-			<div class="col-md-4">
-			
-				 
-				<form method="post" action="fileUploaded?id=${id}&sf=Samplex" enctype="multipart/form-data">
-					<span class="btn btn-default btn-file">
-						<span class="fileinput-new"></span>
-						<span class="fileinput-exists"></span>
-						<input type="file" name="file" size="50">
-					</span>
-					
-					<span class="fileinput-filename"></span>
-					<button type="submit" class="btn btn-info" id="mytooltip" data-toggle="tooltip" title="Upload Files" data-placement="right">
-						Upload
-					</button>
-					</form>
-				
-				<!-- 
-					<div class="container">
-					<div class="row">
-					<div class="col-md-12">
-					
-					Select a file to upload:
-					<form action="fileUploaded?id=${id}&sf=Samplex" method="post"
-					                        enctype="multipart/form-data">
-					<input type="file" name="file" size="50" />	<input type="submit" value="Upload File" /></form>
-					</div>
-					</div>
-					</div>
-				-->
-					<br/>
-				
-				
-			</div>
-		</div>
-	</div>
-	
-	
-	<!-- Table (Samplex)
-	**************************************************-->
-	
-	<div class="container">
-		<div class="row pull-center">
-			<b>
-			<div class="col-sm-1"></div>
-			<div class="col-sm-5 table-bordered">File</div>
-			<div class="col-sm-2 table-bordered">Upload Date</div>
-			<div class="col-sm-3 table-bordered">Uploaded by</div>
-			</b>
-		</div>
-		<!-- JSP generated code for all items in folder -->
-		<c:forEach var="matFile" items="${map.Samplex}">
-			<div class="row pull-center">
-				<div class="col-sm-1"></div>
-				<div class="col-sm-5 table-bordered"><a href="download.do?fid=${matFile.matFileID}"><i class="largeicon icon-download-alt" rel="tooltip" title="Download ${matFile.fileName}"></i></a> ${matFile.fileName}</div>
-				<div class="col-sm-2 table-bordered">${matFile.uploadDate}</div>
-				<div class="col-sm-3 table-bordered">${matFile.uploader}</div>
-			</div>
-		</c:forEach>
-	</div>
-	
-	
-	</br></br></br>
-	
-	<!-- Miscellaneous
-	**************************************************-->
-	<div class="container">
-		<div class="row">
-			<div class="col-sm-1"></div>
-			<div class="col-sm-7">
-				<h2>Miscellaneous <a href="batchdownload?sn=${id}&fn=Miscellaneous"><i class="largeicon icon-download-alt" rel="tooltip" title="Download miscellaneous folder"></i></a></h2>
-			</div>
-			<div class="col-md-4">
-			
-				
-				<form method="post" action="fileUploaded?id=${id}&sf=Miscellaneous" enctype="multipart/form-data">
-					<span class="btn btn-default btn-file">
-						<span class="fileinput-new"></span>
-						<span class="fileinput-exists"></span>
-						<input type="file" name="file" size="50">
-					</span>
-					
-					<span class="fileinput-filename"></span>
-					<button type="submit" class="btn btn-info" id="mytooltip" data-toggle="tooltip" title="Upload Files" data-placement="right">
-						Upload
-					</button>
-				</form>
-				<!--
-				<div class="container">
-					<div class="row">
-					<div class="col-md-12">
-					
-					Select a file to upload:
-					<form action="fileUploaded?id=${id}&sf=Miscellaneous" method="post"
-					                        enctype="multipart/form-data">
-					<input type="file" name="file" size="50" />	<input type="submit" value="Upload File" /></form>
-					</div>
-					</div>
-					</div>
-				-->
-					<br/>
-				
-			</div>
-		</div>
-	</div>
-	
-	
-	<!-- Table (Miscellaneous)
-	**************************************************-->
-	
-	<div class="container">
-		<div class="row pull-center">
-			<b>
-			<div class="col-sm-1"></div>
-			<div class="col-sm-5 table-bordered">File</div>
-			<div class="col-sm-2 table-bordered">Upload Date</div>
-			<div class="col-sm-3 table-bordered">Uploaded by</div>
-			</b>
-		</div>
-		<!-- JSP generated code for all items in folder -->
-		<c:forEach var="matFile" items="${map.Miscellaneous}">
-			<div class="row pull-center">
-				<div class="col-sm-1"></div>
-				<div class="col-sm-5 table-bordered"><a href="download.do?fid=${matFile.matFileID}"><i class="largeicon icon-download-alt" rel="tooltip" title="Download ${matFile.fileName}"></i></a> ${matFile.fileName}</div>
-				<div class="col-sm-2 table-bordered">${matFile.uploadDate}</div>
-				<div class="col-sm-3 table-bordered">${matFile.uploader}</div>
-			</div>
-		</c:forEach>
-	</div>
-
 	</br></br>
 </div>	
 	

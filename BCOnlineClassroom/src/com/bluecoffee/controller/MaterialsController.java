@@ -127,6 +127,15 @@ public class MaterialsController {
 		return "upload";
 	}
 	
+	/*** for deleting resource ***/
+	@RequestMapping("/deletematerial")
+	public String deleteMaterial(@ModelAttribute("user") User user, @RequestParam int mid, @RequestParam String id){
+		if(user.getAdmin()){
+			matFileService.deleteData(mid);
+		}
+		return "redirect:/subfolder?id="+id;
+	}
+	
 	@RequestMapping("/fileUploaded")
 	public String uploadfile(@RequestParam String id, @RequestParam String sf, @ModelAttribute MatFile matFile, @ModelAttribute("user") User user, HttpServletRequest request) {
 

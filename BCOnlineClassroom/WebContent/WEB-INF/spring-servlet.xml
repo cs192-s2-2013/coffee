@@ -52,15 +52,18 @@
 	
 	<bean id="user" class="com.bluecoffee.domain.User" />
 	
-	<!-- declare datasource bean
+	
+	<!--
 	<bean id="dataSource"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
 		<property name="url" value="jdbc:mysql://localhost:3306/uportaldb" />
 		<property name="username" value="root" />
 		<property name="password" value="" />
-	</bean>-->
+	</bean>
+	-->
 	
+	<!-- declare datasource bean -->
 	<bean id="dataSource" 
 		class="org.springframework.jndi.JndiObjectFactoryBean">
     	<property name="jndiName" value="java:comp/env/jdbc/MysqlDS"/>
