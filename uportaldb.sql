@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 08, 2014 at 03:14 PM
+-- Generation Time: Apr 21, 2014 at 11:28 AM
 -- Server version: 5.6.14
 -- PHP Version: 5.5.6
 
@@ -99,7 +99,26 @@ CREATE TABLE IF NOT EXISTS `chatconvo` (
   `chatConvoID` int(11) NOT NULL AUTO_INCREMENT,
   `title` text NOT NULL,
   PRIMARY KEY (`chatConvoID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=42 ;
+
+--
+-- Dumping data for table `chatconvo`
+--
+
+INSERT INTO `chatconvo` (`chatConvoID`, `title`) VALUES
+(29, 'Testing'),
+(30, 'Chatting myseeeeelf'),
+(31, 'forealz'),
+(32, 'hiiiiiiii'),
+(33, 'Random chat'),
+(34, 'Hi Hi'),
+(35, ' '),
+(36, ''),
+(37, '  '),
+(38, 'Let''s chat some more'),
+(39, 'NoSQL'),
+(40, 'CS145 MP'),
+(41, 'Hi Kat!');
 
 -- --------------------------------------------------------
 
@@ -114,7 +133,42 @@ CREATE TABLE IF NOT EXISTS `chatmember` (
   PRIMARY KEY (`chatMemberID`),
   KEY `chatmemberFK` (`chatConvoID`),
   KEY `chatmemberFK2` (`userID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=91 ;
+
+--
+-- Dumping data for table `chatmember`
+--
+
+INSERT INTO `chatmember` (`chatMemberID`, `chatConvoID`, `userID`) VALUES
+(59, 29, 1),
+(61, 30, 5),
+(62, 31, 1),
+(64, 32, 1),
+(66, 33, 8),
+(67, 33, 5),
+(68, 34, 7),
+(69, 34, 6),
+(70, 34, 8),
+(71, 34, 5),
+(72, 35, 6),
+(73, 35, 5),
+(74, 35, 9),
+(75, 35, 7),
+(76, 33, 6),
+(77, 38, 6),
+(78, 38, 5),
+(79, 34, 1),
+(80, 38, 7),
+(81, 39, 5),
+(82, 39, 7),
+(83, 39, 6),
+(84, 39, 8),
+(85, 40, 8),
+(86, 40, 7),
+(87, 39, 1),
+(88, 40, 5),
+(89, 40, 6),
+(90, 41, 6);
 
 -- --------------------------------------------------------
 
@@ -131,7 +185,117 @@ CREATE TABLE IF NOT EXISTS `chatmessage` (
   PRIMARY KEY (`chatMessageID`),
   KEY `chatmessageFK` (`userID`),
   KEY `chatmessageFK2` (`chatConvoID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=150 ;
+
+--
+-- Dumping data for table `chatmessage`
+--
+
+INSERT INTO `chatmessage` (`chatMessageID`, `message`, `messageDate`, `userID`, `chatConvoID`) VALUES
+(46, 'hi', '2014-04-10', 5, 29),
+(47, 'hi', '2014-04-10', 5, 31),
+(48, 'hey', '2014-04-11', 5, 30),
+(49, 'I', '2014-04-11', 5, 30),
+(50, 'am', '2014-04-11', 5, 30),
+(51, 'talking', '2014-04-11', 5, 30),
+(52, 'to', '2014-04-11', 5, 30),
+(53, 'myself', '2014-04-11', 5, 30),
+(54, 'that', '2014-04-11', 5, 30),
+(55, 'is', '2014-04-11', 5, 30),
+(56, 'sad', '2014-04-11', 5, 30),
+(57, 'haha', '2014-04-11', 5, 30),
+(58, 'haha', '2014-04-11', 5, 30),
+(59, 'haha', '2014-04-11', 5, 30),
+(60, 'haha', '2014-04-11', 5, 30),
+(61, 'hellooooo', '2014-04-11', 5, 30),
+(62, 'hiiiiiii', '2014-04-11', 5, 30),
+(63, 'nice talking to you', '2014-04-11', 5, 30),
+(64, 'weeeeeeeeeeee', '2014-04-11', 5, 30),
+(65, 'yo', '2014-04-11', 5, 30),
+(66, 'hellooooooooo', '2014-04-11', 5, 33),
+(67, 'Hello', '2014-04-11', 6, 34),
+(68, 'Hi', '2014-04-11', 6, 34),
+(69, 'hiiii', '2014-04-11', 6, 34),
+(70, 'hiiii', '2014-04-11', 6, 34),
+(71, 'hiiii', '2014-04-11', 6, 34),
+(72, 'ijdoarhigpoeirhg', '2014-04-11', 6, 34),
+(73, 'jshdfuwhiu', '2014-04-11', 6, 34),
+(74, 'hello again', '2014-04-11', 6, 34),
+(75, 'hello again', '2014-04-11', 6, 34),
+(76, 'filling', '2014-04-11', 6, 34),
+(77, 'the', '2014-04-11', 6, 34),
+(78, 'convo', '2014-04-11', 6, 34),
+(79, 'up', '2014-04-11', 6, 34),
+(80, 'with', '2014-04-11', 6, 34),
+(81, 'lots', '2014-04-11', 6, 34),
+(82, 'and', '2014-04-11', 6, 34),
+(83, 'lots', '2014-04-11', 6, 34),
+(84, 'of', '2014-04-11', 6, 34),
+(85, 'stuff', '2014-04-11', 6, 34),
+(86, 'to', '2014-04-11', 6, 34),
+(87, 'see', '2014-04-11', 6, 34),
+(88, 'if', '2014-04-11', 6, 34),
+(89, 'scroll', '2014-04-11', 6, 34),
+(90, 'works', '2014-04-11', 6, 34),
+(91, '', '2014-04-11', 5, 30),
+(92, 'hahahaha', '2014-04-12', 5, 34),
+(93, 'hello', '2014-04-12', 5, 34),
+(94, 'yup', '2014-04-12', 5, 34),
+(95, 'yup', '2014-04-12', 5, 34),
+(96, 'jaskdjfhsjkdf', '2014-04-12', 5, 34),
+(97, 'jaskdjfhsjkdf', '2014-04-12', 5, 34),
+(98, 'eraert', '2014-04-12', 5, 34),
+(99, 'asdfsadf', '2014-04-12', 5, 34),
+(100, '', '2014-04-12', 5, 34),
+(101, '', '2014-04-12', 5, 34),
+(102, 'asfadfg', '2014-04-12', 5, 34),
+(103, 'xxcnf,msdnfmsd', '2014-04-12', 5, 34),
+(104, 'something', '2014-04-12', 5, 34),
+(105, 'sdfsdf', '2014-04-12', 5, 34),
+(106, 'sdfsdf', '2014-04-12', 5, 34),
+(107, 'masndmasnd', '2014-04-12', 5, 34),
+(108, '', '2014-04-12', 5, 34),
+(109, 'kkzjlczkdjflkdfj', '2014-04-12', 5, 34),
+(110, 'gjhgjhg', '2014-04-12', 5, 34),
+(111, '', '2014-04-12', 5, 30),
+(112, '', '2014-04-12', 5, 30),
+(113, 'w', '2014-04-12', 5, 30),
+(114, '', '2014-04-12', 6, 34),
+(115, 'sdffhjgiwurht', '2014-04-12', 6, 34),
+(116, 'sdffhjgiwurht', '2014-04-12', 6, 34),
+(117, 'asd', '2014-04-12', 6, 34),
+(118, 'lalalala', '2014-04-12', 6, 34),
+(119, 'yod', '2014-04-12', 6, 34),
+(120, 'jhfksjhr', '2014-04-12', 5, 34),
+(121, 'sdfgh', '2014-04-12', 5, 34),
+(122, 'hello', '2014-04-12', 5, 34),
+(123, 'kat', '2014-04-12', 5, 34),
+(124, 'sdfghjk', '2014-04-12', 5, 34),
+(125, 'huuhuh', '2014-04-12', 5, 34),
+(126, 'gi', '2014-04-12', 5, 34),
+(127, 'testing', '2014-04-12', 5, 30),
+(128, 'hi', '2014-04-12', 5, 30),
+(129, 'i lost you', '2014-04-12', 5, 30),
+(130, 'we weren''t right', '2014-04-12', 5, 30),
+(131, 'starting....', '2014-04-12', 5, 38),
+(132, 'hello', '2014-04-12', 6, 38),
+(133, 'wew', '2014-04-12', 5, 38),
+(134, '', '2014-04-12', 6, 38),
+(135, 'hi', '2014-04-12', 6, 38),
+(136, 'hello', '2014-04-12', 6, 38),
+(137, 'what', '2014-04-12', 5, 38),
+(138, 'hmmm', '2014-04-12', 5, 38),
+(139, 'hellllllllllllo', '2014-04-12', 6, 38),
+(140, 'Guuuuuys!! Magstart na tayo sa presentation', '2014-04-12', 7, 39),
+(141, 'Game~', '2014-04-12', 5, 39),
+(142, 'na-pressure na rin ako sa kabilang group e', '2014-04-12', 5, 39),
+(143, 'hahahahaha', '2014-04-12', 5, 39),
+(144, 'Emiiiiiiiiiiiir', '2014-04-12', 7, 40),
+(145, 'Laraaaaa', '2014-04-12', 7, 39),
+(146, 'Hi', '2014-04-12', 7, 39),
+(147, 'Hiiiiiiii', '2014-04-12', 7, 40),
+(148, 'Hellooooo', '2014-04-12', 7, 41),
+(149, 'Hellooooo', '2014-04-12', 7, 41);
 
 -- --------------------------------------------------------
 
@@ -144,7 +308,16 @@ CREATE TABLE IF NOT EXISTS `chatonline` (
   `userID` int(11) NOT NULL,
   PRIMARY KEY (`chatOnlineID`),
   KEY `chatonlineFK` (`userID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=130 ;
+
+--
+-- Dumping data for table `chatonline`
+--
+
+INSERT INTO `chatonline` (`chatOnlineID`, `userID`) VALUES
+(129, 5),
+(127, 6),
+(122, 8);
 
 -- --------------------------------------------------------
 
@@ -466,6 +639,25 @@ INSERT INTO `departments` (`collegeid`, `deptid`, `deptname`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `fcategory`
+--
+
+CREATE TABLE IF NOT EXISTS `fcategory` (
+  `fcategoryID` int(11) NOT NULL AUTO_INCREMENT,
+  `category` text NOT NULL,
+  PRIMARY KEY (`fcategoryID`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data for table `fcategory`
+--
+
+INSERT INTO `fcategory` (`fcategoryID`, `category`) VALUES
+(0, 'General');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `fcomment`
 --
 
@@ -478,43 +670,14 @@ CREATE TABLE IF NOT EXISTS `fcomment` (
   PRIMARY KEY (`fcommentID`),
   KEY `fcommentFK` (`userID`),
   KEY `fcommentFK2` (`fpostID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=34 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
 
 --
 -- Dumping data for table `fcomment`
 --
 
 INSERT INTO `fcomment` (`fcommentID`, `content`, `commentDate`, `fpostID`, `userID`) VALUES
-(1, 'lalalalala', '2014-03-28', 1, 1),
-(2, 'helloooooo', '2014-03-28', 1, 1),
-(6, 'yow', '2014-03-28', 1, 1),
-(7, 'yo', '2014-03-28', 3, 1),
-(8, 'mehehehe', '2014-03-28', 3, 1),
-(9, 'lalalalala', '2014-03-28', 4, 1),
-(10, 'hey', '2014-03-29', 5, 1),
-(11, 'hjjhg', '2014-03-29', 5, 1),
-(12, 'Mehehe', '2014-03-29', 1, 1),
-(13, 'Wahaha', '2014-03-29', 1, 1),
-(14, 'looool', '2014-03-29', 10, 1),
-(15, 'lalalalala', '2014-03-29', 1, 1),
-(16, 'lalalalala', '2014-03-29', 1, 1),
-(17, 'Yaaaay', '2014-03-30', 15, 0),
-(18, 'hi', '2014-04-01', 26, 0),
-(19, 'You Google', '2014-04-01', 17, 0),
-(20, 'bye', '2014-04-02', 42, 1),
-(21, 'answer', '2014-04-02', 43, 1),
-(22, 'yow', '2014-04-02', 44, 0),
-(23, 'hiiii', '2014-04-02', 1, 1),
-(24, 'hi', '2014-04-02', 44, 3),
-(25, 'no', '2014-04-03', 44, 1),
-(26, 'comment', '2014-04-03', 47, 1),
-(27, 'whut bakit di nag-error?', '2014-04-03', 47, 1),
-(28, 'yes', '2014-04-03', 49, 0),
-(29, 'hello', '2014-04-05', 49, 3),
-(30, 'help', '2014-04-07', 50, 0),
-(31, 'is it working?', '2014-04-07', 50, 3),
-(32, 'oh yeah', '2014-04-07', 50, 3),
-(33, 'k.', '2014-04-08', 48, 3);
+(7, 'Boo', '2014-04-15', 69, 6);
 
 -- --------------------------------------------------------
 
@@ -529,65 +692,20 @@ CREATE TABLE IF NOT EXISTS `fpost` (
   `commentCount` int(11) NOT NULL,
   `postDate` date NOT NULL,
   `userID` int(11) NOT NULL,
+  `fcategoryID` int(11) NOT NULL,
   PRIMARY KEY (`fpostID`),
-  KEY `fpostFK` (`userID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=51 ;
+  KEY `fpostFK` (`userID`),
+  KEY `fpostFK2` (`fcategoryID`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=72 ;
 
 --
 -- Dumping data for table `fpost`
 --
 
-INSERT INTO `fpost` (`fpostID`, `title`, `content`, `commentCount`, `postDate`, `userID`) VALUES
-(1, 'title1', 'question question question question', 8, '2014-03-28', 1),
-(2, 'title2', 'question question question question', 0, '2014-03-28', 1),
-(3, 'What should I do?', 'CS is hard', 2, '2014-03-28', 1),
-(4, 'Title title title title', 'content content content content', 0, '2014-03-28', 1),
-(5, 'Whyyyyy?', ':(', 0, '2014-03-29', 1),
-(6, 'Whyyyyy?', ':(', 0, '2014-03-29', 1),
-(7, 'Whyyyyy?', ':(', 0, '2014-03-29', 1),
-(8, 'What am I doing?', 'I don''t knkow what I''m doing.', 0, '2014-03-29', 1),
-(9, 'This is a question', 'These are question details', 0, '2014-03-29', 1),
-(10, 'Why am I in CS?', 'ahahahahaha :((', 0, '2014-03-29', 1),
-(11, 'This is a question', 'This is a detail about a question', 0, '2014-03-29', 1),
-(12, 'This is a question', 'This is a detail about a question', 0, '2014-03-29', 1),
-(13, 'This is a question', 'This is a detail', 0, '2014-03-29', 1),
-(14, 'Hellooooo', 'lalalalalala', 0, '2014-03-30', 0),
-(15, 'What to do?', 'Yeah, what to do', 1, '2014-03-30', 0),
-(16, 'How do I set text alignment in HTML? I need help, badly.', 'I have a text, and I want to set it''s alignment to right. How do I do it?', 0, '2014-04-01', 0),
-(17, 'How do I set text alignment in HTML? I need help, badly.', 'I have a text, and I want to set it''s alignment to right. How do I do it?', 1, '2014-04-01', 0),
-(18, 'hi', 'lololol', 0, '2014-04-01', 0),
-(19, 'testing', 'wew', 0, '2014-04-01', 0),
-(20, 'agsdas', 'wewewew', 0, '2014-04-01', 0),
-(21, 'such wow', 'testing', 0, '2014-04-01', 0),
-(22, 'What''', 'hitag', 0, '2014-04-01', 0),
-(23, '''', 'ha', 0, '2014-04-01', 0),
-(24, '\\''', 'ha', 0, '2014-04-01', 0),
-(25, 'what\\'' what', 'what', 0, '2014-04-01', 0),
-(26, 'what''s life?', 'uesfsf', 1, '2014-04-01', 0),
-(27, 'what what', 'testing'' po', 0, '2014-04-01', 0),
-(28, 'what what', 'testing'' po', 0, '2014-04-01', 0),
-(29, 'what what', '''', 0, '2014-04-01', 0),
-(30, 'testing\\''lalala', 'lskjdkfjnaeorng;aosdfna', 0, '2014-04-01', 0),
-(31, 'lalalala\\''', 'LLALALA', 0, '2014-04-01', 0),
-(32, 'lalalal''', 'LLALALA', 0, '2014-04-01', 0),
-(33, 'lalalal''', 'LLALALA', 0, '2014-04-01', 0),
-(34, 'lalalal''a', 'LLALALA', 0, '2014-04-01', 0),
-(35, 'lalalal\\''a', 'LLALALA', 0, '2014-04-01', 0),
-(36, 'lalala\\''', 'yow', 0, '2014-04-01', 0),
-(37, 'lalala\\''j', 'yow', 0, '2014-04-01', 0),
-(38, 'lalala\\''', 'yow', 0, '2014-04-01', 0),
-(39, 'lalala\\\\''', 'yow', 0, '2014-04-01', 0),
-(40, 'lalala\\\\', 'yow', 0, '2014-04-01', 0),
-(41, 'lalala\\', 'yow', 0, '2014-04-01', 0),
-(42, 'question', 'hi', 1, '2014-04-02', 1),
-(43, 'yow', 'a;sldkjff', 1, '2014-04-02', 3),
-(44, 'hellooooooo', 'do you wanna build a snowman', 3, '2014-04-02', 1),
-(45, 'How would I set the size of the text box in bootstrap as fixed?', 'I am doing something in bootstrap that uses a text box, but the one that I have is adjustable. How do I set it as fixed?', 0, '2014-04-02', 3),
-(46, 'yow', 'laskdfjlaskfga;', 0, '2014-04-03', 1),
-(47, 'question', 'answer', 2, '2014-04-03', 1),
-(48, 'test', 'test', 1, '2014-04-03', 1),
-(49, 'hi', 'bye', 2, '2014-04-03', 0),
-(50, 'please work', 'please', 3, '2014-04-07', 0);
+INSERT INTO `fpost` (`fpostID`, `title`, `content`, `commentCount`, `postDate`, `userID`, `fcategoryID`) VALUES
+(69, 'Mei you ni Wo hui shi shui Xin ting zi na li Do bu dui', 'Na jin tian Ca dao zuo tian Kong bai yi pian Na yi tian Zai na yi tian Ke yi ji xu Wei wa qing jie Zai zhe jiao Zha pian shui pei Zai ni shen bian', 1, '2014-04-11', 7, 0),
+(70, 'How do I add modals in JSP?', 'I need to be able to add modals in my JSP code.', 0, '2014-04-11', 5, 0),
+(71, 'How to auto-refresh a jsp?', 'I need my jsp file to auto-refresh...', 0, '2014-04-11', 5, 0);
 
 -- --------------------------------------------------------
 
@@ -602,39 +720,7 @@ CREATE TABLE IF NOT EXISTS `fpostag` (
   PRIMARY KEY (`fpostagID`),
   KEY `fpostagFK` (`fpostID`),
   KEY `fpostagFK2` (`ftagID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=27 ;
-
---
--- Dumping data for table `fpostag`
---
-
-INSERT INTO `fpostag` (`fpostagID`, `fpostID`, `ftagID`) VALUES
-(1, 13, 1),
-(2, 13, 2),
-(3, 13, 3),
-(4, 14, 4),
-(5, 15, 5),
-(6, 15, 6),
-(7, 18, 4),
-(8, 19, 7),
-(9, 20, 8),
-(10, 21, 9),
-(11, 21, 10),
-(12, 21, 11),
-(13, 21, 12),
-(14, 23, 13),
-(15, 34, 7),
-(16, 42, 7),
-(17, 43, 14),
-(18, 44, 15),
-(19, 45, 16),
-(20, 45, 17),
-(21, 45, 18),
-(22, 46, 19),
-(23, 47, 7),
-(24, 48, 7),
-(25, 49, 20),
-(26, 50, 22);
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -646,35 +732,48 @@ CREATE TABLE IF NOT EXISTS `ftag` (
   `ftagID` int(11) NOT NULL AUTO_INCREMENT,
   `tag` text NOT NULL,
   PRIMARY KEY (`ftagID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=23 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=66 ;
 
 --
 -- Dumping data for table `ftag`
 --
 
 INSERT INTO `ftag` (`ftagID`, `tag`) VALUES
-(1, 'lalalalala'),
-(2, 'hello world'),
-(3, 'CS11'),
-(4, ''),
-(5, 'what-am-I-doing'),
-(6, 'bored'),
-(7, 'tag'),
-(8, 'this-is-a-tag'),
-(9, 'this-is-a-test'),
-(10, 'wew-hi'),
-(11, 'what'),
-(12, 'wow'),
-(13, 'he'),
-(14, 'asl;jgdf'),
-(15, 'frozen'),
-(16, 'bootstrap'),
-(17, 'fixed-text-box'),
-(18, 'text-box'),
-(19, ';skdjf;gvane'),
-(20, 'no'),
-(21, 'hello'),
-(22, 'please');
+(31, 'ching'),
+(32, 'chong'),
+(33, 'chang'),
+(34, 'jsp'),
+(35, 'modal'),
+(36, 'modal jsp'),
+(37, 'oioaushgpui'),
+(38, 'dhiurhgoeiurh'),
+(39, 'ksjhffsjkhdf'),
+(40, 'sdjhfkjsdhf'),
+(41, 'fdfgdfgd'),
+(42, 'ksjdhfhfkjzhgf'),
+(43, 'sjdbbfksjdfh'),
+(44, 'shdgfjshdgf'),
+(45, 'sdfsdf'),
+(46, 'hellooooo'),
+(47, 'hi'),
+(48, 'kajhf'),
+(49, 'hglkahdkfls'),
+(50, 'jhgjhgjhg'),
+(51, 'asdf'),
+(52, 'asdfghjkl;''\\'),
+(53, '\\''''\\''\\\\''''\\''\\'''),
+(54, 'tag\\tag'),
+(55, '''tag'''),
+(56, 'bla'),
+(57, 'asdfg'),
+(58, 'this-is-a-tag'),
+(59, 'tag-tag-tag'),
+(60, 'something'),
+(61, 'a-tag'),
+(62, 'another-tag'),
+(63, 'tag'),
+(64, 'werghjxcv'),
+(65, 'blah');
 
 -- --------------------------------------------------------
 
@@ -693,7 +792,7 @@ CREATE TABLE IF NOT EXISTS `hitcounter` (
 --
 
 INSERT INTO `hitcounter` (`page`, `views`) VALUES
-('homepage', 83);
+('homepage', 123);
 
 -- --------------------------------------------------------
 
@@ -737,58 +836,49 @@ CREATE TABLE IF NOT EXISTS `matfile` (
   `matSubjectID` int(11) NOT NULL,
   `matFolderID` int(11) NOT NULL,
   `userID` int(11) NOT NULL,
+  `fileDesc` text,
   PRIMARY KEY (`matFileID`),
   KEY `matfileFK2` (`matSubjectID`),
-  KEY `matfileFK` (`matFolderID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=66 ;
+  KEY `matfileFK` (`matFolderID`),
+  KEY `userID` (`userID`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=103 ;
 
 --
 -- Dumping data for table `matfile`
 --
 
-INSERT INTO `matfile` (`matFileID`, `fileName`, `fileType`, `fileSize`, `uploadDate`, `path`, `matSubjectID`, `matFolderID`, `userID`) VALUES
-(24, 'CS 130 - Lesson 1.pdf', 'pdf', 474982, '2014-03-15', 'C:\\Users\\lara312\\Documents\\GitHub\\coffee\\BCOnlineClassroom\\WebContent\\downloads\\CS 130\\Slides\\', 7, 1, 1),
-(25, 'CS 130 - Lesson 2.pdf', 'pdf', 273616, '2014-03-15', 'C:\\Users\\lara312\\Documents\\GitHub\\coffee\\BCOnlineClassroom\\WebContent\\downloads\\CS 130\\Slides\\', 7, 1, 1),
-(26, 'CS 130 - Lesson 3.pdf', 'pdf', 431795, '2014-03-15', 'C:\\Users\\lara312\\Documents\\GitHub\\coffee\\BCOnlineClassroom\\WebContent\\downloads\\CS 130\\Slides\\', 7, 1, 0),
-(27, 'CS 130 - Lesson 4.pdf', 'pdf', 236032, '2014-03-15', 'C:\\Users\\lara312\\Documents\\GitHub\\coffee\\BCOnlineClassroom\\WebContent\\downloads\\CS 130\\Slides\\', 7, 1, 0),
-(28, 'CS 130 - Lesson 5.pdf', 'pdf', 333960, '2014-03-15', 'C:\\Users\\lara312\\Documents\\GitHub\\coffee\\BCOnlineClassroom\\WebContent\\downloads\\CS 130\\Slides\\', 7, 1, 0),
-(29, 'CS 130 - Lesson 6.pdf', 'pdf', 162288, '2014-03-15', 'C:\\Users\\lara312\\Documents\\GitHub\\coffee\\BCOnlineClassroom\\WebContent\\downloads\\CS 130\\Slides\\', 7, 1, 0),
-(30, 'CS 130 - Lesson 7.pdf', 'pdf', 440491, '2014-03-15', 'C:\\Users\\lara312\\Documents\\GitHub\\coffee\\BCOnlineClassroom\\WebContent\\downloads\\CS 130\\Slides\\', 7, 1, 0),
-(31, 'CS 130 - Lesson 8.pdf', 'pdf', 610494, '2014-03-15', 'C:\\Users\\lara312\\Documents\\GitHub\\coffee\\BCOnlineClassroom\\WebContent\\downloads\\CS 130\\Slides\\', 7, 1, 0),
-(32, 'CS 130 - Lesson 9.pdf', 'pdf', 655607, '2014-03-15', 'C:\\Users\\lara312\\Documents\\GitHub\\coffee\\BCOnlineClassroom\\WebContent\\downloads\\CS 130\\Slides\\', 7, 1, 0),
-(33, 'CS 130 - Lesson 10.pdf', 'pdf', 647676, '2014-03-15', 'C:\\Users\\lara312\\Documents\\GitHub\\coffee\\BCOnlineClassroom\\WebContent\\downloads\\CS 130\\Slides\\', 7, 1, 1),
-(34, 'CS 130 - Long Exam 1 - Answer Key.pdf', 'pdf', 127894, '2014-03-15', 'C:\\Users\\lara312\\Documents\\GitHub\\coffee\\BCOnlineClassroom\\WebContent\\downloads\\CS 130\\Samplex\\', 7, 2, 0),
-(35, 'CS 130 - Long Exam 2 - Answer Key.pdf', 'pdf', 146305, '2014-03-15', 'C:\\Users\\lara312\\Documents\\GitHub\\coffee\\BCOnlineClassroom\\WebContent\\downloads\\CS 130\\Samplex\\', 7, 2, 0),
-(36, 'CS 130 - Long Exam 3 - Answer Key.pdf', 'pdf', 126077, '2014-03-15', 'C:\\Users\\lara312\\Documents\\GitHub\\coffee\\BCOnlineClassroom\\WebContent\\downloads\\CS 130\\Samplex\\', 7, 2, 0),
-(37, 'CS 130 - Simultaneous ODEs - Exercises.pdf', 'pdf', 82659, '2014-03-15', 'C:\\Users\\lara312\\Documents\\GitHub\\coffee\\BCOnlineClassroom\\WebContent\\downloads\\CS 130\\Miscellaneous\\', 7, 3, 0),
-(38, 'CS 130 - Problem Set 2.pdf', 'pdf', 160734, '2014-03-15', 'C:\\Users\\lara312\\Documents\\GitHub\\coffee\\BCOnlineClassroom\\WebContent\\downloads\\CS 130\\Miscellaneous\\', 7, 3, 0),
-(39, 'CS 130 - Fourier Series - Exercises.pdf', 'pdf', 82168, '2014-03-15', 'C:\\Users\\lara312\\Documents\\GitHub\\coffee\\BCOnlineClassroom\\WebContent\\downloads\\CS 130\\Miscellaneous\\', 7, 3, 0),
-(40, 'CS 130 - First Order ODE - Exercises - Part 2.pdf', 'pdf', 70965, '2014-03-15', 'C:\\Users\\lara312\\Documents\\GitHub\\coffee\\BCOnlineClassroom\\WebContent\\downloads\\CS 130\\Miscellaneous\\', 7, 3, 0),
-(41, 'CS 130 - Linear Algebra Examples.pdf', 'pdf', 159015, '2014-03-15', 'C:\\Users\\lara312\\Documents\\GitHub\\coffee\\BCOnlineClassroom\\WebContent\\downloads\\CS 130\\Samplex\\', 7, 2, 0),
-(42, '00 Introduction.pdf', 'pdf', 78087, '2014-03-20', 'C:\\Users\\lara312\\Documents\\GitHub\\coffee\\BCOnlineClassroom\\WebContent\\downloads\\CS 11\\Slides\\', 1, 1, 1),
-(43, '01 Introduction to Computer Programming.pdf', 'pdf', 516561, '2014-03-21', 'C:\\Users\\lara312\\Documents\\GitHub\\coffee\\BCOnlineClassroom\\WebContent\\downloads\\CS 11\\Slides\\', 1, 1, 1),
-(44, '02 Introduction to Java.pdf', 'pdf', 147976, '2014-03-21', 'C:\\Users\\lara312\\Documents\\GitHub\\coffee\\BCOnlineClassroom\\WebContent\\downloads\\CS 11\\Slides\\', 1, 1, 1),
-(45, '00 Introduction.pdf', 'pdf', 78087, '2014-03-21', 'C:\\Users\\lara312\\Documents\\GitHub\\coffee\\BCOnlineClassroom\\WebContent\\downloads\\CS 130\\Slides\\', 7, 1, 1),
-(46, '01 Introduction to Computer Programming.pdf', 'pdf', 516561, '2014-03-21', 'C:\\Users\\lara312\\Documents\\GitHub\\coffee\\BCOnlineClassroom\\WebContent\\downloads\\CS 130\\Slides\\', 7, 1, 1),
-(47, '02 Introduction to Java.pdf', 'pdf', 147976, '2014-03-21', 'C:\\Users\\lara312\\Documents\\GitHub\\coffee\\BCOnlineClassroom\\WebContent\\downloads\\CS 130\\Miscellaneous\\', 7, 3, 1),
-(48, '02 Introduction to Java.pdf', 'pdf', 147976, '2014-03-21', 'C:\\Users\\lara312\\Documents\\GitHub\\coffee\\BCOnlineClassroom\\WebContent\\downloads\\CS 130\\Samplex\\', 7, 2, 1),
-(49, '04 Programming Fundamentals.pdf', 'pdf', 538647, '2014-03-21', 'C:\\Users\\lara312\\Documents\\GitHub\\coffee\\BCOnlineClassroom\\WebContent\\downloads\\CS 130\\Miscellaneous\\', 7, 3, 1),
-(50, '03 Getting to know your Programming Environment.pdf', 'pdf', 246046, '2014-03-22', 'C:\\Users\\lara312\\Documents\\GitHub\\coffee\\BCOnlineClassroom\\WebContent\\downloads\\CS 130\\Miscellaneous\\', 7, 3, 1),
-(51, '06 Control Structures.pdf', 'pdf', 251477, '2014-03-22', 'C:\\Users\\lara312\\Documents\\GitHub\\coffee\\BCOnlineClassroom\\WebContent\\downloads\\CS 130\\Slides\\', 7, 1, 1),
-(52, '11 Inheritance Polymorphism Interface.pdf', 'pdf', 195688, '2014-03-22', 'C:\\Users\\lara312\\Documents\\GitHub\\coffee\\BCOnlineClassroom\\WebContent\\downloads\\CS 11\\Slides\\', 1, 1, 1),
-(53, '20140203 CS 130 - Problem Set 2.pdf', 'pdf', 161562, '2014-03-28', 'C:\\Users\\lara312\\Documents\\GitHub\\coffee\\BCOnlineClassroom\\WebContent\\downloads\\CS 130\\Slides\\', 7, 1, 0),
-(54, 'CS 130 - First Order ODE - Exercises - Part 1.pdf', 'pdf', 94974, '2014-03-28', 'C:\\Users\\lara312\\Documents\\GitHub\\coffee\\BCOnlineClassroom\\WebContent\\downloads\\CS 130\\Slides\\', 7, 1, 0),
-(55, 'CS11Lab-1 (handout).pdf', 'pdf', 405013, '2014-03-29', 'C:\\Users\\lara312\\Documents\\GitHub\\coffee\\BCOnlineClassroom\\WebContent\\downloads\\CS 11\\Samplex\\', 1, 2, 0),
-(56, 'CS 11 Machine Problem.pdf', 'pdf', 292459, '2014-03-29', 'C:\\Users\\lara312\\Documents\\GitHub\\coffee\\BCOnlineClassroom\\WebContent\\downloads\\CS 11\\Slides\\', 1, 1, 0),
-(57, 'MIT6_087IAP10_lec05.pdf', 'pdf', 305477, '2014-03-29', 'C:\\Users\\lara312\\Documents\\GitHub\\coffee\\BCOnlineClassroom\\WebContent\\downloads\\CS 11\\Slides\\', 1, 1, 0),
-(58, 'ME7.docx', 'docx', 14826, '2014-03-29', 'C:\\Users\\lara312\\Documents\\GitHub\\coffee\\BCOnlineClassroom\\WebContent\\downloads\\CS 11\\Slides\\', 1, 1, 0),
-(59, '20131210 CS 130 - Problem Set 1.pdf', 'pdf', 141541, '2014-03-29', 'C:\\Users\\lara312\\Documents\\GitHub\\coffee\\BCOnlineClassroom\\WebContent\\downloads\\CS 130\\Miscellaneous\\', 7, 3, 0),
-(60, 'Chapter_2_V6.3.ppt', '3', 3262464, '2014-04-01', 'C:\\Users\\lara312\\Documents\\GitHub\\coffee\\BCOnlineClassroom\\WebContent\\downloads\\CS 145\\Slides\\', 14, 1, 0),
-(61, 'Chapter_3_V6.01.pdf', '01', 1999441, '2014-04-01', 'C:\\Users\\lara312\\Documents\\GitHub\\coffee\\BCOnlineClassroom\\WebContent\\downloads\\CS 145\\Slides\\', 14, 1, 0),
-(62, 'Exam 1 Reviewer.pdf', 'pdf', 27513, '2014-04-01', 'C:\\Users\\lara312\\Documents\\GitHub\\coffee\\BCOnlineClassroom\\WebContent\\downloads\\CS 145\\Samplex\\', 14, 2, 0),
-(63, 'CS 145 Syllabus.pdf', 'pdf', 53077, '2014-04-01', 'C:\\Users\\lara312\\Documents\\GitHub\\coffee\\BCOnlineClassroom\\WebContent\\downloads\\CS 145\\Miscellaneous\\', 14, 3, 0),
-(64, 'ComputerProgramDevelopment.pdf', 'pdf', 1266063, '2014-04-02', 'C:\\Users\\lara312\\Documents\\GitHub\\coffee\\BCOnlineClassroom\\WebContent\\downloads\\CS 11\\Miscellaneous\\', 1, 3, 3),
-(65, 'Hit2.mp3', 'mp3', 16790, '2014-04-02', 'C:\\Users\\lara312\\Documents\\GitHub\\coffee\\BCOnlineClassroom\\WebContent\\downloads\\CS 130\\Samplex\\', 7, 2, 3);
+INSERT INTO `matfile` (`matFileID`, `fileName`, `fileType`, `fileSize`, `uploadDate`, `path`, `matSubjectID`, `matFolderID`, `userID`, `fileDesc`) VALUES
+(80, 'CS 130 - Lesson 1.pdf', 'pdf', 474982, '2014-04-12', 'C:\\Users\\lara312\\Documents\\GitHub\\coffee\\BCOnlineClassroom\\WebContent\\downloads\\CS 130\\Slides\\', 7, 1, 5, NULL),
+(81, 'CS 130 - Lesson 2.pdf', 'pdf', 273616, '2014-04-12', 'C:\\Users\\lara312\\Documents\\GitHub\\coffee\\BCOnlineClassroom\\WebContent\\downloads\\CS 130\\Slides\\', 7, 1, 5, NULL),
+(82, 'CS 130 - Lesson 3.pdf', 'pdf', 431795, '2014-04-12', 'C:\\Users\\lara312\\Documents\\GitHub\\coffee\\BCOnlineClassroom\\WebContent\\downloads\\CS 130\\Slides\\', 7, 1, 5, NULL),
+(83, 'CS 130 - Lesson 4.pdf', 'pdf', 236032, '2014-04-12', 'C:\\Users\\lara312\\Documents\\GitHub\\coffee\\BCOnlineClassroom\\WebContent\\downloads\\CS 130\\Slides\\', 7, 1, 5, NULL),
+(84, 'CS 130 - Lesson 5.pdf', 'pdf', 333960, '2014-04-12', 'C:\\Users\\lara312\\Documents\\GitHub\\coffee\\BCOnlineClassroom\\WebContent\\downloads\\CS 130\\Slides\\', 7, 1, 5, NULL),
+(85, 'CS 130 - Lesson 6.pdf', 'pdf', 162288, '2014-04-12', 'C:\\Users\\lara312\\Documents\\GitHub\\coffee\\BCOnlineClassroom\\WebContent\\downloads\\CS 130\\Slides\\', 7, 1, 5, NULL),
+(86, 'CS 130 - Lesson 7.pdf', 'pdf', 440491, '2014-04-12', 'C:\\Users\\lara312\\Documents\\GitHub\\coffee\\BCOnlineClassroom\\WebContent\\downloads\\CS 130\\Slides\\', 7, 1, 5, NULL),
+(92, 'CS 130 - First Order ODE - Exercises - Part 1.pdf', 'pdf', 94974, '2014-04-12', 'C:\\Users\\lara312\\Documents\\GitHub\\coffee\\BCOnlineClassroom\\WebContent\\downloads\\CS 130\\Samplex\\', 7, 2, 6, NULL),
+(93, 'CS 130 - First Order ODE - Exercises - Part 2.pdf', 'pdf', 70965, '2014-04-12', 'C:\\Users\\lara312\\Documents\\GitHub\\coffee\\BCOnlineClassroom\\WebContent\\downloads\\CS 130\\Samplex\\', 7, 2, 6, NULL),
+(94, 'CS 130 - Fourier Series - Exercises.pdf', 'pdf', 82168, '2014-04-12', 'C:\\Users\\lara312\\Documents\\GitHub\\coffee\\BCOnlineClassroom\\WebContent\\downloads\\CS 130\\Samplex\\', 7, 2, 6, NULL),
+(96, 'CS 130 - Linear Algebra Examples.pdf', 'pdf', 159015, '2014-04-12', 'C:\\Users\\lara312\\Documents\\GitHub\\coffee\\BCOnlineClassroom\\WebContent\\downloads\\CS 130\\Samplex\\', 7, 2, 6, NULL),
+(97, 'CS 130 - Simultaneous ODEs - Exercises.pdf', 'pdf', 82659, '2014-04-12', 'C:\\Users\\lara312\\Documents\\GitHub\\coffee\\BCOnlineClassroom\\WebContent\\downloads\\CS 130\\Samplex\\', 7, 2, 6, NULL),
+(98, 'toolbox_general.zip', 'zip', 78422, '2014-04-12', 'C:\\Users\\lara312\\Documents\\GitHub\\coffee\\BCOnlineClassroom\\WebContent\\downloads\\CS 130\\Miscellaneous\\', 7, 3, 5, NULL),
+(99, '1560412_10201229725497910_106132362_n.jpg', 'jpg', 54235, '2014-04-12', 'C:\\Users\\lara312\\Documents\\GitHub\\coffee\\BCOnlineClassroom\\WebContent\\downloads\\CS 130\\Miscellaneous\\', 7, 3, 5, NULL),
+(100, '1618398_10201229725617913_265344154_n.jpg', 'jpg', 57020, '2014-04-12', 'C:\\Users\\lara312\\Documents\\GitHub\\coffee\\BCOnlineClassroom\\WebContent\\downloads\\CS 130\\Miscellaneous\\', 7, 3, 5, NULL),
+(102, '1463646_10200772623192476_1640500034_n.jpg', 'jpg', 62248, '2014-04-21', 'C:\\Users\\lara312\\Documents\\GitHub\\coffee\\BCOnlineClassroom\\WebContent\\downloads\\CS 11\\Slides\\', 1, 1, 5, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `matfiletag`
+--
+
+CREATE TABLE IF NOT EXISTS `matfiletag` (
+  `matFileTagID` int(11) NOT NULL AUTO_INCREMENT,
+  `matFileID` int(11) NOT NULL,
+  `matTagID` int(11) NOT NULL,
+  PRIMARY KEY (`matFileTagID`),
+  KEY `matfiletagFK` (`matFileID`),
+  KEY `matfiletagFK2` (`matTagID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -863,6 +953,18 @@ INSERT INTO `matsubject` (`matSubjectID`, `subjectName`, `subjectDesc`) VALUES
 (32, 'CS 197', 'Special Topics'),
 (33, 'CS 198', 'Special Problems I'),
 (34, 'CS 199', 'Special Problems II');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `mattag`
+--
+
+CREATE TABLE IF NOT EXISTS `mattag` (
+  `matTagID` int(11) NOT NULL AUTO_INCREMENT,
+  `matTag` text NOT NULL,
+  PRIMARY KEY (`matTagID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -960,8 +1062,13 @@ INSERT INTO `userroles` (`userid`, `typeid`) VALUES
 (1, 2),
 (2, 9),
 (1, 6),
-(3, 2),
-(4, 2);
+(5, 2),
+(6, 2),
+(7, 2),
+(8, 2),
+(9, 2),
+(5, 7),
+(6, 7);
 
 -- --------------------------------------------------------
 
@@ -981,18 +1088,20 @@ CREATE TABLE IF NOT EXISTS `users` (
   `departmentid` int(11) DEFAULT NULL,
   `courseid` int(11) DEFAULT NULL,
   PRIMARY KEY (`userid`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
 
 --
 -- Dumping data for table `users`
 --
 
 INSERT INTO `users` (`userid`, `firstname`, `lastname`, `email`, `username`, `password`, `enabled`, `collegeid`, `departmentid`, `courseid`) VALUES
-(0, 'Amanda Ginette', 'Codera', 'agcodera@gmail.com', 'agcodera', '01b307acba4f54f55aafc33bb06bbbf6ca803e9a', 1, 20, 26, 92),
 (1, 'Sherlyne', 'Francia', 'shefrancia@gmail.com', 'shefrancia', 'f7c3bc1d808e04732adf679965ccc34ca7ae3441', 1, 20, 26, 92),
 (2, 'Sher', 'Francia', 'sharin@furanshia.com', 'goddessher', 'f7c3bc1d808e04732adf679965ccc34ca7ae3441', 1, NULL, NULL, NULL),
-(3, 'Katrina Grace', 'Lorenzo', 'kgdlorenzo@gmail.com', 'kgdlorenzo', '01b307acba4f54f55aafc33bb06bbbf6ca803e9a', 1, 20, 26, 92),
-(4, 'Lara Eunice', 'Pacumio', 'lara.pacumio@gmail.com', 'leapacumio', 'bd5e5eb049f3907175f54f5a571ba6b9fdea36ab', 1, 20, 26, 92);
+(5, 'Lara Eunice', 'Pacumio', 'lara.pacumio@gmail.com', 'leapacumio', '5fa339bbbb1eeaced3b52e54f44576aaf0d77d96', 1, 20, 26, 92),
+(6, 'Katrina Grace', 'Lorenzo', 'kgdlorenzo@gmail.com', 'kgdlorenzo', '01b307acba4f54f55aafc33bb06bbbf6ca803e9a', 1, 20, 26, 92),
+(7, 'Sharmaine', 'Yap', 'sharmaine.yap@gmail.com', 'sharmaineyap', '01b307acba4f54f55aafc33bb06bbbf6ca803e9a', 1, 20, 26, 92),
+(8, 'Emir', 'Mercado', 'emircado@gmail.com', 'emircado', '01b307acba4f54f55aafc33bb06bbbf6ca803e9a', 1, 20, 26, 92),
+(9, 'Nikka', 'Octavo', 'niks.octavo@gmail.com', 'niksoctavo', '01b307acba4f54f55aafc33bb06bbbf6ca803e9a', 1, 20, 26, 92);
 
 -- --------------------------------------------------------
 
@@ -1036,21 +1145,21 @@ ALTER TABLE `adminrequests`
 -- Constraints for table `chatmember`
 --
 ALTER TABLE `chatmember`
-  ADD CONSTRAINT `chatmemberFK` FOREIGN KEY (`chatConvoID`) REFERENCES `chatconvo` (`chatConvoID`),
-  ADD CONSTRAINT `chatmemberFK2` FOREIGN KEY (`userID`) REFERENCES `users` (`userid`);
+  ADD CONSTRAINT `chatmemberFK` FOREIGN KEY (`chatConvoID`) REFERENCES `chatconvo` (`chatConvoID`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `chatmemberFK2` FOREIGN KEY (`userID`) REFERENCES `users` (`userid`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `chatmessage`
 --
 ALTER TABLE `chatmessage`
-  ADD CONSTRAINT `chatmessageFK` FOREIGN KEY (`userID`) REFERENCES `users` (`userid`),
-  ADD CONSTRAINT `chatmessageFK2` FOREIGN KEY (`chatConvoID`) REFERENCES `chatconvo` (`chatConvoID`);
+  ADD CONSTRAINT `chatmessageFK` FOREIGN KEY (`userID`) REFERENCES `users` (`userid`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `chatmessageFK2` FOREIGN KEY (`chatConvoID`) REFERENCES `chatconvo` (`chatConvoID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `chatonline`
 --
 ALTER TABLE `chatonline`
-  ADD CONSTRAINT `chatonlineFK` FOREIGN KEY (`userID`) REFERENCES `users` (`userid`);
+  ADD CONSTRAINT `chatonlineFK` FOREIGN KEY (`userID`) REFERENCES `users` (`userid`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `courses`
@@ -1063,6 +1172,42 @@ ALTER TABLE `courses`
 --
 ALTER TABLE `departments`
   ADD CONSTRAINT `fk_collegeid` FOREIGN KEY (`collegeid`) REFERENCES `colleges` (`collegeid`);
+
+--
+-- Constraints for table `fcomment`
+--
+ALTER TABLE `fcomment`
+  ADD CONSTRAINT `fcommentFK` FOREIGN KEY (`fpostID`) REFERENCES `fpost` (`fpostID`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `fcommentFK2` FOREIGN KEY (`userID`) REFERENCES `users` (`userid`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `fpost`
+--
+ALTER TABLE `fpost`
+  ADD CONSTRAINT `fpostFK2` FOREIGN KEY (`fcategoryID`) REFERENCES `fcategory` (`fcategoryID`),
+  ADD CONSTRAINT `fpostFK` FOREIGN KEY (`userID`) REFERENCES `users` (`userid`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `fpostag`
+--
+ALTER TABLE `fpostag`
+  ADD CONSTRAINT `fpostagFK` FOREIGN KEY (`ftagID`) REFERENCES `ftag` (`ftagID`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `fpostagFK2` FOREIGN KEY (`fpostID`) REFERENCES `fpost` (`fpostID`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `matfile`
+--
+ALTER TABLE `matfile`
+  ADD CONSTRAINT `matfileFK` FOREIGN KEY (`matSubjectID`) REFERENCES `matsubject` (`matSubjectID`),
+  ADD CONSTRAINT `matfileFK2` FOREIGN KEY (`matFolderID`) REFERENCES `matfolder` (`matFolderID`),
+  ADD CONSTRAINT `matfileFK3` FOREIGN KEY (`userID`) REFERENCES `users` (`userid`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `matfiletag`
+--
+ALTER TABLE `matfiletag`
+  ADD CONSTRAINT `matfiletagFK` FOREIGN KEY (`matFileID`) REFERENCES `matfile` (`matFileID`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `matfiletagFK2` FOREIGN KEY (`matTagID`) REFERENCES `mattag` (`matTagID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `rolespertype`
