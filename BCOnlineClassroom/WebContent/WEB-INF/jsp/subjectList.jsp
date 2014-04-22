@@ -70,6 +70,20 @@
 	
 	</br></br>
 	
+	<!-- Add Category
+	************************************************* -->
+	<form:form method="post" action="/addmatcategory" modelAttribute="matFolder">
+		<div class="row">
+			<div class="col-sm-6"></div>
+			<div class="col-sm-3" style="margin-left:60px">
+				<input type="text" name="folderName" class="form-control" placeholder="Add Category">
+			</div>
+			<div class="col-sm-1">
+				<button type="submit" class="btn btn-primary"><i class="largeicon icon-plus"></i></button>
+			</div>
+		</div>
+	</form:form>	
+	
 	<!--Subject Grid
 	*************************************************-->
 	<div class="container">
@@ -86,7 +100,7 @@
 				<center>
 				<a href="subfolder?id=${matSubject.subjectName}"><i class="icon-folder-open" rel"tooltip" title="${matSubject.subjectName}"></i></a>
 				</br>
-				${matSubject.subjectName}
+				${matSubject.subjectName}<c:if test="${sessionScope.user.getAdmin()=='true'}"> <a href="deletesubject?sid=${matSubject.getMatSubjectID()}"><t class="largeicon icon-trash" rel="tooltip" title="Delete subject"></t></a> </c:if>
 				</br></br>
 				</center>
 			</div>

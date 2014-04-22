@@ -44,6 +44,8 @@
 	<bean id="fTagService" class="com.bluecoffee.services.FTagServiceImpl" />
 	<bean id="fPostagDao" class="com.bluecoffee.dao.FPostagDaoImpl" />
 	<bean id="fPostagService" class="com.bluecoffee.services.FPostagServiceImpl" />
+	<bean id="fCategoryDao" class="com.bluecoffee.dao.FCategoryDaoImpl" />
+	<bean id="fCategoryService" class="com.bluecoffee.services.FCategoryServiceImpl" />
 
 	<bean id="chatConvoDao" class="com.bluecoffee.dao.ChatConvoDaoImpl" />
 	<bean id="chatConvoService" class="com.bluecoffee.services.ChatConvoServiceImpl" />	
@@ -53,7 +55,7 @@
 	<bean id="user" class="com.bluecoffee.domain.User" />
 	
 	
-	<!--
+
 	<bean id="dataSource"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
@@ -61,12 +63,13 @@
 		<property name="username" value="root" />
 		<property name="password" value="" />
 	</bean>
-	-->
+	
 	
 	<!-- declare datasource bean -->
+	<!--
 	<bean id="dataSource" 
 		class="org.springframework.jndi.JndiObjectFactoryBean">
     	<property name="jndiName" value="java:comp/env/jdbc/MysqlDS"/>
- 	</bean>
+ 	</bean> -->
 	
 </beans>

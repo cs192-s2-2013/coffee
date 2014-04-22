@@ -120,6 +120,20 @@
 	</c:otherwise>
 	</c:choose>
 	
+	<!-- Add Category
+	************************************************* -->
+	<form:form method="post" action="/addcategory" modelAttribute="fCategory">
+		<div class="row">
+			<div class="col-sm-6"></div>
+			<div class="col-sm-3" style="margin-left:60px">
+				<input type="text" name="fCategory" class="form-control" placeholder="Add Category">
+			</div>
+			<div class="col-sm-1">
+				<button type="submit" class="btn btn-primary"><i class="largeicon icon-plus"></i></button>
+			</div>
+		</div>
+	</form:form>
+	
 	<!-- List of questions
 	**************************************************-->
 	<c:forEach var="forumItem" items="${fPostList}">

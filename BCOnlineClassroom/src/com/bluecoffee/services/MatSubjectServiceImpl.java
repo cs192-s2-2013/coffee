@@ -26,6 +26,19 @@ public class MatSubjectServiceImpl implements MatSubjectService {
 	public int getMatSubjectIDbyName(String name){
 		return matsubjectdao.getMatSubjectIDbyName(name);
 	}
+	
+	@Override
+	public void deleteSubject(int id){
+		matsubjectdao.deleteSubject(id);
+	}
+	
+	
+	@Override
+	public void addSubject(MatSubject matSubject){
+		matsubjectdao.addSubject(matSubject);
+	}
+	
+	
 /*
 	@Override
 	public void deleteData(String id) {

@@ -10,6 +10,8 @@ public interface MatSubjectDao {
 
 	public List<MatSubject> getMatSubjectList();
 	public int getMatSubjectIDbyName(String name);
+	public void deleteSubject(int id);
+	public void addSubject(MatSubject matSubject);
 
 	//public void updateData(MatSubject matSubject);
 

@@ -150,12 +150,12 @@
 		<!-- Slides
 	**************************************************-->
 <div class = "container">
-	<c:forEach var="category" items="${map}">
+	<c:forEach var="key" items="${keys}">
 	<div class="container">
 		<div class="row">
 			<div class="col-sm-1"></div>
 			<div class="col-sm-7">
-				<h2>${category.key} <a href="batchdownload?sn=${id}&fn=Slides"><i class="largeicon icon-download-alt" rel="tooltip" title="Download slides folder"></i></a></h2>
+				<h2>${key} <a href="batchdownload?sn=${id}&fn=Slides"><i class="largeicon icon-download-alt" rel="tooltip" title="Download slides folder"></i></a></h2>
 			</div>
 			<div class="col-md-4">
 			
@@ -196,7 +196,7 @@
 			</b>
 		</div>
 		<!-- JSP generated code for all items in folder -->
-			<c:forEach var="matFile" items="${category.value}">
+			<c:forEach var="matFile" items="${map.get(key)}">
 				<div class="row pull-center">
 					<div class="col-sm-1"></div>				
 					<div class="col-sm-5 table-bordered">

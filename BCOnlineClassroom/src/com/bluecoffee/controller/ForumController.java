@@ -27,11 +27,13 @@ import com.bluecoffee.domain.FPostag;
 import com.bluecoffee.domain.MatFile;
 import com.bluecoffee.domain.MatSubject;
 import com.bluecoffee.domain.User;
+import com.bluecoffee.domain.FCategory;
 import com.bluecoffee.services.FPostService;
 import com.bluecoffee.services.FCommentService;
 import com.bluecoffee.services.FTagService;
 import com.bluecoffee.services.FPostagService;
 import com.bluecoffee.services.UserService;
+import com.bluecoffee.services.FCategoryService;
 
 import java.io.*;
 import java.util.*;
@@ -55,6 +57,7 @@ public class ForumController {
 	@Autowired FTagService fTagService;
 	@Autowired FPostagService fPostagService;
 	@Autowired UserService userService;
+	@Autowired FCategoryService fCategoryService;
 	
 	//@Autowired private User user;
 	
@@ -178,13 +181,17 @@ public class ForumController {
 		return "redirect:/viewpost?pid="+pid;
 	}
 	
+	/**************** ADMIN FUNCTIONS *********************/
+	
 	/*** for deleting post ***/
 	@RequestMapping("/deletepost")
 	public String deletePost(@ModelAttribute("user") User user, @RequestParam int pid){
 		if(user.getAdmin()){
 			fPostService.deleteData(pid);
+			return "redirect:/forum";
 		}
-		return "redirect:/forum";
+		else{ return "notfound"; }
+		
 	}
 	
 	/*** for deleting comment ***/
@@ -193,7 +200,17 @@ public class ForumController {
 		if(user.getAdmin()){
 			fCommentService.deleteData(cid);
 			fPostService.decCommentCount(pid);
+			return "redirect:/viewpost?pid="+pid;
 		}
-		return "redirect:/viewpost?pid="+pid;
+		else{ return "notfound"; }
 	}
+	
+	/*** add category ***/
+	@RequestMapping("/addcategory")
+	public String addCategory(@ModelAttribute FCategory fCategory){
+		fCategoryService.insertCategory(fCategory);
+		return "redirect:/forum";
+	}
+	
+	/*****************************************************/
 }

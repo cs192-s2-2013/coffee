@@ -21,4 +21,15 @@ public class MatFolderServiceImpl implements MatFolderService {
 	public int getMatFolderIDbyName(String name){
 		return matfolderdao.getMatFolderIDbyName(name);
 	}
+	
+	@Override
+	public void insertCategory(MatFolder matFolder){
+		matfolderdao.insertCategory(matFolder);
+	}
+	
+	@Override
+	public void deleteCategory(int matFolderID){
+		matfolderdao.deleteCategory(matFolderID);
+	}
+	
 }

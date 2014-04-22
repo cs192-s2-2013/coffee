@@ -52,8 +52,6 @@ public class MaterialsController {
 	@Autowired MatFolderService matFolderService;
 	@Autowired UserService userService;
 	
-	//@Autowired private User user;
-	
 	@RequestMapping("/materials")
 	public String getSubjectList(@CookieValue(value="cs192session", defaultValue="none") String fooCookie, Model model) {
 		
@@ -65,29 +63,34 @@ public class MaterialsController {
 	}
 	
 	@RequestMapping("/subfolder")
-	public ModelAndView getFolderList(@RequestParam String id, @RequestParam(value = "us", required=false, defaultValue="0") int us, 
+	public String getFolderList(@RequestParam String id, @RequestParam(value = "us", required=false, defaultValue="0") int us, 
 			@ModelAttribute MatFolder matFolder, Model model){
 		
 		List<MatFolder> matFolderList = matFolderService.getMatFolderList();
-		//List<MatFile> matFileList = matFileService.getMatFileListBySubjectName(id);
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		
 		for(MatFolder folder : matFolderList){
 			List<MatFile> matfilelist = matFileService.getMatFileListBySubjectFolder(id, folder.getMatFolderID());
-			map.put(folder.getFolderName(), matfilelist);
 			
 			for(MatFile matfile : matfilelist){
 				User user = userService.getUserByUserID(matfile.getUserID());
 				matfile.setUploader(user.getFirstName()+" "+user.getLastName()+" ("+user.getUsername()+")");
 				
 			}
+			
+			map.put(folder.getFolderName(), matfilelist);
 		}
 		
+		SortedSet<String> keys = new TreeSet<String>(map.keySet());
+
 		model.addAttribute("id", id);
 		model.addAttribute("success", us);
+		model.addAttribute("keys", keys);
+		model.addAttribute("map", map);
 		
-		return new ModelAndView("resource", "map", map);
+		return "resource";
+		//return new ModelAndView("resource", "map", map);
 		/*
 		matFile = matFileService.getMatFile(id);
 
@@ -98,7 +101,7 @@ public class MaterialsController {
 	}
 	
 	@RequestMapping("/searchfile")
-	public String searchfille(/*@ModelAttribute String s,*/ Model model, HttpServletRequest request){
+	public String searchfile(/*@ModelAttribute String s,*/ Model model, HttpServletRequest request){
 		
 		String s = request.getParameter("s");
 		
@@ -109,7 +112,7 @@ public class MaterialsController {
 		}
 		model.addAttribute("matFileList", matFileList);	
 		
-		return "searchresult"; //TODO new page for search result!!
+		return "searchresult";
 	}
 	
 
@@ -127,14 +130,52 @@ public class MaterialsController {
 		return "upload";
 	}
 	
+	
+	/****************** FOR ADMIN ONLY **************************/
+	
 	/*** for deleting resource ***/
 	@RequestMapping("/deletematerial")
 	public String deleteMaterial(@ModelAttribute("user") User user, @RequestParam int mid, @RequestParam String id){
 		if(user.getAdmin()){
 			matFileService.deleteData(mid);
+			return "redirect:/subfolder?id="+id;
 		}
-		return "redirect:/subfolder?id="+id;
+		else{ return "notfound"; }
+		
 	}
+	
+	@RequestMapping("/deletesubject")
+	public String deleteSubject(@ModelAttribute("user") User user, @RequestParam int sid){
+		if(user.getAdmin()){
+			try{ matSubjectService.deleteSubject(sid); }
+			catch(Exception e){
+				//what to do if it has contents?
+			}
+			return "redirect:/materials";
+		}
+		else{ return "notfound"; }
+	}
+	
+	@RequestMapping("/addsubject")
+	public String addSubject(@ModelAttribute("user") User user, @ModelAttribute MatSubject matSubject) {
+		//if subject exists return error
+		//else add subject
+		if (user.getAdmin()) {
+			try {matSubjectService.getMatSubjectIDbyName(matSubject.getSubjectName());}
+			catch (Exception e) {
+				matSubjectService.addSubject(matSubject);
+				//successful subject added modal
+				return "redirect:/materials";
+			}
+			//subject already exists modal
+			return "redirect:/materials";
+		}
+		else{ return "notfound"; }
+	}
+	
+	
+	/*************************************************************/
+	
 	
 	@RequestMapping("/fileUploaded")
 	public String uploadfile(@RequestParam String id, @RequestParam String sf, @ModelAttribute MatFile matFile, @ModelAttribute("user") User user, HttpServletRequest request) {
@@ -201,7 +242,6 @@ public class MaterialsController {
 					mf.setMatFolderID(matFolderService.getMatFolderIDbyName(sf));
 					
 					mf.setUserID(user.getUserID());
-					//mf.setUserID(1); //TODO should not be hardcoded
 					
 					matFileService.insertData(mf);
 					
@@ -221,4 +261,12 @@ public class MaterialsController {
 		
 		return "redirect:/subfolder?id="+id+"&us="+uploadsuccessful;
 	}
+	
+	/*** add materials category ***/
+	@RequestMapping("/addmatcategory")
+	public String addCategory(@ModelAttribute MatFolder matFolder){
+		matFolderService.insertCategory(matFolder);
+		return "redirect:/materials";
+	}
+	
 }

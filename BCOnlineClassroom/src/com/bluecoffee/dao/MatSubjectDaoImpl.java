@@ -36,6 +36,20 @@ public class MatSubjectDaoImpl implements MatSubjectDao {
 		return matSubject.getMatSubjectID();
 	}
 	
+	public void deleteSubject(int id){
+		String sql = "delete from matsubject where matSubjectID=" + id;
+		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+		jdbcTemplate.update(sql);
+	}
+	
+	@Override
+	public void addSubject(MatSubject matSubject){
+		String sql = "INSERT INTO matsubject (subjectName, subjectDesc) VALUES (?, ?)";
+		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+		jdbcTemplate.update(
+				sql,
+				new Object[] { matSubject.getSubjectName(), matSubject.getSubjectDesc()});
+	}
 	
 	
 /*	@Override
