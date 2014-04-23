@@ -3,6 +3,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@taglib tagdir="/WEB-INF/tags" prefix="t"%>
+
 <html>
 <head>
 	<title>Blue Coffee</title>
@@ -24,27 +26,10 @@
 
 <body>
 
-	<!--  Navigation Bar
-	***************************** -->
-	<nav class="navbar navbar-inverse" role="navigation">
-	   <div class="navbar-header">
-	      <a class="navbar-brand" href="home">Online Classroom</a>
-	   </div>
-	   <div>
-	      <ul class="nav navbar-nav">
-	         <li><a href="materials">Materials</a></li>
-	         <li><a href="forum">Forum</a></li>
-	         <li><a href="chat">Chat</a></li>
-	      </ul>
-		<ul class="nav navbar-nav pull-right">
-              <li><a>${sessionScope.user.getUsername()}<c:if test="${sessionScope.user.getAdmin()}"> (admin)</c:if></a></li>
-              <li><a href="logout">Logout</a></li>
-          </ul>
-	     
-	   </div>
-	</nav>	
+	<t:navbar user="${sessionScope.user}"/>
+	<t:jumbotron title="Forum"/>
 	
-		<!-- Upload
+	<!-- Upload
 	**************************************************
 	
 	<div class="container">
@@ -71,13 +56,10 @@
 	</div> -->
 	
 	
+	
+	
 	<!-- Question/Title
 	**************************************************-->
-	<div class = "jumbotron">
-		<!--JSP code to get subject-->
-		<a href="forum"><h2>Forum</h2></a>
-		<h5>Ask away or share your knowledge.</h5>
-	</div>
 	
 	
 	<!-- Details/Content

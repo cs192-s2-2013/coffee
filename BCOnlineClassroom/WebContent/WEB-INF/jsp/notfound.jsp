@@ -3,6 +3,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%> 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@taglib tagdir="/WEB-INF/tags" prefix="t"%>
+
 <html>
 <head>
 	<title>Blue Coffee</title>
@@ -23,32 +25,8 @@
 
 <body>
 
-	<!--  Navigation Bar
-	***************************** -->
-	<nav class="navbar navbar-inverse" role="navigation">
-	   <div class="navbar-header">
-	      <a class="navbar-brand" href="#">Online Classroom</a>
-	   </div>
-	   <div>
-	      <ul class="nav navbar-nav">
-	         <li><a href="#">Materials</a></li>
-	         <li><a href="#">Forum</a></li>
-	         <li><a href="#">Chat</a></li>
-	      </ul>
-	      <ul class="nav navbar-nav pull-right">
-	         <li><a href="#">Logout</a></li>
-	      </ul>
-	     
-	   </div>
-	</nav>	
-	
-	<!-- Subject Title
-	**************************************************-->
-	<div class = "jumbotron">
-		<!--JSP code to get subject-->
-		<h2>404: Page Not Found</h2>
-	</div>
-
+	<t:navbar/>
+	<t:jumbotron title="notfound"/>
 	
 	<!-- Footer and Modal
 	**************************************************-->
