@@ -83,8 +83,11 @@ public class MaterialsController {
 		}
 		
 		SortedSet<String> keys = new TreeSet<String>(map.keySet());
+		
+		MatSubject matSubject = matSubjectService.getMatSubjectIDbyName(id);
 
 		model.addAttribute("id", id);
+		model.addAttribute("desc", matSubject.getSubjectDesc());
 		model.addAttribute("success", us);
 		model.addAttribute("keys", keys);
 		model.addAttribute("map", map);
@@ -238,7 +241,7 @@ public class MaterialsController {
 					mf.setFileSize(fi.getSize());
 					mf.setUploadDate(new Date());
 					mf.setPath(filePath);
-					mf.setMatSubjectID(matSubjectService.getMatSubjectIDbyName(id));
+					mf.setMatSubjectID(matSubjectService.getMatSubjectIDbyName(id).getMatSubjectID());
 					mf.setMatFolderID(matFolderService.getMatFolderIDbyName(sf));
 					
 					mf.setUserID(user.getUserID());

@@ -26,14 +26,14 @@ public class MatSubjectDaoImpl implements MatSubjectDao {
 	}
 	
 	@Override
-	public int getMatSubjectIDbyName(String name){
+	public MatSubject getMatSubjectIDbyName(String name){
 		MatSubject matSubject = new MatSubject();
 
 		String sql = "SELECT * FROM matsubject WHERE subjectName='"+name+"'";
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
 		matSubject = jdbcTemplate.query(sql, new MatSubjectRowMapper()).get(0);
 		
-		return matSubject.getMatSubjectID();
+		return matSubject;
 	}
 	
 	public void deleteSubject(int id){

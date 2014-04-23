@@ -10,6 +10,7 @@ public interface FPostService {
 	public void deleteData(int fPostID);
 	public FPost getFPostByID(int fPostID);
 	public int getIDByFPost(FPost fpost);
+	public List<FPost> getFPostByCategory(int fCategoryID);
 	public List<FPost> getFPostList();
 	public void incCommentCount(int fPostID);
 	public void decCommentCount(int fPostID);

@@ -60,6 +60,17 @@ public class FPostDaoImpl implements FPostDao {
 	}
 	
 	@Override
+	public List<FPost> getFPostByCategory(int fCategoryID){
+		List<FPost> fPostList = new ArrayList<FPost>();
+		
+		String sql = "SELECT * FROM fpost WHERE fcategoryID =" + fCategoryID;
+		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+		fPostList = jdbcTemplate.query(sql, new FPostRowMapper());
+		
+		return fPostList;
+	}
+	
+	@Override
 	public List<FPost> getFPostList(){
 		List<FPost> fPostList = new ArrayList<FPost>();
 

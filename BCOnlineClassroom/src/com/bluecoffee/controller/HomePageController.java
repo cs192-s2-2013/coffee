@@ -53,7 +53,7 @@ public class HomePageController {
 		if(userdet==null){ return "notfound"; }
 		
 		User user = userService.getUserByUserID(Integer.parseInt(userdet[0]));
-		if(userdet[2].contains("ADMIN_CLASS")){ user.setAdmin(true); }
+		if(userdet[2].contains("ADMIN_CLASS") || userdet[2].contains("GOD")){ user.setAdmin(true); }
 		else{ user.setAdmin(false); }
 		
 		model.addAttribute("user", user);

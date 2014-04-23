@@ -8,27 +8,14 @@
 <html>
 <head>
 	<title>Blue Coffee</title>
-	
-	  
-	<link type="text/css" rel="stylesheet" href="css/bootstrap.css"/>
-	<link href="http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
-	<link rel="stylesheet" type="text/css" href=<c:url value="/WEB-INF/jsp/css/style.css"/>>
-	<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0-rc1/css/bootstrap.min.css" rel="stylesheet">
-
-	<!--  
-
-	<link type="text/css" rel="stylesheet" href="css/style.css">
-	-->
+	<t:css/>
 	
 	<style>
-          body { background: #FFFFFF; }
-          .container { background: ; }
           .modal-dialog {
           	width:400px; 
           	margin-top: 180px;
           }
 		  .modal-body { height: 60px; }
-		  .jumbotron { margin-top: -50px; }
     </style>
 	<script>
 	    $(document).ready(function(){
@@ -43,37 +30,11 @@
 	<t:jumbotron title="Materials"/>
 	
 	
-		<!-- Upload
-	**************************************************
-	
-	<div class="container">
-		<div class="row">
-			<div class="col-md-12">
-			
-			<br/>
-			<br/>
-			<hr/>
-				<div class="fileupload fileupload-new" data-provides="fileupload">
-					<span class="btn btn-primary btn-file">
-					<span class="fileupload-new">Select file</span>
-					<span class="fileupload-exists"></span>
-						<input type="file" data-bfi-disabled/>
-					</span>-
-					<span class="fileupload-preview"></span>
-					<a href="#" class="close fileupload-exists" data-dismiss="fileupload" style="float: none">Ã—</a>
-				</div>
-				<a class="btn btn-info" id="mytooltip" href="#" data-toggle="tooltip" title="Upload Files" data-placement="right">
-					Upload
-				</a>
-			</div>
-		</div>
-	</div> -->
-	
 	<!-- Subject Title
 	**************************************************-->
 	
 	<center>
-		<h1>${id}</h1>
+		<h1>${id}: ${desc}</h1>
 	</center>
 
 	<c:if test="${success == '1'}">
@@ -108,22 +69,6 @@
 		  </div>
 		</div>
 	</c:if>		
-	
-	<!-- 
-	<div class="modal hide" id="myModal">
-	  <div class="modal-header">
-	    <button type="button" class="close" data-dismiss="modal">×</button>
-	    <h3>Modal header</h3>
-	  </div>
-	  <div class="modal-body">
-	      <textarea id="textareaID"></textarea>
-	  </div>
-	  <div class="modal-footer">
-	    <a href="#" class="btn" data-dismiss="modal">Close</a>
-	    <a href="#" class="btn btn-primary">Save changes</a>
-	  </div>
-	</div>
-	-->
 	
 	</br></br>
 		<!-- Slides

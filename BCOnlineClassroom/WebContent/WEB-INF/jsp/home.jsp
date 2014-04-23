@@ -9,7 +9,6 @@
 <head>
 	<title>Blue Coffee</title>
 	
-	
 	<link type="text/css" rel="stylesheet" href="css/bootstrap.css"/>
 	<link href="http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
 	<link type="text/css" rel="stylesheet" href="css/style.css">
@@ -18,15 +17,8 @@
 	<style>
           body { background: #FFFFFF; }
           .container { background: ; }
-          #yes {
-          	text-align: right;
-          	margin: auto;
-          	left: 0;
-          	background: white;
-          	position: relative;
-          }
 		  .jumbotron {
-		  	margin-top: 100px; 
+		  	margin-top: 0px; 
 		  	margin-bottom: 50px;
 		  }
 		  p {
@@ -69,7 +61,7 @@ Hold a conference or study session with anyone in the department. </p>
         </div>
         
         <div class="row">
-        		<h2 style="margin-left: 20px"> Features: </h2></br></br>
+        		<h2 style="margin-left: 20px"> Features: </h2></br>
         		<center>
                 <div class="col-sm-4 column">
                         <h2><i class="largeicon icon-folder-open"></i> Materials </h2>
@@ -96,7 +88,7 @@ Hold a conference or study session with anyone in the department. </p>
 	
 	<!-- Footer and Modal
 	**************************************************-->
-	</br></br></br></br></br></br>
+	</br>
 	<div id="footer">
 	<hr/>	
 	<div class="container">

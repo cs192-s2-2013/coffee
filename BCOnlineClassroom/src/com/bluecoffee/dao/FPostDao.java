@@ -10,6 +10,7 @@ public interface FPostDao {
 	public void deleteData(int fPostID);
 	public FPost getFPostByID(int fPostID);
 	public int getIDByFPost(FPost fpost);
+	public List<FPost> getFPostByCategory(int fCategoryID);
 	public List<FPost> getFPostList();
 	public void updateCommentCount(int fPostID, int newCount);
 

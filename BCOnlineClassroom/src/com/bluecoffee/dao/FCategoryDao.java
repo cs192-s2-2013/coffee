@@ -9,5 +9,6 @@ public interface FCategoryDao {
 	public void insertCategory(FCategory fCategory);
 	public void deleteCategory(int fCategoryID);
 	public String getCategoryByID(int fCategoryID);
+	public List<FCategory> getCategoryList();
 	
 }

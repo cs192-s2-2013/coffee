@@ -8,23 +8,14 @@
 <html>
 <head>
 	<title>Blue Coffee</title>
-	
-	
-	<link type="text/css" rel="stylesheet" href="css/bootstrap.css"/>
-	<link href="http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
-	<link type="text/css" rel="stylesheet" href="css/style.css">
-	<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0-rc1/css/bootstrap.min.css" rel="stylesheet">
+	<t:css/>
 	
 	<style>
-          	body { background: #FFFFFF; }
-          	.container { background: ; }
 			#box {
 				overflow: auto;
 				background: transparent;
 				border: 1px solid rgb(192,192,192);
 			}
-			.jumbotron {
-				margin-top: -50px;
 			}
 			.modal-dialog {
 	          	width:450px; 

@@ -25,6 +25,7 @@ import com.bluecoffee.domain.FComment;
 import com.bluecoffee.domain.FTag;
 import com.bluecoffee.domain.FPostag;
 import com.bluecoffee.domain.MatFile;
+import com.bluecoffee.domain.MatFolder;
 import com.bluecoffee.domain.MatSubject;
 import com.bluecoffee.domain.User;
 import com.bluecoffee.domain.FCategory;
@@ -64,11 +65,18 @@ public class ForumController {
 	/*** Shows all posts in the forum ***/
 	@RequestMapping("/forum")
 	public String showPosts(@CookieValue(value="cs192session", defaultValue="none") String fooCookie,
-			@RequestParam(value = "r", required=false, defaultValue="0") int r, Model model){
+			@RequestParam(value = "r", required=false, defaultValue="0") int r, Model model, 
+			@RequestParam(value = "fc", required=false, defaultValue="-1") int fc){
 		
+		List<FPost> fPostList;
 		if(CookieHandler.decryptCookie(fooCookie)==null){ return "notfound"; }
 		
-		List<FPost> fPostList = fPostService.getFPostList();
+		List<FCategory> fCategoryList = fCategoryService.getCategoryList();
+		model.addAttribute("fCategoryList", fCategoryList);
+		
+		if(fc!=-1){ fPostList = fPostService.getFPostByCategory(fc); }
+		else { fPostList = fPostService.getFPostList(); }
+		
 		for(FPost fPost : fPostList){
 			User user = userService.getUserByUserID(fPost.getUserID());
 			fPost.setPoster(user.getFirstName()+" "+user.getLastName()+" ("+user.getUsername()+")");
@@ -76,6 +84,7 @@ public class ForumController {
 		Collections.reverse(fPostList);
 		model.addAttribute("fPostList", fPostList);
 		model.addAttribute("r", r);
+		model.addAttribute("fc", fc);
 		
 		return "forum";
 	}

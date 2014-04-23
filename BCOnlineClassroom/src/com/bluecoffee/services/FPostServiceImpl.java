@@ -33,6 +33,11 @@ public class FPostServiceImpl implements FPostService{
 	}
 	
 	@Override
+	public List<FPost> getFPostByCategory(int fCategoryID){
+		return fpostdao.getFPostByCategory(fCategoryID);
+	}
+	
+	@Override
 	public List<FPost> getFPostList() {
 		return fpostdao.getFPostList();
 	}

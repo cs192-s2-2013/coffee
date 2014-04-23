@@ -8,19 +8,9 @@
 <html>
 <head>
 	<title>Blue Coffee</title>
-	
-	
-	<link type="text/css" rel="stylesheet" href="css/bootstrap.css"/>
-	<link href="http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
-	<link type="text/css" rel="stylesheet" href="css/style.css">
-	<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0-rc1/css/bootstrap.min.css" rel="stylesheet">
-	
+	<t:css/>
 	<style>
-          body { background: #FFFFFF; }
-          .container { background: ; }
-          .jumbotron { margin-top: -50px; }
           i { font-size: 50px; }
-          
     </style>
 	
 </head>
@@ -47,6 +37,31 @@
 	
 	</br></br>
 	
+	
+	<!-- Add Subject
+	************************************************* -->
+	<c:if test="${sessionScope.user.getAdmin()=='true'}">
+		<form:form method="post" action="/addsubject" modelAttribute="matSubject">
+			<div class="row">
+				<div class="col-sm-6"></div>
+				<div class="col-sm-3" style="margin-left:60px">
+					<input type="text" name="subjectName" class="form-control" placeholder="Subject Title">
+				</div>
+				<div class="col-sm-1">
+					<button type="submit" class="btn btn-primary"><i class="icon-plus"></i></button>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-6"></div>
+				<div class="col-sm-3" style="margin-left:60px">
+					<input type="text" name="subjectDesc" class="form-control" placeholder="Subject Description">
+				</div>
+			</div>
+		</form:form>
+	</c:if>
+	
+	</br>
+	
 	<!-- Add Category
 	************************************************* -->
 	<form:form method="post" action="/addmatcategory" modelAttribute="matFolder">
@@ -56,7 +71,7 @@
 				<input type="text" name="folderName" class="form-control" placeholder="Add Category">
 			</div>
 			<div class="col-sm-1">
-				<button type="submit" class="btn btn-primary"><i class="largeicon icon-plus"></i></button>
+				<button type="submit" class="btn btn-primary"><i class="icon-plus"></i></button>
 			</div>
 		</div>
 	</form:form>	
@@ -75,7 +90,7 @@
 			<%} %>
 			<div class="col-sm-2">
 				<center>
-				<a href="subfolder?id=${matSubject.subjectName}"><i class="icon-folder-open" rel"tooltip" title="${matSubject.subjectName}"></i></a>
+				<a href="subfolder?id=${matSubject.subjectName}"><i class="icon-folder-open" rel="tooltip" title="${matSubject.subjectName}: ${matSubject.subjectDesc}"></i></a>
 				</br>
 				${matSubject.subjectName}<c:if test="${sessionScope.user.getAdmin()=='true'}"> <a href="deletesubject?sid=${matSubject.getMatSubjectID()}"><t class="largeicon icon-trash" rel="tooltip" title="Delete subject"></t></a> </c:if>
 				</br></br>

@@ -2,8 +2,20 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@attribute name="user" required="false" type="com.bluecoffee.domain.User"%>
 
-
-	<nav class="navbar navbar-inverse" role="navigation">
+	<style>
+		.navbar-default{
+			background-color: #FFFFFF;
+		}
+		.navbar-default .navbar-brand{
+			color: #428BCA;
+		}
+		.navbar-default .navbar-nav > li > a{
+			color: #428BCA;
+		}
+	</style>
+	
+	
+	<nav class="navbar navbar-default" role="navigation">
 	   <div class="navbar-header">
 	      <a class="navbar-brand" href="home">Online Classroom</a>
 	   </div>

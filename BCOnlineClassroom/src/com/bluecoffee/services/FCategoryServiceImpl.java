@@ -3,7 +3,6 @@ package com.bluecoffee.services;
 import java.util.List;
 
 import com.bluecoffee.domain.FCategory;
-import com.bluecoffee.dao.ChatConvoDao;
 import com.bluecoffee.dao.FCategoryDao;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +22,10 @@ public class FCategoryServiceImpl implements FCategoryService {
 	
 	public String getCategoryByID(int fCategoryID){
 		return fcategorydao.getCategoryByID(fCategoryID);
+	}
+	
+	public List<FCategory> getCategoryList(){
+		return fcategorydao.getCategoryList();
 	}
 	
 }

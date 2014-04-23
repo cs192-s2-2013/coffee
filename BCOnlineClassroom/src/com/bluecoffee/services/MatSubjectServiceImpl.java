@@ -23,7 +23,7 @@ public class MatSubjectServiceImpl implements MatSubjectService {
 	}
 	
 	@Override
-	public int getMatSubjectIDbyName(String name){
+	public MatSubject getMatSubjectIDbyName(String name){
 		return matsubjectdao.getMatSubjectIDbyName(name);
 	}
 	

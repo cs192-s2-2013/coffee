@@ -8,20 +8,7 @@
 <html>
 <head>
 	<title>Blue Coffee</title>
-	
-	
-	<link type="text/css" rel="stylesheet" href="css/bootstrap.css"/>
-	<link href="http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
-	<link type="text/css" rel="stylesheet" href="css/style.css">
-	<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0-rc1/css/bootstrap.min.css" rel="stylesheet">
-	
-	<style>
-          body { background: #FFFFFF; }
-          .container { background: ; }
-          .jumbotron { margin-top: -50px; }
-          textarea { resize: none; }
-    </style>
-	
+	<t:css/>
 </head>
 
 <body>

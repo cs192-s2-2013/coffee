@@ -10,8 +10,9 @@
 		http://www.springframework.org/schema/context
 		http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 
-	<mvc:resources mapping="/images/**" location="/resources/images/" />
 	<mvc:annotation-driven/>
+	<mvc:resources mapping="/images/**" location="/resources/images/" />
+	<mvc:resources mapping="/resources/**" location="/resources/" />
 	
 	<!-- telling container to take care of annotations stuff -->
 	<context:annotation-config />

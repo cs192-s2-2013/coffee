@@ -36,8 +36,15 @@ public class FCategoryDaoImpl implements FCategoryDao {
 		String sql = "SELECT fcategoryID, category FROM fcategory WHERE fcategoryID = " + fCategoryID;
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
 		fCategoryList = jdbcTemplate.query(sql, new FCategoryRowMapper());
-		
 		return fCategoryList.get(0).getFCategory();
+	}
+	
+	public List<FCategory> getCategoryList(){
+		List<FCategory> fCategoryList = new ArrayList<FCategory>();
+		String sql = "SELECT fcategoryID, category FROM fcategory";
+		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+		fCategoryList = jdbcTemplate.query(sql, new FCategoryRowMapper());
+		return fCategoryList;
 	}
 	
 }
