@@ -109,4 +109,17 @@ public class MatFileDaoImpl implements MatFileDao {
 		
 		return matFileList;
 	}
+	
+	public List<MatFile> getMatFileListByDescription(String searchString){
+		searchString = searchString.replace("'","''");
+		searchString = searchString.replace("\\", "\\\\");
+		
+		List<MatFile> matFileList = new ArrayList<MatFile>();
+		
+		String sql = "SELECT * FROM matfile WHERE fileDesc LIKE '%" +searchString+ "%'";
+		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+		matFileList = jdbcTemplate.query(sql, new MatFileRowMapper());
+		
+		return matFileList;
+	}
 }

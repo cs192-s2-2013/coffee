@@ -26,6 +26,7 @@ public class FPostExtractor implements ResultSetExtractor<FPost> {
 		fpost.setCommentCount(resultSet.getInt(4));
 		fpost.setPostDate(resultSet.getDate(5));
 		fpost.setUserID(resultSet.getInt(6));
+		fpost.setFCategoryID(resultSet.getInt(7));
 		
 		return fpost;
 	}

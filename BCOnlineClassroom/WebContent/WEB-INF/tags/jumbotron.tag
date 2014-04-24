@@ -19,6 +19,11 @@
 			<h5>Insightful discussion with your peers.</h5>
 		</c:when>
 		
+		<c:when test="${title=='Admin'}">
+			<h2><a href="admin">Admin Page</a></h2>
+			<h5></h5>
+		</c:when>
+		
 		<c:when test="${title=='notfound'}">
 			<h2>404: Page Not Found</h2>
 		</c:when>

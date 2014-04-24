@@ -24,14 +24,19 @@ import com.bluecoffee.domain.FPostag;
 import com.bluecoffee.domain.MatFile;
 import com.bluecoffee.domain.MatFolder;
 import com.bluecoffee.domain.MatSubject;
+import com.bluecoffee.domain.MatTag;
+import com.bluecoffee.domain.MatFileTag;
 import com.bluecoffee.domain.User;
 import com.bluecoffee.services.MatFileService;
 import com.bluecoffee.services.MatFolderService;
 import com.bluecoffee.services.MatSubjectService;
+import com.bluecoffee.services.MatTagService;
+import com.bluecoffee.services.MatFileTagService;
 import com.bluecoffee.services.UserService;
 
 import java.io.*;
 import java.util.*;
+import java.util.regex.*;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -50,6 +55,8 @@ public class MaterialsController {
 	@Autowired MatFileService matFileService;
 	@Autowired MatSubjectService matSubjectService;
 	@Autowired MatFolderService matFolderService;
+	@Autowired MatTagService matTagService;
+	@Autowired MatFileTagService matFileTagService;
 	@Autowired UserService userService;
 	
 	@RequestMapping("/materials")
@@ -107,8 +114,100 @@ public class MaterialsController {
 	public String searchfile(/*@ModelAttribute String s,*/ Model model, HttpServletRequest request){
 		
 		String s = request.getParameter("s");
+		s.toLowerCase();
 		
-		List<MatFile> matFileList = matFileService.getMatFileListByFilename(s);
+		List<MatFile> matFileList = new ArrayList<MatFile>();
+		List<MatFile> titleSearchMatFileList = new ArrayList<MatFile>();
+		List<MatFile> tagSearchMatFileList = new ArrayList<MatFile>();
+		List<MatFile> descriptionSearchMatFileList = new ArrayList<MatFile>();
+		
+		Pattern titlePattern = Pattern.compile("title:\"(.*?)\"");
+		Matcher titleMatcher = titlePattern.matcher(s);
+		Pattern tagPattern = Pattern.compile("tag:\"(.*?)\"");
+		Matcher tagMatcher = tagPattern.matcher(s);
+		Pattern descriptionPattern = Pattern.compile("description:\"(.*?)\"");
+		Matcher descriptionMatcher = descriptionPattern.matcher(s);
+		
+		if (titleMatcher.find() || tagMatcher.find() || descriptionMatcher.find()) {
+
+			List<List<MatFile>> listOfSearchResultLists = new ArrayList<List<MatFile>>();
+			int count = 0;
+			
+			titleMatcher.reset();
+			tagMatcher.reset();
+			descriptionMatcher.reset();
+			
+			if (titleMatcher.find()) {
+				String searchString = titleMatcher.group(1);
+				titleSearchMatFileList = matFileService.getMatFileListByFilename(searchString);
+				listOfSearchResultLists.add(titleSearchMatFileList);
+				count++;
+			}
+			
+			if (descriptionMatcher.find()) {
+				String searchString = descriptionMatcher.group(1);
+				descriptionSearchMatFileList = matFileService.getMatFileListByDescription(searchString);
+				listOfSearchResultLists.add(descriptionSearchMatFileList);
+				count++;
+			}
+			
+			if (tagMatcher.find()) {
+				int matTagID = matTagService.getMatTagID(s);
+				List<MatFileTag> matFileTagList = matFileTagService.getMatFileTagListByTagID(matTagID);
+				for(MatFileTag matFileTag : matFileTagList){
+					tagSearchMatFileList.add( matFileService.getMatFile(matFileTag.getMatFileID()) );	
+				}
+				listOfSearchResultLists.add(tagSearchMatFileList);
+				count++;
+			}
+			
+			//intersection of searchResultLists
+			if (count==1)	matFileList = listOfSearchResultLists.get(0);
+			else if (count==2) {
+				List<Integer> matFileIDList= new ArrayList<Integer>();
+				for (MatFile mf : listOfSearchResultLists.get(1))
+					matFileIDList.add(mf.getMatFileID());
+				
+				for (MatFile matFile : listOfSearchResultLists.get(0)) {
+					if (matFileIDList.contains(matFile.getMatFileID()))
+						matFileList.add(matFile);
+				}
+			}
+			else {
+				List<Integer> matFileIDList1= new ArrayList<Integer>();
+				for (MatFile mf : listOfSearchResultLists.get(1))
+					matFileIDList1.add(mf.getMatFileID());
+				List<Integer> matFileIDList2= new ArrayList<Integer>();
+				for (MatFile mf : listOfSearchResultLists.get(2))
+					matFileIDList2.add(mf.getMatFileID());
+				
+				for (MatFile matFile : listOfSearchResultLists.get(0)) {
+					if (matFileIDList1.contains(matFile.getMatFileID()) && matFileIDList2.contains(matFile.getMatFileID()))
+						matFileList.add(matFile);
+				}
+			}
+		}
+		
+		else {
+			titleSearchMatFileList = matFileService.getMatFileListByFilename(s);
+			for (MatFile matFile : titleSearchMatFileList) {
+				if (!matFileList.contains(matFile))	matFileList.add(matFile);
+			}
+			
+			descriptionSearchMatFileList = matFileService.getMatFileListByDescription(s);
+			for (MatFile matFile : descriptionSearchMatFileList) {
+				if (!matFileList.contains(matFile))	matFileList.add(matFile);
+			}
+			
+			int matTagID = matTagService.getMatTagID(s);
+			List<MatFileTag> matFileTagList = matFileTagService.getMatFileTagListByTagID(matTagID);
+			for(MatFileTag matFileTag : matFileTagList){
+				tagSearchMatFileList.add( matFileService.getMatFile(matFileTag.getMatFileID()) );	
+			}
+			for (MatFile matFile : tagSearchMatFileList)
+				if (!matFileList.contains(matFile))	matFileList.add(matFile);
+		}
+		
 		for(MatFile matFile : matFileList){
 			User user = userService.getUserByUserID(matFile.getUserID());
 			matFile.setUploader(user.getFirstName()+" "+user.getLastName()+" ("+user.getUsername()+")");

@@ -19,6 +19,7 @@ public interface MatFileService {
 	public List<MatFile> getMatFileListBySubjectName(String subjectName);
 	public List<MatFile> getMatFileListBySubjectFolder(String subjectName, int matFolderID);
 	public List<MatFile> getMatFileListByFilename(String filename);
+	public List<MatFile> getMatFileListByDescription(String searchString);
 	
 	public String getFileNameByID(int id);
 	

@@ -55,6 +55,11 @@ public class MatFileServiceImpl implements MatFileService {
 	}
 	
 	@Override
+	public List<MatFile> getMatFileListByDescription(String searchString){
+		return matfiledao.getMatFileListByDescription(searchString);
+	}
+	
+	@Override
 	public String getFileNameByID(int id){
 		return getMatFile(id).getFileName();
 	}

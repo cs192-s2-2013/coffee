@@ -13,6 +13,7 @@ public interface MatFileDao {
 	public MatFile getMatFile(int id);
 	public List<MatFile> getMatFileListBySubjectName(String subjectName);
 	public List<MatFile> getMatFileListBySubjectFolder(String subjectName, int matFolderID);
+	public List<MatFile> getMatFileListByDescription(String searchString);
 	public List<MatFile> getMatFileListByFilename(String filename);
 	
 }

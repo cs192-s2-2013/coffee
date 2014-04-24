@@ -11,6 +11,7 @@ public class FPost {
 	private int userID;
 	private String poster;
 	private String tag;
+	private int fCategoryID;
 	
 	public int getFPostID(){ return fPostID; }
 	public String getTitle(){ return title; }
@@ -20,6 +21,9 @@ public class FPost {
 	public int getUserID(){ return userID; }
 	public String getPoster(){ return poster; }
 	public String getTag(){ return tag; }
+	public int getFCategoryID(){ return fCategoryID; }
+	
+	
 	
 	public void setFPostID(int fPostID){ this.fPostID = fPostID; }
 	public void setTitle(String title){ this.title = title; }
@@ -29,4 +33,6 @@ public class FPost {
 	public void setUserID(int userID){ this.userID = userID; }
 	public void setPoster(String poster){ this.poster = poster; }
 	public void setTag(String tag){ this.tag = tag; }
+	public void setFCategoryID(int fCategoryID){ this.fCategoryID = fCategoryID; }
+	
 }

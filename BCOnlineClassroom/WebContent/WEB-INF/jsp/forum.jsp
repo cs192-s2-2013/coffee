@@ -8,7 +8,7 @@
 <html>
 <head>
 	<title>Blue Coffee</title>
-	<t:css/>	
+	<t:css/>
 </head>
 
 <body>
@@ -59,6 +59,13 @@
 				<div class="col-sm-2"></div>
 				<div class="col-sm-8">
 					<textarea class="form-control" name="tag" placeholder="Tags: tags-are-separated-by-spaces this-is-another-tag"></textarea>
+				</div>
+			</div>
+			</br>
+			<div class="row">
+				<div class="col-sm-2"></div>
+				<div class="col-sm-8">
+					<textarea class="form-control" name="fCategoryID" placeholder="CategoryID"></textarea>
 				</div>
 			</div>
 			</br>

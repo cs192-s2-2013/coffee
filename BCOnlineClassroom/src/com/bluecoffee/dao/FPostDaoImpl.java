@@ -18,11 +18,11 @@ public class FPostDaoImpl implements FPostDao {
 	@Override
 	public void insertData(FPost fpost){
 		
-		String sql = "INSERT INTO fpost (title, content, commentCount, postDate, userID) VALUES (?, ?, ?, ?, ?)";
+		String sql = "INSERT INTO fpost (title, content, commentCount, postDate, userID, fCategoryID) VALUES (?, ?, ?, ?, ?, ?)";
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
 		jdbcTemplate.update(
 				sql,
-				new Object[] { fpost.getTitle(), fpost.getContent(), fpost.getCommentCount(), fpost.getPostDate(), fpost.getUserID()});
+				new Object[] { fpost.getTitle(), fpost.getContent(), fpost.getCommentCount(), fpost.getPostDate(), fpost.getUserID(), fpost.getFCategoryID()});
 	}
 	
 	@Override

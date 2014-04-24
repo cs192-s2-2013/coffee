@@ -4,21 +4,21 @@
 	xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:mvc="http://www.springframework.org/schema/mvc"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans
-		http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+		http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/mvc
- 		http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd
+ 		http://www.springframework.org/schema/mvc/spring-mvc.xsd
 		http://www.springframework.org/schema/context
-		http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+		http://www.springframework.org/schema/context/spring-context.xsd">
 
-	<mvc:annotation-driven/>
-	<mvc:resources mapping="/images/**" location="/resources/images/" />
-	<mvc:resources mapping="/resources/**" location="/resources/" />
-	
 	<!-- telling container to take care of annotations stuff -->
 	<context:annotation-config />
 
 	<!-- declaring base package -->
 	<context:component-scan base-package="com.bluecoffee" />
+
+	<mvc:annotation-driven/>
+	<!-- <mvc:resources mapping="/images/**" location="/resources/images/" /> -->
+	<mvc:resources mapping="/resources/**" location="/resources/" />	
 
 	<!-- adding view resolver to show jsp's on browser -->
 	<bean id="viewResolver"
@@ -34,6 +34,10 @@
 	<bean id="matSubjectService" class="com.bluecoffee.services.MatSubjectServiceImpl" />
 	<bean id="matFolderDao" class="com.bluecoffee.dao.MatFolderDaoImpl" />
 	<bean id="matFolderService" class="com.bluecoffee.services.MatFolderServiceImpl" />
+	<bean id="matTagDao" class="com.bluecoffee.dao.MatTagDaoImpl" />
+	<bean id="matTagService" class="com.bluecoffee.services.MatTagServiceImpl" />
+	<bean id="matFileTagDao" class="com.bluecoffee.dao.MatFileTagDaoImpl" />
+	<bean id="matFileTagService" class="com.bluecoffee.services.MatFileTagServiceImpl" />
 	<bean id="userDao" class="com.bluecoffee.dao.UserDaoImpl" />
 	<bean id="userService" class="com.bluecoffee.services.UserServiceImpl" />
 	
