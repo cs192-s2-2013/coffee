@@ -8,7 +8,7 @@ public interface MatFileDao {
 
 	public void insertData(MatFile matFile);
 	public List<MatFile> getMatFileList();
-	public void updateData(MatFile matFile);
+	//public void updateData(MatFile matFile);
 	public void deleteData(int id);
 	public MatFile getMatFile(int id);
 	public List<MatFile> getMatFileListBySubjectName(String subjectName);

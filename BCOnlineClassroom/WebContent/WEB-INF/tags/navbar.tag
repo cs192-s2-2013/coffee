@@ -1,4 +1,4 @@
-<%@tag description="Generic Page Tag" pageEncoding="UTF-8"%>
+<%@tag description="Navigation Bar Tag" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@attribute name="user" required="false" type="com.bluecoffee.domain.User"%>
 
@@ -24,6 +24,9 @@
 	         <li><a href="materials">Materials</a></li>
 	         <li><a href="forum">Forum</a></li>
 	         <li><a href="chat">Chat</a></li>
+	         <c:if test="${user.getAdmin()}">
+	         	<li><a href="admin">Admin</a></li>
+	         </c:if>
 	      </ul>
 		<ul class="nav navbar-nav pull-right">
               <li><a>${user.getUsername()}<c:if test="${user.getAdmin()}"> (admin)</c:if></a></li>

@@ -37,7 +37,7 @@ public class MatFolderDaoImpl implements MatFolderDao {
 	}
 	
 	@Override
-	public void insertCategory(MatFolder matFolder){
+	public void insertFolder(MatFolder matFolder){
 		String sql = "INSERT INTO matfolder (folderName) VALUES (?)";
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
 		jdbcTemplate.update(
@@ -46,15 +46,15 @@ public class MatFolderDaoImpl implements MatFolderDao {
 	}
 	
 	@Override
-	public void deleteCategory(int matFolderID){
+	public void deleteFolder(int matFolderID){
 		String sql = "DELETE FROM matfolder WHERE matFolderID = " + matFolderID;
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
 		jdbcTemplate.update(sql);
 	}
 	
-	public void deleteFolder(int id){
+	/*public void deleteFolder(int id){
 		String sql = "delete from matfolder where matFolderID=" + id;
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
 		jdbcTemplate.update(sql);
-	}
+	}*/
 }

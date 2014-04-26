@@ -1,4 +1,4 @@
-<%@tag description="Generic Page Tag" pageEncoding="UTF-8"%>
+<%@tag description="CSS Tag" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 	<link type="text/css" rel="stylesheet" href="css/bootstrap.css"/>
@@ -26,5 +26,15 @@
 			        .btn {
 			            padding: 0.5em;
 			        }
+		.modal-dialog{ width: 450px; }
+		.modal-header { height: 50px; }
+		.modal-body{ height: 180px; }
+		.modal-footer{ height: 50px: }
+		#inbox, .btn-default{
+		        height: 35px; 
+		        width: 400px;
+		        margin-bottom: 4px;
+		        text-align: left;
+		}
     </style>
     

@@ -12,6 +12,8 @@ public interface FPostDao {
 	public int getIDByFPost(FPost fpost);
 	public List<FPost> getFPostByCategory(int fCategoryID);
 	public List<FPost> getFPostList();
+	public List<FPost> getFPostListByTitle(String searchString);
+	public List<FPost> getFPostListByContent(String searchString);
 	public void updateCommentCount(int fPostID, int newCount);
 
 }

@@ -6,16 +6,19 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Arrays;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
 public class Zipper {
     List<String> fileList;
     private String SOURCE_FOLDER;
+    private String[] selectedFiles;
  
-    Zipper(String SOURCE_FOLDER) {
+    Zipper(String SOURCE_FOLDER, String[] selectedFiles) {
 		fileList = new ArrayList<String>();
 		this.SOURCE_FOLDER = SOURCE_FOLDER;
+		this.selectedFiles = selectedFiles;
     }
  
     /**
@@ -69,7 +72,9 @@ public class Zipper {
 		if(node.isDirectory()) {
 			String[] subNote = node.list();
 			for(String filename : subNote) {
-				generateFileList(new File(node, filename));
+				if(Arrays.asList(selectedFiles).contains(filename)) { 
+					generateFileList(new File(node, filename));
+				}
 			}
 		}
     }

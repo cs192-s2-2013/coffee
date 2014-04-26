@@ -100,14 +100,6 @@ public class MaterialsController {
 		model.addAttribute("map", map);
 		
 		return "resource";
-		//return new ModelAndView("resource", "map", map);
-		/*
-		matFile = matFileService.getMatFile(id);
-
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("matFile", matFile);		
-		
-		return new ModelAndView("subfolder", "map", map);*/
 	}
 	
 	@RequestMapping("/searchfile")
@@ -152,7 +144,7 @@ public class MaterialsController {
 			}
 			
 			if (tagMatcher.find()) {
-				int matTagID = matTagService.getMatTagID(s);
+				int matTagID = matTagService.getMatTagID(tagMatcher.group(1));
 				List<MatFileTag> matFileTagList = matFileTagService.getMatFileTagListByTagID(matTagID);
 				for(MatFileTag matFileTag : matFileTagList){
 					tagSearchMatFileList.add( matFileService.getMatFile(matFileTag.getMatFileID()) );	
@@ -189,14 +181,16 @@ public class MaterialsController {
 		}
 		
 		else {
+			List<Integer> matFileIDList = new ArrayList<Integer>();
+			
 			titleSearchMatFileList = matFileService.getMatFileListByFilename(s);
 			for (MatFile matFile : titleSearchMatFileList) {
-				if (!matFileList.contains(matFile))	matFileList.add(matFile);
+				if (!matFileIDList.contains(matFile.getMatFileID()))	matFileIDList.add(matFile.getMatFileID());
 			}
 			
 			descriptionSearchMatFileList = matFileService.getMatFileListByDescription(s);
 			for (MatFile matFile : descriptionSearchMatFileList) {
-				if (!matFileList.contains(matFile))	matFileList.add(matFile);
+				if (!matFileIDList.contains(matFile.getMatFileID()))	matFileIDList.add(matFile.getMatFileID());
 			}
 			
 			int matTagID = matTagService.getMatTagID(s);
@@ -205,7 +199,10 @@ public class MaterialsController {
 				tagSearchMatFileList.add( matFileService.getMatFile(matFileTag.getMatFileID()) );	
 			}
 			for (MatFile matFile : tagSearchMatFileList)
-				if (!matFileList.contains(matFile))	matFileList.add(matFile);
+				if (!matFileIDList.contains(matFile.getMatFileID()))	matFileIDList.add(matFile.getMatFileID());
+			
+			for (int matFileID : matFileIDList)
+				matFileList.add(matFileService.getMatFile(matFileID));
 		}
 		
 		for(MatFile matFile : matFileList){
@@ -224,13 +221,13 @@ public class MaterialsController {
 		return "download";
 	}
 	
-	@RequestMapping("/upload")
+	/*@RequestMapping("/upload")
 	public String upload(@RequestParam String id, @RequestParam String sf, @ModelAttribute MatFile matFile, Model model) {
 		model.addAttribute("id", id);
 		model.addAttribute("sf", sf);
 		
 		return "upload";
-	}
+	}*/
 	
 	
 	/****************** FOR ADMIN ONLY **************************/
@@ -246,7 +243,7 @@ public class MaterialsController {
 		
 	}
 	
-	@RequestMapping("/deletesubject")
+	/*@RequestMapping("/deletesubject")
 	public String deleteSubject(@ModelAttribute("user") User user, @RequestParam int sid){
 		if(user.getAdmin()){
 			try{ matSubjectService.deleteSubject(sid); }
@@ -256,8 +253,8 @@ public class MaterialsController {
 			return "redirect:/materials";
 		}
 		else{ return "notfound"; }
-	}
-	
+	}*/
+	/*
 	@RequestMapping("/addsubject")
 	public String addSubject(@ModelAttribute("user") User user, @ModelAttribute MatSubject matSubject) {
 		//if subject exists return error
@@ -273,7 +270,7 @@ public class MaterialsController {
 			return "redirect:/materials";
 		}
 		else{ return "notfound"; }
-	}
+	}*/
 	
 	
 	/*************************************************************/
@@ -365,10 +362,10 @@ public class MaterialsController {
 	}
 	
 	/*** add materials category ***/
-	@RequestMapping("/addmatcategory")
+	@RequestMapping("/addfolder")
 	public String addCategory(@ModelAttribute MatFolder matFolder){
-		matFolderService.insertCategory(matFolder);
+		matFolderService.insertFolder(matFolder);
 		return "redirect:/materials";
 	}
-	
+
 }

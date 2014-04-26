@@ -48,7 +48,11 @@ public class BatchDownloadController {
 		
 		String SOURCE_FOLDER = "C:\\Users\\lara312\\Documents\\GitHub\\coffee\\BCOnlineClassroom\\WebContent\\downloads\\"+subjectName+"\\"+folderName;
 		
-    	Zipper zipper = new Zipper(SOURCE_FOLDER);
+		String[] selectedValues = request.getParameterValues("SelectedFiles");
+		if(selectedValues==null){
+			selectedValues = new String[0];
+		}
+    	Zipper zipper = new Zipper(SOURCE_FOLDER, selectedValues);
     	zipper.generateFileList(new File(SOURCE_FOLDER));
     	zipper.zipIt(OUTPUT_ZIP_FILE);
 		/****************************************/
@@ -99,7 +103,6 @@ public class BatchDownloadController {
 
 		inputStream.close();
 		outStream.close();
-		
 		/************************************/
 	}
 	

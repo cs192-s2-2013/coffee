@@ -12,6 +12,7 @@ public class FPost {
 	private String poster;
 	private String tag;
 	private int fCategoryID;
+	private String uploader;
 	
 	public int getFPostID(){ return fPostID; }
 	public String getTitle(){ return title; }
@@ -22,6 +23,7 @@ public class FPost {
 	public String getPoster(){ return poster; }
 	public String getTag(){ return tag; }
 	public int getFCategoryID(){ return fCategoryID; }
+	public String getUploader(){ return uploader; }
 	
 	
 	
@@ -34,5 +36,5 @@ public class FPost {
 	public void setPoster(String poster){ this.poster = poster; }
 	public void setTag(String tag){ this.tag = tag; }
 	public void setFCategoryID(int fCategoryID){ this.fCategoryID = fCategoryID; }
-	
+	public void setUploader(String uploader){ this.uploader = uploader; }
 }

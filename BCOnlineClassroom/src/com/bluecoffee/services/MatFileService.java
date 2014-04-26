@@ -14,7 +14,7 @@ public interface MatFileService {
 
 	public MatFile getMatFile(int id);
 
-	public void updateData(MatFile matFile);
+	//public void updateData(MatFile matFile);
 	
 	public List<MatFile> getMatFileListBySubjectName(String subjectName);
 	public List<MatFile> getMatFileListBySubjectFolder(String subjectName, int matFolderID);

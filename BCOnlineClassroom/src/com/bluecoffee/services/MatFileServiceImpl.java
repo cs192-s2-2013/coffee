@@ -33,11 +33,11 @@ public class MatFileServiceImpl implements MatFileService {
 		return matfiledao.getMatFile(id);
 	}
 
-	@Override
+	/*@Override
 	public void updateData(MatFile matFile) {
 		matfiledao.updateData(matFile);
 		
-	}
+	}*/
 
 	@Override
 	public List<MatFile> getMatFileListBySubjectName(String subjectName) {

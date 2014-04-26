@@ -42,6 +42,9 @@
                      <li><a href="materials">Materials</a></li>
                      <li><a href="forum">Forum</a></li>
                      <li><a href="chat">Chat</a></li>   
+                     <c:if test="${user.getAdmin()}">
+	         			<li><a href="admin">Admin</a></li>
+	         		</c:if>
                   </ul>
                   <ul class="nav navbar-nav pull-right">
                   	  <li><a>${sessionScope.user.getUsername()}<c:if test="${sessionScope.user.getAdmin()}"> (admin)</c:if></a></li>

@@ -1,4 +1,4 @@
-<%@tag description="Generic Page Tag" pageEncoding="UTF-8"%>
+<%@tag description="Jumbotron Tag" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@attribute name="title" required="true"%>
 

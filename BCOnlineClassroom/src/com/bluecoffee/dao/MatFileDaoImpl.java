@@ -18,20 +18,20 @@ public class MatFileDaoImpl implements MatFileDao {
 	public void insertData(MatFile matFile) {
 
 		String sql = "INSERT INTO matfile "
-				+ "(fileName, fileType, fileSize, uploadDate, path, matSubjectID, matFolderID, userID) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+				+ "(fileName, fileType, fileSize, uploadDate, path, matSubjectID, matFolderID, userID, fileDesc) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
 		jdbcTemplate.update(
 				sql,
 				new Object[] { matFile.getFileName(), matFile.getFileType(),
 						matFile.getFileSize(), matFile.getUploadDate(), matFile.getPath(),
-						matFile.getMatSubjectID(), matFile.getMatFolderID(), matFile.getUserID()});
+						matFile.getMatSubjectID(), matFile.getMatFolderID(), matFile.getUserID(), matFile.getFileDesc()});
 
 	}
 
 	public List<MatFile> getMatFileList() {
 		List<MatFile> matFileList = new ArrayList<MatFile>();
 
-		String sql = "SELECT * FROM matfile";
+		String sql = "SELECT matFileID, fileName, fileType, fileSize, uploadDate, path, matSubjectID, matFolderID, userID, fileDesc FROM matfile";
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
 		matFileList = jdbcTemplate.query(sql, new MatFileRowMapper());
 		
@@ -45,7 +45,7 @@ public class MatFileDaoImpl implements MatFileDao {
 		jdbcTemplate.update(sql);
 	}
 
-	@Override
+	/*@Override
 	public void updateData(MatFile matFile) {
 
 		String sql = "UPDATE matfile SET fileName = ?,fileType = ?, fileSize = ?, uploadDate = ?, path = ? where matFileID = ?";
@@ -55,13 +55,13 @@ public class MatFileDaoImpl implements MatFileDao {
 				new Object[] { matFile.getFileName(), matFile.getFileType(),
 						matFile.getFileSize(), matFile.getUploadDate(), matFile.getPath(), matFile.getMatFileID() });
 	
-	}
+	}*/
 
 	@Override
 	public MatFile getMatFile(int id) {
 		List<MatFile> matFileList = new ArrayList<MatFile>();
 		
-		String sql = "SELECT * FROM matfile WHERE matFileID= " + id;
+		String sql = "SELECT matFileID, fileName, fileType, fileSize, uploadDate, path, matSubjectID, matFolderID, userID, fileDesc FROM matfile WHERE matFileID= " + id;
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
 		matFileList = jdbcTemplate.query(sql, new MatFileRowMapper());
 		
@@ -74,7 +74,7 @@ public class MatFileDaoImpl implements MatFileDao {
 		
 		List<MatFile> matFileList = new ArrayList<MatFile>();
 
-		String sql = "SELECT matFileID, fileName, fileType, fileSize, uploadDate, path, matSubjectID, matFolderID, userID"
+		String sql = "SELECT matFileID, fileName, fileType, fileSize, uploadDate, path, matSubjectID, matFolderID, userID, fileDesc"
 				+ " FROM matfile NATURAL JOIN matsubject WHERE subjectName='"+subjectName+"'";
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
 		matFileList = jdbcTemplate.query(sql, new MatFileRowMapper());
@@ -89,7 +89,7 @@ public class MatFileDaoImpl implements MatFileDao {
 		
 		List<MatFile> matFileList = new ArrayList<MatFile>();
 
-		String sql = "SELECT matFileID, fileName, fileType, fileSize, uploadDate, path, matSubjectID, matFolderID, userID"
+		String sql = "SELECT matFileID, fileName, fileType, fileSize, uploadDate, path, matSubjectID, matFolderID, userID, fileDesc"
 				+ " FROM matfile NATURAL JOIN matsubject WHERE subjectName='"+subjectName+"' AND matFolderID="+matFolderID;
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
 		matFileList = jdbcTemplate.query(sql, new MatFileRowMapper());
@@ -103,7 +103,7 @@ public class MatFileDaoImpl implements MatFileDao {
 		
 		List<MatFile> matFileList = new ArrayList<MatFile>();
 		
-		String sql = "SELECT * FROM matfile WHERE filename LIKE '%" +filename+ "%'";
+		String sql = "SELECT matFileID, fileName, fileType, fileSize, uploadDate, path, matSubjectID, matFolderID, userID, fileDesc FROM matfile WHERE filename LIKE '%" +filename+ "%'";
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
 		matFileList = jdbcTemplate.query(sql, new MatFileRowMapper());
 		
@@ -116,7 +116,7 @@ public class MatFileDaoImpl implements MatFileDao {
 		
 		List<MatFile> matFileList = new ArrayList<MatFile>();
 		
-		String sql = "SELECT * FROM matfile WHERE fileDesc LIKE '%" +searchString+ "%'";
+		String sql = "SELECT matFileID, fileName, fileType, fileSize, uploadDate, path, matSubjectID, matFolderID, userID, fileDesc FROM matfile WHERE fileDesc LIKE '%" +searchString+ "%'";
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
 		matFileList = jdbcTemplate.query(sql, new MatFileRowMapper());
 		

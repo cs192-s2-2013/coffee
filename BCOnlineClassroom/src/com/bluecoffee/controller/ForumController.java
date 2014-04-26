@@ -38,6 +38,7 @@ import com.bluecoffee.services.FCategoryService;
 
 import java.io.*;
 import java.util.*;
+import java.util.regex.*;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -86,6 +87,8 @@ public class ForumController {
 		model.addAttribute("r", r);
 		model.addAttribute("fc", fc);
 		
+		model.addAttribute("fPost", new FPost());
+		
 		return "forum";
 	}
 	
@@ -120,19 +123,118 @@ public class ForumController {
 	@RequestMapping("/searchpost")
 	public String searchpost(Model model, HttpServletRequest request){
 		
-		String s = request.getParameter("s");
+		String s = request.getParameter("s");		
+		s.toLowerCase();
 		
-		int fTagID = fTagService.getFTagID(s);
-		List<FPostag> fPostagList = fPostagService.getFPostagListByTagID(fTagID);
 		List<FPost> fPostList = new ArrayList<FPost>();
-		for(FPostag fPostag : fPostagList){
-			fPostList.add( fPostService.getFPostByID(fPostag.getFPostID()) );	
+		List<FPost> titleSearchFPostList = new ArrayList<FPost>();
+		List<FPost> tagSearchFPostList = new ArrayList<FPost>();
+		List<FPost> descriptionSearchFPostList = new ArrayList<FPost>();
+		
+		Pattern titlePattern = Pattern.compile("title:\"(.*?)\"");
+		Matcher titleMatcher = titlePattern.matcher(s);
+		Pattern tagPattern = Pattern.compile("tag:\"(.*?)\"");
+		Matcher tagMatcher = tagPattern.matcher(s);
+		Pattern descriptionPattern = Pattern.compile("description:\"(.*?)\"");
+		Matcher descriptionMatcher = descriptionPattern.matcher(s);
+		
+		if (titleMatcher.find() || tagMatcher.find() || descriptionMatcher.find()) {
+			
+			List<List<FPost>> listOfSearchResultLists = new ArrayList<List<FPost>>();
+			int count = 0;
+			
+			titleMatcher.reset();
+			tagMatcher.reset();
+			descriptionMatcher.reset();
+			
+			if (titleMatcher.find()) {
+				String searchString = titleMatcher.group(1);
+				titleSearchFPostList = fPostService.getFPostListByTitle(searchString);
+				if (titleSearchFPostList.isEmpty()) System.out.println("No results for title!!");
+				listOfSearchResultLists.add(titleSearchFPostList);
+				count++;
+			}
+			
+			if (descriptionMatcher.find()) {
+				String searchString = descriptionMatcher.group(1);
+				descriptionSearchFPostList = fPostService.getFPostListByContent(searchString);
+				if (descriptionSearchFPostList.isEmpty()) System.out.println("No results for content!!");
+				listOfSearchResultLists.add(descriptionSearchFPostList);
+				count++;
+			}
+			
+			if (tagMatcher.find()) {
+				int fTagID = fTagService.getFTagID(tagMatcher.group(1));
+				List<FPostag> fPostagList = fPostagService.getFPostagListByTagID(fTagID);
+				for(FPostag fPostag : fPostagList){
+					tagSearchFPostList.add( fPostService.getFPostByID(fPostag.getFPostID()) );	
+				}
+				if (tagSearchFPostList.isEmpty()) System.out.println("No results for tag!!");
+				listOfSearchResultLists.add(tagSearchFPostList);
+				count++;
+			}
+			
+			//intersection of searchResultLists
+			if (count==1)	fPostList = listOfSearchResultLists.get(0);
+			else if (count==2) {
+				List<Integer> fPostIDList= new ArrayList<Integer>();
+				for (FPost fp : listOfSearchResultLists.get(1))
+					fPostIDList.add(fp.getFPostID());
+				
+				for (FPost fPost : listOfSearchResultLists.get(0)) {
+					if (fPostIDList.contains(fPost.getFPostID()))
+						fPostList.add(fPost);
+				}
+				System.out.println("Two fields");
+				if (listOfSearchResultLists.get(0).isEmpty()) System.out.println("1No results!!");
+				if (listOfSearchResultLists.get(1).isEmpty()) System.out.println("2No results!!");
+				if (fPostList.isEmpty()) System.out.println("3No results!!");
+			}
+			else {
+				List<Integer> fPostIDList1= new ArrayList<Integer>();
+				for (FPost fp : listOfSearchResultLists.get(1))
+					fPostIDList1.add(fp.getFPostID());
+				List<Integer> fPostIDList2= new ArrayList<Integer>();
+				for (FPost fp : listOfSearchResultLists.get(2))
+					fPostIDList2.add(fp.getFPostID());
+				for (FPost fPost : listOfSearchResultLists.get(0)) {
+					if (fPostIDList1.contains(fPost.getFPostID()) && fPostIDList2.contains(fPost.getFPostID()))
+						fPostList.add(fPost);
+				}
+				System.out.println("Three fields");
+			}
+		}
+		
+		else {
+			List<Integer> fPostIDList = new ArrayList<Integer>();
+			
+			titleSearchFPostList = fPostService.getFPostListByTitle(s);
+			for (FPost fPost : titleSearchFPostList) {
+				if (!fPostIDList.contains(fPost.getFPostID()))	fPostIDList.add(fPost.getFPostID());
+			}
+			
+			descriptionSearchFPostList = fPostService.getFPostListByContent(s);
+			for (FPost fPost : descriptionSearchFPostList) {
+				if (!fPostIDList.contains(fPost.getFPostID()))	fPostIDList.add(fPost.getFPostID());
+			}
+			
+			int fTagID = fTagService.getFTagID(s);
+			List<FPostag> fPostagList = fPostagService.getFPostagListByTagID(fTagID);
+			for(FPostag fPostag : fPostagList){
+				tagSearchFPostList.add( fPostService.getFPostByID(fPostag.getFPostID()) );	
+			}
+			for (FPost fPost : tagSearchFPostList)
+				if (!fPostIDList.contains(fPost.getFPostID()))	fPostIDList.add(fPost.getFPostID());
+			
+			for (int fPostID : fPostIDList)
+				fPostList.add(fPostService.getFPostByID(fPostID));
 		}
 		
 		for(FPost fPost : fPostList){
 			User user = userService.getUserByUserID(fPost.getUserID());
-			fPost.setPoster(user.getFirstName()+" "+user.getLastName()+" ("+user.getUsername()+")");
+			fPost.setUploader(user.getFirstName()+" "+user.getLastName()+" ("+user.getUsername()+")");
 		}
+		
 		Collections.reverse(fPostList);
 		model.addAttribute("fPostList", fPostList);
 		
@@ -202,6 +304,7 @@ public class ForumController {
 		else{ return "notfound"; }
 		
 	}
+	
 	
 	/*** for deleting comment ***/
 	@RequestMapping("/deletecomment")

@@ -38,44 +38,6 @@
 	</br></br>
 	
 	
-	<!-- Add Subject
-	************************************************* -->
-	<c:if test="${sessionScope.user.getAdmin()=='true'}">
-		<form:form method="post" action="/addsubject" modelAttribute="matSubject">
-			<div class="row">
-				<div class="col-sm-6"></div>
-				<div class="col-sm-3" style="margin-left:60px">
-					<input type="text" name="subjectName" class="form-control" placeholder="Subject Title">
-				</div>
-				<div class="col-sm-1">
-					<button type="submit" class="btn btn-primary"><i class="icon-plus"></i></button>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-sm-6"></div>
-				<div class="col-sm-3" style="margin-left:60px">
-					<input type="text" name="subjectDesc" class="form-control" placeholder="Subject Description">
-				</div>
-			</div>
-		</form:form>
-	</c:if>
-	
-	</br>
-	
-	<!-- Add Category
-	************************************************* -->
-	<form:form method="post" action="/addmatcategory" modelAttribute="matFolder">
-		<div class="row">
-			<div class="col-sm-6"></div>
-			<div class="col-sm-3" style="margin-left:60px">
-				<input type="text" name="folderName" class="form-control" placeholder="Add Category">
-			</div>
-			<div class="col-sm-1">
-				<button type="submit" class="btn btn-primary"><i class="icon-plus"></i></button>
-			</div>
-		</div>
-	</form:form>	
-	
 	<!--Subject Grid
 	*************************************************-->
 	<div class="container">

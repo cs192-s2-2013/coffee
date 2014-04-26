@@ -24,6 +24,7 @@ public class MatFileExtractor implements ResultSetExtractor<MatFile> {
 		matFile.setMatSubjectID(resultSet.getInt(7));
 		matFile.setMatFolderID(resultSet.getInt(8));
 		matFile.setUserID(resultSet.getInt(9));
+		matFile.setFileDesc(resultSet.getString(10));
 		
 		return matFile;
 	}

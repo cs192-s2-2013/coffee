@@ -82,6 +82,34 @@ public class FPostDaoImpl implements FPostDao {
 	}
 	
 	@Override
+	public List<FPost> getFPostListByTitle(String searchString) {
+		searchString = searchString.replace("'","''");
+		searchString = searchString.replace("\\", "\\\\");
+		
+		List<FPost> fPostList = new ArrayList<FPost>();
+		
+		String sql = "SELECT * FROM fpost WHERE title LIKE '%" +searchString+ "%'";
+		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+		fPostList = jdbcTemplate.query(sql, new FPostRowMapper());
+		
+		return fPostList;
+	}
+	
+	@Override
+	public List<FPost> getFPostListByContent(String searchString) {
+		searchString = searchString.replace("'","''");
+		searchString = searchString.replace("\\", "\\\\");
+		
+		List<FPost> fPostList = new ArrayList<FPost>();
+		
+		String sql = "SELECT * FROM fpost WHERE content LIKE '%" +searchString+ "%'";
+		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+		fPostList = jdbcTemplate.query(sql, new FPostRowMapper());
+		
+		return fPostList;
+	}
+	
+	@Override
 	public void updateCommentCount(int fPostID, int newCount){
 		
 		String sql = "UPDATE fpost SET commentCount=" +newCount

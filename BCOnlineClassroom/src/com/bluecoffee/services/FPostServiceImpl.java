@@ -43,6 +43,16 @@ public class FPostServiceImpl implements FPostService{
 	}
 	
 	@Override
+	public List<FPost> getFPostListByTitle(String searchString){
+		return fpostdao.getFPostListByTitle(searchString);
+	}
+	
+	@Override
+	public List<FPost> getFPostListByContent(String searchString){
+		return fpostdao.getFPostListByContent(searchString);
+	}
+	
+	@Override
 	public void incCommentCount(int fPostID){
 		FPost fPost = fpostdao.getFPostByID(fPostID);
 		fpostdao.updateCommentCount(fPostID, fPost.getCommentCount()+1);

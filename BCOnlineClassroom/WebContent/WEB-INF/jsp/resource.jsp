@@ -9,6 +9,7 @@
 <head>
 	<title>Blue Coffee</title>
 	<t:css/>
+	<t:jscheckbox/>
 	
 	<style>
           .modal-dialog {
@@ -28,7 +29,55 @@
 
 	<t:navbar user="${sessionScope.user}"/>
 	<t:jumbotron title="Materials"/>
+	<t:jsmodal/>
 	
+	<!-- MODAL -->
+<!-- 	<form:form method="post" action="fileUploaded?id=${id}&sf=${key}">
+<div id="login" class="modal show" tabindex="-1" role="dialog" aria-hidden="true">
+<div class="modal-dialog">
+<div class="modal-content">  
+           
+        <div class="modal-header">
+                <h4>File Upload</h4>  
+        </div>
+        
+        <div class="modal-body">
+                <input type="text" name="fileDesc" required class="form-control input-lg" placeholder="Description" id="inbox">
+                <input type="text" name="title" required class="form-control input-lg" placeholder="Tags" id="inbox">
+        
+                <div class="btn-group">
+                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" required>
+                                <span class="caret"></span> Select Category 
+                        </button>
+                        <ul class="dropdown-menu" role="menu" style="width:300px">
+                                <li><a href="#">Action</a></li>
+                                <li><a href="#">Another action</a></li>
+                                <li><a href="#">Something else here</a></li>
+                        </ul>
+                </div>
+        
+                <div class="fileinput fileinput-new" data-provides="fileinput">
+                        <form method="post" action="fileUploaded?id=${id}&sf=Slides" enctype="multipart/form-data">
+                                <span class="btn btn-default btn-file">
+                                        <span class="fileinput-new"></span>
+                                        <span class="fileinput-exists"></span>
+                                        <input type="file" name="file" size="50">
+                                </span>
+                                <span class="fileinput-filename"></span>
+                        </form>
+                </div> 
+        </div>
+  
+          <div class="modal-footer">
+              <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>  
+            <button type="submit" class="btn btn-primary">Submit</button>  
+          </div>
+        
+</div>
+</div>
+</div>
+</form:form>
+	 -->
 	
 	<!-- Subject Title
 	**************************************************-->
@@ -71,22 +120,13 @@
 	</c:if>		
 	
 	</br></br>
-		<!-- Slides
-	**************************************************-->
-<div class = "container">
-	<c:forEach var="key" items="${keys}">
-	<div class="container">
-		<div class="row">
-			<div class="col-sm-1"></div>
-			<div class="col-sm-7">
-				<h2>${key} <a href="batchdownload?sn=${id}&fn=Slides"><i class="largeicon icon-download-alt" rel="tooltip" title="Download slides folder"></i></a></h2>
-			</div>
-			<div class="col-md-4">
+
+			<!-- <div class="col-md-4">
 			
 				<div class="fileinput fileinput-new" data-provides="fileinput">
 					
 					 
-					<form method="post" action="fileUploaded?id=${id}&sf=Slides" enctype="multipart/form-data">
+					<form method="post" action="fileUploaded?id=${id}&sf=${key}" enctype="multipart/form-data">
 					<span class="btn btn-default btn-file">
 						<span class="fileinput-new"></span>
 						<span class="fileinput-exists"></span>
@@ -101,29 +141,50 @@
 					<br/>
 					
 				</div>
+			</div>-->
+	
+			<div class="col-md-4">
+				<div class="fileinput fileinput-new" data-provides="fileinput">
+					<button type="button" class="btn btn-info" data-toggle="modal" data-target="#inputupload">
+						Upload
+					</button>
+					<br/>	
+				</div>
+			</div>
+	
+	<!-- Folder
+	**************************************************-->
+<div class = "container">
+	<c:forEach var="key" items="${keys}">
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-1"></div>
+			<div class="col-sm-7">
+				<h2>${key} <a href="batchdownload?sn=${id}&fn=${key}"><i class="largeicon icon-download-alt" rel="tooltip" title="Download slides folder"></i></a></h2>
 			</div>
 		</div>
 	</div>
-	
-	
+					
 	<!-- Table (Slides)
 	**************************************************-->
 	
 	<div class="container">
-		<div class="row pull-center">
-			<b>
-			<div class="col-sm-1"></div>
-			<div class="col-sm-5 table-bordered">File</div>
-			<!-- <div class="col-sm-1 table-bordered">File Size</div> -->
-			<div class="col-sm-2 table-bordered">Upload Date</div>
-			<div class="col-sm-3 table-bordered">Uploaded by</div>
-			</b>
-		</div>
-		<!-- JSP generated code for all items in folder -->
+		<form name='SelectFiles' method="post" action="batchdownload?sn=${id}&fn=${key}">
+			<div class="row pull-center">
+				<b>
+				<div class="col-sm-1"></div>
+				<div class="col-sm-5 table-bordered"><input type=checkbox name="checkall" onClick="check(this.form.SelectedFiles)">File</div>
+				<!-- <div class="col-sm-1 table-bordered">File Size</div> -->
+				<div class="col-sm-2 table-bordered">Upload Date</div>
+				<div class="col-sm-3 table-bordered">Uploaded by</div>
+				</b>
+			</div>
+			<!-- JSP generated code for all items in folder -->
 			<c:forEach var="matFile" items="${map.get(key)}">
 				<div class="row pull-center">
 					<div class="col-sm-1"></div>				
 					<div class="col-sm-5 table-bordered">
+						<input type=checkbox name=SelectedFiles value="${matFile.fileName}">
 						<a href="download.do?fid=${matFile.matFileID}"><i class="largeicon icon-download-alt" rel="tooltip" title="Download ${matFile.fileName}"></i></a> 
 						<c:if test="${sessionScope.user.getAdmin()=='true'}"> <a href="deletematerial?mid=${matFile.matFileID}&id=${id}"><i class="largeicon icon-trash" rel="tooltip" title="Delete material"></i></a> </c:if>
 						${matFile.fileName}
@@ -134,7 +195,9 @@
 					<!-- <div class="col-sm-1 table-bordered"><a href="download.do?fid=${matFile.matFileID}">Download</a></div>	-->
 				</div>
 			</c:forEach>
-		</c:forEach>
+			<button type="submit" class="btn btn-primary" rel="tooltip"">Download</button> 		
+		</form>
+	</c:forEach>
 	</div>
 	
 	</br></br>

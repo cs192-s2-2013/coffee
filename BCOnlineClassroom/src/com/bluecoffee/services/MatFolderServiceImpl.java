@@ -23,13 +23,13 @@ public class MatFolderServiceImpl implements MatFolderService {
 	}
 	
 	@Override
-	public void insertCategory(MatFolder matFolder){
-		matfolderdao.insertCategory(matFolder);
+	public void insertFolder(MatFolder matFolder){
+		matfolderdao.insertFolder(matFolder);
 	}
 	
 	@Override
-	public void deleteCategory(int matFolderID){
-		matfolderdao.deleteCategory(matFolderID);
+	public void deleteFolder(int matFolderID){
+		matfolderdao.deleteFolder(matFolderID);
 	}
 	
 }
