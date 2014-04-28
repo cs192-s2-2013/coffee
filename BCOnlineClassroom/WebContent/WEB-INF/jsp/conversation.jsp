@@ -51,7 +51,7 @@
 	    $(document).ready(function(){
 	        $("[rel=tooltip]").tooltip({ placement: 'right'});
 	    });
-    </script>
+	</script>
 	
 </head>
 
@@ -143,6 +143,13 @@
 				<a href="conversation?c=${c}"><i class ="largeicon icon-star"></i></a>
 			</div>
 	</form:form>
+	
+	<script src="http://code.jquery.com/jquery-latest.js"></script>
+	<script>
+	setInterval(function() {
+	    $("messagebox").load("conversation?c="+$(chatConvoID)+" #messagebox");
+	}, 10000); // seconds to wait, miliseconds
+    </script>
 	
 	<script>
 		var d = document.getElementById("messagebox");

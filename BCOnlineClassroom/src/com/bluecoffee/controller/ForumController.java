@@ -69,14 +69,16 @@ public class ForumController {
 			@RequestParam(value = "r", required=false, defaultValue="0") int r, Model model, 
 			@RequestParam(value = "fc", required=false, defaultValue="-1") int fc){
 		
+		String fCategory;
+		
 		List<FPost> fPostList;
 		if(CookieHandler.decryptCookie(fooCookie)==null){ return "notfound"; }
 		
 		List<FCategory> fCategoryList = fCategoryService.getCategoryList();
 		model.addAttribute("fCategoryList", fCategoryList);
 		
-		if(fc!=-1){ fPostList = fPostService.getFPostByCategory(fc); }
-		else { fPostList = fPostService.getFPostList(); }
+		if(fc!=-1){ fPostList = fPostService.getFPostByCategory(fc); fCategory = fCategoryService.getCategoryByID(fc);}
+		else { fPostList = fPostService.getFPostList(); fCategory = "All posts";}
 		
 		for(FPost fPost : fPostList){
 			User user = userService.getUserByUserID(fPost.getUserID());
@@ -86,6 +88,7 @@ public class ForumController {
 		model.addAttribute("fPostList", fPostList);
 		model.addAttribute("r", r);
 		model.addAttribute("fc", fc);
+		model.addAttribute("fCategory", fCategory);
 		
 		model.addAttribute("fPost", new FPost());
 		

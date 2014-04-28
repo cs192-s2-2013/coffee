@@ -36,6 +36,17 @@ public class MatFolderDaoImpl implements MatFolderDao {
 		return matFolder.getMatFolderID();
 	}
 	
+	public String getNameByID(int matFolderID){
+		
+		MatFolder matFolder = new MatFolder();
+
+		String sql = "SELECT * FROM matfolder WHERE matFolderID="+matFolderID;
+		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+		matFolder = jdbcTemplate.query(sql, new MatFolderRowMapper()).get(0);
+		
+		return matFolder.getFolderName();
+	}
+	
 	@Override
 	public void insertFolder(MatFolder matFolder){
 		String sql = "INSERT INTO matfolder (folderName) VALUES (?)";

@@ -93,11 +93,13 @@ public class MaterialsController {
 		
 		MatSubject matSubject = matSubjectService.getMatSubjectIDbyName(id);
 
+		model.addAttribute("matFile", new MatFile()); /* for creating new matFile */
 		model.addAttribute("id", id);
 		model.addAttribute("desc", matSubject.getSubjectDesc());
 		model.addAttribute("success", us);
 		model.addAttribute("keys", keys);
 		model.addAttribute("map", map);
+		model.addAttribute("matFolderList", matFolderList);
 		
 		return "resource";
 	}
@@ -277,17 +279,18 @@ public class MaterialsController {
 	
 	
 	@RequestMapping("/fileUploaded")
-	public String uploadfile(@RequestParam String id, @RequestParam String sf, @ModelAttribute MatFile matFile, @ModelAttribute("user") User user, HttpServletRequest request) {
-
-		int uploadsuccessful=0;
+	public String uploadfile(@RequestParam String id/*, @ModelAttribute MatFile tempMatFile*/, @ModelAttribute("user") User user, HttpServletRequest request) {
 		
-		File file;
+		String fileDesc = "";//request.getParameter("fileDesc");
+		int matFolderID = 0;//Integer.parseInt(request.getParameter("matCategoryID"));
+		
+		int uploadsuccessful=0;
+		String subjectname = id;
+		String foldername = "";//matFolderService.getNameByID(matFolderID);
+
 		int maxFileSize = 5000 * 1024;
 		int maxMemSize = 5000 * 1024;
-		ServletContext context = request.getServletContext();
-		String filePath = context.getInitParameter("file-upload");
-		filePath = filePath + "\\" + id + "\\" + sf + "\\";
-
+		
 		// Verify the content type
 		String contentType = request.getContentType();
 		if ((contentType.indexOf("multipart/form-data") >= 0)) {
@@ -302,6 +305,8 @@ public class MaterialsController {
 		ServletFileUpload upload = new ServletFileUpload(factory);
 		// maximum file size to be uploaded.
 		upload.setSizeMax( maxFileSize );
+		
+		List<FileItem> fiList = new ArrayList<FileItem>();
 		try{ 
 			// Parse the request to get file items.
 			List fileItems = upload.parseRequest(request);
@@ -311,51 +316,82 @@ public class MaterialsController {
 
 			while ( i.hasNext () ) {
 				FileItem fi = (FileItem)i.next();
-				if ( !fi.isFormField () ){
-					// Get the uploaded file parameters
-					String fieldName = fi.getFieldName();
-					String fileName = fi.getName();
-					boolean isInMemory = fi.isInMemory();
-					long sizeInBytes = fi.getSize();
-					// Write the file
-					if( fileName.lastIndexOf("\\") >= 0 ){
-						file = new File( filePath + fileName.substring( fileName.lastIndexOf("\\")));
-						fileName = fileName.substring( fileName.lastIndexOf("\\")+1);
+				if ( fi.isFormField () ){
+					String name = fi.getFieldName();
+					String value = fi.getString();
+					   
+					if(name.equals("fileDesc")){
+						fileDesc = value;
 					}
-					else{
-						file = new File( filePath + fileName.substring(fileName.lastIndexOf("\\")+1));
-						fileName = fileName.substring(fileName.lastIndexOf("\\")+1);
+					else if(name.equals("matFolderID")){
+					  	matFolderID = Integer.parseInt(value);
+					   	foldername = matFolderService.getNameByID(matFolderID);
 					}
-				
-					fi.write( file );
-					
-					String[] parts = fileName.split("\\.");
-					
-					MatFile mf = new MatFile();
-					mf.setFileName(fileName);
-					mf.setFileType(parts[1]);
-					mf.setFileSize(fi.getSize());
-					mf.setUploadDate(new Date());
-					mf.setPath(filePath);
-					mf.setMatSubjectID(matSubjectService.getMatSubjectIDbyName(id).getMatSubjectID());
-					mf.setMatFolderID(matFolderService.getMatFolderIDbyName(sf));
-					
-					mf.setUserID(user.getUserID());
-					
-					matFileService.insertData(mf);
-					
-					
 				}
+				else {
+					fiList.add(fi);
+				}
+				
+			}
+		}catch(Exception e){
+			uploadsuccessful = -1;
+		}
+		
+		
+		File file;
+		ServletContext context = request.getServletContext();
+		String filePath = context.getInitParameter("file-upload");
+		filePath = filePath + "\\" + subjectname + "\\" + foldername + "\\";
+
+		try{ 
+			for( FileItem fi : fiList){
+				// Get the uploaded file parameters
+				String fieldName = fi.getFieldName();
+				String fileName = fi.getName();
+				boolean isInMemory = fi.isInMemory();
+				long sizeInBytes = fi.getSize();
+				// Write the file
+				if( fileName.lastIndexOf("\\") >= 0 ){
+					file = new File( filePath + fileName.substring( fileName.lastIndexOf("\\")));
+					fileName = fileName.substring( fileName.lastIndexOf("\\")+1);
+				}
+				else{
+					file = new File( filePath + fileName.substring(fileName.lastIndexOf("\\")+1));
+					fileName = fileName.substring(fileName.lastIndexOf("\\")+1);
+				}
+			
+				fi.write( file );
+				
+				String[] parts = fileName.split("\\.");
+				
+				MatFile mf = new MatFile();
+				mf.setFileName(fileName);
+				mf.setFileType(parts[1]);
+				mf.setFileSize(fi.getSize());
+				mf.setUploadDate(new Date());
+				mf.setPath(filePath);
+				mf.setMatSubjectID(matSubjectService.getMatSubjectIDbyName(id).getMatSubjectID());
+				//mf.setMatFolderID(matFolderService.getMatFolderIDbyName(foldername));
+				mf.setMatFolderID(matFolderID);
+				mf.setFileDesc(fileDesc);
+				
+				mf.setUserID(user.getUserID());
+				
+				matFileService.insertData(mf);
+				
+							
 			}
 			
 			uploadsuccessful = 1;
 		}catch(Exception ex) {
 			//System.out.println(ex);
 			uploadsuccessful = -1;
+
 		}
 		}
 		else{
 			uploadsuccessful = -1;
+
 		}
 		
 		return "redirect:/subfolder?id="+id+"&us="+uploadsuccessful;

@@ -6,33 +6,46 @@
 <%@taglib tagdir="/WEB-INF/tags" prefix="t"%>
 
 <html>
+
+<style>
+
+</style>
+
 <head>
 	<title>Blue Coffee</title>
+	<script type="text/javascript" src="<c:url value="resources/js/jquery.js" />"> </script>
+	<script type="text/javascript" src="<c:url value="resources/js/bootstrap.js" />"> </script>
 	<t:css/>
+	<t:jsddown/>
+	
+	
 </head>
 
 <body>
-
-	<t:navbar user="${sessionScope.user}"/>
-	<t:jumbotron title="Forum"/>
+            <t:navbar user="${sessionScope.user}"/>
+			<t:jumbotron title="Forum"/>
 	
-	<!-- Search Bar
-	************************************************* -->
-	<form:form method="post" action="/searchpost">
+	<c:choose>
+	<c:when test="${r=='1'}">
+	
+		<!-- Search Bar
+		************************************************* -->
+	
 		<div class="row">
 			<div class="col-sm-7"></div>
+			<form:form method="post" action="/searchpost">
 			<div class="col-sm-3">
 				<input type="text" name="s" class="form-control" placeholder="Find posts">
 			</div>
 			<div class="col-sm-1">
 				<button type="submit" class="btn btn-primary"><i class="icon-search" style="font-size:15px;"></i></button>
 			</div>
+			</form:form>
 		</div>
-	</form:form>	
+		
 	
 	
-	<c:choose>
-	<c:when test="${r=='1'}">
+	
 		<!-- Input question
 		**************************************************-->
 		<div class="container">
@@ -92,27 +105,65 @@
 	</c:when>
 	<c:otherwise>
 		<div class="row">
-			<div class="col-sm-2"></div>
-				<div class="col-sm-1" style="margin-bottom:20px"><a href="forum?r=1"><button type="ask" class="btn btn-primary">Ask a question</button></a></div>
+			<div class="col-sm-1"></div>
+			<div class="col-sm-1" style="margin-bottom:20px"><a href="forum?r=1"><button type="ask" class="btn btn-primary">Ask a question</button></a></div>
+			<div class="col-sm-5"></div>
+			<form:form method="post" action="/searchpost">
+			<div class="col-sm-3">
+				<input type="text" name="s" class="form-control" placeholder="Find posts">
+			</div>
+			<div class="col-sm-1">
+				<button type="submit" class="btn btn-primary"><i class="icon-search" style="font-size:15px;"></i></button>
+			</div>
+			</form:form>
 		</div>
 	</c:otherwise>
 	</c:choose>
-	
-	
-	<!-- List of categories
+
+
+
+	<!-- Category title
 	**************************************************-->
+	<div class="row">
+		<div class="col-sm-3">
+		<div class="row">
+			<div class="col-sm-3"></div>
+			<div class="col-sm-8"><h3>Categories</h3></div>
+		</div>
+		</div>
+		<div class="col-sm-4">
+			<h2>${fCategory}</h2>
+		</div>
+	</div>
 	
-	<c:forEach var="fCategory" items="${fCategoryList}">
-		<a href="forum?fc=${fCategory.getFCategoryID()}">${fCategory.getFCategory()}</a>						
-		<br/>
-	</c:forEach>
+
+	
+<div class="row">
+
+	<div class="col-sm-3">
+		<div class="row">
+			<div class="col-sm-3"></div>
+			<div class="col-sm-8 table-bordered">
+				<h4><a href="forum?fc=-1">All posts</a></h4>
+			</div>
+		</div>
+		<c:forEach var="fCategory" items="${fCategoryList}">
+			<div class="row">
+				<div class="col-sm-3"></div>
+				<div class="col-sm-8 table-bordered">
+					<h4><a href="forum?fc=${fCategory.getFCategoryID()}">${fCategory.getFCategory()}</a></h4>
+				</div>
+			</div>
+		</c:forEach>
+	</div>	
+	
+	<div class="col-sm-9">
 	
 	<!-- List of questions
 	**************************************************-->
-	<c:forEach var="forumItem" items="${fPostList}">
-		<div class="container">
+	<div class="container">
+		<c:forEach var="forumItem" items="${fPostList}">
 			<div class="row">
-				<div class="col-sm-1"></div>
 				<div class="col-sm-8 table-bordered">
 					<h4><a href="viewpost?pid=${forumItem.getFPostID()}">${forumItem.title}</a></h4>
 					<h5>Posted by ${forumItem.poster} on ${forumItem.postDate}
@@ -129,9 +180,14 @@
 					</c:choose>
 				</center></div>
 			</div>
-		</div>
-	</c:forEach>
+		</c:forEach>
+	</div>
 	
+	</div>
+		
+	
+		
+</div>
 	
 	<!-- Footer and Modal
 	**************************************************-->
@@ -170,7 +226,7 @@
 			</div>
 		</div>
 	</div>
-	
+
 	<script src="js/jquery.js"></script>
 	<script src="js/bootstrap.js"></script>
 	<script src="js/contentHover.js"></script>
@@ -206,8 +262,9 @@
 			});
 			
 		});
-	
+		
 	</script>
+
 </body>
 </html>
 

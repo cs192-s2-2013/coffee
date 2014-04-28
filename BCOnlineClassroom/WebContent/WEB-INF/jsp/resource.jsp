@@ -8,8 +8,10 @@
 <html>
 <head>
 	<title>Blue Coffee</title>
+	<script type="text/javascript" src="<c:url value="resources/js/jquery.js" />"> </script>
 	<t:css/>
 	<t:jscheckbox/>
+	<t:jsmodal/>
 	
 	<style>
           .modal-dialog {
@@ -29,21 +31,19 @@
 
 	<t:navbar user="${sessionScope.user}"/>
 	<t:jumbotron title="Materials"/>
-	<t:jsmodal/>
 	
 	<!-- MODAL -->
-<!-- 	<form:form method="post" action="fileUploaded?id=${id}&sf=${key}">
-<div id="login" class="modal show" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div id="inputupload" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
 <div class="modal-dialog">
 <div class="modal-content">  
-           
+        <form:form method="post" action="fileUploaded?id=${id}" modelAttribute="matFile" enctype="multipart/form-data">
         <div class="modal-header">
                 <h4>File Upload</h4>  
         </div>
-        
         <div class="modal-body">
-                <input type="text" name="fileDesc" required class="form-control input-lg" placeholder="Description" id="inbox">
-                <input type="text" name="title" required class="form-control input-lg" placeholder="Tags" id="inbox">
+	            <input type="text" name="fileDesc" required class="form-control input-lg" placeholder="Description" id="inbox">
+                <!-- <input type="text" name="tags" required class="form-control input-lg" placeholder="Tags" id="inbox">
         
                 <div class="btn-group">
                         <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" required>
@@ -55,30 +55,39 @@
                                 <li><a href="#">Something else here</a></li>
                         </ul>
                 </div>
-        
+        		 -->
+				<div class="col-sm-8">
+				<tr>
+					<td>Category: </td>
+					<form:select path="matFolderID">
+					<c:forEach var="matFolder" items="${matFolderList}">
+						<option value="${matFolder.getMatFolderID()}">
+                    	<c:out value="${matFolder.getFolderName()}"></c:out>
+                		</option>
+					</c:forEach>
+					</form:select>
+				</tr>
+				</div>
+				
                 <div class="fileinput fileinput-new" data-provides="fileinput">
-                        <form method="post" action="fileUploaded?id=${id}&sf=Slides" enctype="multipart/form-data">
                                 <span class="btn btn-default btn-file">
                                         <span class="fileinput-new"></span>
                                         <span class="fileinput-exists"></span>
                                         <input type="file" name="file" size="50">
                                 </span>
                                 <span class="fileinput-filename"></span>
-                        </form>
                 </div> 
         </div>
   
           <div class="modal-footer">
-              <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>  
+              <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>  
             <button type="submit" class="btn btn-primary">Submit</button>  
           </div>
-        
+        </form:form>
 </div>
 </div>
 </div>
-</form:form>
-	 -->
-	
+
 	<!-- Subject Title
 	**************************************************-->
 	
