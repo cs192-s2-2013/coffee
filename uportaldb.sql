@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 21, 2014 at 11:28 AM
+-- Generation Time: Apr 29, 2014 at 05:36 PM
 -- Server version: 5.6.14
 -- PHP Version: 5.5.6
 
@@ -99,7 +99,7 @@ CREATE TABLE IF NOT EXISTS `chatconvo` (
   `chatConvoID` int(11) NOT NULL AUTO_INCREMENT,
   `title` text NOT NULL,
   PRIMARY KEY (`chatConvoID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=42 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=43 ;
 
 --
 -- Dumping data for table `chatconvo`
@@ -118,7 +118,8 @@ INSERT INTO `chatconvo` (`chatConvoID`, `title`) VALUES
 (38, 'Let''s chat some more'),
 (39, 'NoSQL'),
 (40, 'CS145 MP'),
-(41, 'Hi Kat!');
+(41, 'Hi Kat!'),
+(42, 'blahblah');
 
 -- --------------------------------------------------------
 
@@ -133,7 +134,7 @@ CREATE TABLE IF NOT EXISTS `chatmember` (
   PRIMARY KEY (`chatMemberID`),
   KEY `chatmemberFK` (`chatConvoID`),
   KEY `chatmemberFK2` (`userID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=91 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=93 ;
 
 --
 -- Dumping data for table `chatmember`
@@ -168,7 +169,9 @@ INSERT INTO `chatmember` (`chatMemberID`, `chatConvoID`, `userID`) VALUES
 (87, 39, 1),
 (88, 40, 5),
 (89, 40, 6),
-(90, 41, 6);
+(90, 41, 6),
+(91, 42, 5),
+(92, 42, 10);
 
 -- --------------------------------------------------------
 
@@ -185,7 +188,7 @@ CREATE TABLE IF NOT EXISTS `chatmessage` (
   PRIMARY KEY (`chatMessageID`),
   KEY `chatmessageFK` (`userID`),
   KEY `chatmessageFK2` (`chatConvoID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=150 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=168 ;
 
 --
 -- Dumping data for table `chatmessage`
@@ -295,7 +298,25 @@ INSERT INTO `chatmessage` (`chatMessageID`, `message`, `messageDate`, `userID`, 
 (146, 'Hi', '2014-04-12', 7, 39),
 (147, 'Hiiiiiiii', '2014-04-12', 7, 40),
 (148, 'Hellooooo', '2014-04-12', 7, 41),
-(149, 'Hellooooo', '2014-04-12', 7, 41);
+(149, 'Hellooooo', '2014-04-12', 7, 41),
+(150, 'Helloooooooo', '2014-04-28', 10, 42),
+(151, 'Is anybody there?', '2014-04-28', 10, 42),
+(152, 'There', '2014-04-28', 10, 42),
+(153, 'there', '2014-04-28', 10, 42),
+(154, 'Hello', '2014-04-28', 5, 42),
+(155, 'hello', '2014-04-28', 5, 42),
+(156, 'hello', '2014-04-28', 5, 42),
+(157, 'sjhdfksjdhfalkjgdklfjgnarg', '2014-04-28', 10, 42),
+(158, 'rdtrd', '2014-04-28', 10, 42),
+(159, 'tyruetyjefgjgj56usfh', '2014-04-28', 5, 42),
+(160, '', '2014-04-28', 10, 42),
+(161, 'hello', '2014-04-29', 6, 34),
+(162, 'hello', '2014-04-29', 6, 34),
+(163, 'yow', '2014-04-29', 6, 34),
+(164, 'hello', '2014-04-29', 5, 34),
+(165, 'hoy', '2014-04-29', 6, 34),
+(166, 'ano', '2014-04-29', 5, 34),
+(167, 'wew', '2014-04-29', 6, 34);
 
 -- --------------------------------------------------------
 
@@ -308,15 +329,15 @@ CREATE TABLE IF NOT EXISTS `chatonline` (
   `userID` int(11) NOT NULL,
   PRIMARY KEY (`chatOnlineID`),
   KEY `chatonlineFK` (`userID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=130 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=167 ;
 
 --
 -- Dumping data for table `chatonline`
 --
 
 INSERT INTO `chatonline` (`chatOnlineID`, `userID`) VALUES
-(129, 5),
-(127, 6),
+(163, 5),
+(166, 7),
 (122, 8);
 
 -- --------------------------------------------------------
@@ -646,14 +667,16 @@ CREATE TABLE IF NOT EXISTS `fcategory` (
   `fcategoryID` int(11) NOT NULL AUTO_INCREMENT,
   `category` text NOT NULL,
   PRIMARY KEY (`fcategoryID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
 
 --
 -- Dumping data for table `fcategory`
 --
 
 INSERT INTO `fcategory` (`fcategoryID`, `category`) VALUES
-(0, 'General');
+(0, 'General'),
+(3, 'Hello'),
+(4, 'hello');
 
 -- --------------------------------------------------------
 
@@ -670,14 +693,17 @@ CREATE TABLE IF NOT EXISTS `fcomment` (
   PRIMARY KEY (`fcommentID`),
   KEY `fcommentFK` (`userID`),
   KEY `fcommentFK2` (`fpostID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
 
 --
 -- Dumping data for table `fcomment`
 --
 
 INSERT INTO `fcomment` (`fcommentID`, `content`, `commentDate`, `fpostID`, `userID`) VALUES
-(7, 'Boo', '2014-04-15', 69, 6);
+(7, 'Boo', '2014-04-15', 69, 6),
+(8, 'Hello', '2014-04-25', 71, 5),
+(9, 'Na jin tian Ca dao zuo tian Kong bai yi pian Na yi tian Zai na yi tian Ke yi ji xu Wei wa qing jie Zai zhe jiao Zha pian shui pei Zai ni shen bian Na jin tian Ca dao zuo tian Kong bai yi pian Na yi tian Zai na yi tian Ke yi ji xu Wei wa qing jie Zai zhe jiao Zha pian shui pei Zai ni shen bian Na jin tian Ca dao zuo tian Kong bai yi pian Na yi tian Zai na yi tian Ke yi ji xu Wei wa qing jie Zai zhe jiao Zha pian shui pei Zai ni shen bian ', '2014-04-25', 69, 5),
+(10, ':p', '2014-04-26', 72, 5);
 
 -- --------------------------------------------------------
 
@@ -696,16 +722,21 @@ CREATE TABLE IF NOT EXISTS `fpost` (
   PRIMARY KEY (`fpostID`),
   KEY `fpostFK` (`userID`),
   KEY `fpostFK2` (`fcategoryID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=72 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=77 ;
 
 --
 -- Dumping data for table `fpost`
 --
 
 INSERT INTO `fpost` (`fpostID`, `title`, `content`, `commentCount`, `postDate`, `userID`, `fcategoryID`) VALUES
-(69, 'Mei you ni Wo hui shi shui Xin ting zi na li Do bu dui', 'Na jin tian Ca dao zuo tian Kong bai yi pian Na yi tian Zai na yi tian Ke yi ji xu Wei wa qing jie Zai zhe jiao Zha pian shui pei Zai ni shen bian', 1, '2014-04-11', 7, 0),
+(69, 'Mei you ni Wo hui shi shui Xin ting zi na li Do bu dui', 'Na jin tian Ca dao zuo tian Kong bai yi pian Na yi tian Zai na yi tian Ke yi ji xu Wei wa qing jie Zai zhe jiao Zha pian shui pei Zai ni shen bian', 2, '2014-04-11', 7, 0),
 (70, 'How do I add modals in JSP?', 'I need to be able to add modals in my JSP code.', 0, '2014-04-11', 5, 0),
-(71, 'How to auto-refresh a jsp?', 'I need my jsp file to auto-refresh...', 0, '2014-04-11', 5, 0);
+(71, 'How to auto-refresh a jsp?', 'I need my jsp file to auto-refresh...', 1, '2014-04-11', 5, 0),
+(72, 'Question', 'Detail', 1, '2014-04-24', 5, 0),
+(73, 'ASDFGH', 'qwertyu', 0, '2014-04-24', 5, 3),
+(74, 'asdfg', 'asdfgh', 0, '2014-04-25', 5, 3),
+(75, 'How to get inverse of a matrix', 'A = [(1,0,0),(0,1,0),(0,0,1)]', 0, '2014-04-26', 7, 0),
+(76, 'hello', 'modal', 0, '2014-04-29', 5, 0);
 
 -- --------------------------------------------------------
 
@@ -720,7 +751,19 @@ CREATE TABLE IF NOT EXISTS `fpostag` (
   PRIMARY KEY (`fpostagID`),
   KEY `fpostagFK` (`fpostID`),
   KEY `fpostagFK2` (`ftagID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
+
+--
+-- Dumping data for table `fpostag`
+--
+
+INSERT INTO `fpostag` (`fpostagID`, `fpostID`, `ftagID`) VALUES
+(1, 72, 66),
+(2, 73, 67),
+(3, 74, 69),
+(4, 75, 81),
+(5, 75, 82),
+(6, 76, 94);
 
 -- --------------------------------------------------------
 
@@ -732,7 +775,7 @@ CREATE TABLE IF NOT EXISTS `ftag` (
   `ftagID` int(11) NOT NULL AUTO_INCREMENT,
   `tag` text NOT NULL,
   PRIMARY KEY (`ftagID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=66 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=95 ;
 
 --
 -- Dumping data for table `ftag`
@@ -773,7 +816,36 @@ INSERT INTO `ftag` (`ftagID`, `tag`) VALUES
 (62, 'another-tag'),
 (63, 'tag'),
 (64, 'werghjxcv'),
-(65, 'blah');
+(65, 'blah'),
+(66, 'tags'),
+(67, '123456'),
+(68, 'sdfg'),
+(69, 'asdfghjk'),
+(70, 'title:"asdf"'),
+(71, 'asdf;llkj'),
+(72, 'asdfsdflgjo;srdtlhj'),
+(73, 'hello'),
+(74, 'tag:"tag" title:"ques" description:"det"'),
+(75, 'tag:"tag"'),
+(76, 'tags:"tag"'),
+(77, 'q'),
+(78, 'h'),
+(79, 'tag:"tag" description:"det"'),
+(80, 'tag:"tag" description:"det" title:"q"'),
+(81, 'matrix'),
+(82, 'inverse'),
+(83, 'tag:"matrix"'),
+(84, 'tag:"tag" title:"q" description:"det"'),
+(85, 'tag:"tag" title:"q"'),
+(86, 'tag:"tag" description:"q"'),
+(87, 'tag:"tag" description:"q"'),
+(88, 'tag:"matrix" title:"inverse"'),
+(89, 'matri'),
+(90, 'tag:"matrix" title:"matrix"'),
+(91, 'tag:"tags" description:"det" title:"q"'),
+(92, 'title:"q" description:"det" tag:"tags"'),
+(93, 'tag:"tags"'),
+(94, 'ohyeah');
 
 -- --------------------------------------------------------
 
@@ -792,7 +864,7 @@ CREATE TABLE IF NOT EXISTS `hitcounter` (
 --
 
 INSERT INTO `hitcounter` (`page`, `views`) VALUES
-('homepage', 123);
+('homepage', 128);
 
 -- --------------------------------------------------------
 
@@ -841,15 +913,15 @@ CREATE TABLE IF NOT EXISTS `matfile` (
   KEY `matfileFK2` (`matSubjectID`),
   KEY `matfileFK` (`matFolderID`),
   KEY `userID` (`userID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=103 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=121 ;
 
 --
 -- Dumping data for table `matfile`
 --
 
 INSERT INTO `matfile` (`matFileID`, `fileName`, `fileType`, `fileSize`, `uploadDate`, `path`, `matSubjectID`, `matFolderID`, `userID`, `fileDesc`) VALUES
-(80, 'CS 130 - Lesson 1.pdf', 'pdf', 474982, '2014-04-12', 'C:\\Users\\lara312\\Documents\\GitHub\\coffee\\BCOnlineClassroom\\WebContent\\downloads\\CS 130\\Slides\\', 7, 1, 5, NULL),
-(81, 'CS 130 - Lesson 2.pdf', 'pdf', 273616, '2014-04-12', 'C:\\Users\\lara312\\Documents\\GitHub\\coffee\\BCOnlineClassroom\\WebContent\\downloads\\CS 130\\Slides\\', 7, 1, 5, NULL),
+(80, 'CS 130 - Lesson 1.pdf', 'pdf', 474982, '2014-04-12', 'C:\\Users\\lara312\\Documents\\GitHub\\coffee\\BCOnlineClassroom\\WebContent\\downloads\\CS 130\\Slides\\', 7, 1, 5, 'Introduction to matrices, determinants, matrix inverse'),
+(81, 'CS 130 - Lesson 2.pdf', 'pdf', 273616, '2014-04-12', 'C:\\Users\\lara312\\Documents\\GitHub\\coffee\\BCOnlineClassroom\\WebContent\\downloads\\CS 130\\Slides\\', 7, 1, 5, 'More on determinants'),
 (82, 'CS 130 - Lesson 3.pdf', 'pdf', 431795, '2014-04-12', 'C:\\Users\\lara312\\Documents\\GitHub\\coffee\\BCOnlineClassroom\\WebContent\\downloads\\CS 130\\Slides\\', 7, 1, 5, NULL),
 (83, 'CS 130 - Lesson 4.pdf', 'pdf', 236032, '2014-04-12', 'C:\\Users\\lara312\\Documents\\GitHub\\coffee\\BCOnlineClassroom\\WebContent\\downloads\\CS 130\\Slides\\', 7, 1, 5, NULL),
 (84, 'CS 130 - Lesson 5.pdf', 'pdf', 333960, '2014-04-12', 'C:\\Users\\lara312\\Documents\\GitHub\\coffee\\BCOnlineClassroom\\WebContent\\downloads\\CS 130\\Slides\\', 7, 1, 5, NULL),
@@ -863,7 +935,20 @@ INSERT INTO `matfile` (`matFileID`, `fileName`, `fileType`, `fileSize`, `uploadD
 (98, 'toolbox_general.zip', 'zip', 78422, '2014-04-12', 'C:\\Users\\lara312\\Documents\\GitHub\\coffee\\BCOnlineClassroom\\WebContent\\downloads\\CS 130\\Miscellaneous\\', 7, 3, 5, NULL),
 (99, '1560412_10201229725497910_106132362_n.jpg', 'jpg', 54235, '2014-04-12', 'C:\\Users\\lara312\\Documents\\GitHub\\coffee\\BCOnlineClassroom\\WebContent\\downloads\\CS 130\\Miscellaneous\\', 7, 3, 5, NULL),
 (100, '1618398_10201229725617913_265344154_n.jpg', 'jpg', 57020, '2014-04-12', 'C:\\Users\\lara312\\Documents\\GitHub\\coffee\\BCOnlineClassroom\\WebContent\\downloads\\CS 130\\Miscellaneous\\', 7, 3, 5, NULL),
-(102, '1463646_10200772623192476_1640500034_n.jpg', 'jpg', 62248, '2014-04-21', 'C:\\Users\\lara312\\Documents\\GitHub\\coffee\\BCOnlineClassroom\\WebContent\\downloads\\CS 11\\Slides\\', 1, 1, 5, NULL);
+(102, '1463646_10200772623192476_1640500034_n.jpg', 'jpg', 62248, '2014-04-21', 'C:\\Users\\lara312\\Documents\\GitHub\\coffee\\BCOnlineClassroom\\WebContent\\downloads\\CS 11\\Slides\\', 1, 1, 5, NULL),
+(108, '1463646_10200772623192476_1640500034_n.jpg', 'jpg', 62248, '2014-04-28', 'C:\\Users\\lara312\\Documents\\GitHub\\coffee\\BCOnlineClassroom\\WebContent\\downloads\\CS 11\\Slides\\', 1, 1, 5, 'asdfg'),
+(109, '1488294_10201544012876736_8332175070350163476_n.jpg', 'jpg', 53742, '2014-04-28', 'C:\\Users\\lara312\\Documents\\GitHub\\coffee\\BCOnlineClassroom\\WebContent\\downloads\\CS 11\\Slides\\', 1, 1, 5, 'dfgh'),
+(110, '1463646_10200772623192476_1640500034_n.jpg', 'jpg', 62248, '2014-04-28', 'C:\\Users\\lara312\\Documents\\GitHub\\coffee\\BCOnlineClassroom\\WebContent\\downloads\\CS 11\\Slides\\', 1, 1, 5, 'dfghj'),
+(111, '1.png', 'png', 91603, '2014-04-29', 'C:\\Users\\lara312\\Documents\\GitHub\\coffee\\BCOnlineClassroom\\WebContent\\downloads\\CS 11\\Slides\\', 1, 1, 5, 'hello'),
+(112, '2.png', 'png', 85186, '2014-04-29', 'C:\\Users\\lara312\\Documents\\GitHub\\coffee\\BCOnlineClassroom\\WebContent\\downloads\\CS 11\\Slides\\', 1, 1, 5, 'description'),
+(113, '4.png', 'png', 83869, '2014-04-29', 'C:\\Users\\lara312\\Documents\\GitHub\\coffee\\BCOnlineClassroom\\WebContent\\downloads\\CS 11\\Slides\\', 1, 1, 5, 'Description'),
+(114, '4.png', 'png', 83869, '2014-04-29', 'C:\\Users\\lara312\\Documents\\GitHub\\coffee\\BCOnlineClassroom\\WebContent\\downloads\\CS 11\\ASDFGHJ\\', 1, 4, 5, 'desc'),
+(115, '2.png', 'png', 85186, '2014-04-29', 'C:\\Users\\lara312\\Documents\\GitHub\\coffee\\BCOnlineClassroom\\WebContent\\downloads\\CS 11\\Slides\\', 1, 1, 5, 'sdfg'),
+(116, '1.png', 'png', 91603, '2014-04-29', 'C:\\Users\\lara312\\Documents\\GitHub\\coffee\\BCOnlineClassroom\\WebContent\\downloads\\CS 11\\Slides\\', 1, 1, 5, 'asdf'),
+(117, '2.png', 'png', 85186, '2014-04-29', 'C:\\Users\\lara312\\Documents\\GitHub\\coffee\\BCOnlineClassroom\\WebContent\\downloads\\CS 11\\Slides\\', 1, 1, 5, 'asdf'),
+(118, '1.png', 'png', 91603, '2014-04-29', 'C:\\Users\\lara312\\Documents\\GitHub\\coffee\\BCOnlineClassroom\\WebContent\\downloads\\CS 11\\ASDFGHJ\\', 1, 4, 5, 'asdf'),
+(119, '2.png', 'png', 85186, '2014-04-29', 'C:\\Users\\lara312\\Documents\\GitHub\\coffee\\BCOnlineClassroom\\WebContent\\downloads\\CS 11\\ASDFGHJ\\', 1, 4, 5, 'desc'),
+(120, 'design.pdf', 'pdf', 3304923, '2014-04-29', 'C:\\Users\\lara312\\Documents\\GitHub\\coffee\\BCOnlineClassroom\\WebContent\\downloads\\CS 11\\Miscellaneous\\', 1, 3, 5, 'qwerqwertyui');
 
 -- --------------------------------------------------------
 
@@ -878,7 +963,17 @@ CREATE TABLE IF NOT EXISTS `matfiletag` (
   PRIMARY KEY (`matFileTagID`),
   KEY `matfiletagFK` (`matFileID`),
   KEY `matfiletagFK2` (`matTagID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+
+--
+-- Dumping data for table `matfiletag`
+--
+
+INSERT INTO `matfiletag` (`matFileTagID`, `matFileID`, `matTagID`) VALUES
+(1, 119, 10),
+(2, 120, 2),
+(3, 120, 11),
+(4, 120, 12);
 
 -- --------------------------------------------------------
 
@@ -890,7 +985,7 @@ CREATE TABLE IF NOT EXISTS `matfolder` (
   `matFolderID` int(11) NOT NULL AUTO_INCREMENT,
   `folderName` varchar(20) NOT NULL,
   PRIMARY KEY (`matFolderID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
 
 --
 -- Dumping data for table `matfolder`
@@ -899,7 +994,9 @@ CREATE TABLE IF NOT EXISTS `matfolder` (
 INSERT INTO `matfolder` (`matFolderID`, `folderName`) VALUES
 (1, 'Slides'),
 (2, 'Samplex'),
-(3, 'Miscellaneous');
+(3, 'Miscellaneous'),
+(4, 'ASDFGHJ'),
+(7, 'New');
 
 -- --------------------------------------------------------
 
@@ -912,7 +1009,7 @@ CREATE TABLE IF NOT EXISTS `matsubject` (
   `subjectName` varchar(30) NOT NULL,
   `subjectDesc` varchar(100) NOT NULL,
   PRIMARY KEY (`matSubjectID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=35 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=38 ;
 
 --
 -- Dumping data for table `matsubject`
@@ -952,7 +1049,10 @@ INSERT INTO `matsubject` (`matSubjectID`, `subjectName`, `subjectDesc`) VALUES
 (31, 'CS 196', 'Seminar on Ethical Professional Issues in Computing'),
 (32, 'CS 197', 'Special Topics'),
 (33, 'CS 198', 'Special Problems I'),
-(34, 'CS 199', 'Special Problems II');
+(34, 'CS 199', 'Special Problems II'),
+(35, 'helloooo', 'yow'),
+(36, 'asdfghjkl;', 'sdfghjkl;'''),
+(37, 'hello', 'lalalala');
 
 -- --------------------------------------------------------
 
@@ -964,7 +1064,25 @@ CREATE TABLE IF NOT EXISTS `mattag` (
   `matTagID` int(11) NOT NULL AUTO_INCREMENT,
   `matTag` text NOT NULL,
   PRIMARY KEY (`matTagID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=13 ;
+
+--
+-- Dumping data for table `mattag`
+--
+
+INSERT INTO `mattag` (`matTagID`, `matTag`) VALUES
+(1, 'cs'),
+(2, 'asdf'),
+(3, 'cs130'),
+(4, 'cs 130'),
+(5, 'tag:'),
+(6, 'tag:"CS 130"'),
+(7, 'tag: "lesson 1"'),
+(8, 'd'),
+(9, 'matrix'),
+(10, 'tags'),
+(11, 'qwer'),
+(12, 'zxcv');
 
 -- --------------------------------------------------------
 
@@ -1044,6 +1162,31 @@ INSERT INTO `rolespertype` (`roleid`, `typeid`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `schedule`
+--
+
+CREATE TABLE IF NOT EXISTS `schedule` (
+  `schedID` int(11) NOT NULL AUTO_INCREMENT,
+  `schedStream` text NOT NULL,
+  `schedDesc` text NOT NULL,
+  `userID` int(11) NOT NULL,
+  PRIMARY KEY (`schedID`),
+  KEY `scheduleFK` (`userID`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+
+--
+-- Dumping data for table `schedule`
+--
+
+INSERT INTO `schedule` (`schedID`, `schedStream`, `schedDesc`, `userID`) VALUES
+(1, '000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000', 'Schedule not yet set.', 6),
+(2, '000000000000000000100000000100000000000000000000000000000000000000000000000000000000000000000000010000000000000000000001000000', 'Schedule not yet set.', 10),
+(3, '000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000', 'Schedule not yet set.', 5),
+(4, '000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000', 'bowl', 7);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `userroles`
 --
 
@@ -1067,8 +1210,9 @@ INSERT INTO `userroles` (`userid`, `typeid`) VALUES
 (7, 2),
 (8, 2),
 (9, 2),
+(6, 9),
 (5, 7),
-(6, 7);
+(10, 2);
 
 -- --------------------------------------------------------
 
@@ -1088,7 +1232,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `departmentid` int(11) DEFAULT NULL,
   `courseid` int(11) DEFAULT NULL,
   PRIMARY KEY (`userid`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
 
 --
 -- Dumping data for table `users`
@@ -1101,7 +1245,8 @@ INSERT INTO `users` (`userid`, `firstname`, `lastname`, `email`, `username`, `pa
 (6, 'Katrina Grace', 'Lorenzo', 'kgdlorenzo@gmail.com', 'kgdlorenzo', '01b307acba4f54f55aafc33bb06bbbf6ca803e9a', 1, 20, 26, 92),
 (7, 'Sharmaine', 'Yap', 'sharmaine.yap@gmail.com', 'sharmaineyap', '01b307acba4f54f55aafc33bb06bbbf6ca803e9a', 1, 20, 26, 92),
 (8, 'Emir', 'Mercado', 'emircado@gmail.com', 'emircado', '01b307acba4f54f55aafc33bb06bbbf6ca803e9a', 1, 20, 26, 92),
-(9, 'Nikka', 'Octavo', 'niks.octavo@gmail.com', 'niksoctavo', '01b307acba4f54f55aafc33bb06bbbf6ca803e9a', 1, 20, 26, 92);
+(9, 'Nikka', 'Octavo', 'niks.octavo@gmail.com', 'niksoctavo', '01b307acba4f54f55aafc33bb06bbbf6ca803e9a', 1, 20, 26, 92),
+(10, 'Amanda', 'Codera', 'acodera@gmail.com', 'aycodera', '5fa339bbbb1eeaced3b52e54f44576aaf0d77d96', 1, 20, 26, 92);
 
 -- --------------------------------------------------------
 
@@ -1184,8 +1329,8 @@ ALTER TABLE `fcomment`
 -- Constraints for table `fpost`
 --
 ALTER TABLE `fpost`
-  ADD CONSTRAINT `fpostFK2` FOREIGN KEY (`fcategoryID`) REFERENCES `fcategory` (`fcategoryID`),
-  ADD CONSTRAINT `fpostFK` FOREIGN KEY (`userID`) REFERENCES `users` (`userid`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `fpostFK` FOREIGN KEY (`userID`) REFERENCES `users` (`userid`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `fpostFK2` FOREIGN KEY (`fcategoryID`) REFERENCES `fcategory` (`fcategoryID`);
 
 --
 -- Constraints for table `fpostag`
@@ -1215,6 +1360,12 @@ ALTER TABLE `matfiletag`
 ALTER TABLE `rolespertype`
   ADD CONSTRAINT `fk_roleid` FOREIGN KEY (`roleid`) REFERENCES `roles` (`roleid`),
   ADD CONSTRAINT `fk_typeid` FOREIGN KEY (`typeid`) REFERENCES `usertypes` (`typeid`);
+
+--
+-- Constraints for table `schedule`
+--
+ALTER TABLE `schedule`
+  ADD CONSTRAINT `scheduleFK` FOREIGN KEY (`userID`) REFERENCES `users` (`userid`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `userroles`
