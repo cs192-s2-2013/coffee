@@ -19,8 +19,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.bluecoffee.domain.FPost;
-import com.bluecoffee.domain.FPostag;
 import com.bluecoffee.domain.MatFile;
 import com.bluecoffee.domain.MatFolder;
 import com.bluecoffee.domain.MatSubject;
@@ -279,14 +277,15 @@ public class MaterialsController {
 	
 	
 	@RequestMapping("/fileUploaded")
-	public String uploadfile(@RequestParam String id/*, @ModelAttribute MatFile tempMatFile*/, @ModelAttribute("user") User user, HttpServletRequest request) {
+	public String uploadfile(@RequestParam String id, @ModelAttribute("user") User user, HttpServletRequest request) {
 		
-		String fileDesc = "";//request.getParameter("fileDesc");
-		int matFolderID = 0;//Integer.parseInt(request.getParameter("matCategoryID"));
-		
+		String fileDesc = "";
+		String[] tags = null;
+		int matFolderID = 0;
+
 		int uploadsuccessful=0;
 		String subjectname = id;
-		String foldername = "";//matFolderService.getNameByID(matFolderID);
+		String foldername = "";
 
 		int maxFileSize = 5000 * 1024;
 		int maxMemSize = 5000 * 1024;
@@ -327,6 +326,9 @@ public class MaterialsController {
 					  	matFolderID = Integer.parseInt(value);
 					   	foldername = matFolderService.getNameByID(matFolderID);
 					}
+					else if(name.equals("tags")){
+						tags = value.split(" ");
+					}
 				}
 				else {
 					fiList.add(fi);
@@ -359,6 +361,8 @@ public class MaterialsController {
 					file = new File( filePath + fileName.substring(fileName.lastIndexOf("\\")+1));
 					fileName = fileName.substring(fileName.lastIndexOf("\\")+1);
 				}
+				
+				file.getParentFile().mkdirs();
 			
 				fi.write( file );
 				
@@ -379,6 +383,13 @@ public class MaterialsController {
 				
 				matFileService.insertData(mf);
 				
+				/* tags */
+				int matFileID = matFileService.getIDByMatFile(mf);
+				for(String tag : tags){
+					tag = tag.trim();
+					int tagID = matTagService.getMatTagID(tag);
+					matFileTagService.insertData(matFileID, tagID);
+				}
 							
 			}
 			

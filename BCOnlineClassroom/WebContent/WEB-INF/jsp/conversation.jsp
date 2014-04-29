@@ -8,7 +8,10 @@
 <html>
 <head>
 	<title>Blue Coffee</title>
+	<script type="text/javascript" src="<c:url value="resources/js/jquery.js" />"> </script>
+	<script type="text/javascript" src="<c:url value="resources/js/bootstrap.js" />"> </script>
 	<t:css/>
+	<script type="text/javascript" src="<c:url value="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js" />"> </script>
 	
 	<style>
 			#box {
@@ -52,6 +55,7 @@
 	        $("[rel=tooltip]").tooltip({ placement: 'right'});
 	    });
 	</script>
+
 	
 </head>
 
@@ -59,7 +63,6 @@
 
 	<t:navbar user="${sessionScope.user}"/>
 	<t:jumbotron title="Chat"/>
-	
 	
 	<center>
 	<div style="height: 75%; width: 70%;">
@@ -114,18 +117,8 @@
 	
 	<!-- List of messages
 	**************************************************-->	
-			<div class="col-sm-9 row" style="margin-left:2px;">
-				<h4>'${convoTitle }'</h4>
-				<div class="mygrid-wrapper-div" id="messagebox">
-				<div class="chatbox text-left">
-					<c:forEach var="message" items="${chatMessageList}">
-					<b>${message.getSender()}:</b> ${message.getMessage()} </br>
-					</c:forEach>
-				</div>
-				</div>
-					
-			</div>
-		
+			<div id="score"><%@ include file="reload-window.jsp" %></div>
+				
 	
 	<!-- Input message
 	**************************************************-->	
@@ -144,13 +137,13 @@
 			</div>
 	</form:form>
 	
+	
 	<script src="http://code.jquery.com/jquery-latest.js"></script>
 	<script>
 	setInterval(function() {
 	    $("messagebox").load("conversation?c="+$(chatConvoID)+" #messagebox");
 	}, 10000); // seconds to wait, miliseconds
     </script>
-	
 	<script>
 		var d = document.getElementById("messagebox");
 
@@ -225,6 +218,15 @@
 	</div>
 	</center>
 	
+	<script type="text/javascript">
+	jQuery(document).ready(function() {
+		   setInterval(function() {
+		       jQuery('#score').load('/reload-window.jsp');
+		   }, 1000);
+		});
+	
+
+	</script>
 	
 </body>
 </html>

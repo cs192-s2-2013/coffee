@@ -16,110 +16,64 @@
 	<script type="text/javascript" src="<c:url value="resources/js/jquery.js" />"> </script>
 	<script type="text/javascript" src="<c:url value="resources/js/bootstrap.js" />"> </script>
 	<t:css/>
-	<t:jsddown/>
-	
 	
 </head>
 
 <body>
-            <t:navbar user="${sessionScope.user}"/>
-			<t:jumbotron title="Forum"/>
+	<t:navbar user="${sessionScope.user}"/>
+	<t:jumbotron title="Forum"/>
 	
-	<c:choose>
-	<c:when test="${r=='1'}">
-	
-		<!-- Search Bar
-		************************************************* -->
-	
-		<div class="row">
-			<div class="col-sm-7"></div>
-			<form:form method="post" action="/searchpost">
-			<div class="col-sm-3">
-				<input type="text" name="s" class="form-control" placeholder="Find posts">
-			</div>
-			<div class="col-sm-1">
-				<button type="submit" class="btn btn-primary"><i class="icon-search" style="font-size:15px;"></i></button>
-			</div>
+	<!------------------  MODALS ---------------------->
+	<!-- Modal for creating new post -->
+	<div class="modal fade" id="inputpost" tabindex="-1" role="dialog" aria-labelledby="inputpostlabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<form:form method="post" action="/submitpost" modelAttribute="fPost">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h4 class="modal-title" id="myModalLabel">Ask a question</h4>
+					</div>
+					<div class="modal-body">
+						<input type="text" name="title" class="form-control" placeholder="Type your question here">
+						<textarea class="form-control" name="content" rows="3" placeholder="Details about the problem"></textarea>
+						<textarea class="form-control" name="tag" placeholder="Tags: tags-are-separated-by-spaces this-is-another-tag"></textarea>
+						<tr>
+							<td>Category: </td>
+							<form:select path="fCategoryID">
+							<c:forEach var="fCategory" items="${fCategoryList}">
+								<option value="${fCategory.getFCategoryID()}">
+		                    	<c:out value="${fCategory.getFCategory()}"></c:out>
+		                		</option>
+							</c:forEach>
+							</form:select>
+						</tr>
+					</div>
+					<br>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+						<button type="submit" class="btn btn-primary">Submit</button>
+					</div>
+				</div>
 			</form:form>
 		</div>
-		
-	
-	
-	
-		<!-- Input question
-		**************************************************-->
-		<div class="container">
-		<form:form method="post" action="/submitpost" modelAttribute="fPost">
-			<div class="row">
-				<div class="col-sm-2"></div>
-					<div class="col-sm-8"><center><h3>Ask a question</h3></center></div>
-			</div>
-			<div class="row">
-				<div class="col-sm-2"></div>
-				<div class="col-sm-8">
-					<input type="text" name="title" class="form-control" placeholder="Type your question here">
-				</div>
-			</div>
-			</br>
-			<div class="row">
-				<div class="col-sm-2"></div>
-				<div class="col-sm-8">
-					<textarea class="form-control" name="content" rows="3" placeholder="Details about the problem"></textarea>
-				</div>
-			</div>
-			</br>
-			<div class="row">
-				<div class="col-sm-2"></div>
-				<div class="col-sm-8">
-					<textarea class="form-control" name="tag" placeholder="Tags: tags-are-separated-by-spaces this-is-another-tag"></textarea>
-				</div>
-			</div>
-			</br>
-			<div class="row">
-				<div class="col-sm-2"></div>
-				<div class="col-sm-8">
-				<tr>
-					<td>Category: </td>
-					<form:select path="fCategoryID">
-					<c:forEach var="fCategory" items="${fCategoryList}">
-						<option value="${fCategory.getFCategoryID()}">
-                    	<c:out value="${fCategory.getFCategory()}"></c:out>
-                		</option>
-					</c:forEach>
-					</form:select>
-				</tr>
-				</div>
-			</div>
-			</br>
-			<div class="row">
-				<div class="col-sm-8"></div>
-				<div class="col-sm-3">
-					<!--<button type="button" class="btn btn-info">Add details</button>-->
-					<a href="forum?r=1"></a><button type="cancel" class="btn btn-primary">Cancel</button></a>
-					<button type="submit" class="btn btn-primary">Submit</button>
-				</div>
-			</div>
-		</form:form>
-		</div>
-		</br></br></br>
-	</c:when>
-	<c:otherwise>
-		<div class="row">
-			<div class="col-sm-1"></div>
-			<div class="col-sm-1" style="margin-bottom:20px"><a href="forum?r=1"><button type="ask" class="btn btn-primary">Ask a question</button></a></div>
-			<div class="col-sm-5"></div>
-			<form:form method="post" action="/searchpost">
-			<div class="col-sm-3">
-				<input type="text" name="s" class="form-control" placeholder="Find posts">
-			</div>
-			<div class="col-sm-1">
-				<button type="submit" class="btn btn-primary"><i class="icon-search" style="font-size:15px;"></i></button>
-			</div>
-			</form:form>
-		</div>
-	</c:otherwise>
-	</c:choose>
+	</div>
+	<!------------------  end modals ---------------------->
 
+
+	<!-- Search Bar
+	************************************************* -->
+	<div class="row">
+		<div class="col-sm-1"></div>
+		<div class="col-sm-1" style="margin-bottom:20px"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#inputpost">Ask a question</button></div>
+		<div class="col-sm-5"></div>
+		<form:form method="post" action="/searchpost">
+		<div class="col-sm-3">
+			<input type="text" name="s" class="form-control" placeholder="Find posts">
+		</div>
+		<div class="col-sm-1">
+			<button type="submit" class="btn btn-primary"><i class="icon-search" style="font-size:15px;"></i></button>
+		</div>
+		</form:form>
+	</div>
 
 
 	<!-- Category title

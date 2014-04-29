@@ -122,4 +122,26 @@ public class MatFileDaoImpl implements MatFileDao {
 		
 		return matFileList;
 	}
+	
+	public int getIDByMatFile(MatFile matFile){
+		String s = matFile.getFileName().replace("'","''");
+		s = s.replace("\\", "\\\\");
+		matFile.setFileName(s);
+		
+		s = matFile.getFileDesc().replace("'","''");
+		s = s.replace("\\", "\\\\");
+		matFile.setFileDesc(s);
+		
+		String sql = "SELECT matFileID, fileName, fileType, fileSize, uploadDate, path, matSubjectID, matFolderID, userID, fileDesc FROM matfile "
+				+ "WHERE fileName = '"+matFile.getFileName()+"'"
+				+ " AND fileSize = " +matFile.getFileSize()
+				+ " AND matSubjectID = " +matFile.getMatSubjectID()
+				+ " AND matFolderID = " +matFile.getMatFolderID()
+				+ " AND userID = " +matFile.getUserID()
+				+ " AND fileDesc = '" +matFile.getFileDesc()+"'";
+		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+		MatFile mf = jdbcTemplate.query(sql, new MatFileRowMapper()).get(0);
+		
+		return mf.getMatFileID();
+	}
 }

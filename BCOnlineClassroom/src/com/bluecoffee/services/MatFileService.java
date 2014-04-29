@@ -25,4 +25,6 @@ public interface MatFileService {
 	
 	public String getFilePathByID(int id);
 	
+	public int getIDByMatFile(MatFile matFile);
+	
 }

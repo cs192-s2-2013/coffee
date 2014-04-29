@@ -9,10 +9,8 @@
 <head>
 	<title>Blue Coffee</title>
 	<script type="text/javascript" src="<c:url value="resources/js/jquery.js" />"> </script>
+	<script type="text/javascript" src="<c:url value="resources/js/bootstrap.js" />"> </script>
 	<t:css/>
-	<t:jscollapse/>
-	<t:jstransition/>
-	<t:jsmodal/>
 	
 	<style>
 		.modal-dialog {
@@ -36,6 +34,7 @@
 	<t:navbar user="${sessionScope.user}"/>
 	<t:jumbotron title="Admin"/>
 	
+	<!------------------  MODALS ---------------------->
 	<!-- Modal Materials Subject -->
 	<div class="modal fade" id="addsubject" tabindex="-1" role="dialog" aria-labelledby="addsubjectlabel" aria-hidden="true">
 		<div class="modal-dialog">
@@ -97,6 +96,7 @@
 			</form:form>
 		</div>
 	</div>
+	<!------------------  end modals ---------------------->
 	
 	<h1>Materials</h1>
 	<div class="panel-group" id="accordion">

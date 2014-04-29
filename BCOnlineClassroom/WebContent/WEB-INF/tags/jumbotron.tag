@@ -19,6 +19,11 @@
 			<h5>Insightful discussion with your peers.</h5>
 		</c:when>
 		
+		<c:when test="${title=='Schedule'}">
+			<h2><a href="schedule">Schedule</a></h2>
+			<h5>Consult with a mentor.</h5>
+		</c:when>
+		
 		<c:when test="${title=='Admin'}">
 			<h2><a href="admin">Admin Page</a></h2>
 			<h5></h5>

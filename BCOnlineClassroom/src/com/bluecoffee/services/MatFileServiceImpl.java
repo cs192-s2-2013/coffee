@@ -69,5 +69,8 @@ public class MatFileServiceImpl implements MatFileService {
 		return getMatFile(id).getPath();
 	}
 	
+	public int getIDByMatFile(MatFile matFile){
+		return matfiledao.getIDByMatFile(matFile);
+	}
 	
 }

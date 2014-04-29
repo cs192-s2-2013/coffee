@@ -15,5 +15,5 @@ public interface MatFileDao {
 	public List<MatFile> getMatFileListBySubjectFolder(String subjectName, int matFolderID);
 	public List<MatFile> getMatFileListByDescription(String searchString);
 	public List<MatFile> getMatFileListByFilename(String filename);
-	
+	public int getIDByMatFile(MatFile matFile);
 }
