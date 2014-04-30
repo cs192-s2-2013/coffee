@@ -4,13 +4,13 @@
 
 	<style>
 		.navbar-default{
-			background-color: #FFFFFF;
+			background-color: #428BCA;
 		}
 		.navbar-default .navbar-brand{
-			color: #428BCA;
+			color: #FFFFFF;
 		}
 		.navbar-default .navbar-nav > li > a{
-			color: #428BCA;
+			color: #FFFFFF;
 		}
 	</style>
 	

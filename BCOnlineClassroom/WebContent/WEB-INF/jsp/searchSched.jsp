@@ -23,15 +23,53 @@
 	<!-- Sched Table
 	**************************************************-->
 	
-	<h3>Search schedules</h3>
 	<div class="container">
-        <form name='SelectTiles' method="post" action="searchSchedResults">
-                <c:forEach var="ts" begin="0" end="125">
-                	<input type=checkbox name="SelectedTiles" value="${ts}"></input>
-                    <c:if test="${((ts+1)%6)==0}"><br></c:if>  
-                </c:forEach>
-                <button type="submit" class="btn btn-primary">Search</button> 
-        </form>
+		<div class="row">
+			<div class="col-sm-2"></div>
+			<div class="col-sm-8" style="margin-bottom:5px;"><b>SEARCH SCHEDULE</b></div>
+		</div>
+		<form name='SelectTiles' method="post" action="searchschedresults">
+		<div class="row">
+			<div class="col-sm-2"></div>
+		</div>
+		<div class="row">
+			<b>
+			<div class="col-sm-2"></div>
+			<cell_size><div class="col-sm-2 table-bordered">Time/Day</div>
+			<div class="col-sm-1 table-bordered">Monday</div>
+			<div class="col-sm-1 table-bordered">Tuesday</div>
+			<div class="col-sm-1 table-bordered">Wednesday</div>
+			<div class="col-sm-1 table-bordered">Thursday</div>
+			<div class="col-sm-1 table-bordered">Friday</div>
+			<div class="col-sm-1 table-bordered">Saturday</div></cell_size>
+			</b>
+		</div>
+		<%int i = 0;%>
+		<c:forEach var="bit" items="${schedStream}" varStatus="count" begin="0" end="125">
+			<%if(i==0) {%>
+				<div class="row">
+				<div class="col-sm-2"></div>
+				<div class="col-sm-2 table-bordered"><cell_size>${timeslots[count.index / 6]}</cell_size></div>
+			<%} %>
+			<c:choose>
+				<c:when test="${not bit}">
+					<div class="col-sm-1 table-bordered"><center><input type=checkbox name="SelectedTiles" value="${count.index}"></center></div>
+				</c:when>
+				<c:otherwise>
+					<div class="col-sm-1 table-bordered"><center><input type=checkbox name="SelectedTiles" value="${count.index}" checked></center></div>
+				</c:otherwise>
+			</c:choose>
+			<%i++;
+			if(i==6) {
+				i=0;%>
+				</div>
+			<%} %>
+		</c:forEach>
+		</br>
+		<div class="col-sm-2"></div>
+		<div class="col-sm-7"></div>
+		<div class="col-sm-2"><button type="submit" class="btn btn-primary">Search</button></div></div>
+		</form>
 	</div>
 	
 	

@@ -26,18 +26,18 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-sm-2"></div>
-			<div class="col-sm-8"><h4>${schedDesc}</h4></div>
+			<div class="col-sm-8" style="margin-bottom:5px;"><b>MY SCHEDULE</b></div>
 		</div>
 		<div class="row">
 			<b>
 			<div class="col-sm-2"></div>
-			<div class="col-sm-2 table-bordered">Time/Day</div>
+			<cell_size><div class="col-sm-2 table-bordered">Time/Day</div>
 			<div class="col-sm-1 table-bordered">Monday</div>
 			<div class="col-sm-1 table-bordered">Tuesday</div>
 			<div class="col-sm-1 table-bordered">Wednesday</div>
 			<div class="col-sm-1 table-bordered">Thursday</div>
 			<div class="col-sm-1 table-bordered">Friday</div>
-			<div class="col-sm-1 table-bordered">Saturday</div>
+			<div class="col-sm-1 table-bordered">Saturday</div></cell_size>
 			</b>
 		</div>
 		<%int i = 0;%>
@@ -45,14 +45,14 @@
 			<%if(i==0) {%>
 				<div class="row">
 				<div class="col-sm-2"></div>
-				<div class="col-sm-2 table-bordered">${timeslots[count.index / 6]}</div>
+				<div class="col-sm-2 table-bordered"><cell_size>${timeslots[count.index / 6]}</cell_size></div>
 			<%} %>
 			<c:choose>
 				<c:when test="${not bit}">
-					<div class="col-sm-1 table-bordered" style="background-color:#ffffff; color:#ffffff;">*</div>
+					<div class="col-sm-1 table-bordered" style="background-color:#ffffff; color:#ffffff;"><cell_size>*</cell_size></div>
 				</c:when>
 				<c:otherwise>
-					<div class="col-sm-1 table-bordered" style="background-color:#32CD32; color:#32CD32;">*</div>
+					<div class="col-sm-1 table-bordered" style="background-color:#32CD32; color:#32CD32;"><cell_size>*</cell_size></div>
 				</c:otherwise>
 			</c:choose>
 			<%i++;	
@@ -61,6 +61,16 @@
 				</div>
 			<%} %>
 		</c:forEach>
+		</br>
+		<div class="row">
+			<div class="col-sm-2"></div>
+			<div class="col-sm-7"><h5>${schedDesc}</h5></div>
+			<div class="col-sm-2">
+				<a href="schedit" class="btn btn-primary btn-small">Edit</a>
+				&nbsp;
+				<a href="searchsched" class="btn btn-primary btn-small"><i class="icon-white icon-search" style="font-size:17px;"></i></a>
+			</div>
+		</div>
 	</div>
 	
 	<!-- Footer and Modal

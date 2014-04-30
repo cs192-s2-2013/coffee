@@ -34,10 +34,12 @@
 					</div>
 					<div class="modal-body">
 						<input type="text" name="title" class="form-control" placeholder="Type your question here">
+						<br>
 						<textarea class="form-control" name="content" rows="3" placeholder="Details about the problem"></textarea>
+						<br>
 						<textarea class="form-control" name="tag" placeholder="Tags: tags-are-separated-by-spaces this-is-another-tag"></textarea>
-						<tr>
-							<td>Category: </td>
+						<br>
+						Category: 
 							<form:select path="fCategoryID">
 							<c:forEach var="fCategory" items="${fCategoryList}">
 								<option value="${fCategory.getFCategoryID()}">
@@ -45,7 +47,6 @@
 		                		</option>
 							</c:forEach>
 							</form:select>
-						</tr>
 					</div>
 					<br>
 					<div class="modal-footer">
@@ -217,6 +218,8 @@
 			
 		});
 		
+		/************ dropdown ************/
+		$('.dropdown-toggle').dropdown()
 	</script>
 
 </body>

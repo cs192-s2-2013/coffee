@@ -1,6 +1,7 @@
 package com.bluecoffee.controller;
 
 import java.util.List;
+import java.util.HashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -40,40 +41,65 @@ public class AdminController {
 	@Autowired FCommentService fCommentService;
 	@Autowired FCategoryService fCategoryService;
 	
-	@RequestMapping("/admin")
-	public String adminpage(@ModelAttribute("user") User user, Model model){
-		
-		if(user.getAdmin()){
-			/** Materials **/
-			/* Subject */
-			List<MatSubject> matSubjectList = matSubjectService.getMatSubjectList();
-			model.addAttribute("matSubjectList", matSubjectList);
-			
-			/* Category */
-			List<MatFolder> matFolderList = matFolderService.getMatFolderList();
-			model.addAttribute("matFolderList", matFolderList);
+    @Autowired UserService userService;
 
-			List<MatFile> matFileList = matFileService.getMatFileList();
-			model.addAttribute("matFileList", matFileList);
-			
-			/** Forum **/
-			/* Category */
-			List<FCategory> fCategoryList = fCategoryService.getCategoryList();
-			model.addAttribute("fCategoryList", fCategoryList);
-			
-			/* Post */
-			List<FPost> fPostList = fPostService.getFPostList();
-			model.addAttribute("fPostList", fPostList);
-				
-			/* Comment */
-			List<FComment> fCommentList = fCommentService.getFCommentList();
-			model.addAttribute("fCommentList", fCommentList);
-			
-			
-			return "adminhome";
-		}
-		else{ return "notfound"; }
-	}
+    @RequestMapping("/admin")
+        public String adminpage(@ModelAttribute("user") User user, Model model){
+                
+                if(user.getAdmin()){
+                        /** Materials **/
+                        /* Subject */
+                        List<MatSubject> matSubjectList = matSubjectService.getMatSubjectList();
+                        model.addAttribute("matSubjectList", matSubjectList);
+                        
+                        /* Category */
+                        List<MatFolder> matFolderList = matFolderService.getMatFolderList();
+                        model.addAttribute("matFolderList", matFolderList);
+
+                        /* File */
+                        List<MatFile> matFileList = matFileService.getMatFileList();
+                        
+                        HashMap<Integer, String> subjectMap = new HashMap<Integer, String>();
+                        for(MatSubject subject : matSubjectList){ subjectMap.put(subject.getMatSubjectID(), subject.getSubjectName()); }
+            
+                        HashMap<Integer, String> folderMap = new HashMap<Integer, String>();
+                        for(MatFolder folder : matFolderList){ folderMap.put(folder.getMatFolderID(), folder.getFolderName()); }
+                        
+                        for(MatFile file : matFileList){
+                                User u = userService.getUserByUserID(file.getUserID());
+                                file.setUploader(u.getUsername());
+                                file.setSubjectName( subjectMap.get(file.getMatSubjectID()) );
+                                file.setFolderName( folderMap.get(file.getMatFolderID()) );
+                        }
+                        model.addAttribute("matFileList", matFileList);
+                        
+                        /** Forum **/
+                        /* Category */
+                        List<FCategory> fCategoryList = fCategoryService.getCategoryList();
+                        model.addAttribute("fCategoryList", fCategoryList);
+                        
+                        /* Post */
+                        List<FPost> fPostList = fPostService.getFPostList();
+                        
+                        for(FPost post : fPostList){
+                                User u = userService.getUserByUserID(post.getUserID());
+                                post.setPoster(u.getUsername());
+                        }
+                        model.addAttribute("fPostList", fPostList);
+                                
+                        /* Comment */
+                        List<FComment> fCommentList = fCommentService.getFCommentList();
+                        
+                        for(FComment comment: fCommentList){
+                                User u = userService.getUserByUserID(comment.getUserID());
+                                comment.setCommenter(u.getUsername());
+                        }
+                        model.addAttribute("fCommentList", fCommentList);
+                        
+                        return "adminhome";
+                }
+                else{ return "notfound"; }
+        }
 	
 	@RequestMapping("/admin/addsubject")
 	public String addSubject(@ModelAttribute("user") User user, @ModelAttribute MatSubject matSubject) {

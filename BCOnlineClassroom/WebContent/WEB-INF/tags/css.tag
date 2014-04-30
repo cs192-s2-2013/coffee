@@ -11,11 +11,19 @@
 		  .jumbotron {
 		  		background-color: #121212;
 		  		margin-top: -30px;
-			    padding: 0.5em 0.6em;
-			    
+			    padding: 0.5em 0.6em; 
 			}
           textarea { resize: none; }
           k { font-size: 44.5px; }
+          cell_size { font-size: 12px; }
+			input[type=checkbox]
+			{
+			  -ms-transform: scale(1); /* IE */
+			  -moz-transform: scale(1); /* FF */
+			  -webkit-transform: scale(1); /* Safari and Chrome */
+			  -o-transform: scale(1); /* Opera */
+			  padding: 10px;
+			}
           h2 {
 			    	color: pink;
 			    	margin-left: 20px;

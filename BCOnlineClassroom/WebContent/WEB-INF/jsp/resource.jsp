@@ -220,7 +220,7 @@ a.tooltip span {
 	**************************************************-->
 	
 	<div class="container">
-		<form name='SelectFiles' method="post" action="batchdownload?sn=${id}&fn=${key}">
+		<form name='SelectFiles' method="post" action="batchdownload?sn=${id}&fn=${key}" onsubmit="return checkForm(this);">
 			<div class="row pull-center">
 				<b>
 				<div class="col-sm-1"></div>
@@ -350,9 +350,6 @@ sagittis lacus vel augue laoreet rutrum faucibus.">
 		$('#element').popover('hide');
 		$('#filedetails').popover('hide')
 		
-		
-	$('#telement').tooltip('show')
-	
 	$(function () {
     $(document).tooltip({
         content: function () {
@@ -374,7 +371,20 @@ sagittis lacus vel augue laoreet rutrum faucibus.">
         }
     });
 });
-	
+
+		/* Checks if no checkbox checked */
+		var checkForm = function(form){
+		    var inputs = form.getElementsByTagName('input');
+		    for(var i = 0, l = inputs.length; i < l; i++){
+		        var input = inputs[i];
+		        if(input.type == "checkbox" && input.checked)
+		            return true;
+		    }
+		    alert('No file selected for download');
+		    return false;
+		};
+		/*********************************/
+		
 	</script>
 
 </body>

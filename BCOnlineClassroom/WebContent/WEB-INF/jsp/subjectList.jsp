@@ -54,7 +54,7 @@
 				<center>
 				<a href="subfolder?id=${matSubject.subjectName}"><i class="icon-folder-open" rel="tooltip" title="${matSubject.subjectName}: ${matSubject.subjectDesc}"></i></a>
 				</br>
-				${matSubject.subjectName}<c:if test="${sessionScope.user.getAdmin()=='true'}"> <a href="deletesubject?sid=${matSubject.getMatSubjectID()}"><t class="largeicon icon-trash" rel="tooltip" title="Delete subject"></t></a> </c:if>
+				${matSubject.subjectName}
 				</br></br>
 				</center>
 			</div>

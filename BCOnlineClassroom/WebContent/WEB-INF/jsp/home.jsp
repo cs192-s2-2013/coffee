@@ -15,13 +15,17 @@
 	<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0-rc1/css/bootstrap.min.css" rel="stylesheet">
 	
 	<style>
-          body { background: #FFFFFF; }
-          .container { background: ; }
-		  .jumbotron {
-		  	margin-top: 0px; 
-		  	margin-bottom: 50px;
-		  }
-		  p {
+		body { background: #FFFFFF; }
+		.navbar-default{ background-color: #428BCA; }
+		.navbar-default .navbar-brand{ color: #FFFFFF; }
+		.navbar-default .navbar-nav > li > a { color: #FFFFFF; }
+		.jumbotron {
+			background-color: #121212;
+			width: 100%;
+			margin-top: 20px; 
+			margin-bottom: 30px;
+			font: pink;
+		} p {
 		  	color: gray;
 		  }
     </style>
@@ -35,7 +39,7 @@
 <div class="container">
         <div class="row clearfix">
                 <div class="col-md-12 column">
-                        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+                        <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
                   <a class="navbar-brand" href="#">Online Classroom</a>
                <div>
                   <ul class="nav navbar-nav navbar-left">
@@ -54,7 +58,7 @@
                </div>
             </nav>        
                     <div class="jumbotron">
-                                <h1> The Online Classroom </h1>
+                                <a href="#"><h1> The Online Classroom </h1></a>
                                 <p> An exclusive platform for collaboration with your Department of Computer Science fellows. 
 Access a plethora of review materials and learning resources.
 Gain feedback from the entire UP DCS network.
@@ -67,20 +71,25 @@ Hold a conference or study session with anyone in the department. </p>
         <div class="row">
         		<h2 style="margin-left: 20px"> Features: </h2></br>
         		<center>
-                <div class="col-sm-4 column">
+                <div class="col-sm-3 column">
                         <h2><i class="largeicon icon-folder-open"></i> Materials </h2>
-                        <p> Upload or download all the resources you need. </p>
+                        <p> Upload or download resources you need. </p>
                         <p> <a class="btn btn-primary" href="materials">Go to Materials »</a> </p>
                 </div>
-                <div class="col-sm-4 column">
+                <div class="col-sm-3 column">
                         <h2><i class="largeicon icon-pencil"></i> Forum </h2>
                         <p> Ask away or share your knowledge. </p>
                         <p> <a class="btn btn-primary" href="forum">Go to Forum »</a> </p>
                 </div>
-                <div class="col-sm-4 column">
+                <div class="col-sm-3 column">
                         <h2><i class="largeicon icon-comment"></i> Chat </h2>
                         <p> Insightful discussion with your peers. </p>
                         <p> <a class="btn btn-primary" href="chat">Go to Chat »</a> </p>
+                </div>
+                <div class="col-sm-3 column">
+                        <h2><i class="largeicon icon-calendar"></i> Schedule </h2>
+                        <p> Stalk people. You're welcome.  </p>
+                        <p> <a class="btn btn-primary" href="schedule">Go to Schedule »</a> </p>
                 </div>
         
         </center>
